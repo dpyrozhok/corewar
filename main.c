@@ -35,7 +35,24 @@ void ft_dump(unsigned char *arena)
 
 void    ft_create_car(t_champ *champ)
 {
+    t_car   *car;
 
+    car = (t_car *)ft_memalloc(sizeof(t_car));
+
+}
+
+void    ft_place_champ(t_core *core)
+{
+    t_champ *tmp;
+    int    shift;
+
+    shift = 0;
+    tmp = core->champs;
+    while (tmp) {
+        ft_memcpy(core->arena + shift, tmp->code, tmp->size);
+        shift += MEM_SIZE / core->qt_champ;
+        tmp = tmp->next;
+    }
 }
 
 void    ft_parse_champion(t_core *core, int fd)
@@ -58,7 +75,7 @@ void    ft_parse_champion(t_core *core, int fd)
     read(fd, &buf, 3);
     champ->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * champ->size);
     read(fd, champ->code, champ->size);
-    ft_create_car(champ);
+    core->qt_champ++;
     if (!core->champs)
         core->champs = champ;
     else
@@ -77,7 +94,7 @@ int main(int ac, char **av)
 	int fd;
 
 	check_args(ac, av);
-	i = 0;
+	i = 1;
 	setbuf(stdout, 0);
 	core = (t_core *) ft_memalloc(sizeof(t_core));
 	core->arena = (unsigned char *) malloc(sizeof(unsigned char) * MEM_SIZE);
@@ -87,5 +104,7 @@ int main(int ac, char **av)
         ft_parse_champion(core, fd);
         i++;
     }
+    ft_place_champ(core);
+    ft_dump(core->arena);
     return 0;
 }

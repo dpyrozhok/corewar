@@ -8,6 +8,7 @@
 typedef struct          s_core {
     unsigned char   *arena;
     struct s_champ  *champs;
+    int             qt_champ;
 }                       t_core;
 
 typedef struct          s_champ {
@@ -19,13 +20,15 @@ typedef struct          s_champ {
     struct s_champ  *next;
 }                       t_champ;
 
-struct          s_car {
+typedef struct              s_car {
     int             pos;
     int             carry;
     int             id;
     int             live;
-    unsigned int    reg[16];
+    unsigned int    reg[REG_NUMBER];
     int             opcode;
     int             cycle;
-};
+    struct s_car    *next;
+    struct s_car    *prev;
+}                           t_car;
 #endif
