@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/popanase/corewar_my/corewar.h
+libft/libft.h
+/Users/popanase/corewar_my/libft/libft.h
+ft_printf/libftprintf.h
+/Users/popanase/corewar_my/ft_printf/libftprintf.h
+op.h
+/Users/popanase/corewar_my/op.h
+
+/Users/popanase/corewar_my/ft_printf/libftprintf.h
+unistd.h
+-
+stdlib.h
+-
+stdarg.h
+-
+../libft/libft.h
+/Users/popanase/corewar_my/libft/libft.h
+limits.h
+-
+
+/Users/popanase/corewar_my/libft/libft.h
+stdlib.h
+-
+
+/Users/popanase/corewar_my/main.c
+stdio.h
+-
+fcntl.h
+-
+corewar.h
+/Users/popanase/corewar_my/corewar.h
+
+/Users/popanase/corewar_my/op.h
+

@@ -1,0 +1,3 @@
+/Users/popanase/corewar_my/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/popanase/corewar_my/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/popanase/corewar_my/cmake-build-debug/CMakeFiles/corewar.dir
