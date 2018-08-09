@@ -24,10 +24,12 @@ int		p_err(int ret, char *str, char *orig)
 	write(2, str, ft_strlen(str));
 	if (orig)
 	{
-		write(2, ": ", 2);
+		write(2, ": '", 2);
 		write(2, orig, ft_strlen(orig));
+		write(2, "'\n", 1);
 	}
-	write(2, "\n", 1);
+	else
+		write(2, "\n", 1);
 	return (ret);
 }
 
@@ -129,6 +131,68 @@ void 	check_num(int ac, char **av, int i, t_core *core)
 	is_int(av[i]);
 }
 
+int	str_str(char *src, char *str)
+{
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+	while (src[i] != '\0')
+	{
+		while (src[i] == str[j])
+		{
+			if (str[j + 1] == '\0')
+				return (i - j);
+			i++;
+			j++;
+		}
+		i -= j;
+		j = 0;
+		i++;
+	}
+	if (str[j] == '\0')
+		return (i);
+	return (-1);
+}
+
+int		str_inc(const char *haystack, const char *needle)
+{
+	const char	*h;
+	const char	*n;
+
+	while (*haystack)
+	{
+		if (*haystack == *needle)
+		{
+			h = haystack;
+			n = needle;
+			while (*h)
+			{
+				if (*h != *n)
+					break ;
+				h++;
+				n++;
+			}
+			if (!*n && !*h)
+				return (1);
+		}
+		haystack++;
+	}
+	return (0);
+}
+
+void	check_filename(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 5)
+		exit(p_err(112, "Invalid filename", str));
+	if (!str_inc(str, ".cor"))
+		exit(p_err(113, "Invalid filename", str));
+}
+
 int	check_dir(char *str)
 {
 	int		fd;
@@ -139,7 +203,10 @@ int	check_dir(char *str)
 		close(fd);
 		exit(p_err(108, "Argument is not a file", str));
 	}
+	check_filename(str);
 	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		return (p_err(2, "Unable to open file", str));
 	return (fd);
 }
 
@@ -164,11 +231,11 @@ void	check_file(char *str)
 		file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
 					(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
 		if (file->size > CHAMP_MAX_SIZE)
-			exit(p_err(111, "Exceeded bot max size", NULL));
+			exit(p_err(110, "Exceeded bot max size", NULL));
 		read(fd, &file->comment, COMMENT_LENGTH);
 		read(fd, &file->buf, 4);
 		if (file->bur != NULL)
-			exit(p_err(110, "Invalid NULL bytes after bot comment", NULL));
+			exit(p_err(111, "Invalid NULL bytes after bot comment", NULL));
 		close(fd);
 	}
 }
