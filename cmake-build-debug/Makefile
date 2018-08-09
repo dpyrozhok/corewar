@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/popanase/corewar_my
+CMAKE_SOURCE_DIR = /Users/vlevko/42/git_corewar
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/popanase/corewar_my/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/vlevko/42/git_corewar/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/popanase/corewar_my/cmake-build-debug/CMakeFiles /Users/popanase/corewar_my/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vlevko/42/git_corewar/cmake-build-debug/CMakeFiles /Users/vlevko/42/git_corewar/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/popanase/corewar_my/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vlevko/42/git_corewar/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

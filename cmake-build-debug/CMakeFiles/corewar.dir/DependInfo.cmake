@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/popanase/corewar_my/main.c" "/Users/popanase/corewar_my/cmake-build-debug/CMakeFiles/corewar.dir/main.c.o"
+  "/Users/vlevko/42/git_corewar/main.c" "/Users/vlevko/42/git_corewar/cmake-build-debug/CMakeFiles/corewar.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
