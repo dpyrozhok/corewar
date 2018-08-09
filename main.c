@@ -2,45 +2,6 @@
 #include <fcntl.h>
 #include "corewar.h"
 
-int		get_base(const char c)
-{
-    int		nb;
-
-    if (c >= '0' && c <= '9')
-        nb = c - '0';
-    else if (c >= 'a' && c <= 'z')
-        nb = c - 'a' + 10;
-    else if (c >= 'A' && c <= 'Z')
-        nb = c - 'A' + 10;
-    else
-        nb = -1;
-    return (nb);
-}
-
-int		ft_atoh(const char *str, int base)
-{
-    int		neg;
-    int		nbr;
-    int		curr;
-
-    neg = 0;
-    nbr = 0;
-    if (*str == '-')
-        neg++;
-    if (*str == '-' || *str == '+')
-        str++;
-    curr = get_base(*str);
-    while (curr >= 0 && curr < base)
-    {
-        nbr = nbr * base + curr;
-        str++;
-        curr = get_base(*str);
-    }
-    if (neg)
-        nbr = -nbr;
-    return (nbr);
-}
-
 void    ft_dump(unsigned char *arena) {
     int i;
 
@@ -54,12 +15,19 @@ void    ft_dump(unsigned char *arena) {
     }
 }
 
+void    ft_create_car(t_champ *champ)
+{
+
+}
+
 void    ft_parse_champion(t_core *core, int fd)
 {
-    int i;
-    char    buf[4];
-    unsigned int     size;
-    t_champ *champ;
+    int                 i;
+    char                buf[4];
+    unsigned int        size;
+    t_champ             *champ;
+    t_champ             *tmp;
+
 
     champ = (t_champ *)ft_memalloc(sizeof(t_champ));
     read(fd, &buf, 4);
@@ -72,19 +40,16 @@ void    ft_parse_champion(t_core *core, int fd)
     read(fd, &buf, 3);
     champ->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * champ->size);
     read(fd, champ->code, champ->size);
-    ft_printf("%s\n", champ->name);
-    ft_printf("%s\n", champ->comment);
-    ft_printf("%u\n", champ->size);
-    i = 0;
-    while (i < champ->size)
+    ft_create_car(champ);
+    if (!core->champs)
+        core->champs = champ;
+    else
     {
-        ft_printf("%02x ", champ->code[i]);
-        i++;
-        if (i % 64 == 0)
-            ft_printf("\n");
+        tmp = core->champs;
+        while (tmp->next)
+            tmp = tmp->next;
+        tmp->next = champ;
     }
-    ft_printf("\n");
-    core->champs = champ;
 }
 
 int main(int ac, char **av) {
@@ -92,12 +57,14 @@ int main(int ac, char **av) {
     int i;
     int fd;
 
-    i = 0;
+    i = 1;
     setbuf(stdout, 0);
     core = (t_core *)ft_memalloc(sizeof(t_core));
     core->arena = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
-    fd = open(av[1], O_RDONLY);
-    ft_parse_champion(core, fd);
- // ft_dump (core->arena);
+    while(i < ac) {
+        fd = open(av[i], O_RDONLY);
+        ft_parse_champion(core, fd);
+        i++;
+    }
     return 0;
 }
