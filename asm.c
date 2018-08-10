@@ -41,6 +41,18 @@ int		main(int ac, char **av)
 
 	if (ac < 2 || ac > 3)
 		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
+	// if (ft_strcmp(av[1], "-d")) // decompilyator?
+	// {
+	// 	if (ac != 3)
+	// 		return (0) // nepravilnaya komanda sveti usage(kompil
+	// 	// if () nepravilniy format faila
+	// 	//return (0);
+	// }
+	// else
+	// {
+	// 	// if () nepravilniy format faila
+	// 	//return (0);
+	// }
 	if (!(ft_check_format(av[1])))
 		return(ft_printf("Can't read source file\n"));
 	else
