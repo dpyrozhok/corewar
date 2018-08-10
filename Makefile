@@ -12,7 +12,8 @@
 
 NAME = corewar
 
-SRC = main.c
+SRC = main.c \
+    check_args.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

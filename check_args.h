@@ -3,16 +3,18 @@
 //
 
 #ifndef COREWAR_CHECK_ARGS_H
-#define COREWAR_CHECK_ARGS_H
-#include "corewar.h"
+# define COREWAR_CHECK_ARGS_H
+
+# include "corewar.h"
 
 typedef struct	s_check
 {
 	char			buf[4];
-	unsigned char	name[PROG_NAME_LENGTH];
+	char			name[PROG_NAME_LENGTH];
 	unsigned char	comment[COMMENT_LENGTH];
 	unsigned int	size;
 	unsigned char	*code;
+	ssize_t			ret;
 }				t_check;
 
 void	check_args(int ac, char **av, t_core *core);
