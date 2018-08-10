@@ -1,9 +1,14 @@
 #ifndef COREWAR_COREWAR_H
 #define COREWAR_COREWAR_H
 
+#include <stdio.h>
+#include <fcntl.h>
 # include "libft/libft.h"
 # include "ft_printf/libftprintf.h"
 # include "op.h"
+
+typedef struct s_champ	t_champ;
+typedef struct s_car	t_car;
 
 typedef struct          s_core {
     unsigned char   *arena;
@@ -11,9 +16,10 @@ typedef struct          s_core {
     int             qt_champ;
     int             init_nub;
     int             c_to_die;
+	int				dump;
 }                       t_core;
 
-typedef struct          s_champ {
+struct          s_champ {
     unsigned char   name[PROG_NAME_LENGTH + 1];
     unsigned char   comment[COMMENT_LENGTH + 1];
     unsigned int    size;
@@ -21,11 +27,11 @@ typedef struct          s_champ {
     int             s_live;
     int             last_live;
     unsigned char   *code;
-    struct s_car    *cars;
-    struct s_champ  *next;
-}                       t_champ;
+    t_car    		*cars;
+    t_champ  		*next;
+};
 
-typedef struct              s_car {
+struct              s_car {
     int             pos;
     int             carry;
     int             id;
@@ -33,7 +39,7 @@ typedef struct              s_car {
     unsigned int    reg[REG_NUMBER];
     int             opcode;
     int             cycle;
-    struct s_car    *next;
-    struct s_car    *prev;
-}                           t_car;
+    t_car    		*next;
+    t_car    		*prev;
+};
 #endif

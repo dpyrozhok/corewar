@@ -2,14 +2,7 @@
 // Created by Vitalii LEVKO on 8/9/18.
 //
 
-typedef struct	s_check
-{
-	char			buf[4];
-	unsigned char	name[PROG_NAME_LENGTH];
-	unsigned char	comment[COMMENT_LENGTH];
-	unsigned int	size;
-	unsigned char	*code;
-}				t_check;
+#include "check_args.h"
 
 int	ft_isspace(int c)
 {
@@ -24,7 +17,7 @@ int		p_err(int ret, char *str, char *orig)
 	write(2, str, ft_strlen(str));
 	if (orig)
 	{
-		write(2, ": '", 2);
+		write(2, ": '", 3);
 		write(2, orig, ft_strlen(orig));
 		write(2, "'\n", 1);
 	}
@@ -120,7 +113,7 @@ void	store_dump(int ac, char **av, int i, t_core *core)
 	core->dump = dump;
 }
 
-void 	check_num(int ac, char **av, int i, t_core *core)
+void 	check_num(int ac, char **av, int i)
 {
 	int		num;
 
@@ -128,7 +121,7 @@ void 	check_num(int ac, char **av, int i, t_core *core)
 		exit(p_err(105, "Missed player number", NULL));
 	if (!is_num(av[i]))
 		exit(p_err(106, "Player number is not a number", av[i]));
-	is_int(av[i]);
+	is_int(av[i], av[i]);
 }
 
 int	str_str(char *src, char *str)
@@ -206,7 +199,7 @@ int	check_dir(char *str)
 	check_filename(str);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		return (p_err(2, "Unable to open file", str));
+		exit(p_err(2, "Unable to open file", str));
 	return (fd);
 }
 
@@ -216,28 +209,30 @@ void	check_file(char *str)
 	t_check *file;
 
 	fd = 0;
-	while (fd != -1)
-	{
+//	while (fd != -1)
+//	{
 		fd = check_dir(str);
-		file = (t_check *)malloc(sizeof(t_check));
+		file = (t_check *)ft_memalloc(sizeof(t_check));
 		read(fd, &file->buf, 4);
-		if (file->buf ^ COREWAR_EXEC_MAGIC != 0)
+		file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
+			(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
+		if (file->size != COREWAR_EXEC_MAGIC)
 			exit(p_err(109, "Invalid magic bytes", NULL));
 		read(fd, &file->name, PROG_NAME_LENGTH);
 		read(fd, &file->buf, 4);
-		if (file->buf != NULL)
+		if (ft_strcmp(file->buf, ""))
 			exit(p_err(110, "Invalid NULL bytes after bot name", NULL));
 		read(fd, &file->buf, 4);
-		file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
-					(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
+		file->size = (unsigned int)((unsigned char)file->buf << 24 | (unsigned char)file->buf << 16 | \
+					(unsigned char)file->buf << 8 | (unsigned char)file->buf);
 		if (file->size > CHAMP_MAX_SIZE)
 			exit(p_err(110, "Exceeded bot max size", NULL));
 		read(fd, &file->comment, COMMENT_LENGTH);
 		read(fd, &file->buf, 4);
-		if (file->bur != NULL)
+		if (ft_strcmp(file->buf, ""))
 			exit(p_err(111, "Invalid NULL bytes after bot comment", NULL));
 		close(fd);
-	}
+//	}
 }
 
 void	check_args(int ac, char **av, t_core *core)
@@ -256,7 +251,7 @@ void	check_args(int ac, char **av, t_core *core)
 		if (!ft_strcmp(av[i], "-dump"))
 			store_dump(ac, av, ++i, core);
 		else if (!ft_strcmp(av[i], "-n"))
-			check_num(ac, av, ++i, core);
+			check_num(ac, av, ++i);
 		else
 			check_file(av[i]);
 		i++;

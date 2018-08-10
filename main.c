@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <fcntl.h>
 #include "corewar.h"
+#include "check_args.h"
 
+/*
 void	p_usage(void)
 {
 	ft_printf("usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...\n");
@@ -18,7 +18,7 @@ void	check_args(int ac, char **av)
 	while (i < ac)
 		i++;
 }
-
+*/
 void ft_dump(unsigned char *arena)
 {
 	int i;
@@ -106,10 +106,11 @@ int main(int ac, char **av)
 	int i;
 	int fd;
 
-	check_args(ac, av);
 	i = 1;
 	setbuf(stdout, 0);
 	core = (t_core *) ft_memalloc(sizeof(t_core));
+	core->dump = -1;
+	check_args(ac, av, core);
 	core->arena = (unsigned char *) malloc(sizeof(unsigned char) * MEM_SIZE);
     core->init_nub = 0;
     core->c_to_die = CYCLE_TO_DIE;
