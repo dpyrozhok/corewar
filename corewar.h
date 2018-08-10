@@ -14,8 +14,13 @@ typedef struct          s_core {
     unsigned char   *arena;
     struct s_champ  *champs;
     int             qt_champ;
+    int             qt_car;
     int             init_nub;
+    int             cycle;
     int             c_to_die;
+    int             last_check;
+    int             qt_check;
+    int             winner_id;
 	int				dump;
 }                       t_core;
 
@@ -35,11 +40,13 @@ struct              s_car {
     int             pos;
     int             carry;
     int             id;
-    unsigned int    live;
+    int             live;
     unsigned int    reg[REG_NUMBER];
     int             opcode;
     int             cycle;
     t_car    		*next;
     t_car    		*prev;
 };
+
+void    ft_start_fight(t_core *core);
 #endif

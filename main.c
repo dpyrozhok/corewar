@@ -42,8 +42,9 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
     car->id = champ->id;
     car->reg[0] = (unsigned int)champ->id;
     car->opcode = (int)core->arena[pos];
+    core->qt_car++;
     if (car->opcode > 0 && car->opcode < 17)
-        car->cycle = 10;  // must take value from op.c
+        car->cycle = 0;  // must take value from op.c
     if (champ->cars) {
         car->prev = champ->cars->prev;
         car->next = champ->cars;
@@ -51,7 +52,11 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
         champ->cars->prev = car;
     }
     else
+    {
         champ->cars = car;
+        car->next = car;
+        car->prev = car;
+    }
 }
 
 void    ft_place_champ(t_core *core)
@@ -78,13 +83,15 @@ void    ft_parse_champion(t_core *core, int fd)
 
     champ = (t_champ *)ft_memalloc(sizeof(t_champ));
     read(fd, &buf, 4);
-    read(fd, &champ->name, PROG_NAME_LENGTH + 1);
-    read(fd, &buf, 3);
+    read(fd, &champ->name, PROG_NAME_LENGTH);
+    champ->name[PROG_NAME_LENGTH] = '\0';
+    read(fd, &buf, 4);
     read(fd, &buf, 4);
     size = (unsigned int)((unsigned char)buf[0] << 24 | (unsigned char)buf[1] << 16 | (unsigned char)buf[2] << 8 | (unsigned char)buf[3]);
     champ->size = size;
-    read(fd, &champ->comment, COMMENT_LENGTH + 1);
-    read(fd, &buf, 3);
+    read(fd, &champ->comment, COMMENT_LENGTH);
+    champ->comment[COMMENT_LENGTH] = '\0';
+    read(fd, &buf, 4);
     champ->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * champ->size);
     read(fd, champ->code, champ->size);
     core->qt_champ++;
@@ -112,7 +119,7 @@ int main(int ac, char **av)
 	core->dump = -1;
 	check_args(ac, av, core);
 	core->arena = (unsigned char *) malloc(sizeof(unsigned char) * MEM_SIZE);
-    core->init_nub = 0;
+    core->init_nub = 81;
     core->c_to_die = CYCLE_TO_DIE;
     while(i < ac) {
         fd = open(av[i], O_RDONLY);
@@ -121,6 +128,7 @@ int main(int ac, char **av)
         i++;
     }
     ft_place_champ(core);
+    ft_start_fight(core);
     ft_dump(core->arena);
     return 0;
 }
