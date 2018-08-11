@@ -1,23 +1,7 @@
 #include "corewar.h"
 #include "check_args.h"
-/*
-void	p_usage(void)
-{
-	ft_printf("usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...\n");
-	exit(0);
-}
+#include "ncurs.h"
 
-void	check_args(int ac, char **av)
-{
-	int i;
-
-	if (ac == 1)
-		p_usage();
-	i = 1;
-	while (i < ac)
-		i++;
-}
-*/
 void ft_dump(unsigned char *arena)
 {
 	int i;
