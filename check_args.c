@@ -3,6 +3,7 @@
 //
 
 #include "check_args.h"
+#include "ncurs.h"
 
 int	ft_isspace(int c)
 {
@@ -19,7 +20,7 @@ int		p_err(int ret, char *str, char *orig)
 	{
 		write(2, ": '", 3);
 		write(2, orig, ft_strlen(orig));
-		write(2, "'\n", 1);
+		write(2, "'\n", 2);
 	}
 	else
 		write(2, "\n", 1);
@@ -93,7 +94,7 @@ void	is_int(char *str, char *orig)
 
 void	p_usage(void)
 {
-	ft_printf("usage: ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...\n");
+	ft_printf("usage: ./corewar [-help | [-v] [-dump nbr_cycles] [[-n number] champion1.cor] ...]\n");
 	exit(0);
 }
 
@@ -154,9 +155,9 @@ void	check_filename(char *str)
 
 	len = ft_strlen(str);
 	if (len < 5)
-		exit(p_err(112, "Invalid filename", str));
+		exit(p_err(112, "Invalid file type", str));
 	if (!str_inc(str, ".cor"))
-		exit(p_err(113, "Invalid filename", str));
+		exit(p_err(113, "Invalid file type", str));
 }
 
 int	check_dir(char *str)
@@ -180,6 +181,8 @@ void	check_null(t_check *file)
 {
 	int i;
 
+	if (file->ret != 4)
+		exit(p_err(116, "Bot NULL bytes length mismatch", ft_itoa(file->ret)));
 	i = 0;
 	while(i < 4)
 	{
@@ -194,6 +197,8 @@ void	check_bot_name(t_check *file)
 	int		i;
 	char *str;
 
+	if (file->ret != PROG_NAME_LENGTH)
+		exit(p_err(114, "Bot name length mismatch", ft_itoa(file->ret)));
 	i = 0;
 	while(i < PROG_NAME_LENGTH)
 	{
@@ -211,24 +216,30 @@ void	check_file(char *str)
 
 	fd = check_dir(str);
 	file = (t_check *)ft_memalloc(sizeof(t_check));
-	read(fd, &file->buf, 4);
+	file->ret = read(fd, &file->buf, 4);
 	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
 		(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
-	if (file->size != COREWAR_EXEC_MAGIC)
+	if (file->ret != 4 || file->size != COREWAR_EXEC_MAGIC)
 		exit(p_err(109, "Invalid magic bytes", NULL));
-	read(fd, &file->name, PROG_NAME_LENGTH);
+	file->ret = read(fd, &file->name, PROG_NAME_LENGTH);
 	check_bot_name(file);
-	read(fd, &file->buf, 4);
+	file->ret = read(fd, &file->buf, 4);
 	check_null(file);
-	read(fd, &file->buf, 4);
-	file->size = (unsigned int)((unsigned char)file->buf << 24 | (unsigned char)file->buf << 16 | \
-				(unsigned char)file->buf << 8 | (unsigned char)file->buf);
+	file->ret = read(fd, &file->buf, 4);
+	if (file->ret != 4)
+		exit(p_err(116, "Bot max size length mismatch", ft_itoa(file->ret)));
+	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
+				(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
 	if (file->size > CHAMP_MAX_SIZE)
 		exit(p_err(110, "Exceeded bot max size", NULL));
-	read(fd, &file->comment, COMMENT_LENGTH);
-	read(fd, &file->buf, 4);
+	file->ret = read(fd, &file->comment, COMMENT_LENGTH);
+	if (file->ret != COMMENT_LENGTH)
+		exit(p_err(115, "Bot comment length mismatch", ft_itoa(file->ret)));
+	file->ret = read(fd, &file->buf, 4);
 	check_null(file);
-	read(fd, &file->code, CHAMP_MAX_SIZE);
+	file->ret = read(fd, &file->code, CHAMP_MAX_SIZE);
+	if (file->ret != file->size)
+		exit(p_err(116, "Bot size mismatch", ft_itoa(file->ret)));
 	ft_strclr(file->buf);
 	file->ret = read(fd, &file->buf, 1);
 	if (file->ret > 0)
@@ -240,6 +251,7 @@ void	check_args(int ac, char **av, t_core *core)
 {
 	int i;
 	int c;
+	int fd;
 
 	if (ac == 1)
 		p_usage();
@@ -249,13 +261,33 @@ void	check_args(int ac, char **av, t_core *core)
 	{
 		if (c > MAX_ARGS_NUMBER)
 			exit(p_err(100, "Exceeded number of args", av[i]));
-		if (!ft_strcmp(av[i], "-dump"))
+		if (!ft_strcmp(av[i], "-help"))
+		{
+			fd = open("man/corewar.man", O_RDONLY);
+			if (fd == -1)
+				exit(p_err(1, "Cannot access the man file", "man/corewar.man"));
+			i = p_help(0, 0, fd, '\0');
+			close(fd);
+			exit(i);
+		}
+		else if (!ft_strcmp(av[i], "-v"))
+		{
+			c++;
+			do_more();
+			exit(0);
+		}
+		else if (!ft_strcmp(av[i], "-dump"))
+		{
+			c++;
 			store_dump(ac, av, ++i, core);
+		}
 		else if (!ft_strcmp(av[i], "-n"))
+		{
+			c++;
 			check_num(ac, av, ++i);
+		}
 		else
 			check_file(av[i]);
 		i++;
-		c++;
 	}
 }

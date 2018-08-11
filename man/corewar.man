@@ -1,0 +1,28 @@
+
+COREWAR(1)				General Manual				COREWAR(1)
+
+/*NAME*/
+	/*corewar*/ -- a simple project 
+
+/*SYNOPSIS*/
+	/*./corewar*/ [/*-help*/ | [/*-v*/] [/*-dump nbr_cycles*/] [[/*-n number*/] /*champion1.cor*/] /*...*/]
+
+/*DESCRIPTION*/
+	The /*corwar*/ is a simple project. It uses at least one champion
+	passed as a parameter.
+
+	The options are as follows:
+
+	/*-help*/	Display the general manual page.
+
+	/*-v*/		Run in visual mode.
+
+	/*-dump nbr_cycle*/	Print a dump on the provided cycle number.
+
+	/*-n number*/	Specify champion initial number.
+
+/*DIAGNOSTICS*/
+	The /*corewar*/ utility exits 0 on success, and >0 if error occurs.
+
+UNIT Factory			August 31, 2018			  UNIT Factory
+/^(END)^/
