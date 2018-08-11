@@ -49,4 +49,6 @@ struct              s_car {
 };
 
 void    ft_start_fight(t_core *core);
+void    ft_make_check(t_core *core);
+void    ft_opcode_switcher(t_core *core, t_champ *champ);
 #endif

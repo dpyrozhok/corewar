@@ -1,6 +1,5 @@
 #include "corewar.h"
 #include "check_args.h"
-
 /*
 void	p_usage(void)
 {
