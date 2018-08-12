@@ -299,6 +299,6 @@ void	check_args(int ac, char **av, t_core *core)
 
 void	op(void)
 {
-	printf("%hhd\n", op_tab[1].arg[0]);
+	printf("%s\n", op_tab[0].exp);
 	exit(0);
 }

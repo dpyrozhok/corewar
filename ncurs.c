@@ -15,8 +15,9 @@ typedef struct _WIN_struct {
 } WIN;
 
 
-void init_win_params(WIN *p_win);
+void init_win_params(WIN *p_win, int h, int w, int sy, int sx);
 void print_win_params(WIN *p_win);
+void init_win_params2(WIN *p_win, int h, int w, int sy, int sx);
 void create_box(WIN *win, bool flag);
 
 
@@ -185,6 +186,7 @@ void	destroy_win(WINDOW *local_win)
 void	do_more(void)
 {
 	WIN win;
+	WIN win2;
 	int ch;
 
 	initscr();
@@ -192,17 +194,29 @@ void	do_more(void)
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
+	curs_set(0);
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_BLUE, COLOR_BLACK);
 
-	init_win_params(&win);
-	print_win_params(&win);
-	
+	init_win_params(&win, 67, 196, 1, 0);
+//	print_win_params(&win);
+	init_win_params2(&win2, 67, 56, 1, 197);
+
 	attron(COLOR_PAIR(1));
 	printw("Press F1 to exit");
 	refresh();
 	attroff(COLOR_PAIR(1));
-	
+
+	attron(COLOR_PAIR(2));
 	create_box(&win, TRUE);
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(3));
+	create_box(&win2, FALSE);
+	attroff(COLOR_PAIR(3));
+//	cbreak();
+//	keypad(stdscr, TRUE);
+//	noecho();
 	while((ch = getch()) != KEY_F(1))
 	{
 		switch(ch)
@@ -232,20 +246,40 @@ void	do_more(void)
 	endwin();
 }
 
-void init_win_params(WIN *p_win)
+void init_win_params(WIN *p_win, int h, int w, int sy, int sx)
 {
-        p_win->height = 3;
-        p_win->width = 10;
-        p_win->starty = (LINES - p_win->height)/2;
-        p_win->startx = (COLS - p_win->width)/2;
-        p_win->border.ls = '|';
-        p_win->border.rs = '|';
-        p_win->border.ts = '-';
-        p_win->border.bs = '-';
-        p_win->border.tl = '+';
-        p_win->border.tr = '+';
-        p_win->border.bl = '+';
-        p_win->border.br = '+';
+        p_win->height = h;
+        p_win->width = w;
+//		p_win->starty = (LINES - p_win->height)/2;
+		p_win->starty = sy;
+//		p_win->startx = (COLS - p_win->width)/2;
+		p_win->startx = sx;
+        p_win->border.ls = ACS_VLINE;
+        p_win->border.rs = ACS_VLINE;
+        p_win->border.ts = ACS_HLINE;
+        p_win->border.bs = ACS_HLINE;
+        p_win->border.tl = ACS_ULCORNER;
+        p_win->border.tr = ACS_URCORNER;
+        p_win->border.bl = ACS_LLCORNER;
+        p_win->border.br = ACS_LRCORNER;
+}
+
+void init_win_params2(WIN *p_win, int h, int w, int sy, int sx)
+{
+	p_win->height = h;
+	p_win->width = w;
+	//		p_win->starty = (LINES - p_win->height)/2;
+	p_win->starty = sy;
+	//		p_win->startx = (COLS - p_win->width)/2;
+	p_win->startx = sx;
+	p_win->border.ls = ACS_VLINE;
+	p_win->border.rs = ACS_VLINE;
+	p_win->border.ts = ACS_HLINE;
+	p_win->border.bs = ACS_HLINE;
+	p_win->border.tl = ACS_TTEE;
+	p_win->border.tr = ACS_URCORNER;
+	p_win->border.bl = ACS_BTEE;
+	p_win->border.br = ACS_LRCORNER;
 }
 
 void print_win_params(WIN *p_win)
@@ -260,7 +294,7 @@ void print_win_params(WIN *p_win)
 
 void create_box(WIN *p_win, bool flag)
 {
-	int i, j;
+//	int i, j;
 	int x, y, w, h;
 
 	x = p_win->startx;
@@ -270,6 +304,15 @@ void create_box(WIN *p_win, bool flag)
 
 	if( flag == TRUE)
 	{
+		p_win->border.ls = ACS_VLINE;
+		p_win->border.rs = ACS_VLINE;
+		p_win->border.ts = ACS_HLINE;
+		p_win->border.bs = ACS_HLINE;
+		p_win->border.tl = ACS_ULCORNER;
+		p_win->border.tr = ACS_URCORNER;
+		p_win->border.bl = ACS_LLCORNER;
+		p_win->border.br = ACS_LRCORNER;
+
 		mvaddch(y, x, p_win->border.tl);
 		mvaddch(y, x + w, p_win->border.tr);
 		mvaddch(y + h, x, p_win->border.bl);
@@ -280,8 +323,66 @@ void create_box(WIN *p_win, bool flag)
 		mvvline(y + 1, x + w, p_win->border.rs, h - 1);
 	}
 	else
-		for(j = y; j <= y + h; ++j)
-			for(i = x; i <= x + w; ++i)
-				mvaddch(j, i, ' ');
+//		for(j = y; j <= y + h; ++j)
+//			for(i = x; i <= x + w; ++i)
+//				mvaddch(j, i, ' ');
+	{
+		p_win->border.ls = ACS_VLINE;
+		p_win->border.rs = ACS_VLINE;
+		p_win->border.ts = ACS_HLINE;
+		p_win->border.bs = ACS_HLINE;
+		p_win->border.tl = ACS_ULCORNER;
+		p_win->border.tr = ACS_URCORNER;
+		p_win->border.bl = ACS_LLCORNER;
+		p_win->border.br = ACS_LRCORNER;
+
+		mvaddch(y, x, p_win->border.tl);
+		mvaddch(y, x + w, p_win->border.tr);
+		mvaddch(y + h, x, p_win->border.bl);
+		mvaddch(y + h, x + w, p_win->border.br);
+		mvhline(y, x + 1, p_win->border.ts, w - 1);
+		mvhline(y + h, x + 1, p_win->border.bs, w - 1);
+		mvvline(y + 1, x, p_win->border.ls, h - 1);
+		mvvline(y + 1, x + w, p_win->border.rs, h - 1);
+	}
 	refresh();
+}
+
+void	do_acs(void)
+{
+	initscr();
+	printw("Upper left corner "); addch(ACS_ULCORNER); printw("\n");
+	printw("Lower left corner "); addch(ACS_LLCORNER); printw("\n");
+	printw("Lower right corner "); addch(ACS_LRCORNER); printw("\n");
+	printw("Tee pointing right "); addch(ACS_LTEE); printw("\n");
+	printw("Tee pointing left "); addch(ACS_RTEE); printw("\n");
+	printw("Tee pointing up "); addch(ACS_BTEE); printw("\n");
+	printw("Tee pointing down "); addch(ACS_TTEE); printw("\n");
+	printw("Horizontal line "); addch(ACS_HLINE); printw("\n");
+	printw("Vertical line "); addch(ACS_VLINE); printw("\n");
+	printw("Large Plus or cross over "); addch(ACS_PLUS); printw("\n");
+	printw("Scan Line 1 "); addch(ACS_S1); printw("\n");
+	printw("Scan Line 3 "); addch(ACS_S3); printw("\n");
+	printw("Scan Line 7 "); addch(ACS_S7); printw("\n");
+	printw("Scan Line 9 "); addch(ACS_S9); printw("\n");
+	printw("Diamond "); addch(ACS_DIAMOND); printw("\n");
+	printw("Checker board (stipple) "); addch(ACS_CKBOARD); printw("\n");
+	printw("Degree Symbol "); addch(ACS_DEGREE); printw("\n");
+	printw("Plus/Minus Symbol "); addch(ACS_PLMINUS); printw("\n");
+	printw("Bullet "); addch(ACS_BULLET); printw("\n");
+	printw("Arrow Pointing Left "); addch(ACS_LARROW); printw("\n");
+	printw("Arrow Pointing Right "); addch(ACS_RARROW); printw("\n");
+	printw("Arrow Pointing Down "); addch(ACS_DARROW); printw("\n");
+	printw("Arrow Pointing Up "); addch(ACS_UARROW); printw("\n");
+	printw("Board of squares "); addch(ACS_BOARD); printw("\n");
+	printw("Lantern Symbol "); addch(ACS_LANTERN); printw("\n");
+	printw("Solid Square Block "); addch(ACS_BLOCK); printw("\n");
+	printw("Less/Equal sign "); addch(ACS_LEQUAL); printw("\n");
+	printw("Greater/Equal sign "); addch(ACS_GEQUAL); printw("\n");
+	printw("Pi "); addch(ACS_PI); printw("\n");
+	printw("Not equal "); addch(ACS_NEQUAL); printw("\n");
+	printw("UK pound sign "); addch(ACS_STERLING); printw("\n");
+	refresh();
+	getch();
+	endwin();
 }

@@ -17,7 +17,8 @@ SRC = main.c \
     start_fight.c \
     check_isend.c \
     opcode_switcher.c \
-    ncurs.c
+    ncurs.c \
+    op.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
