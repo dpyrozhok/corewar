@@ -190,30 +190,48 @@ void	do_more(void)
 	int ch;
 
 	initscr();
+	if (LINES < 69 || COLS < 254)
+	{
+		endwin();
+		printf("Resize window to min 254 cols and 69 rows. Currently %d cols and %d rows\n", COLS, LINES);
+		exit(0);
+	}
 	start_color();
 	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
-	init_pair(3, COLOR_BLUE, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_WHITE);
+	init_pair(3, COLOR_BLUE, COLOR_WHITE);
+	init_color(COLOR_WHITE, 600, 600, 600);
+	init_pair(4, COLOR_WHITE, COLOR_BLACK);
 
 	init_win_params(&win, 67, 196, 1, 0);
 //	print_win_params(&win);
 	init_win_params2(&win2, 67, 56, 1, 197);
 
-	attron(COLOR_PAIR(1));
+	attron(COLOR_PAIR(1) | A_BOLD);
 	printw("Press F1 to exit");
 	refresh();
-	attroff(COLOR_PAIR(1));
+	attroff(COLOR_PAIR(1) | A_BOLD);
 
+	attron(A_REVERSE);
+	attron(A_BOLD);
 	attron(COLOR_PAIR(2));
 	create_box(&win, TRUE);
 	attroff(COLOR_PAIR(2));
 	attron(COLOR_PAIR(3));
 	create_box(&win2, FALSE);
 	attroff(COLOR_PAIR(3));
+	attron(COLOR_PAIR(4));
+	attroff(A_BOLD);
+	mvprintw(3, 3, "00");
+	attroff(A_REVERSE);
+	attron(A_BOLD);
+	mvprintw(3, 200, "00");
+	attroff(COLOR_PAIR(4));
+
 //	cbreak();
 //	keypad(stdscr, TRUE);
 //	noecho();
