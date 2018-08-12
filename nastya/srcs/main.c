@@ -12,37 +12,18 @@
 
 #include "../inc/asm.h"
 
-//void	ft_obnul(t_my	*inf)
-//{
-//	inf->fd = open("test", O_RDONLY);
-//}
+void	ft_obnul(t_my	*inf)
+{
+    inf->fd = open("test", O_RDONLY);
+    inf->t.line = NULL;
 
+}
 
-//void    ft_push_back(t_text **lst, t_text *new)
-//{
-//    t_text  *p_t;
-//
-//    p_t = *lst;
-//    if (!p_t)//->line)
-//        p_t = new;
-//    else
-//    {
-//        while (p_t->next)
-//        {
-//            p_t = p_t->next;
-//        }
-//        p_t->next = new;
-//        p_t = p_t->next;
-//        p_t->next = NULL;
-//    }
-//    p_t->next = NULL;
-//}
-
-void    ft_push_back(t_text *lst, t_text *new)
+void    ft_push_back(t_my *lst, t_text *new)
 {
     t_text  *p_t;
 
-    p_t = lst;
+    p_t = &lst->t;
     while (p_t->next)
     {
         p_t = p_t->next;
@@ -50,40 +31,39 @@ void    ft_push_back(t_text *lst, t_text *new)
     if (p_t->line)
         p_t->next = new;
     else
-        lst = new;
+        lst->t = *new;
 }
 
-void    ft_print_txt(t_text *p_t)
+void    ft_print_txt(t_text t)
 {
+    t_text      *p_t;
+
+    p_t = &t;
     while (p_t->next)
     {
-        ft_printf("%s\n", p_t->line);
+        ft_printf("%s\t\n", p_t->line);
         p_t = p_t->next;
     }
     if(p_t)
-        ft_printf("%s\n", p_t->line);
+        ft_printf("%s\t\n", p_t->line);
 }
 
 int		main()
 {
 	t_my	inf;
-	t_text	*p_t;
     t_text  *new_t;
 
-//	ft_obnul(&inf);
-    inf.fd = open("test", O_RDONLY);
-	inf.t.line = NULL;
-    inf.t.next = NULL;
-    p_t = &inf.t;
+	ft_obnul(&inf);
     new_t = malloc(sizeof(new_t));
+    new_t->next = NULL;
 	while (get_next_line(inf.fd, &(new_t->line)) > 0)
 	{
-        new_t->next = NULL;
-        ft_push_back(&inf.t, new_t);
+
+        ft_push_back(&inf, new_t);
         new_t = malloc(sizeof(new_t));
+        new_t->next = NULL;
 	}
     free(new_t);
-    p_t = &inf.t;
-    ft_print_txt(p_t);
+    ft_print_txt(inf.t);
 	return 0;
 }

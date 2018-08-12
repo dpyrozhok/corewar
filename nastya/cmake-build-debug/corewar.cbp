@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/amalkevy/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/amalkevy/tt/nastya/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/amalkevy/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/amalkevy/tt/nastya/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/amalkevy/corewar/cmake-build-debug"/>
+				<Option working_dir="/Users/amalkevy/tt/nastya/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="corewar">
-				<Option output="/Users/amalkevy/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/amalkevy/corewar/cmake-build-debug"/>
+				<Option output="/Users/amalkevy/tt/nastya/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/amalkevy/tt/nastya/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -52,15 +52,15 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="corewar/fast">
-				<Option output="/Users/amalkevy/corewar/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/amalkevy/corewar/cmake-build-debug"/>
+				<Option output="/Users/amalkevy/tt/nastya/cmake-build-debug/corewar" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/amalkevy/tt/nastya/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -73,236 +73,236 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/corewar/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 corewar/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/amalkevy/tt/nastya/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/amalkevy/corewar/inc/asm.h">
+		<Unit filename="/Users/amalkevy/tt/nastya/inc/asm.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_atoi.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_atoi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_bzero.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_bzero.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_countw.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_countw.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_intrev.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_intrev.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_intsort.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_intsort.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_isalnum.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_isalnum.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_isalpha.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_isalpha.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_isascii.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_isascii.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_isdigit.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_isdigit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_isprint.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_isprint.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_itoa.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_itoa.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstadd.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstadd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstdel.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstdelone.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstdelone.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstiter.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstiter.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstmap.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstmap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_lstnew.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_lstnew.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memalloc.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memalloc.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memccpy.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memccpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memchr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memcmp.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memcmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memcpy.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memcpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memdel.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memmove.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memmove.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_memset.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_memset.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_printf.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_printf.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putchar.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putchar.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putchar_fd.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putchar_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putendl.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putendl.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putendl_fd.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putendl_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putnbr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putnbr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putnbr_fd.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putnbr_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putstr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_putstr_fd.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_putstr_fd.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strcat.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strcat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strchr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strclr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strclr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strcmp.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strcmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strcpy.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strcpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strdel.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strdel.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strdup.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strdup.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strequ.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strequ.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_striter.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_striter.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_striteri.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_striteri.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strjoin.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strjoin.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strlcat.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strlcat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strlen.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strlen.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strmap.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strmap.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strmapi.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strmapi.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strncat.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strncat.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strncmp.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strncmp.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strncpy.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strncpy.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strnequ.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strnequ.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strnew.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strnew.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strnstr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strnstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strrchr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strrchr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strrev.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strrev.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strsort.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strsort.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strsplit.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strsplit.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strstr.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strstr.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strsub.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strsub.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_strtrim.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_strtrim.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_tolower.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_tolower.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/ft_toupper.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/ft_toupper.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/get_next_line.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/get_next_line.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/itoa_base.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/itoa_base.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/libft.h">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/libft.h">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/pr_num_str.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/pr_num_str.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/pr_uni_char.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/pr_uni_char.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/read.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/read.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/type.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/type.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/libft/unicode.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/libft/unicode.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/srcs/main.c">
+		<Unit filename="/Users/amalkevy/tt/nastya/srcs/main.c">
 			<Option target="corewar"/>
 		</Unit>
-		<Unit filename="/Users/amalkevy/corewar/CMakeLists.txt">
+		<Unit filename="/Users/amalkevy/tt/nastya/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
