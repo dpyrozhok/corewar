@@ -15,6 +15,8 @@ NAME = corewar
 SRC = main.c \
     check_args.c \
     start_fight.c \
+    check_isend.c \
+    opcode_switcher.c \
     ncurs.c
 OBJ = $(SRC:.c=.o)
 

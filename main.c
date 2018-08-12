@@ -1,6 +1,5 @@
 #include "corewar.h"
 #include "check_args.h"
-#include "ncurs.h"
 
 void ft_dump(unsigned char *arena)
 {

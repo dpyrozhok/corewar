@@ -182,7 +182,7 @@ void	check_null(t_check *file)
 	int i;
 
 	if (file->ret != 4)
-		exit(p_err(116, "Bot NULL bytes length mismatch", ft_itoa(file->ret)));
+		exit(p_err(116, "Bot NULL bytes length mismatch", ft_itoa((int)file->ret)));
 	i = 0;
 	while(i < 4)
 	{
@@ -198,7 +198,7 @@ void	check_bot_name(t_check *file)
 	char *str;
 
 	if (file->ret != PROG_NAME_LENGTH)
-		exit(p_err(114, "Bot name length mismatch", ft_itoa(file->ret)));
+		exit(p_err(114, "Bot name length mismatch", ft_itoa((int)file->ret)));
 	i = 0;
 	while(i < PROG_NAME_LENGTH)
 	{
@@ -227,19 +227,19 @@ void	check_file(char *str)
 	check_null(file);
 	file->ret = read(fd, &file->buf, 4);
 	if (file->ret != 4)
-		exit(p_err(116, "Bot max size length mismatch", ft_itoa(file->ret)));
+		exit(p_err(116, "Bot max size length mismatch", ft_itoa((int)file->ret)));
 	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
 				(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
 	if (file->size > CHAMP_MAX_SIZE)
 		exit(p_err(110, "Exceeded bot max size", NULL));
 	file->ret = read(fd, &file->comment, COMMENT_LENGTH);
 	if (file->ret != COMMENT_LENGTH)
-		exit(p_err(115, "Bot comment length mismatch", ft_itoa(file->ret)));
+		exit(p_err(115, "Bot comment length mismatch", ft_itoa((int)file->ret)));
 	file->ret = read(fd, &file->buf, 4);
 	check_null(file);
 	file->ret = read(fd, &file->code, CHAMP_MAX_SIZE);
 	if (file->ret != file->size)
-		exit(p_err(116, "Bot size mismatch", ft_itoa(file->ret)));
+		exit(p_err(116, "Bot size mismatch", ft_itoa((int)file->ret)));
 	ft_strclr(file->buf);
 	file->ret = read(fd, &file->buf, 1);
 	if (file->ret > 0)

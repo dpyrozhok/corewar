@@ -57,6 +57,8 @@ void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 
 void    ft_switch_op_9_16(t_core *core, t_champ *champ)
 {
+    if (core && champ)
+        ;
 //    if (champ->cars->opcode == 9)
 //        ft_09_opcode(core, champ);
 //    if (champ->cars->opcode == 10)
