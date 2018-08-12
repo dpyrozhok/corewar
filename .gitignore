@@ -1,8 +1,5 @@
 cmake-build-debug
 .idea
-corewar
 *.[oa]
 *~
-libft/
-ft_printf/
-vm_champs/
+# git update-index --assume-unchanged [ libft/* | ft_printf/* | corewar | vm_champs/* / main.o ]
