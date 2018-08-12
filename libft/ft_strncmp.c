@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 18:29:10 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:24:31 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/08 21:20:31 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/22 19:37:04 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int					ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*buf_s1;
-	unsigned char	*buf_s2;
+	unsigned char	*news1;
+	unsigned char	*news2;
 
-	i = 0;
-	buf_s1 = (unsigned char *)s1;
-	buf_s2 = (unsigned char *)s2;
-	while (buf_s1[i] != '\0' && i < n)
+	if (n == 0)
+		return (0);
+	news1 = (unsigned char*)s1;
+	news2 = (unsigned char*)s2;
+	while (*news1 == *news2 && *news1 != '\0' && *news2 != '\0' && n - 1 > 0)
 	{
-		if (buf_s1[i] != buf_s2[i])
-			return (buf_s1[i] - buf_s2[i]);
-		i++;
+		news1++;
+		news2++;
+		n--;
 	}
-	if (buf_s1[i] != buf_s2[i] && n != 0 && i != n)
-		return (buf_s1[i] - buf_s2[i]);
+	if (*news1 != *news2)
+		return ((int)(*news1 - *news2));
 	return (0);
 }

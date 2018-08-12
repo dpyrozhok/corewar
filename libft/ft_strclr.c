@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 18:26:56 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:27:04 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/11 16:32:17 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/11 16:32:18 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 void	ft_strclr(char *s)
 {
+	int i;
+
+	i = 0;
 	if (s)
-		ft_bzero(s, ft_strlen(s));
+	{
+		while (s[i])
+		{
+			s[i] = '\0';
+			i++;
+		}
+	}
 }

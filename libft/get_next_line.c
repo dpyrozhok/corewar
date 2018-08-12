@@ -3,66 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 18:25:48 by popanase          #+#    #+#             */
-/*   Updated: 2018/02/07 18:50:18 by popanase         ###   ########.fr       */
+/*   Created: 2018/01/13 15:42:49 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/01/13 15:50:55 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-void	ft_cut_buff(char *s)
+#include <fcntl.h>
+
+static t_list				*ft_lst_checkfd(t_list **lst, const int fd)
 {
-	int	i;
-	int j;
+	t_list					*res;
 
-	i = 0;
-	j = 0;
-	while (s[i] != '\n' && s[i])
-		i++;
-	if (s[i] == '\n')
-		i++;
-	while (s[i])
+	res = *lst;
+	while (res)
 	{
-		s[j] = s[i];
-		i++;
-		j++;
+		if (res->content_size == (size_t)fd)
+			return (res);
+		res = res->next;
 	}
-	s[j] = '\0';
+	res = malloc(sizeof(*res));
+	res->content = ft_strdup("\0");
+	res->content_size = fd;
+	res->next = NULL;
+	ft_lstadd(lst, res);
+	res = *lst;
+	return (res);
 }
 
-void	ft_cut_str(char *s)
+static int					ft_checkcontent(char **line, char **ostacha)
 {
-	int i;
+	int						i;
+	char					*str;
+	int						start;
 
-	i = 0;
-	while (s[i] != '\n' && s[i])
-		i++;
-	s[i] = '\0';
+	i = -1;
+	while ((*ostacha)[++i])
+		if ((*ostacha)[i] == '\n')
+		{
+			start = (int)*ostacha;
+			start = (int)ft_strchr(*ostacha, '\n') + 1 - start;
+			str = (*line);
+			*line = ft_strsub(*ostacha, 0, start - 1);
+			free(str);
+			str = (*ostacha);
+			*ostacha = ft_strsub(*ostacha, start
+					, (int)ft_strlen(*ostacha) - start);
+			free(str);
+			return (1);
+		}
+	str = (*line);
+	*line = ft_strjoin(*line, (*ostacha));
+	free(str);
+	ft_bzero(*ostacha, ft_strlen(*ostacha));
+	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+int							get_next_line(int fd, char **line)
 {
-	static char	sb[BUFF_SIZE + 1];
-	char		*tmp;
-	char		b[BUFF_SIZE + 1];
-	int			r;
+	char					buf[BUFF_SIZE + 1];
+	int						ret;
+	t_list					*ostacha;
+	char					*str;
+	static t_list			*lst = NULL;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE <= 0 || read(fd, b, 0) == -1)
+	ret = 0;
+	if (fd < 0 || line == NULL || BUFF_SIZE < 0 || read(fd, buf, 0) < 0)
 		return (-1);
-	*line = ft_strdup(sb);
-	while (!ft_strchr(sb, '\n') && (r = read(fd, b, BUFF_SIZE)))
-	{
-		b[r] = '\0';
-		ft_strcpy(sb, b);
-		tmp = ft_strjoin(*line, sb);
-		free(*line);
-		*line = tmp;
-	}
-	if (!ft_strlen(sb) && r < BUFF_SIZE)
+	ostacha = ft_lst_checkfd(&lst, fd);
+	*line = ft_strdup("\0");
+	if (!(ft_strchr(ostacha->content, '\n')))
+		while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+		{
+			buf[ret] = '\0';
+			str = ostacha->content;
+			ostacha->content = ft_strjoin(str, buf);
+			str ? free(str) : str;
+			if (ft_strchr(ostacha->content, '\n'))
+				break ;
+		}
+	if (ret < BUFF_SIZE && !ft_strlen(ostacha->content))
 		return (0);
-	ft_cut_buff(sb);
-	ft_cut_str(*line);
+	ft_checkcontent(line, (char**)(&(ostacha->content)));
 	return (1);
 }

@@ -12,6 +12,7 @@
 #include "asm.h"
 
 int g_fd;
+int g_fd1;
 
 int		ft_check_format(char *name)
 {
@@ -51,33 +52,34 @@ static int	is_little(void)
 	return (0);
 }
 
-static int	swap_two_octets(int nb)
+int	ft_change(int ch)
 {
-	int		tmp;
+	int		new;
 
-	tmp = nb & 0xff;
-	nb = (nb & 0xff00) / 0xff;
-	nb = nb + (tmp * 0x100);
-	return (nb);
+	new = ch & 0xff;
+	ch = (ch & 0xff00) / 0xff;
+	ch = ch + (new * 0x100);
+	return (ch);
 }
 
-int		little_to_big_endian(int nb)
+int		convert_end(int new)
 {
-	int tmp;
+	int ch;
 
 	if (is_little() == 1)
 	{
-		tmp = nb & 0xffff;
-		nb = (nb & 0xffff0000) / 0xffff;
-		tmp = swap_two_octets(tmp) * 0x10000;
-		nb = swap_two_octets(nb) + tmp;
+		ch = new & 0xffff;
+		new = (new & 0xffff0000) / 0xffff;
+		ch = ft_change(ch) * 0x10000;
+		new = ft_change(new) + ch;
 	}
-	return (nb);
+	return (new);
 }
 
 void		ft_read_file(char *name)
 {
-	int su = little_to_big_endian(COREWAR_EXEC_MAGIC);
+	int su = convert_end(COREWAR_EXEC_MAGIC);
+    char *line;
 	if ((g_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
 					   S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
@@ -85,6 +87,38 @@ void		ft_read_file(char *name)
 		exit(1);
 	}
 	write(g_fd, &su, sizeof(su));
+    int fd;
+
+
+    /// CHECK IMENI
+    fd = open("zork.s", O_RDONLY);
+
+    get_next_line(fd, &line);
+    line = ft_strchr(line, '\"') + 1;
+    int i = 0;
+    char newline[132] = {0};
+    while (line[i] != '\"')
+    {
+        newline[i] = line[i];
+        i++;
+    }
+    char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    write(g_fd, &newline,sizeof(newline));
+    write(g_fd, &(botsize), sizeof(2)); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+    /// CHECK COMMENTA
+    char comment[2052] = {0};
+    get_next_line(fd, &line);
+    line = ft_strchr(line, '\"') + 1;
+
+   i = 0;
+    while (line[i] != '\"')
+    {
+        comment[i] = line[i];
+        i++;
+    }
+    write(g_fd, &comment,sizeof(comment));
 }
 
 int		main(int ac, char **av)

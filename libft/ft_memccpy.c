@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 18:23:19 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:04:53 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/04 19:01:02 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/04 19:01:36 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void				*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	unsigned char	*buf_d;
-	unsigned char	*buf_s;
-	size_t			i;
+	unsigned char	*srcnew;
+	unsigned char	*dstnew;
 
-	buf_d = (unsigned char *)dst;
-	buf_s = (unsigned char *)src;
-	i = 0;
-	while (i < n)
+	srcnew = (unsigned char*)src;
+	dstnew = (unsigned char*)dest;
+	while (n > 0 && *srcnew != (unsigned char)c)
 	{
-		*(buf_d + i) = *(buf_s + i);
-		if (*(buf_s + i) == (unsigned char)c)
-			return ((buf_d + i + 1));
-		i++;
+		n--;
+		*dstnew++ = *srcnew++;
 	}
-	return (NULL);
+	if (n > 0)
+	{
+		*dstnew++ = *srcnew++;
+		return (dstnew);
+	}
+	else
+		return (NULL);
 }

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 15:27:36 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:04:14 by popanase         ###   ########.fr       */
+/*   Created: 2017/10/31 16:37:52 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/10/31 16:55:39 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void				*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	const char		*buf_s;
-	char			*buf_d;
+	unsigned char	*kuda;
+	unsigned char	*otkuda;
 
-	buf_s = (const char *)src;
-	buf_d = (char *)dst;
+	kuda = (unsigned char *)dest;
+	otkuda = (unsigned char *)src;
 	while (n--)
-		*(buf_d + n) = *(buf_s + n);
-	return (dst);
+		*kuda++ = *otkuda++;
+	return (dest);
 }

@@ -3,40 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 18:26:06 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:29:16 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/13 16:33:16 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/13 16:33:17 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*join;
-	size_t	i;
-	size_t	j;
+	char	*str;
+	size_t	len;
 
-	i = 0;
-	j = 0;
-	if (s1 && s2)
-	{
-		if ((join = ft_strnew(ft_strlen(s1) + ft_strlen(s2))))
-		{
-			while (s1[i] != '\0')
-			{
-				join[i] = s1[i];
-				i++;
-			}
-			while (s2[j] != '\0')
-			{
-				join[i] = s2[j];
-				i++;
-				j++;
-			}
-			return (join);
-		}
-	}
-	return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char*)s1;
+	str = ft_memalloc(len + 1);
+	if (!str)
+		return (NULL);
+	str = ft_strcat(str, s1);
+	ft_strlcat(str, s2, len + 1);
+	return (str);
 }

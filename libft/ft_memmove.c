@@ -3,31 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 16:12:43 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:05:41 by popanase         ###   ########.fr       */
+/*   Created: 2017/10/31 17:53:42 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/10/31 18:05:18 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void				*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*buf_d;
-	char	*buf_s;
+	unsigned char	*kuda;
+	unsigned char	*otkuda;
+	size_t			i;
 
-	buf_d = (char *)dst;
-	buf_s = (char *)src;
-	if (buf_d <= buf_s || buf_d >= buf_s + len)
+	i = 0;
+	kuda = (unsigned char *)dst;
+	otkuda = (unsigned char *)src;
+	if (src <= dst)
 	{
 		while (len--)
-			*(buf_d++) = *(buf_s++);
+			kuda[len] = otkuda[len];
 	}
-	else if (buf_d > buf_s)
+	else
 	{
-		while (len--)
-			*(buf_d + len) = *(buf_s + len);
+		while (i < len)
+		{
+			kuda[i] = otkuda[i];
+			i++;
+		}
 	}
 	return (dst);
 }

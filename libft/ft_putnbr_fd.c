@@ -3,49 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/28 15:56:51 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:43:00 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/21 16:38:44 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/21 16:38:45 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t		ft_getlen(long int tmp)
+void	ft_putnbr_fd(int n, int fd)
 {
-	long int	del;
-
-	del = 1;
-	while (tmp)
+	if (n == -2147483648)
 	{
-		tmp /= 10;
-		del *= 10;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	return (del);
-}
-
-void				ft_putnbr_fd(int n, int fd)
-{
-	long int	del;
-	int			tmp;
-
-	tmp = n;
-	del = ft_getlen(tmp);
-	if (tmp == 0)
-		ft_putchar_fd(48, fd);
-	if (tmp < 0)
+	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		tmp *= -1;
+		n = -n;
 	}
-	while (del != 1)
+	if (n >= 10)
 	{
-		del /= 10;
-		if (tmp < 0)
-			ft_putchar_fd(48 - tmp / del, fd);
-		else
-			ft_putchar_fd(48 + tmp / del, fd);
-		tmp %= del;
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+	}
+	if (n < 10)
+	{
+		ft_putchar_fd(n % 10 + '0', fd);
 	}
 }

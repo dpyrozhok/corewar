@@ -15,7 +15,6 @@
 # define OP(index)	g_op_tab[index]
 
 # include "libft/libft.h"
-# include "ft_printf/libftprintf.h"
 # include "op.h"
 # include <fcntl.h>
 # include <string.h>

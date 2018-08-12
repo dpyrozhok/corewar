@@ -3,36 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 17:34:11 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:15:25 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/08 19:54:45 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/08 19:54:48 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strnstr(const char *hstck, const char *ndl, size_t len)
+static char		*ft_waja(const char *big, const char *little, int b,
+	int metka)
 {
-	size_t i;
-	size_t j;
+	if (metka && little[b] == '\0')
+		return ((char*)big + metka - b);
+	return (0);
+}
+
+char			*ft_strnstr(const char *big, const char *little, size_t len)
+{
+	size_t		i;
+	int			b;
+	int			metka;
 
 	i = 0;
-	j = 0;
-	while (hstck[i] != '\0' && i < len)
+	b = 0;
+	metka = 0;
+	if (*little == '\0')
+		return ((char *)big);
+	while (big[i] && little[b] && i < len)
 	{
-		while (hstck[i] == ndl[j] && i < len)
+		if (big[i] == little[b] && i < len)
 		{
-			if (ndl[j + 1] == '\0')
-				return ((char *)(hstck + i - j));
-			i++;
-			j++;
+			metka = i + 1;
+			b += 1;
 		}
-		i -= j;
-		j = 0;
+		else
+		{
+			metka = 0;
+			i -= b;
+			b = 0;
+		}
 		i++;
 	}
-	if (ndl[j] == '\0')
-		return ((char *)hstck);
-	return (NULL);
+	return (ft_waja(big, little, b, metka));
 }

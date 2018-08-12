@@ -4,39 +4,16 @@ project(CORE)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(CORE
-        ft_printf/ft_conver_c.c
-        ft_printf/ft_conver_id.c
-        ft_printf/ft_conver_inv.c
-        ft_printf/ft_conver_lc.c
-        ft_printf/ft_conver_ls.c
-        ft_printf/ft_conver_o.c
-        ft_printf/ft_conver_p.c
-        ft_printf/ft_conver_per.c
-        ft_printf/ft_conver_s.c
-        ft_printf/ft_conver_u.c
-        ft_printf/ft_conver_x.c
-        ft_printf/ft_helper_lc_ls.c
-        ft_printf/ft_printf.c
-        ft_printf/ft_readformat.c
-        ft_printf/libftprintf.h
         libft/ft_atoi.c
         libft/ft_bzero.c
-        libft/ft_cntwrd.c
         libft/ft_isalnum.c
         libft/ft_isalpha.c
         libft/ft_isascii.c
         libft/ft_isdigit.c
         libft/ft_isprint.c
         libft/ft_itoa.c
-        libft/ft_itoal.c
-        libft/ft_itoao.c
-        libft/ft_itoau.c
-        libft/ft_itoax.c
-        libft/ft_lnwrd.c
         libft/ft_lstadd.c
-        libft/ft_lstaddend.c
         libft/ft_lstdel.c
-        libft/ft_lstdellast.c
         libft/ft_lstdelone.c
         libft/ft_lstiter.c
         libft/ft_lstmap.c
@@ -49,6 +26,7 @@ add_executable(CORE
         libft/ft_memdel.c
         libft/ft_memmove.c
         libft/ft_memset.c
+        libft/ft_printf.c
         libft/ft_putchar.c
         libft/ft_putchar_fd.c
         libft/ft_putendl.c
@@ -79,16 +57,19 @@ add_executable(CORE
         libft/ft_strnew.c
         libft/ft_strnstr.c
         libft/ft_strrchr.c
-        libft/ft_strsplit.c
         libft/ft_strstr.c
         libft/ft_strsub.c
         libft/ft_strtrim.c
-        libft/ft_swap.c
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/get_next_line.c
-        libft/get_next_line.h
+        libft/itoa_base.c
         libft/libft.h
+        libft/pr_num_str.c
+        libft/pr_uni_char.c
+        libft/read.c
+        libft/type.c
+        libft/unicode.c
         asm.c
         asm.h
         op.c

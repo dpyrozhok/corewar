@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 18:47:31 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:27:41 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/11 16:34:07 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/11 16:34:08 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 void	ft_striter(char *s, void (*f)(char *))
 {
-	size_t	i;
+	int i;
 
 	i = 0;
 	if (s && f)
 	{
 		while (s[i])
-			f(s + i++);
+		{
+			f(&s[i]);
+			i++;
+		}
 	}
 }

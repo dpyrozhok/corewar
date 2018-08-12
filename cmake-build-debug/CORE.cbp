@@ -86,58 +86,10 @@
 		<Unit filename="/Users/dpyrozho/CORE/asm.h">
 			<Option target="CORE"/>
 		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_c.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_id.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_inv.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_lc.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_ls.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_o.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_p.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_per.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_s.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_u.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_conver_x.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_helper_lc_ls.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_printf.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/ft_readformat.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/ft_printf/libftprintf.h">
-			<Option target="CORE"/>
-		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_atoi.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_bzero.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_cntwrd.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_isalnum.c">
@@ -158,31 +110,10 @@
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_itoa.c">
 			<Option target="CORE"/>
 		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_itoal.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_itoao.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_itoau.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_itoax.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lnwrd.c">
-			<Option target="CORE"/>
-		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lstadd.c">
 			<Option target="CORE"/>
 		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lstaddend.c">
-			<Option target="CORE"/>
-		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lstdel.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lstdellast.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_lstdelone.c">
@@ -219,6 +150,9 @@
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_memset.c">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/ft_printf.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_putchar.c">
@@ -311,9 +245,6 @@
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_strrchr.c">
 			<Option target="CORE"/>
 		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_strsplit.c">
-			<Option target="CORE"/>
-		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_strstr.c">
 			<Option target="CORE"/>
 		</Unit>
@@ -321,9 +252,6 @@
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_strtrim.c">
-			<Option target="CORE"/>
-		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/ft_swap.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/ft_tolower.c">
@@ -335,10 +263,25 @@
 		<Unit filename="/Users/dpyrozho/CORE/libft/get_next_line.c">
 			<Option target="CORE"/>
 		</Unit>
-		<Unit filename="/Users/dpyrozho/CORE/libft/get_next_line.h">
+		<Unit filename="/Users/dpyrozho/CORE/libft/itoa_base.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/libft/libft.h">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/pr_num_str.c">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/pr_uni_char.c">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/read.c">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/type.c">
+			<Option target="CORE"/>
+		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/libft/unicode.c">
 			<Option target="CORE"/>
 		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/op.c">

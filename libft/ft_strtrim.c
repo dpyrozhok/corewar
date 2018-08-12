@@ -3,49 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 18:47:56 by popanase          #+#    #+#             */
-/*   Updated: 2017/12/07 18:29:31 by popanase         ###   ########.fr       */
+/*   Created: 2017/11/13 20:26:11 by dpyrozho          #+#    #+#             */
+/*   Updated: 2017/11/13 20:26:13 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_getend(const char *s)
+static int	ft_countspaces(int len, char const *s)
 {
-	size_t i;
+	int		start;
 
-	i = ft_strlen(s) - 1;
-	while ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
-		i--;
-	return (i + 1);
+	start = 0;
+	len--;
+	while (s[len] == ' ' || s[len] == '\n' || s[len] == '\t')
+	{
+		if (len == start)
+			return (0);
+		len--;
+	}
+	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+		start++;
+	return (len - start);
 }
 
-char			*ft_strtrim(char const *s)
+char		*ft_strtrim(char const *s)
 {
-	char	*trim;
-	size_t	i;
-	size_t	j;
-	size_t	end;
+	int		i;
+	char	*str;
+	int		newlen;
+	int		len;
 
+	if (!s)
+		return (NULL);
 	i = 0;
-	j = 0;
-	if (s)
+	len = ft_strlen(s);
+	newlen = ft_countspaces(len, s);
+	str = ft_strnew(newlen + 1);
+	if (!str)
+		return (NULL);
+	while (*s == ' ' || *s == '\n' || *s == '\t')
+		s++;
+	while (newlen >= i)
 	{
-		while ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
-			i++;
-		end = ft_getend(s);
-		if (end > i)
-			trim = ft_strnew(end - i);
-		else
-			trim = ft_strnew(0);
-		if (trim)
-		{
-			while (i < end)
-				trim[j++] = s[i++];
-			return (trim);
-		}
+		str[i] = *s++;
+		i++;
 	}
-	return (NULL);
+	return (str);
 }
