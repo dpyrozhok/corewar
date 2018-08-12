@@ -4,6 +4,7 @@
 
 #include "check_args.h"
 #include "ncurs.h"
+void	op(void);
 
 int	ft_isspace(int c)
 {
@@ -286,8 +287,18 @@ void	check_args(int ac, char **av, t_core *core)
 			c++;
 			check_num(ac, av, ++i);
 		}
+		else if (!ft_strcmp(av[i], "-op"))
+		{
+			op();
+		}
 		else
 			check_file(av[i]);
 		i++;
 	}
+}
+
+void	op(void)
+{
+	printf("%hhd\n", op_tab[1].arg[0]);
+	exit(0);
 }

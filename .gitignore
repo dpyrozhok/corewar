@@ -2,4 +2,5 @@ cmake-build-debug
 .idea
 *.[oa]
 *~
-# git update-index --assume-unchanged [ libft/* | ft_printf/* | corewar | vm_champs/* / main.o ]
+# ignore local changes: git update-index --assume-unchanged [ libft/* | ft_printf/* | corewar | vm_champs/* / main.o ]
+# resume track changes: git update-index --no-assume-unchanged <file>

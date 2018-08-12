@@ -6,6 +6,7 @@
 # define COREWAR_CHECK_ARGS_H
 
 # include "corewar.h"
+# include "t_op.h"
 
 typedef struct	s_check
 {
