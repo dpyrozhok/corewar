@@ -6,6 +6,7 @@
 # include "libft/libft.h"
 # include "ft_printf/libftprintf.h"
 # include "op.h"
+# include "t_op.h"
 
 typedef struct s_champ	t_champ;
 typedef struct s_car	t_car;
@@ -51,4 +52,7 @@ struct              s_car {
 void    ft_start_fight(t_core *core);
 void    ft_make_check(t_core *core);
 void    ft_opcode_switcher(t_core *core, t_champ *champ);
+int 	ft_read_2(t_core *core, int pos);
+int 	ft_read_4(t_core *core, int pos);
+void    ft_11_opcode(t_core *core, t_champ *champ);
 #endif

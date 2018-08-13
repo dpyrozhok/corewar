@@ -7,6 +7,10 @@
 
 #include "op.h"
 
+#define T_REG	1
+#define T_DIR	2
+#define T_IND	3
+
 typedef struct s_op
 {
 	char *op;

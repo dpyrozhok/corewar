@@ -1,13 +1,20 @@
 #include "corewar.h"
 
 // нужно разобраться как тянуть инфу со структуры op.c
+int ft_read_2(t_core *core, int pos) {
+    int    ret;
 
-// <--вариант команды live для zork
+    ret = (int)(
+            (unsigned char)core->arena[pos + 3] << 8 |
+            (unsigned char)core->arena[pos + 4]
+    );
+    return ret;
+}
 
-unsigned int ft_get_live_v(t_core *core, int pos) {
-    unsigned int    ret;
+int ft_read_4(t_core *core, int pos) {
+    int    ret;
 
-    ret = (unsigned int)(
+    ret = (int)(
             (unsigned char)core->arena[pos + 1] << 24 |
             (unsigned char)core->arena[pos + 2] << 16 |
             (unsigned char)core->arena[pos + 3] << 8 |
@@ -16,8 +23,10 @@ unsigned int ft_get_live_v(t_core *core, int pos) {
     return ret;
 }
 
+// <--вариант команды live для zork
+
 void    ft_01_opcode(t_core *core, t_champ *champ) {
-    if ((unsigned int)champ->id == ft_get_live_v(core, champ->cars->pos % MEM_SIZE)) {
+    if (champ->id == ft_read_4(core, champ->cars->pos % MEM_SIZE)) {
         champ->s_live++;
         champ->last_live = core->cycle;
     }
@@ -26,14 +35,6 @@ void    ft_01_opcode(t_core *core, t_champ *champ) {
 }
 
 // -->вариант команды live для zork
-
-// <--вариант команды sti для zork
-
-//void    ft_11_opcode(t_core *core, t_champ *champ) {
-//
-//}
-
-// -->вариант команды sti для zork
 
 void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 {
@@ -57,14 +58,12 @@ void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 
 void    ft_switch_op_9_16(t_core *core, t_champ *champ)
 {
-    if (core && champ)
-        ;
 //    if (champ->cars->opcode == 9)
 //        ft_09_opcode(core, champ);
 //    if (champ->cars->opcode == 10)
 //        ft_10_opcode(core, champ);
-//    if (champ->cars->opcode == 11)
-//        ft_11_opcode(core, champ);
+    if (champ->cars->opcode == 11)
+        ft_11_opcode(core, champ);
 //    if (champ->cars->opcode == 12)
 //        ft_12_opcode(core, champ);
 //    if (champ->cars->opcode == 13)
