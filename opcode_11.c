@@ -14,30 +14,29 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
     codage[1] = (unsigned char)(core->arena[champ->cars->pos % MEM_SIZE] & 48) >> 4;
     codage[2] = (unsigned char)(core->arena[champ->cars->pos % MEM_SIZE] & 12) >> 2;
     codage[3] = (unsigned char)(core->arena[champ->cars->pos % MEM_SIZE] & 3);
-    champ->cars->pos++;
-    if (codage[0] == T_REG) {
-        arg[0] = champ->cars->reg[ft_read_2(core, champ->cars->pos % MEM_SIZE)];
-        champ->cars->pos += 2;
+    if (codage[0] == REG_CODE) {
+        arg[0] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE) - 1];
+        champ->cars->pos += 1;
     }
-    if (codage[1] == T_REG) {
-        arg[1] = champ->cars->reg[ft_read_2(core, champ->cars->pos % MEM_SIZE)];
-        champ->cars->pos += 2;
-    } else if (codage[1] == T_DIR) {
+    if (codage[1] == REG_CODE) {
+        arg[1] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE)];
+        champ->cars->pos += 1;
+    } else if (codage[1] == DIR_CODE) {
         arg[1] = ft_read_2(core, champ->cars->pos % MEM_SIZE);
         champ->cars->pos += 2;
-    } else if (codage[1] == T_IND) {
+    } else if (codage[1] == IND_CODE) {
         arg[1] = ft_read_4(core, (ft_read_2(core, champ->cars->pos % MEM_SIZE) + pc) % IDX_MOD);
         champ->cars->pos += 2;
     }
-    if (codage[2] == T_REG) {
-        arg[2] = champ->cars->reg[ft_read_2(core, champ->cars->pos % MEM_SIZE)];
-        champ->cars->pos += 2;
-    } else if (codage[2] == T_DIR) {
+    if (codage[2] == REG_CODE) {
+        arg[2] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE)];
+        champ->cars->pos += 1;
+    } else if (codage[2] == DIR_CODE) {
         arg[2] = ft_read_2(core, champ->cars->pos % MEM_SIZE);
         champ->cars->pos += 2;
-    } else if (codage[2] == T_IND) {
+    } else if (codage[2] == IND_CODE) {
         arg[2] = ft_read_4(core, (ft_read_2(core, champ->cars->pos % MEM_SIZE) + pc) % IDX_MOD);
         champ->cars->pos += 2;
     }
-//    ft_put_4(arg[0], core->arena[pc + (arg[1] + arg[2]) % IDX_MOD % MEM_SIZE]);  // ft_put_4 записывает 4 байта на карту
+    ft_put_4(core, arg[0], pc + (arg[1] + arg[2]) % IDX_MOD % MEM_SIZE);  // ft_put_4 записывает 4 байта на карту
 }

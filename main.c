@@ -1,18 +1,21 @@
 #include "corewar.h"
 #include "check_args.h"
 
-void ft_dump(unsigned char *arena)
+void ft_dump(t_core *core)
 {
 	int i;
 
 	i = 0;
+    ft_printf("Cycle: %i\n", core->cycle);
+    ft_printf("\n");
 	while (i < MEM_SIZE)
 	{
-		ft_printf("%02x ", arena[i]);
+		ft_printf("%02x ", core->arena[i]);
 		i++;
 		if (i % 64 == 0)
 			ft_printf("\n");
 	}
+    ft_printf("\n");
 }
 
 void    ft_create_car(t_core *core, t_champ *champ, int pos)
@@ -26,7 +29,7 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
     car->opcode = (int)core->arena[pos];
     core->qt_car++;
     if (car->opcode > 0 && car->opcode < 17)
-        car->cycle = 0;  // must take value from op.c
+        car->cycle = op_tab[car->opcode - 1].cycle;  // must take value from op.c
     if (champ->cars) {
         car->prev = champ->cars->prev;
         car->next = champ->cars;
@@ -101,16 +104,16 @@ int main(int ac, char **av)
 	core->dump = -1;
 	check_args(ac, av, core);
 	core->arena = (unsigned char *) malloc(sizeof(unsigned char) * MEM_SIZE);
-    core->init_nub = 81;
+    core->init_nub = 0;
     core->c_to_die = CYCLE_TO_DIE;
     while(i < ac) {
         fd = open(av[i], O_RDONLY);
+        core->init_nub--;
         ft_parse_champion(core, fd);
-        core->init_nub++;
         i++;
     }
     ft_place_champ(core);
     ft_start_fight(core);
-    ft_dump(core->arena);
+    ft_dump(core);
     return 0;
 }
