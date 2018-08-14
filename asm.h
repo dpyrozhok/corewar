@@ -21,4 +21,18 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+
+typedef struct      s_text
+{
+    char            *line;
+    struct s_text   *next;
+    int             i;
+}                   t_text;
+
+typedef struct s_my
+{
+    t_text *head;
+    int fd;
+}               t_my;
+
 #endif

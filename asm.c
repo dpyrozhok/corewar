@@ -76,10 +76,10 @@ int		convert_end(int new)
 	return (new);
 }
 
-void		ft_read_file(char *name)
+void		ft_read_file(char *name, t_my inf)
 {
 	int su = convert_end(COREWAR_EXEC_MAGIC);
-    char *line;
+    t_text *ukaz;
 	if ((g_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
 					   S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
@@ -87,51 +87,148 @@ void		ft_read_file(char *name)
 		exit(1);
 	}
 	write(g_fd, &su, sizeof(su));
-    int fd;
 
-
-    /// CHECK IMENI
-    fd = open("zork.s", O_RDONLY);
-
-    get_next_line(fd, &line);
-    line = ft_strchr(line, '\"') + 1;
+    ukaz = inf.head;
+    ukaz->line = ft_strchr(ukaz->line, '\"') + 1;
     int i = 0;
     char newline[132] = {0};
-    while (line[i] != '\"')
+    while (ukaz->line[i] != '\"')
     {
-        newline[i] = line[i];
+        newline[i] = ukaz->line[i];
         i++;
     }
+
+    // BOTSIZE\
+
     char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
     write(g_fd, &newline,sizeof(newline));
     write(g_fd, &(botsize), sizeof(2)); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     /// CHECK COMMENTA
+
+    ukaz = ukaz->next;
+
     char comment[2052] = {0};
-    get_next_line(fd, &line);
-    line = ft_strchr(line, '\"') + 1;
+    ukaz->line = ft_strchr(ukaz->line, '\"') + 1;
 
    i = 0;
-    while (line[i] != '\"')
+    while (ukaz->line[i] != '\"')
     {
-        comment[i] = line[i];
+        comment[i] = ukaz->line[i];
         i++;
     }
     write(g_fd, &comment,sizeof(comment));
+
 }
+
+void	ft_obnul(t_my	*inf, char *name)
+{
+    inf->fd = open(name, O_RDONLY);
+    inf->head = (t_text*)malloc(sizeof(t_text));
+    inf->head->line = NULL;
+    inf->head->next = NULL;
+
+}
+
+void    ft_push_back(t_my *my, t_text *new, int i)
+{
+    t_text  *p_t;
+
+    p_t = my->head;
+    new->i = i;
+    while (p_t->next)
+    {
+        p_t = p_t->next;
+    }
+    if (p_t->line)
+        p_t->next = new;
+    else
+        my->head = new;
+}
+
+void    ft_print_txt(t_text *t)
+{
+    t_text      *p_t;
+
+    p_t = t;
+    while (p_t->next)
+    {
+        ft_printf("%s\t\n", p_t->line);
+        p_t = p_t->next;
+    }
+    if(p_t)
+        ft_printf("%s\t\n", p_t->line);
+}
+
+void    ft_add_index(t_my   *inf)
+{
+    t_text  *p;
+    int     i;
+
+    i = 1;
+    p = inf->head;
+    while (p)
+    {
+        p->i = i;
+        p = p->next;
+        i++;
+    }
+}
+
 
 int		main(int ac, char **av)
 {
 	char *name;
+    t_my	inf;
+    t_text  *new_t;
+    int     i;
 
-	if (ac < 2 || ac > 3)
+    i = 1;
+    if (ac < 2 || ac > 3)
 		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
 	if (!ft_check_format(av[1]))
-		return(ft_printf("Can't read source file\n"));
+		return(ft_printf("Can'head read source file\n"));
 	else
 		name = ft_get_name(av[1]);
-	ft_read_file(name);
+
+
+
+
+
+
+
+
+    ft_obnul(&inf, av[1]);
+    new_t = (t_text*)malloc(sizeof(t_text));
+    new_t->next = NULL;
+    while (get_next_line(inf.fd, &(new_t->line)) > 0)
+    {
+        ft_push_back(&inf, new_t, i++);
+        new_t = (t_text*)malloc(sizeof(t_text));
+        new_t->next = NULL;
+    }
+    free(new_t);
+
+
+
+
+
+
+    ft_print_txt(inf.head);
+
+
+
+
+
+
+
+
+
+
+
+
+  ft_read_file(name, inf);
 	ft_printf("Writing output program to %s", name);
 	free(name);
 	return (0);

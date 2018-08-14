@@ -263,14 +263,10 @@ libft.h
 /Users/dpyrozho/CORE/libft/ft_toupper.c
 
 /Users/dpyrozho/CORE/libft/get_next_line.c
-unistd.h
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
+fcntl.h
 -
-stdlib.h
--
-asm.h
-/Users/dpyrozho/CORE/libft/asm.h
-get_next_line.h
-/Users/dpyrozho/CORE/libft/get_next_line.h
 
 /Users/dpyrozho/CORE/libft/itoa_base.c
 libft.h

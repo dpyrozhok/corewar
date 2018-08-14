@@ -157,6 +157,7 @@ CMakeFiles/CORE.dir/libft/ft_tolower.c.o: ../libft/ft_tolower.c
 CMakeFiles/CORE.dir/libft/ft_toupper.c.o: ../libft/ft_toupper.c
 
 CMakeFiles/CORE.dir/libft/get_next_line.c.o: ../libft/get_next_line.c
+CMakeFiles/CORE.dir/libft/get_next_line.c.o: ../libft/libft.h
 
 CMakeFiles/CORE.dir/libft/itoa_base.c.o: ../libft/itoa_base.c
 CMakeFiles/CORE.dir/libft/itoa_base.c.o: ../libft/libft.h

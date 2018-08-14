@@ -12,284 +12,296 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcf9751e-5ebc-4768-8a59-22f12bca1ffb" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/.name" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/codeStyles/Project.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/nastya.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/CMakeLists.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/Makefile" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/asm" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/author" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeCache.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeCCompiler.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeCXXCompiler.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeDetermineCompilerABI_C.bin" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeDetermineCompilerABI_CXX.bin" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeSystem.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdC/CMakeCCompilerId.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdC/a.out" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdCXX/a.out" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/CMakeOutput.log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/Makefile.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/Makefile2" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/TargetDirectories.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/clion-environment.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/clion-log.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/cmake.check_cache" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/C.includecache" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/DependInfo.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/build.make" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/cmake_clean.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/depend.internal" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/depend.make" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/flags.make" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_atoi.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_bzero.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_countw.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_intrev.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_intsort.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isalnum.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isalpha.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isascii.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isdigit.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isprint.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_itoa.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstadd.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstdel.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstdelone.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstiter.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstmap.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstnew.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memalloc.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memccpy.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memchr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memcmp.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memcpy.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memdel.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memmove.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memset.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_printf.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putchar.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putchar_fd.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putendl.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putendl_fd.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putnbr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putnbr_fd.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putstr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putstr_fd.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcat.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strchr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strclr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcmp.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcpy.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strdel.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strdup.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strequ.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_striter.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_striteri.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strjoin.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strlcat.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strlen.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strmap.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strmapi.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncat.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncmp.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncpy.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnequ.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnew.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnstr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strrchr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strrev.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsort.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsplit.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strstr.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsub.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strtrim.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_tolower.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_toupper.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/get_next_line.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/itoa_base.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/pr_num_str.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/pr_uni_char.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/read.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/type.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/unicode.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/link.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/progress.make" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/srcs/main.c.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.bin" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.cxx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/progress.marks" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/Makefile" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/cmake_install.cmake" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/corewar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/cmake-build-debug/corewar.cbp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/.zork.s.swo" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/.zork.s.swp" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/bee_gees.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/bigzork.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/fluttershy.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/helltrain.cor" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/helltrain.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/turtle.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/zork.cor" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/examples/zork.s" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/inc/asm.h" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/Makefile" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/author" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_atoi.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_bzero.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_countw.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_intrev.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_intsort.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_isalnum.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_isalpha.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_isascii.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_isdigit.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_isprint.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_itoa.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstadd.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstdel.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstdelone.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstiter.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstmap.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_lstnew.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memalloc.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memccpy.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memchr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memcmp.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memcpy.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memdel.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memmove.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_memset.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_printf.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putchar.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putchar_fd.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putendl.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putendl_fd.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putnbr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putnbr_fd.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putstr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_putstr_fd.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strcat.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strchr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strclr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strcmp.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strcpy.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strdel.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strdup.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strequ.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_striter.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_striteri.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strjoin.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strlcat.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strlen.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strmap.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strmapi.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strncat.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strncmp.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strncpy.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strnequ.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strnew.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strnstr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strrchr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strrev.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strsort.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strsplit.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strstr.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strsub.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_strtrim.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_tolower.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/ft_toupper.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/get_next_line.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/itoa_base.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/libft.a" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/libft.h" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_atoi.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_bzero.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_countw.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_intrev.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_intsort.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_isalnum.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_isalpha.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_isascii.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_isdigit.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_isprint.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_itoa.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstadd.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstdel.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstdelone.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstiter.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstmap.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_lstnew.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memalloc.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memccpy.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memchr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memcmp.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memcpy.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memdel.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memmove.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_memset.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_printf.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_printf.o-99f54f3b" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putchar.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putchar_fd.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putendl.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putendl_fd.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putnbr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putnbr_fd.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putstr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_putstr_fd.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strcat.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strchr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strclr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strcmp.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strcpy.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strdel.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strdup.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strequ.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_striter.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_striteri.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strjoin.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strlcat.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strlen.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strmap.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strmapi.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strncat.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strncmp.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strncpy.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strnequ.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strnew.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strnstr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strrchr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strrev.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strsort.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strsplit.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strstr.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strsub.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_strtrim.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_tolower.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/ft_toupper.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/get_next_line.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/itoa_base.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/pr_num_str.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/pr_uni_char.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/read.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/type.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/objs/unicode.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/pr_num_str.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/pr_uni_char.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/read.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/type.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/libft/unicode.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/objs/main.o" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/srcs/main.c" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/nastya/test" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/asm.c" afterPath="$PROJECT_DIR$/asm.c" />
+      <change beforePath="$PROJECT_DIR$/asm.h" afterPath="$PROJECT_DIR$/asm.h" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/C.includecache" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.internal" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.make" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/get_next_line.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/get_next_line.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CORE" afterPath="$PROJECT_DIR$/cmake-build-debug/CORE" />
+      <change beforePath="$PROJECT_DIR$/libft/get_next_line.c" afterPath="$PROJECT_DIR$/libft/get_next_line.c" />
+      <change beforePath="$PROJECT_DIR$/libft/libft.a" afterPath="$PROJECT_DIR$/libft/libft.a" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/.name" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/codeStyles/Project.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/misc.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/modules.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/nastya.iml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/.idea/workspace.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/CMakeLists.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/Makefile" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/asm" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/author" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeCache.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeCCompiler.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeCXXCompiler.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeDetermineCompilerABI_C.bin" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CMakeSystem.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdC/a.out" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/3.9.4/CompilerIdCXX/a.out" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/C.includecache" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/DependInfo.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/build.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/cmake_clean.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/depend.internal" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/depend.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/flags.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_atoi.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_bzero.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_countw.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_intrev.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_intsort.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isalnum.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isalpha.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isascii.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isdigit.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_isprint.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_itoa.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstadd.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstdel.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstdelone.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstiter.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstmap.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_lstnew.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memalloc.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memccpy.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memchr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memcmp.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memcpy.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memdel.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memmove.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_memset.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_printf.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putchar.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putchar_fd.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putendl.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putendl_fd.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putnbr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putnbr_fd.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putstr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_putstr_fd.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcat.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strchr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strclr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcmp.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strcpy.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strdel.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strdup.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strequ.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_striter.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_striteri.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strjoin.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strlcat.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strlen.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strmap.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strmapi.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncat.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncmp.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strncpy.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnequ.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnew.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strnstr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strrchr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strrev.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsort.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsplit.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strstr.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strsub.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_strtrim.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_tolower.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/ft_toupper.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/get_next_line.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/itoa_base.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/pr_num_str.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/pr_uni_char.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/read.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/type.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/libft/unicode.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/link.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/corewar.dir/srcs/main.c.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/Makefile" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/cmake_install.cmake" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/corewar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/cmake-build-debug/corewar.cbp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/.zork.s.swo" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/.zork.s.swp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/bee_gees.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/bigzork.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/fluttershy.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/helltrain.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/helltrain.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/turtle.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/zork.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/examples/zork.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/inc/asm.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/Makefile" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/author" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_atoi.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_bzero.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_countw.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_intrev.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_intsort.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_isalnum.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_isalpha.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_isascii.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_isdigit.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_isprint.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_itoa.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstadd.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstdel.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstdelone.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstiter.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstmap.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_lstnew.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memalloc.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memccpy.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memchr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memcmp.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memcpy.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memdel.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memmove.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_memset.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_printf.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putchar.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putchar_fd.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putendl.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putendl_fd.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putnbr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putnbr_fd.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putstr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_putstr_fd.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strcat.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strchr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strclr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strcmp.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strcpy.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strdel.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strdup.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strequ.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_striter.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_striteri.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strjoin.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strlcat.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strlen.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strmap.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strmapi.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strncat.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strncmp.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strncpy.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strnequ.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strnew.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strnstr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strrchr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strrev.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strsort.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strsplit.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strstr.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strsub.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_strtrim.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_tolower.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/ft_toupper.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/get_next_line.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/itoa_base.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/libft.a" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/libft.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_atoi.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_bzero.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_countw.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_intrev.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_intsort.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_isalnum.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_isalpha.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_isascii.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_isdigit.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_isprint.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_itoa.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstadd.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstdel.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstdelone.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstiter.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstmap.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_lstnew.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memalloc.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memccpy.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memchr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memcmp.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memcpy.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memdel.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memmove.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_memset.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_printf.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_printf.o-99f54f3b" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putchar.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putchar_fd.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putendl.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putendl_fd.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putnbr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putnbr_fd.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putstr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_putstr_fd.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strcat.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strchr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strclr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strcmp.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strcpy.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strdel.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strdup.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strequ.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_striter.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_striteri.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strjoin.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strlcat.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strlen.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strmap.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strmapi.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strncat.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strncmp.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strncpy.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strnequ.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strnew.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strnstr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strrchr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strrev.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strsort.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strsplit.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strstr.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strsub.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_strtrim.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_tolower.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/ft_toupper.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/get_next_line.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/itoa_base.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/pr_num_str.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/pr_uni_char.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/read.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/type.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/objs/unicode.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/pr_num_str.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/pr_uni_char.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/read.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/type.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/libft/unicode.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/objs/main.o" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/srcs/main.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nastya/test" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/zork.cor" afterPath="$PROJECT_DIR$/zork.cor" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -301,108 +313,130 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="asm.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/asm.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="asm.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/asm.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="88" column="32" lean-forward="false" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="op.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/op.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_next_line.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/get_next_line.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="libft.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/libft.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="92" column="1" lean-forward="false" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/Makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zork.s" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/zork.s">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="op.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/op.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="asm.c" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/asm.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="237">
+                  <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="pr_num_str.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/libft/pr_num_str.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="426">
+                  <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="op.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/op.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="240">
+                  <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="555">
+                  <caret line="37" column="25" lean-forward="false" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="get_next_line.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/libft/get_next_line.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="150">
+                  <caret line="10" column="42" lean-forward="false" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+                  <folding>
+                    <element signature="e#892#910#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ft_toupper.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/libft/ft_toupper.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/libft/Makefile">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="zork.s" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/zork.s">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/README.md">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="asm.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/asm.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="569">
+                  <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="asm.h" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/asm.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="495">
+                  <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+                  <folding>
+                    <element signature="e#957#982#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -411,9 +445,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/op.h" />
-        <option value="$PROJECT_DIR$/asm.h" />
         <option value="$PROJECT_DIR$/libft/Makefile" />
         <option value="$PROJECT_DIR$/libft/libft.h" />
+        <option value="$PROJECT_DIR$/libft/get_next_line.c" />
+        <option value="$PROJECT_DIR$/zork.s" />
+        <option value="$PROJECT_DIR$/asm.h" />
         <option value="$PROJECT_DIR$/asm.c" />
       </list>
     </option>
@@ -425,10 +461,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="442" />
-    <option name="y" value="164" />
-    <option name="width" value="1202" />
-    <option name="height" value="1293" />
+    <option name="x" value="23" />
+    <option name="y" value="30" />
+    <option name="width" value="2099" />
+    <option name="height" value="1329" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -460,7 +496,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -510,28 +546,31 @@
       <workItem from="1534076488201" duration="2445000" />
       <workItem from="1534085960605" duration="390000" />
       <workItem from="1534091146902" duration="237000" />
+      <workItem from="1534248373181" duration="1499000" />
+      <workItem from="1534251647976" duration="1444000" />
+      <workItem from="1534256840181" duration="5955000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15625000" />
+    <option name="totallyTimeSpent" value="24523000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="442" y="164" width="1202" height="1293" extended-state="0" />
+    <frame x="23" y="30" width="2099" height="1329" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15474209" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24630776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32700247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12694512" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27497935" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39978448" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.388109" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286638" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -539,9 +578,39 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3277645" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27048528" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24630776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38822594" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -551,17 +620,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>121</line>
-          <option name="timeStamp" value="18" />
+          <line>90</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/asm.c</url>
+          <line>233</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="20" />
+      <option name="time" value="42" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="g_fd" language="ObjectiveC" />
-        <watch expression="COREWAR_EXEC_MAGIC" language="ObjectiveC" />
-        <watch expression="g_fd1" language="ObjectiveC" />
+        <watch expression="inf.head-&gt;next-&gt;next-&gt;next-&gt;next" />
       </configuration>
     </watches-manager>
   </component>
@@ -585,30 +658,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libft/libft.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="1" lean-forward="true" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libft/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/op.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1125">
@@ -636,7 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="16" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -644,7 +692,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
           <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#892#910#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -699,7 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -746,7 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -824,66 +872,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libft/ft_itoax.c" />
-    <entry file="file://$PROJECT_DIR$/asm.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/op.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libft/get_next_line.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libft/libft.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1380">
           <caret line="92" column="1" lean-forward="false" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libft/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zork.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -896,10 +888,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="25" lean-forward="false" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/ft_toupper.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/get_next_line.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="42" lean-forward="false" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+          <folding>
+            <element signature="e#892#910#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zork.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/ft_strchr.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/op.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/pr_num_str.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asm.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding>
+            <element signature="e#957#982#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/asm.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="88" column="32" lean-forward="false" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
+        <state relative-caret-position="237">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
         </state>
       </provider>
