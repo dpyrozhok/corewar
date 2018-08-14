@@ -49,10 +49,14 @@ struct              s_car {
     t_car    		*prev;
 };
 
+
+void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
 void    ft_make_check(t_core *core);
 void    ft_opcode_switcher(t_core *core, t_champ *champ);
+int     ft_read_1(t_core *core, int pos);
 int 	ft_read_2(t_core *core, int pos);
 int 	ft_read_4(t_core *core, int pos);
+void    ft_put_4(t_core *core, int arg, int pos);
 void    ft_11_opcode(t_core *core, t_champ *champ);
 #endif

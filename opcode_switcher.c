@@ -1,17 +1,33 @@
 #include "corewar.h"
 
 // нужно разобраться как тянуть инфу со структуры op.c
-int ft_read_2(t_core *core, int pos) {
+void    ft_put_4(t_core *core, int arg, int pos) {
+    core->arena[pos] = (unsigned char)(arg >> 24);
+    core->arena[pos + 1] = (unsigned char)(arg >> 16 & 255);
+    core->arena[pos + 2] = (unsigned char)(arg >> 8 & 255);
+    core->arena[pos + 3] = (unsigned char)(arg & 255);
+}
+
+int     ft_read_1(t_core *core, int pos) {
     int    ret;
 
     ret = (int)(
-            (unsigned char)core->arena[pos + 3] << 8 |
-            (unsigned char)core->arena[pos + 4]
+            (unsigned char)core->arena[pos + 1]
     );
     return ret;
 }
 
-int ft_read_4(t_core *core, int pos) {
+int     ft_read_2(t_core *core, int pos) {
+    int    ret;
+
+    ret = (int)(
+            (unsigned char)core->arena[pos + 1] << 8 |
+            (unsigned char)core->arena[pos + 2]
+    );
+    return ret;
+}
+
+int     ft_read_4(t_core *core, int pos) {
     int    ret;
 
     ret = (int)(
@@ -26,11 +42,12 @@ int ft_read_4(t_core *core, int pos) {
 // <--вариант команды live для zork
 
 void    ft_01_opcode(t_core *core, t_champ *champ) {
-    if (champ->id == ft_read_4(core, champ->cars->pos % MEM_SIZE)) {
+    if (champ->id == ft_read_4(core, champ->cars->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
         champ->s_live++;
         champ->last_live = core->cycle;
+        core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
     }
-    champ->cars->live = 1;
+    champ->cars->live = 1; // каретка (процесс) жив в этом цикле
     champ->cars->pos += 4;
 }
 
