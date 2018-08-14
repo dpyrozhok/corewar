@@ -183,6 +183,25 @@ void	destroy_win(WINDOW *local_win)
 	delwin(local_win);
 }
 
+int		cnt_dig(int nbr)
+{
+	int cnt;
+
+
+	if (nbr == INT_MIN)
+		return (11);
+	cnt = 0;
+	if (nbr < 0)
+	{
+		cnt++;
+		nbr = -nbr;
+	}
+	cnt++;
+	while (nbr %= 10 > 0)
+		cnt++;
+	return (cnt);
+}
+
 void	do_more(void)
 {
 	WIN win;
@@ -206,6 +225,7 @@ void	do_more(void)
 	init_pair(3, COLOR_BLUE, COLOR_WHITE);
 	init_color(COLOR_WHITE, 600, 600, 600);
 	init_pair(4, COLOR_WHITE, COLOR_BLACK);
+	init_pair(25, COLOR_BLUE, COLOR_BLACK);
 
 	init_win_params(&win, 67, 196, 1, 0);
 //	print_win_params(&win);
@@ -226,12 +246,38 @@ void	do_more(void)
 	attroff(COLOR_PAIR(3));
 	attron(COLOR_PAIR(4));
 	attroff(A_BOLD);
+	attron(A_BOLD | COLOR_PAIR(3));
 	mvprintw(3, 3, "00");
+	attroff(A_BOLD | COLOR_PAIR(3));
 	attroff(A_REVERSE);
+	attron(COLOR_PAIR(25));
+	mvprintw(3, 7, "00");
+	attroff(COLOR_PAIR(25));
 	attron(A_BOLD);
-	mvprintw(3, 200, "00");
+	mvprintw(3, 200, "** PAUSED **");
+	mvprintw(5, 200, "Cycles/second limit : %d", 50);
+	mvprintw(8, 200, "Cycle : %d", 0);
+	mvprintw(10, 200, "Processes : %d", 1);
+	mvprintw(12, 200, "Player %d : ", -1);
+	char zork[5] = "zork";
+	attron(COLOR_PAIR(25));
+	mvprintw(12, 210 + cnt_dig(-1), "%s", zork);
+	attroff(COLOR_PAIR(25));
+	mvprintw(13, 202, "Last live :                     %d", 0);
+	mvprintw(14, 202, "Lives in current period :       %d", 0);
+	mvprintw(16, 200, "Live breakdown for current period :");
+	attroff(A_BOLD);
+	mvprintw(17, 200, "[--------------------------------------------------]");
+	attron(A_BOLD);
+	mvprintw(19, 200, "Live breakdown for current period :");
+	attroff(A_BOLD);
+	mvprintw(20, 200, "[--------------------------------------------------]");
+	attron(A_BOLD);
+	mvprintw(22, 200, "CYCLE_TO_DIE : %d", 1536);
+	mvprintw(24, 200, "CYCLE_DELTA : %d", 50);
+	mvprintw(26, 200, "NBR_LIVE : %d", 21);
+	mvprintw(28, 200, "MAX_CHECKS : %d", 10);
 	attroff(COLOR_PAIR(4));
-
 //	cbreak();
 //	keypad(stdscr, TRUE);
 //	noecho();
