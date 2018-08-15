@@ -205,8 +205,9 @@ int		cnt_dig(int nbr)
 void	do_ncurs(t_core *core)
 {
 
-//	int ch;
-	int i,r,c;
+	//	int ch;
+	int i, r, c;
+	t_champ *curr;
 
 	i = 0;
 	r = 3;
@@ -225,29 +226,45 @@ void	do_ncurs(t_core *core)
 	}
 
 	attron(A_BOLD);
-	mvprintw(3, 200, "** RUN **");
+	mvprintw(3, 200, "** RUNNING**");
 	mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
-	mvprintw(10, 200, "Processes : %d", 1);
-	mvprintw(12, 200, "Player %d : ", -1);
-	char zork[5] = "zork";
-	attron(COLOR_PAIR(25));
-	mvprintw(12, 210 + cnt_dig(-1), "%s", zork);
-	attroff(COLOR_PAIR(25));
-	mvprintw(13, 202, "Last live :                     %d", 0);
-	mvprintw(14, 202, "Lives in current period :       %d", 0);
-	mvprintw(16, 200, "Live breakdown for current period :");
+	mvprintw(10, 200, "Processes : %d", core->qt_car);
+
+	r = 12;
+	i = 0;
+	int col;
+	col = 20;
+	curr = core->champs;
+	while (i++ < core->qt_champ)
+	{
+		mvprintw(r, 200, "Player %d : ", curr->id);
+//		char zork[5] = "zork";
+		attron(COLOR_PAIR(col));
+		mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
+		attroff(COLOR_PAIR(col));
+		mvprintw(r++, 202, "Last live :                     %d", curr->last_live);
+		mvprintw(r, 202, "Lives in current period :       %d", 0);
+		r += 2;
+		col++;
+		curr = curr->next;
+	}
+
+	mvprintw(r++, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
-	mvprintw(17, 200, "[--------------------------------------------------]");
+	mvprintw(r++, 200, "[--------------------------------------------------]");
 	attron(A_BOLD);
-	mvprintw(19, 200, "Live breakdown for current period :");
+	mvprintw(++r, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
-	mvprintw(20, 200, "[--------------------------------------------------]");
+	mvprintw(r++, 200, "[--------------------------------------------------]");
 	attron(A_BOLD);
-	mvprintw(22, 200, "CYCLE_TO_DIE : %d", 1536);
-	mvprintw(24, 200, "CYCLE_DELTA : %d", 50);
-	mvprintw(26, 200, "NBR_LIVE : %d", 21);
-	mvprintw(28, 200, "MAX_CHECKS : %d", 10);
+	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
+	r++;
+	mvprintw(++r, 200, "CYCLE_DELTA : %d", 50);
+	r++;
+	mvprintw(++r, 200, "NBR_LIVE : %d", 21);
+	r++;
+	mvprintw(++r, 200, "MAX_CHECKS : %d", 10);
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();
@@ -307,7 +324,10 @@ void	init_ncurs(void)
 	init_pair(3, COLOR_BLUE, COLOR_WHITE);
 	init_color(COLOR_WHITE, 600, 600, 600);
 	init_pair(4, COLOR_WHITE, COLOR_BLACK);
-	init_pair(25, COLOR_BLUE, COLOR_BLACK);
+	init_pair(20, COLOR_GREEN, COLOR_BLACK);
+	init_pair(21, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(22, COLOR_BLUE, COLOR_BLACK);
+	init_pair(23, COLOR_RED, COLOR_BLACK);
 
 	init_win_params(&win, 67, 196, 1, 0);
 	//	print_win_params(&win);
@@ -327,14 +347,16 @@ void	init_ncurs(void)
 	create_box(&win2, FALSE);
 	attroff(COLOR_PAIR(3));
 	attron(COLOR_PAIR(4));
-	attroff(A_BOLD);
 //	attron(A_BOLD | COLOR_PAIR(3));
-//	mvprintw(3, 3, "00");
-//	attroff(A_BOLD | COLOR_PAIR(3));
+	//	mvprintw(3, 3, "00");
+	//	attroff(A_BOLD | COLOR_PAIR(3));
 	attroff(A_REVERSE);
-//	attron(COLOR_PAIR(25));
-//	mvprintw(3, 7, "00");
-//	attroff(COLOR_PAIR(25));
+	//	attron(COLOR_PAIR(25));
+	//	mvprintw(3, 7, "00");
+	//	attroff(COLOR_PAIR(25));
+	mvprintw(67/2 -1, (196 - (int)ft_strlen("MAKE PEACE NOT WAR"))/2, "MAKE PEACE NOT WAR");
+	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
+	attroff(A_BOLD);
 	getch();
 
 }

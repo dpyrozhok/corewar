@@ -118,7 +118,7 @@ int main(int ac, char **av)
 //    ft_dump(core);
 	do_ncurs(core);
 	attron(A_BOLD);
-	mvprintw(3, 200, "** FINISH **");
+	mvprintw(3, 200, "** FINISH ** ");
 	attroff(A_BOLD);
 	getch();
 	endwin();
