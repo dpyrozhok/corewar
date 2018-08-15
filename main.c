@@ -103,6 +103,7 @@ int main(int ac, char **av)
 	core = (t_core *) ft_memalloc(sizeof(t_core));
 	core->dump = -1;
 	check_args(ac, av, core);
+	init_ncurs();
 	core->arena = (unsigned char *) malloc(sizeof(unsigned char) * MEM_SIZE);
     core->init_nub = 0;
     core->c_to_die = CYCLE_TO_DIE;
@@ -114,6 +115,12 @@ int main(int ac, char **av)
     }
     ft_place_champ(core);
     ft_start_fight(core);
-    ft_dump(core);
-    return 0;
+//    ft_dump(core);
+	do_ncurs(core);
+	attron(A_BOLD);
+	mvprintw(3, 200, "** FINISH **");
+	attroff(A_BOLD);
+	getch();
+	endwin();
+	return 0;
 }

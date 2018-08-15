@@ -6,8 +6,9 @@
 
 int			p_help(size_t i, size_t j, int fd, char c);
 void		do_win(void);
-void		do_more(void);
+void		do_ncurs(t_core *core);
 void		do_acs(void);
+void		init_ncurs(void);
 
 
 #endif

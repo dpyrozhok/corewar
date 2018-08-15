@@ -3,7 +3,7 @@
 //
 
 #include "check_args.h"
-#include "ncurs.h"
+
 void	op(void);
 
 int	ft_isspace(int c)
@@ -274,7 +274,7 @@ void	check_args(int ac, char **av, t_core *core)
 		else if (!ft_strcmp(av[i], "-v"))
 		{
 			c++;
-			do_more();
+//			do_ncurs(core);
 			exit(0);
 		}
 		else if (!ft_strcmp(av[i], "-dump"))

@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "ncurs.h"
 
 void    ft_get_n_car_value(t_core *core, t_champ *champ)
 {
@@ -27,8 +28,11 @@ void    ft_touch_car(t_core *core, t_champ *champ)
 
 void    ft_start_fight(t_core *core) {
     t_champ *tmp;
+    do_ncurs(core);
+    getch();
     while (core->c_to_die > 0 && core->qt_car > 0) {
-        ft_dump(core);
+//        ft_dump(core);
+//		do_ncurs(core);
         while (tmp)
         {
             if (tmp->cars)

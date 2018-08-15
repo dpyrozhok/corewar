@@ -7,6 +7,7 @@
 
 # include "corewar.h"
 # include "t_op.h"
+# include "ncurs.h"
 
 typedef struct	s_check
 {

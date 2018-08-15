@@ -202,61 +202,32 @@ int		cnt_dig(int nbr)
 	return (cnt);
 }
 
-void	do_more(void)
+void	do_ncurs(t_core *core)
 {
-	WIN win;
-	WIN win2;
-	int ch;
 
-	initscr();
-	if (LINES < 69 || COLS < 254)
+//	int ch;
+	int i,r,c;
+
+	i = 0;
+	r = 3;
+	c = 3;
+	while (i < MEM_SIZE)
 	{
-		endwin();
-		printf("Resize window to min 254 cols and 69 rows. Currently %d cols and %d rows\n", COLS, LINES);
-		exit(0);
+		mvprintw(r, c, "%02x ", core->arena[i]);
+		i++;
+		if (i % 64 == 0)
+		{
+			c = 3;
+			r++;
+		}
+		else
+			c += 3;
 	}
-	start_color();
-	cbreak();
-	keypad(stdscr, TRUE);
-	noecho();
-	curs_set(0);
-	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_WHITE);
-	init_pair(3, COLOR_BLUE, COLOR_WHITE);
-	init_color(COLOR_WHITE, 600, 600, 600);
-	init_pair(4, COLOR_WHITE, COLOR_BLACK);
-	init_pair(25, COLOR_BLUE, COLOR_BLACK);
 
-	init_win_params(&win, 67, 196, 1, 0);
-//	print_win_params(&win);
-	init_win_params2(&win2, 67, 56, 1, 197);
-
-	attron(COLOR_PAIR(1) | A_BOLD);
-	printw("Press F1 to exit");
-	refresh();
-	attroff(COLOR_PAIR(1) | A_BOLD);
-
-	attron(A_REVERSE);
 	attron(A_BOLD);
-	attron(COLOR_PAIR(2));
-	create_box(&win, TRUE);
-	attroff(COLOR_PAIR(2));
-	attron(COLOR_PAIR(3));
-	create_box(&win2, FALSE);
-	attroff(COLOR_PAIR(3));
-	attron(COLOR_PAIR(4));
-	attroff(A_BOLD);
-	attron(A_BOLD | COLOR_PAIR(3));
-	mvprintw(3, 3, "00");
-	attroff(A_BOLD | COLOR_PAIR(3));
-	attroff(A_REVERSE);
-	attron(COLOR_PAIR(25));
-	mvprintw(3, 7, "00");
-	attroff(COLOR_PAIR(25));
-	attron(A_BOLD);
-	mvprintw(3, 200, "** PAUSED **");
+	mvprintw(3, 200, "** RUN **");
 	mvprintw(5, 200, "Cycles/second limit : %d", 50);
-	mvprintw(8, 200, "Cycle : %d", 0);
+	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", 1);
 	mvprintw(12, 200, "Player %d : ", -1);
 	char zork[5] = "zork";
@@ -278,9 +249,12 @@ void	do_more(void)
 	mvprintw(26, 200, "NBR_LIVE : %d", 21);
 	mvprintw(28, 200, "MAX_CHECKS : %d", 10);
 	attroff(COLOR_PAIR(4));
+	attroff(A_BOLD);
+	refresh();
 //	cbreak();
 //	keypad(stdscr, TRUE);
 //	noecho();
+/*
 	while((ch = getch()) != KEY_F(1))
 	{
 		switch(ch)
@@ -308,6 +282,61 @@ void	do_more(void)
 		}
 	}
 	endwin();
+*/
+}
+
+void	init_ncurs(void)
+{
+	WIN win;
+	WIN win2;
+
+	initscr();
+	if (LINES < 69 || COLS < 254)
+	{
+		endwin();
+		printf("Resize window to min 254 cols and 69 rows. Currently %d cols and %d rows\n", COLS, LINES);
+		exit(0);
+	}
+	start_color();
+	cbreak();
+	keypad(stdscr, TRUE);
+	noecho();
+	curs_set(0);
+	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_WHITE);
+	init_pair(3, COLOR_BLUE, COLOR_WHITE);
+	init_color(COLOR_WHITE, 600, 600, 600);
+	init_pair(4, COLOR_WHITE, COLOR_BLACK);
+	init_pair(25, COLOR_BLUE, COLOR_BLACK);
+
+	init_win_params(&win, 67, 196, 1, 0);
+	//	print_win_params(&win);
+	init_win_params2(&win2, 67, 56, 1, 197);
+
+	attron(COLOR_PAIR(1) | A_BOLD);
+	mvprintw(0, (254 - (int)ft_strlen("C O R E W A R")) / 2, "C O R E W A R");
+	refresh();
+	attroff(COLOR_PAIR(1) | A_BOLD);
+
+	attron(A_REVERSE);
+	attron(A_BOLD);
+	attron(COLOR_PAIR(2));
+	create_box(&win, TRUE);
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(3));
+	create_box(&win2, FALSE);
+	attroff(COLOR_PAIR(3));
+	attron(COLOR_PAIR(4));
+	attroff(A_BOLD);
+//	attron(A_BOLD | COLOR_PAIR(3));
+//	mvprintw(3, 3, "00");
+//	attroff(A_BOLD | COLOR_PAIR(3));
+	attroff(A_REVERSE);
+//	attron(COLOR_PAIR(25));
+//	mvprintw(3, 7, "00");
+//	attroff(COLOR_PAIR(25));
+	getch();
+
 }
 
 void init_win_params(WIN *p_win, int h, int w, int sy, int sx)

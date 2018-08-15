@@ -18,7 +18,8 @@ SRC = main.c \
     check_isend.c \
     opcode_switcher.c \
     ncurs.c \
-    op.c
+    op.c \
+    opcode_11.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
