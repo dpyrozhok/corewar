@@ -19,7 +19,7 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
         champ->cars->pos += 1;
     }
     if (codage[1] == REG_CODE) {
-        arg[1] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE)];
+        arg[1] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE) - 1];
         champ->cars->pos += 1;
     } else if (codage[1] == DIR_CODE) {
         arg[1] = ft_read_2(core, champ->cars->pos % MEM_SIZE);
@@ -29,7 +29,7 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
         champ->cars->pos += 2;
     }
     if (codage[2] == REG_CODE) {
-        arg[2] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE)];
+        arg[2] = champ->cars->reg[ft_read_1(core, champ->cars->pos % MEM_SIZE) - 1];
         champ->cars->pos += 1;
     } else if (codage[2] == DIR_CODE) {
         arg[2] = ft_read_2(core, champ->cars->pos % MEM_SIZE);

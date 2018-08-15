@@ -1,6 +1,5 @@
 #include "corewar.h"
 
-// нужно разобраться как тянуть инфу со структуры op.c
 void    ft_put_4(t_core *core, int arg, int pos) {
     core->arena[pos] = (unsigned char)(arg >> 24);
     core->arena[pos + 1] = (unsigned char)(arg >> 16 & 255);
@@ -53,6 +52,18 @@ void    ft_01_opcode(t_core *core, t_champ *champ) {
 
 // -->вариант команды live для zork
 
+void    ft_09_opcode(t_core *core, t_champ *champ) {
+    int shift;
+
+    if (champ->cars->carry) {
+        shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
+        shift = champ->cars->pos - 1 + shift % MEM_SIZE; // после выполнения этой команды каретка сместится на 1, а нам в этом случаи не нужно, поэтому тут -1
+        champ->cars->pos = shift % MEM_SIZE;
+    }
+    else
+        champ->cars->pos += 2;
+}
+
 void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 {
     if (champ->cars->opcode == 1)
@@ -65,8 +76,8 @@ void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 //        ft_04_opcode(core, champ);
 //    if (champ->cars->opcode == 5)
 //        ft_05_opcode(core, champ);
-//    if (champ->cars->opcode == 6)
-//        ft_06_opcode(core, champ);
+    if (champ->cars->opcode == 6)
+        ft_06_opcode(core, champ);
 //    if (champ->cars->opcode == 7)
 //        ft_07_opcode(core, champ);
 //    if (champ->cars->opcode == 8)
@@ -75,8 +86,8 @@ void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 
 void    ft_switch_op_9_16(t_core *core, t_champ *champ)
 {
-//    if (champ->cars->opcode == 9)
-//        ft_09_opcode(core, champ);
+    if (champ->cars->opcode == 9)
+        ft_09_opcode(core, champ);
 //    if (champ->cars->opcode == 10)
 //        ft_10_opcode(core, champ);
     if (champ->cars->opcode == 11)
