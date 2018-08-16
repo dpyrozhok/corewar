@@ -76,45 +76,51 @@ int		convert_end(int new)
 	return (new);
 }
 
-char	*ft_go_space(char *line)
+char	*ft_go_space(char *line, int *x)
 {
 	while (*line && (*line == ' ' || *line == '\t'))
+	{
 		line++;
+		(*x)++;
+	}
 	return (line);
 }
 
-void	ft_write_name_comment(char **buf, char *line, char *define)
+void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 {
 	int		i;
 	int 	max_i;
 
 	i = 0;
-	max_i = (*(define + 1) == 'n') ? 127 : 2047;
+	max_i = (*(define + 1) == 'n') ? PROG_NAME_LENGTH - 1 : COMMENT_LENGTH - 1;
 	while (line[i] && line[i] != '"')
 	{
 		if (i >= max_i)
 		{
-			ft_printf("Error. Too big %s\n", define + 1);
+			ft_printf("Lexical error[TOKEN][%i:%i]. Too big %s\n", inf.y, inf.x, define + 1);
 			exit(1);
 		}
 		(*buf)[i] = line[i];
 		if (line[i] =='\\')
 		{
 			i++;
+			inf.x++;
 			(*buf)[i] = line[i];
 		}
+		inf.x++;
 		i++;
 	}
 	if (line[i] != '"')
 	{
-		ft_printf("Error. %s should ends with \"\n", define + 1);
+		ft_printf("Lexical error[TOKEN][%i:%i]. %s should ends with \"\n", inf.y, inf.x + 1, define + 1);
 		exit(1);
 	}
 	line += i + 1;
-	line = ft_go_space(line);
+	inf.x++;
+	line = ft_go_space(line, &(inf.x));
 	if (*(line) != '\0')
 	{
-		ft_printf("Error. Excess information after %s\n", define + 1);
+		ft_printf("Lexical error[TOKEN][%i:%i]. Excess information after %s\n", inf.y, inf.x + 1, define + 1);
 		exit(1);
 	}
 }
@@ -124,31 +130,50 @@ void	ft_name_comment(t_my inf, char *define, char **buf)
 	    /// CHECK Define
 	char 	*line;
 
+	inf.x = 0;
 	if (!inf.head || !inf.head->next)
 	{
-		ft_printf("Error. Too small file. Not enough information\n");
+		ft_printf("Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n", inf.y,0);
 		exit(1);
 	}
-	line = (*(define + 1) == 'n') ? inf.head->line : inf.head->next->line;
-	line = ft_go_space(line);
+	line = ft_go_space(inf.head->line, &(inf.x));
     if (!(line == ft_strstr(line, define)))
     {
-        ft_printf("Error. Command line should starts with \"%s\"\n", define);
+        ft_printf("Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n", inf.y, inf.x, define);
         exit(1);
     }
     line += ft_strlen(define);
-	line = ft_go_space(line);
+	inf.x += ft_strlen(define);
+	line = ft_go_space(line, &(inf.x));
 	if (*(line) != '"')
 	{
-		ft_printf("Error. %s should starts with \"\n", define + 1);
+		ft_printf("Lexical error[TOKEN][%i:%i]. %s should starts with \"\n", inf.y, inf.x, define + 1);
 		exit(1);
 	}
     line++;
+	inf.x++;
 	/// WRITE Define
-	ft_write_name_comment(buf, line, define);
+	ft_write_name_comment(buf, line, define, inf);
 }
 
-void		ft_read_file(t_my inf, char *name)
+void		ft_throu_empt_lines(t_my *inf)
+{
+	char 	*l;
+
+	while(inf->head && inf->head->line)
+	{
+		l = ft_go_space(inf->head->line, &(inf->x));
+		if (*l == '\0')
+		{
+			inf->head = inf->head->next;
+			inf->y++;
+		}
+		else
+			break ;
+	}
+}
+
+void		ft_read_head(t_my *inf, char *name)
 {
 	char	*name2;
 	char	*comment;
@@ -161,26 +186,40 @@ void		ft_read_file(t_my inf, char *name)
 		ft_printf("error: open\n");
 		exit(1);
 	}
-	name2 = ft_memalloc(132);
-	comment = ft_memalloc(2052);
+	name2 = ft_memalloc(PROG_NAME_LENGTH + 4);
+	comment = ft_memalloc(COMMENT_LENGTH + 4);
 
 	/// MAGIC NUMBER
 	magic_num = convert_end(COREWAR_EXEC_MAGIC);
 	write(g_fd, &magic_num, sizeof(magic_num));
 
     ///NAME
-	ft_name_comment(inf, NAME_CMD_STRING, &name2);
-	ft_printf("NAME %s\n", name2);
+	ft_throu_empt_lines(inf);
+	ft_name_comment(*inf, NAME_CMD_STRING, &name2);
 	write(g_fd, &name2,sizeof(name2));
 
     /// BOTSIZE
     char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    write(g_fd, &(botsize), sizeof(2)); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    write(g_fd, &(botsize), 2); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	///COMMENT
-	ft_name_comment(inf, COMMENT_CMD_STRING, &comment);
-	ft_printf("COMMENT %s\n", comment);
+	if (inf->head->next)
+	{
+		inf->head = inf->head->next;
+		inf->y++;
+	}
+	ft_throu_empt_lines(inf);
+	ft_name_comment(*inf, COMMENT_CMD_STRING, &comment);
     write(g_fd, &comment,sizeof(comment));
+	if (inf->head->next)
+	{
+		inf->head = inf->head->next;
+		inf->y++;
+	}
+}
+
+void		ft_read_body(t_my inf, char *name)
+{
 
 }
 
@@ -190,6 +229,8 @@ void	ft_obnul(t_my	*inf, char *name)
     inf->head = (t_text*)malloc(sizeof(t_text));
     inf->head->line = NULL;
     inf->head->next = NULL;
+	inf->x = 1;
+	inf->y = 1;
 
 }
 
@@ -253,7 +294,9 @@ int		main(int ac, char **av)
     ft_print_txt(inf.head);
 
 
-	ft_read_file(inf, name);
+	ft_read_head(&inf, name);
+	ft_throu_empt_lines(&inf);
+	ft_read_body(inf, name);
 	ft_printf("Writing output program to %s", name);
 	free(name);
 	return (0);
