@@ -33,6 +33,8 @@ typedef struct s_my
 {
     t_text *head;
     int fd;
+	int x;
+	int y;
 }               t_my;
 
 #endif

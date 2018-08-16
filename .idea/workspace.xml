@@ -13,6 +13,36 @@
   <component name="ChangeListManager">
     <list default="true" id="bcf9751e-5ebc-4768-8a59-22f12bca1ffb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/asm.c" afterPath="$PROJECT_DIR$/asm.c" />
+      <change beforePath="$PROJECT_DIR$/asm.h" afterPath="$PROJECT_DIR$/asm.h" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/C.includecache" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.internal" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/depend.make" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isalpha.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isalpha.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isascii.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isascii.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isdigit.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isdigit.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isprint.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_isprint.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memccpy.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memccpy.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memchr.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memchr.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memcmp.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memcmp.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memcpy.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memcpy.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memmove.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memmove.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memset.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_memset.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_putchar.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_putchar.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_putchar_fd.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_putchar_fd.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strchr.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strchr.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strcmp.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strcmp.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strcpy.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strcpy.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_striter.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_striter.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_striteri.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_striteri.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strlen.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strlen.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strncmp.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strncmp.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strnstr.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strnstr.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strstr.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_strstr.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_toupper.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/libft/ft_toupper.c.o" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CORE" afterPath="$PROJECT_DIR$/cmake-build-debug/CORE" />
+      <change beforePath="$PROJECT_DIR$/zork.cor" afterPath="$PROJECT_DIR$/zork.cor" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +60,8 @@
           <file leaf-file-name="asm.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/asm.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="591">
-                  <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+                <state relative-caret-position="1078">
+                  <caret line="303" column="1" lean-forward="false" selection-start-line="303" selection-start-column="1" selection-end-line="303" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -60,7 +90,7 @@
           <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
+                <state relative-caret-position="508">
                   <caret line="37" column="25" lean-forward="false" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
                   <folding />
                 </state>
@@ -126,8 +156,8 @@
           <file leaf-file-name="asm.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/asm.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2955">
-                  <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+                <state relative-caret-position="2775">
+                  <caret line="185" column="12" lean-forward="false" selection-start-line="185" selection-start-column="12" selection-end-line="185" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -136,8 +166,8 @@
           <file leaf-file-name="asm.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/asm.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
-                  <caret line="37" column="6" lean-forward="false" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+                <state relative-caret-position="540">
+                  <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
                   <folding>
                     <element signature="e#957#982#0" expanded="true" />
                   </folding>
@@ -262,27 +292,30 @@
       <workItem from="1534256840181" duration="5955000" />
       <workItem from="1534419606598" duration="45000" />
       <workItem from="1534419655858" duration="7000" />
+      <workItem from="1534421052753" duration="80000" />
+      <workItem from="1534421143358" duration="15000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24575000" />
+    <option name="totallyTimeSpent" value="24670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="23" y="30" width="2099" height="1329" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24630776" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32700247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27497935" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27497935" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.388109" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32700247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -329,18 +362,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>90</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>233</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="42" />
     </breakpoint-manager>
     <watches-manager>
@@ -595,14 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="25" lean-forward="false" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libft/ft_toupper.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -668,21 +681,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asm.c">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2955">
-          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+        <state relative-caret-position="508">
+          <caret line="37" column="25" lean-forward="false" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asm.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="6" lean-forward="false" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+        <state relative-caret-position="540">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
           <folding>
             <element signature="e#957#982#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asm.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1078">
+          <caret line="303" column="1" lean-forward="false" selection-start-line="303" selection-start-column="1" selection-end-line="303" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>

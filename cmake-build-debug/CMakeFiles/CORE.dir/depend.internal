@@ -15,15 +15,18 @@ CMakeFiles/CORE.dir/libft/ft_bzero.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_isalnum.c.o
  /Users/dpyrozho/CORE/libft/ft_isalnum.c
- /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_isalpha.c.o
  /Users/dpyrozho/CORE/libft/ft_isalpha.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_isascii.c.o
  /Users/dpyrozho/CORE/libft/ft_isascii.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_isdigit.c.o
  /Users/dpyrozho/CORE/libft/ft_isdigit.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_isprint.c.o
  /Users/dpyrozho/CORE/libft/ft_isprint.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_itoa.c.o
  /Users/dpyrozho/CORE/libft/ft_itoa.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -50,25 +53,34 @@ CMakeFiles/CORE.dir/libft/ft_memalloc.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memccpy.c.o
  /Users/dpyrozho/CORE/libft/ft_memccpy.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memchr.c.o
  /Users/dpyrozho/CORE/libft/ft_memchr.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memcmp.c.o
  /Users/dpyrozho/CORE/libft/ft_memcmp.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memcpy.c.o
  /Users/dpyrozho/CORE/libft/ft_memcpy.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memdel.c.o
  /Users/dpyrozho/CORE/libft/ft_memdel.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memmove.c.o
  /Users/dpyrozho/CORE/libft/ft_memmove.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_memset.c.o
  /Users/dpyrozho/CORE/libft/ft_memset.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_printf.c.o
  /Users/dpyrozho/CORE/libft/ft_printf.c
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_putchar.c.o
  /Users/dpyrozho/CORE/libft/ft_putchar.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_putchar_fd.c.o
  /Users/dpyrozho/CORE/libft/ft_putchar_fd.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_putendl.c.o
  /Users/dpyrozho/CORE/libft/ft_putendl.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -92,15 +104,18 @@ CMakeFiles/CORE.dir/libft/ft_strcat.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strchr.c.o
  /Users/dpyrozho/CORE/libft/ft_strchr.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strclr.c.o
  /Users/dpyrozho/CORE/libft/ft_strclr.c
- /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strcmp.c.o
  /Users/dpyrozho/CORE/libft/ft_strcmp.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strcpy.c.o
  /Users/dpyrozho/CORE/libft/ft_strcpy.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strdel.c.o
  /Users/dpyrozho/CORE/libft/ft_strdel.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strdup.c.o
  /Users/dpyrozho/CORE/libft/ft_strdup.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -119,6 +134,7 @@ CMakeFiles/CORE.dir/libft/ft_strlcat.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strlen.c.o
  /Users/dpyrozho/CORE/libft/ft_strlen.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strmap.c.o
  /Users/dpyrozho/CORE/libft/ft_strmap.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -130,6 +146,7 @@ CMakeFiles/CORE.dir/libft/ft_strncat.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strncmp.c.o
  /Users/dpyrozho/CORE/libft/ft_strncmp.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strncpy.c.o
  /Users/dpyrozho/CORE/libft/ft_strncpy.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -141,11 +158,13 @@ CMakeFiles/CORE.dir/libft/ft_strnew.c.o
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strnstr.c.o
  /Users/dpyrozho/CORE/libft/ft_strnstr.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strrchr.c.o
  /Users/dpyrozho/CORE/libft/ft_strrchr.c
  /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strstr.c.o
  /Users/dpyrozho/CORE/libft/ft_strstr.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/ft_strsub.c.o
  /Users/dpyrozho/CORE/libft/ft_strsub.c
  /Users/dpyrozho/CORE/libft/libft.h
@@ -156,6 +175,7 @@ CMakeFiles/CORE.dir/libft/ft_tolower.c.o
  /Users/dpyrozho/CORE/libft/ft_tolower.c
 CMakeFiles/CORE.dir/libft/ft_toupper.c.o
  /Users/dpyrozho/CORE/libft/ft_toupper.c
+ /Users/dpyrozho/CORE/libft/libft.h
 CMakeFiles/CORE.dir/libft/get_next_line.c.o
  /Users/dpyrozho/CORE/libft/get_next_line.c
  /Users/dpyrozho/CORE/libft/libft.h

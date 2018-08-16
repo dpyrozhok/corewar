@@ -51,16 +51,22 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_isalnum.c
+
+/Users/dpyrozho/CORE/libft/ft_isalpha.c
 libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_isalpha.c
-
 /Users/dpyrozho/CORE/libft/ft_isascii.c
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_isdigit.c
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_isprint.c
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_itoa.c
 libft.h
@@ -95,44 +101,44 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memccpy.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memchr.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memcmp.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memcpy.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memdel.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memmove.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_memset.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_printf.c
 libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_putchar.c
-unistd.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_putchar_fd.c
-unistd.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_putendl.c
 libft.h
@@ -163,24 +169,22 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strchr.c
-stdlib.h
--
-
-/Users/dpyrozho/CORE/libft/ft_strclr.c
 libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
+/Users/dpyrozho/CORE/libft/ft_strclr.c
+
 /Users/dpyrozho/CORE/libft/ft_strcmp.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strcpy.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strdel.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strdup.c
 libft.h
@@ -191,12 +195,8 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_striter.c
-stdlib.h
--
 
 /Users/dpyrozho/CORE/libft/ft_striteri.c
-stdlib.h
-/Users/dpyrozho/CORE/libft/stdlib.h
 
 /Users/dpyrozho/CORE/libft/ft_strjoin.c
 libft.h
@@ -207,8 +207,8 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strlen.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strmap.c
 libft.h
@@ -223,8 +223,8 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strncmp.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strncpy.c
 libft.h
@@ -239,16 +239,16 @@ libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strnstr.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strrchr.c
 libft.h
 /Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strstr.c
-stdlib.h
--
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/ft_strsub.c
 libft.h
@@ -261,6 +261,8 @@ libft.h
 /Users/dpyrozho/CORE/libft/ft_tolower.c
 
 /Users/dpyrozho/CORE/libft/ft_toupper.c
+libft.h
+/Users/dpyrozho/CORE/libft/libft.h
 
 /Users/dpyrozho/CORE/libft/get_next_line.c
 libft.h
