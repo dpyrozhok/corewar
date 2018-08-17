@@ -21,9 +21,9 @@
 #define DIR_SIZE				REG_SIZE
 
 
-# define REG_CODE				1
-# define DIR_CODE				2
-# define IND_CODE				3
+# define REG_CODE				1   //01
+# define DIR_CODE				2   //10
+# define IND_CODE				3   //11
 
 
 #define MAX_ARGS_NUMBER			4

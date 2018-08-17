@@ -40,29 +40,11 @@ int     ft_read_4(t_core *core, int pos) {
 
 // <--вариант команды live для zork
 
-void    ft_01_opcode(t_core *core, t_champ *champ) {
-    if (champ->id == ft_read_4(core, champ->cars->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
-        champ->s_live++;
-        champ->last_live = core->cycle;
-        core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
-    }
-    champ->cars->live = 1; // каретка (процесс) жив в этом цикле
-    champ->cars->pos += 4;
-}
+
 
 // -->вариант команды live для zork
 
-void    ft_09_opcode(t_core *core, t_champ *champ) {
-    int shift;
 
-    if (champ->cars->carry) {
-        shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-        shift = champ->cars->pos - 1 + shift % MEM_SIZE; // после выполнения этой команды каретка сместится на 1, а нам в этом случаи не нужно, поэтому тут -1
-        champ->cars->pos = shift % MEM_SIZE;
-    }
-    else
-        champ->cars->pos += 2;
-}
 
 void    ft_switch_op_1_8(t_core *core, t_champ *champ)
 {
