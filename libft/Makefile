@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: popanase <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/02/19 18:42:06 by popanase         ###   ########.fr        #
+#    Updated: 2018/08/17 10:35:34 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,13 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	  ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_cntwrd.c ft_lnwrd.c \
 	  ft_lstaddend.c ft_lstdellast.c ft_swap.c ft_itoal.c ft_itoao.c \
 	  ft_itoax.c ft_itoau.c get_next_line.c\
+	  ft_printf/ft_printf.c ft_printf/ft_conver_x.c \
+	  ft_printf/ft_conver_o.c ft_printf/ft_conver_s.c \
+	  ft_printf/ft_conver_c.c ft_printf/ft_conver_id.c \
+	  ft_printf/ft_conver_u.c ft_printf/ft_conver_per.c \
+	  ft_printf/ft_conver_p.c ft_printf/ft_conver_lc.c \
+	  ft_printf/ft_conver_ls.c ft_printf/ft_conver_inv.c \
+	  ft_printf/ft_readformat.c ft_printf/ft_helper_lc_ls.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -35,7 +42,7 @@ $(NAME): $(OBJ)
 	ar rc $@ $^
 	
 %.o: %.c
-	gcc -Wall -Wextra -Werror -c $<
+	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean: 
 	rm -f $(OBJ)

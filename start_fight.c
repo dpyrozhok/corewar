@@ -14,11 +14,39 @@ void    ft_get_n_car_value(t_core *core, t_champ *champ)
 
 void    ft_touch_car(t_core *core, t_champ *champ)
 {
+    int r,c;
+ 
     if (champ->cars->cycle < 2) {
+        if (core->v)
+        {
+            r = 3+(champ->cars->pos/64);
+            c = 3+3*(champ->cars->pos%64);
+            attron(COLOR_PAIR(champ->c));
+            mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
+            attroff(COLOR_PAIR(champ->c));
+        }
         champ->cars->cycle = 0;
         if (champ->cars->opcode > 0 && champ->cars->opcode < 16)
             ft_opcode_switcher(core, champ);
+        if (core->v)
+        {
+            r = 3+(champ->cars->pos/64);
+            c = 3+3*(champ->cars->pos%64);
+            attron(COLOR_PAIR(champ->c));
+            mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
+            attroff(COLOR_PAIR(champ->c));
+        }
         champ->cars->pos++;
+        if (core->v)
+        {
+            r = 3 + (champ->cars->pos/64);
+            c = 3 + 3*(champ->cars->pos%64);
+            attron(COLOR_PAIR(champ->c));
+            attron(A_REVERSE);
+            mvprintw(r, c, "%02x", core->arena[champ->cars->pos%MEM_SIZE]);
+            attroff(A_REVERSE);
+            attroff(COLOR_PAIR(champ->c));
+        }
         ft_get_n_car_value(core, champ);
     }
     else
@@ -27,15 +55,13 @@ void    ft_touch_car(t_core *core, t_champ *champ)
 
 void    ft_start_fight(t_core *core) {
     t_champ *tmp;
-//    do_ncurs(core);
-//    attron(A_BOLD);
-//    mvprintw(3, 200, "** PRESS ANY KEY TO MAKE A WAR **  ");
-//    getch();
-//    attron(A_BOLD);
-//    mvprintw(3, 200, "** RUNNING **");
-//    attroff(A_BOLD);
+
+    if (core->v)
+    {
+        getch();
+        attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
+    }
     while (core->c_to_die > 0 && core->qt_car > 0) {
-//		do_ncurs(core);
         while (tmp)
         {
             if (tmp->cars)
@@ -43,16 +69,27 @@ void    ft_start_fight(t_core *core) {
             tmp = tmp->next;
         }
         tmp = core->champs;
-        ft_dump(core);
+        // ft_dump(core);
+        if (!core->v && core->dump != -1 && core->cycle == core->dump)
+            ft_dump(core);
+        if (core->v)
+        {
+            do_ncurs(core);
+            // attron(A_BOLD); mvprintw(8, 208, "%d", core->cycle);
+            // attroff(A_BOLD); refresh();
+            usleep(100000);
+        }
         core->cycle++;
-//        attron(A_BOLD);
-//        mvprintw(8, 208, "%d", core->cycle);
-//        attroff(A_BOLD);
-//        refresh();
-//        usleep(200);
         if (core->cycle == core->c_to_die + core->last_check) {
             ft_make_check(core);
             core->last_check = core->cycle;
         }
+    }
+    if (core->v)
+    {
+        // do_ncurs(NULL);
+        do_ncurs(core);
+        attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
+        getch(); endwin();
     }
 }

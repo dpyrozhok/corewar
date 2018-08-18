@@ -208,45 +208,53 @@ void	do_ncurs(t_core *core)
 	//	int ch;
 	int i, r, c;
 	t_champ *curr;
+	static int sw = 0;
 
-	i = 0;
-	r = 3;
-	c = 3;
-	while (i < MEM_SIZE)
+	if (!core)
 	{
-		mvprintw(r, c, "%02x ", core->arena[i]);
-		i++;
-		if (i % 64 == 0)
+		sw = 0;
+		return ;
+	}
+	if (sw == 0)
+	{
+		i = 0;
+		r = 3;
+		c = 3;
+		while (i < MEM_SIZE)
 		{
-			c = 3;
-			r++;
+			mvprintw(r, c, "%02x ", core->arena[i]);
+			i++;
+			if (i % 64 == 0)
+			{
+				c = 3;
+				r++;
+			}
+			else
+				c += 3;
 		}
-		else
-			c += 3;
+		sw = 1;
 	}
 
 	attron(A_BOLD);
-	mvprintw(3, 200, "** RUNNING**");
+	mvprintw(3, 200, "** RUNNING **");
 	mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
 
 	r = 12;
 	i = 0;
-	int col;
-	col = 20;
 	curr = core->champs;
 	while (i++ < core->qt_champ)
 	{
 		mvprintw(r, 200, "Player %d : ", curr->id);
-//		char zork[5] = "zork";
-		attron(COLOR_PAIR(col));
+		attron(COLOR_PAIR(curr->c));
 		mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
-		attroff(COLOR_PAIR(col));
-		mvprintw(r++, 202, "Last live :                     %d", curr->last_live);
-		mvprintw(r, 202, "Lives in current period :       %d", 0);
+		attroff(COLOR_PAIR(curr->c));
+		mvprintw(r, 202, "Last live : ");
+		mvprintw(r++, 214, "%21d", curr->last_live);
+		mvprintw(r, 202, "Lives in current period : ");
+		mvprintw(r, 228, "%7d", curr->s_live);
 		r += 2;
-		col++;
 		curr = curr->next;
 	}
 
@@ -254,24 +262,25 @@ void	do_ncurs(t_core *core)
 	attroff(A_BOLD);
 	mvprintw(r++, 200, "[--------------------------------------------------]");
 	attron(A_BOLD);
-	mvprintw(++r, 200, "Live breakdown for current period :");
+	mvprintw(++r, 200, "Live breakdown for last period :");
 	attroff(A_BOLD);
-	mvprintw(r++, 200, "[--------------------------------------------------]");
+	mvprintw(++r, 200, "[--------------------------------------------------]");
 	attron(A_BOLD);
+	r++;
 	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
 	r++;
-	mvprintw(++r, 200, "CYCLE_DELTA : %d", 50);
+	mvprintw(++r, 200, "CYCLE_DELTA : %d", CYCLE_DELTA);
 	r++;
-	mvprintw(++r, 200, "NBR_LIVE : %d", 21);
+	mvprintw(++r, 200, "NBR_LIVE : %d", NBR_LIVE);
 	r++;
-	mvprintw(++r, 200, "MAX_CHECKS : %d", 10);
+	mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();
-//	cbreak();
-//	keypad(stdscr, TRUE);
-//	noecho();
-/*
+	// cbreak();
+	// keypad(stdscr, TRUE);
+	// noecho();
+	/*
 	while((ch = getch()) != KEY_F(1))
 	{
 		switch(ch)
@@ -299,7 +308,7 @@ void	do_ncurs(t_core *core)
 		}
 	}
 	endwin();
-*/
+	*/
 }
 
 void	init_ncurs(void)
@@ -328,6 +337,10 @@ void	init_ncurs(void)
 	init_pair(21, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(22, COLOR_BLUE, COLOR_BLACK);
 	init_pair(23, COLOR_RED, COLOR_BLACK);
+	init_pair(30, COLOR_WHITE, COLOR_GREEN);
+	init_pair(31, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(32, COLOR_WHITE, COLOR_BLUE);
+	init_pair(33, COLOR_WHITE, COLOR_RED);
 
 	init_win_params(&win, 67, 196, 1, 0);
 	//	print_win_params(&win);
@@ -347,7 +360,7 @@ void	init_ncurs(void)
 	create_box(&win2, FALSE);
 	attroff(COLOR_PAIR(3));
 	attron(COLOR_PAIR(4));
-//	attron(A_BOLD | COLOR_PAIR(3));
+	// attron(A_BOLD | COLOR_PAIR(3));
 	//	mvprintw(3, 3, "00");
 	//	attroff(A_BOLD | COLOR_PAIR(3));
 	attroff(A_REVERSE);
@@ -358,8 +371,8 @@ void	init_ncurs(void)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	getch();
-
 }
+
 
 void init_win_params(WIN *p_win, int h, int w, int sy, int sx)
 {
@@ -400,12 +413,15 @@ void init_win_params2(WIN *p_win, int h, int w, int sy, int sx)
 void print_win_params(WIN *p_win)
 {
 	if (p_win)
+	{
 		;
+	}
 #ifdef _DEBUG
 	mvprintw(25, 0, "%d %d %d %d", p_win->startx, p_win->starty, p_win->width, p_win->height);
 	refresh();
 #endif
 }
+
 
 void create_box(WIN *p_win, bool flag)
 {

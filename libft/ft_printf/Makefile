@@ -3,50 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
+#    By: popanase <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/08/18 22:09:44 by vlevko           ###   ########.fr        #
+#    Updated: 2018/03/19 18:33:40 by popanase         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = corewar
+NAME = libftprintf.a
 
-SRC = main.c \
-    check_args.c \
-    start_fight.c \
-    check_isend.c \
-    opcode_switcher.c \
-    ncurs.c \
-    op.c \
-    opcode_1_5.c \
-    opcode_11_16.c \
-    opcode_6_10.c \
-    op_handler.c
+SRC = ft_printf.c ft_conver_x.c ft_conver_o.c ft_conver_s.c ft_conver_c.c \
+	  ft_conver_id.c ft_conver_u.c ft_conver_per.c ft_conver_p.c ft_conver_lc.c \
+	  ft_conver_ls.c ft_conver_inv.c ft_readformat.c ft_helper_lc_ls.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft
-	@#make -C ft_printf
-	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
-	gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -o $@
+	ar rc $@ $^
 	
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $<
 
 clean: 
-	make clean -C libft
-	@#make clean -C ft_printf
 	rm -f $(OBJ)
 
 fclean: clean 
-	make fclean -C libft
-	@#make fclean -C ft_printf
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 

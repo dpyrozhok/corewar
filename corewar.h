@@ -12,41 +12,45 @@ typedef struct s_champ	t_champ;
 typedef struct s_car	t_car;
 
 typedef struct          s_core {
-    unsigned char   *arena;
-    struct s_champ  *champs;
-    int             qt_champ;
-    int             qt_car;
-    int             init_nub;
-    int             cycle;
-    int             c_to_die;
-    int             last_check;
-    int             qt_check;
-    int             winner_id;
+	unsigned char   *arena;
+	struct s_champ  *champs;
+	int             qt_champ;
+	int             qt_car;
+	int             init_nub;
+	int             cycle;
+	int             c_to_die;
+	int             last_check;
+	int             qt_check;
+	int             winner_id;
 	int				dump;
+	int				v;
+	int				c;
 }                       t_core;
 
 struct          s_champ {
-    unsigned char   name[PROG_NAME_LENGTH + 1];
-    unsigned char   comment[COMMENT_LENGTH + 1];
-    unsigned int    size;
-    int             id;
-    int             s_live;
-    int             last_live;
-    unsigned char   *code;
-    t_car    		*cars;
-    t_champ  		*next;
+	unsigned char   name[PROG_NAME_LENGTH + 1];
+	unsigned char   comment[COMMENT_LENGTH + 1];
+	unsigned int    size;
+	int             id;
+	int             s_live;
+	int             last_live;
+	unsigned char   *code;
+	t_car    		*cars;
+	t_champ  		*next;
+	int				c;
+	int				cc;
 };
 
 struct              s_car {
-    int             pos;
-    int             carry;
-    int             id;
-    int             live;
-    unsigned int    reg[REG_NUMBER];
-    int             opcode;
-    int             cycle;
-    t_car    		*next;
-    t_car    		*prev;
+	int             pos;
+	int             carry;
+	int             id;
+	int             live;
+	unsigned int    reg[REG_NUMBER];
+	int             opcode;
+	int             cycle;
+	t_car    		*next;
+	t_car    		*prev;
 };
 
 

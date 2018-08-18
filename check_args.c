@@ -274,8 +274,7 @@ void	check_args(int ac, char **av, t_core *core)
 		else if (!ft_strcmp(av[i], "-v"))
 		{
 			c++;
-//			do_ncurs(core);
-			exit(0);
+			core->v = 1;
 		}
 		else if (!ft_strcmp(av[i], "-dump"))
 		{
