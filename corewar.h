@@ -52,6 +52,7 @@ struct              s_car {
 
 void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
+void    ft_create_car(t_core *core, t_champ *champ, int pos);
 void    ft_make_check(t_core *core);
 void    ft_opcode_switcher(t_core *core, t_champ *champ);
 int     *ft_get_codage(t_core *core, t_champ *champ);
@@ -67,6 +68,13 @@ void    ft_03_opcode(t_core *core, t_champ *champ);
 void    ft_04_opcode(t_core *core, t_champ *champ);
 void    ft_05_opcode(t_core *core, t_champ *champ);
 void    ft_06_opcode(t_core *core, t_champ *champ);
+void    ft_07_opcode(t_core *core, t_champ *champ);
+void    ft_08_opcode(t_core *core, t_champ *champ);
 void    ft_09_opcode(t_core *core, t_champ *champ);
+void    ft_10_opcode(t_core *core, t_champ *champ);
 void    ft_11_opcode(t_core *core, t_champ *champ);
+void    ft_12_opcode(t_core *core, t_champ *champ);
+void    ft_13_opcode(t_core *core, t_champ *champ);
+void    ft_14_opcode(t_core *core, t_champ *champ);
+void    ft_15_opcode(t_core *core, t_champ *champ);
 #endif

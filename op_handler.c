@@ -20,7 +20,7 @@ int ft_check_cod_and_arg(t_champ *champ, int const *cod, int const *arg) {
     while (i < op_tab[op].qt_arg) {
         if (!(cod[i] & op_tab[op].arg[i])) // проверка валидные значение в codage маски вверху
             return 0;
-        else if (cod[i] & 1) // проверка если T_REG
+        else if (cod[i] == REG_CODE) // проверка если T_REG
         {
             if (!(arg[i] > 0 && arg[i] < 17)) // проверка валидное ли значение T_REG
                 return 0;

@@ -43,7 +43,7 @@ void    ft_start_fight(t_core *core) {
             tmp = tmp->next;
         }
         tmp = core->champs;
-//        ft_dump(core);
+        ft_dump(core);
         core->cycle++;
 //        attron(A_BOLD);
 //        mvprintw(8, 208, "%d", core->cycle);
