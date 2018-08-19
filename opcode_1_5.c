@@ -17,13 +17,18 @@ void    ft_01_opcode(t_core *core, t_champ *champ) {
 	champ->cars->pos += 4;
 	if (core->v)
 	{
-		r = 3+(champ->cars->pos/64);
-		c = 3+3*(champ->cars->pos%64);
+		r = 3+((champ->cars->pos%MEM_SIZE)/64)%64;
+		c = 3+(3*((champ->cars->pos%MEM_SIZE)%64))%192;
 		attron(COLOR_PAIR(champ->c));
+		// attron(COLOR_PAIR(core->a[champ->cars->pos]));
 		attron(A_REVERSE);
+		// attron(A_BOLD);
 		mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
+		// attroff(A_BOLD);
 		attroff(A_REVERSE);
+		// attroff(COLOR_PAIR(core->a[champ->cars->pos]));
 		attroff(COLOR_PAIR(champ->c));
+		ft_memset(core->a+1 + champ->cars->pos%MEM_SIZE, champ->c, 1);
 	}
 }
 
@@ -62,19 +67,20 @@ void    ft_03_opcode(t_core *core, t_champ *champ) {
 			if (core->v)
 			{
 				pos = pc + arg[0] % IDX_MOD % MEM_SIZE;
-				r = 3+pos/64;
-				c = 3+3*(pos%64);
-				attron( COLOR_PAIR(champ->c));
+				r = 3+((pos%MEM_SIZE)/64)%64;
+				c = 3+(3*((pos%MEM_SIZE)%64))%192;
+				attron(COLOR_PAIR(champ->c));
 				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]] >> 24));
 				c += 3;
-				// c %= 64; ?? нужно ли
+				// c %= 192; ?? нужно ли
 				// r += c/64;
 				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]] >> 16 & 255));
 				c += 3;
 				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]] >> 8 & 255));
 				c += 3;
 				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]] & 255));
-				attroff( champ->c);
+				attroff(COLOR_PAIR(champ->c));
+				ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
 			}
 		}
 	}

@@ -28,11 +28,13 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
 	{
 		r = 3 + (pos/64);
 		c = 3 + 3*(pos%64);
-		attron(COLOR_PAIR(champ->c));
+		attron(COLOR_PAIR(core->a[pos]));
+		// attron(COLOR_PAIR(champ->c));
 		attron(A_REVERSE);
 		mvprintw(r, c, "%02x", core->arena[pos]);
 		attroff(A_REVERSE);
-		attroff(COLOR_PAIR(champ->c));
+		// attroff(COLOR_PAIR(champ->c));
+		attroff(COLOR_PAIR(core->a[pos]));
 		refresh();
 	}
 	car->pos = pos;
@@ -89,6 +91,7 @@ void    ft_place_champ(t_core *core)
 				i++;
 			}
 			attroff(COLOR_PAIR(tmp->c));
+			ft_memset(core->a + shift, tmp->c, tmp->size);
 			refresh();
 		}
 		ft_memcpy(core->arena + shift, tmp->code, tmp->size);
@@ -141,11 +144,12 @@ int main(int ac, char **av)
 
 	i = 1;
 	setbuf(stdout, 0);
-	core = (t_core *) ft_memalloc(sizeof(t_core));
+	core = (t_core *)ft_memalloc(sizeof(t_core));
 	core->dump = -1;
 	core->c = 20;
 	check_args(ac, av, core);
 	core->arena = (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
+	core->a = (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
 	core->init_nub = 0;
 	core->c_to_die = CYCLE_TO_DIE;
 	while(i < ac) {

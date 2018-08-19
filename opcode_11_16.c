@@ -21,9 +21,9 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 		if (core->v)
 		{
 			pos = pc + (arg[1] + arg[2]) % IDX_MOD % MEM_SIZE;
-			r = 3+pos/64;
-			c = 3+3*(pos%64);
-			attron( COLOR_PAIR(champ->c));
+			r = 3+((pos%MEM_SIZE)/64)%64;
+			c = 3+(3*((pos%MEM_SIZE)%64))%192;
+			attron(COLOR_PAIR(champ->c));
 			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] >> 24));
 			c += 3;
 			// c %= 64; ?? нужно ли
@@ -33,7 +33,8 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] >> 8 & 255));
 			c += 3;
 			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] & 255));
-			attroff( COLOR_PAIR(champ->c));
+			attroff(COLOR_PAIR(champ->c));
+			ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
 		}
 	}
 }

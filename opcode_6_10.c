@@ -72,13 +72,18 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 		champ->cars->pos = shift % MEM_SIZE;
 		if (core->v)
 		{
-			r = 3 + (champ->cars->pos/64);
-			c = 3 + 3*(champ->cars->pos%64);
-			attron(COLOR_PAIR(champ->c));
+			r = 3 + ((champ->cars->pos%MEM_SIZE)/64)%64;
+			c = 3 + (3*((champ->cars->pos%MEM_SIZE)%64))%192;
+			attron(COLOR_PAIR(champ->cc));
+			// attron(COLOR_PAIR(core->a[champ->cars->pos]));
 			attron(A_REVERSE);
+			attron(A_BOLD);
 			mvprintw(r, c, "%02x", core->arena[champ->cars->pos%MEM_SIZE]);
+			attroff(A_BOLD);
 			attroff(A_REVERSE);
-			attroff(COLOR_PAIR(champ->c));
+			// attroff(COLOR_PAIR(core->a[champ->cars->pos]));
+			attroff(COLOR_PAIR(champ->cc));
+			ft_memset(core->a+1 + champ->cars->pos%MEM_SIZE, champ->cc, 1);
 		}
 	}
 	else

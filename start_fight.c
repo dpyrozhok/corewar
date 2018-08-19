@@ -19,33 +19,33 @@ void    ft_touch_car(t_core *core, t_champ *champ)
     if (champ->cars->cycle < 2) {
         if (core->v)
         {
-            r = 3+(champ->cars->pos/64);
-            c = 3+3*(champ->cars->pos%64);
-            attron(COLOR_PAIR(champ->c));
+            r = 3+((champ->cars->pos%MEM_SIZE)/64)%64;
+            c = 3+(3*((champ->cars->pos%MEM_SIZE)%64))%192;
+            attron(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
             mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
-            attroff(COLOR_PAIR(champ->c));
+            attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
         champ->cars->cycle = 0;
         if (champ->cars->opcode > 0 && champ->cars->opcode < 16)
             ft_opcode_switcher(core, champ);
         if (core->v)
         {
-            r = 3+(champ->cars->pos/64);
-            c = 3+3*(champ->cars->pos%64);
-            attron(COLOR_PAIR(champ->c));
+            r = 3+((champ->cars->pos%MEM_SIZE)/64)%64;
+            c = 3+(3*((champ->cars->pos%MEM_SIZE)%64))%192;
+            attron(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
             mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
-            attroff(COLOR_PAIR(champ->c));
+            attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
         champ->cars->pos++;
         if (core->v)
         {
-            r = 3 + (champ->cars->pos/64);
-            c = 3 + 3*(champ->cars->pos%64);
-            attron(COLOR_PAIR(champ->c));
+            r = 3 + ((champ->cars->pos%MEM_SIZE)/64)%64;
+            c = 3 + (3*((champ->cars->pos%MEM_SIZE)%64))%192;
+            attron(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
             attron(A_REVERSE);
             mvprintw(r, c, "%02x", core->arena[champ->cars->pos%MEM_SIZE]);
             attroff(A_REVERSE);
-            attroff(COLOR_PAIR(champ->c));
+            attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
         ft_get_n_car_value(core, champ);
     }
@@ -56,6 +56,7 @@ void    ft_touch_car(t_core *core, t_champ *champ)
 void    ft_start_fight(t_core *core) {
     t_champ *tmp;
 
+    tmp = NULL;
     if (core->v)
     {
         getch();
@@ -77,7 +78,7 @@ void    ft_start_fight(t_core *core) {
             do_ncurs(core);
             // attron(A_BOLD); mvprintw(8, 208, "%d", core->cycle);
             // attroff(A_BOLD); refresh();
-            usleep(100000);
+            // usleep(10000);
         }
         core->cycle++;
         if (core->cycle == core->c_to_die + core->last_check) {

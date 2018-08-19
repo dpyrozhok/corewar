@@ -232,11 +232,13 @@ void	do_ncurs(t_core *core)
 			else
 				c += 3;
 		}
+		attron(A_BOLD);
+		mvprintw(3, 200, "** WELCOME **");
+		attroff(A_BOLD);
 		sw = 1;
 	}
 
 	attron(A_BOLD);
-	mvprintw(3, 200, "** RUNNING **");
 	mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
@@ -328,19 +330,20 @@ void	init_ncurs(void)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_WHITE);
-	init_pair(3, COLOR_BLUE, COLOR_WHITE);
-	init_color(COLOR_WHITE, 600, 600, 600);
-	init_pair(4, COLOR_WHITE, COLOR_BLACK);
-	init_pair(20, COLOR_GREEN, COLOR_BLACK);
-	init_pair(21, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(22, COLOR_BLUE, COLOR_BLACK);
-	init_pair(23, COLOR_RED, COLOR_BLACK);
-	init_pair(30, COLOR_WHITE, COLOR_GREEN);
-	init_pair(31, COLOR_WHITE, COLOR_YELLOW);
-	init_pair(32, COLOR_WHITE, COLOR_BLUE);
-	init_pair(33, COLOR_WHITE, COLOR_RED);
+	init_pair(1, COLOR_CYAN, COLOR_BLACK); // заголовок
+	init_pair(2, COLOR_RED, COLOR_WHITE); // левая рамка
+	init_pair(3, COLOR_BLUE, COLOR_WHITE); // правая рамка
+	// init_color(COLOR_WHITE, 600, 600, 600); // интенсивность белого
+	init_pair(4, COLOR_WHITE, COLOR_BLACK); // белый цвет по дефолту, -1
+	init_pair(0, COLOR_WHITE, COLOR_BLACK); // белый цвет по дефолту, -1
+	init_pair(20, COLOR_GREEN, COLOR_BLACK); // зеленый бот
+	init_pair(21, COLOR_YELLOW, COLOR_BLACK); // желтый бот
+	init_pair(22, COLOR_BLUE, COLOR_BLACK); // синий бот
+	init_pair(23, COLOR_RED, COLOR_BLACK); // красный бот
+	init_pair(30, COLOR_GREEN, COLOR_WHITE); // команда под кареткой зеленого
+	init_pair(31, COLOR_YELLOW, COLOR_WHITE); // команда под кареткой желтого
+	init_pair(32, COLOR_BLUE, COLOR_WHITE); // команда под кареткой синего
+	init_pair(33, COLOR_RED, COLOR_WHITE); // команда под каретой красного
 
 	init_win_params(&win, 67, 196, 1, 0);
 	//	print_win_params(&win);
@@ -359,7 +362,7 @@ void	init_ncurs(void)
 	attron(COLOR_PAIR(3));
 	create_box(&win2, FALSE);
 	attroff(COLOR_PAIR(3));
-	attron(COLOR_PAIR(4));
+	attron(COLOR_PAIR(-1));
 	// attron(A_BOLD | COLOR_PAIR(3));
 	//	mvprintw(3, 3, "00");
 	//	attroff(A_BOLD | COLOR_PAIR(3));
@@ -378,9 +381,9 @@ void init_win_params(WIN *p_win, int h, int w, int sy, int sx)
 {
         p_win->height = h;
         p_win->width = w;
-//		p_win->starty = (LINES - p_win->height)/2;
+		// p_win->starty = (LINES - p_win->height)/2;
 		p_win->starty = sy;
-//		p_win->startx = (COLS - p_win->width)/2;
+		// p_win->startx = (COLS - p_win->width)/2;
 		p_win->startx = sx;
         p_win->border.ls = ACS_VLINE;
         p_win->border.rs = ACS_VLINE;
@@ -425,7 +428,7 @@ void print_win_params(WIN *p_win)
 
 void create_box(WIN *p_win, bool flag)
 {
-//	int i, j;
+	// int i, j;
 	int x, y, w, h;
 
 	x = p_win->startx;
@@ -454,9 +457,9 @@ void create_box(WIN *p_win, bool flag)
 		mvvline(y + 1, x + w, p_win->border.rs, h - 1);
 	}
 	else
-//		for(j = y; j <= y + h; ++j)
-//			for(i = x; i <= x + w; ++i)
-//				mvaddch(j, i, ' ');
+		// for(j = y; j <= y + h; ++j)
+			// for(i = x; i <= x + w; ++i)
+				// mvaddch(j, i, ' ');
 	{
 		p_win->border.ls = ACS_VLINE;
 		p_win->border.rs = ACS_VLINE;

@@ -25,6 +25,7 @@ typedef struct          s_core {
 	int				dump;
 	int				v;
 	int				c;
+	unsigned char	*a;
 }                       t_core;
 
 struct          s_champ {
