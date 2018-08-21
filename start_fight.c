@@ -55,6 +55,7 @@ void    ft_touch_car(t_core *core, t_champ *champ)
 
 void    ft_start_fight(t_core *core) {
     t_champ *tmp;
+    t_car   *car;
 
     tmp = NULL;
     if (core->v)
@@ -65,12 +66,19 @@ void    ft_start_fight(t_core *core) {
     while (core->c_to_die > 0 && core->qt_car > 0) {
         while (tmp)
         {
-            if (tmp->cars)
+            if (tmp->cars) {
+                car = tmp->cars;
                 ft_touch_car(core, tmp);
+                tmp->cars = tmp->cars->next;
+                while (car != tmp->cars) {
+                    ft_touch_car(core, tmp);
+                    tmp->cars = tmp->cars->next;
+                }
+            }
             tmp = tmp->next;
         }
         tmp = core->champs;
-        // ft_dump(core);
+        ft_dump(core);
         if (!core->v && core->dump != -1 && core->cycle == core->dump)
             ft_dump(core);
         if (core->v)
@@ -80,6 +88,7 @@ void    ft_start_fight(t_core *core) {
             // attroff(A_BOLD); refresh();
             // usleep(10000);
         }
+        //usleep(100000);
         core->cycle++;
         if (core->cycle == core->c_to_die + core->last_check) {
             ft_make_check(core);

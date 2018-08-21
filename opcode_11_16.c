@@ -14,10 +14,14 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 	codage = ft_get_codage(core, champ);
 	arg = ft_get_args(core, champ, codage);
 	if (codage[1] == 3)
-		arg[1] = ft_read_4(core, (arg[1] + pc) % IDX_MOD);
+		arg[1] = ft_read_4(core, (arg[1] + pc - 1) % IDX_MOD);
 	if (ft_check_cod_and_arg(champ, codage, arg))
 	{
-		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
+		if (codage[1] == REG_CODE)
+			arg[1] = champ->cars->reg[arg[1] - 1];
+		if (codage[2] == REG_CODE)
+			arg[2] = champ->cars->reg[arg[2] - 1];
+		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc  ) % MEM_SIZE);
 		if (core->v)
 		{
 			pos = pc + (arg[1] + arg[2]) % IDX_MOD % MEM_SIZE;
@@ -44,7 +48,7 @@ void    ft_12_opcode(t_core *core, t_champ *champ) {
 
 	new_pc = ft_read_2(core, champ->cars->pos % MEM_SIZE);
 	new_pc = (new_pc % IDX_MOD + champ->cars->pos) % MEM_SIZE;
-	ft_create_car(core, champ, new_pc); // вопрос переноситься ли жизнь процеса на новый ли нет?
+	ft_create_car(core, champ, new_pc); // вопрос переноситься ли жизнь процеса на новый ли нет? Однозначно, да
 	champ->cars->pos += 2;
 }
 

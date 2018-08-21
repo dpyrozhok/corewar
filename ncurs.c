@@ -362,7 +362,7 @@ void	init_ncurs(void)
 	attron(COLOR_PAIR(3));
 	create_box(&win2, FALSE);
 	attroff(COLOR_PAIR(3));
-	attron(COLOR_PAIR(-1));
+	attron(COLOR_PAIR(4));
 	// attron(A_BOLD | COLOR_PAIR(3));
 	//	mvprintw(3, 3, "00");
 	//	attroff(A_BOLD | COLOR_PAIR(3));

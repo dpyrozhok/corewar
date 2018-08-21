@@ -13,11 +13,15 @@ void    ft_06_opcode(t_core *core, t_champ *champ) {
 	pc = champ->cars->pos % MEM_SIZE;
 	codage = ft_get_codage(core, champ);
 	arg = ft_get_args(core, champ, codage);
-	if (codage[0] == 3)
+	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (codage[1] == 3)
+	if (codage[1] == IND_CODE)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+        if (codage[0] == REG_CODE)
+            arg[0] = champ->cars->reg[arg[0] - 1];
+        if (codage[1] == REG_CODE)
+            arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] & arg[1]);
 		champ->cars->carry = 1;
 	} else
@@ -32,11 +36,15 @@ void    ft_07_opcode(t_core *core, t_champ *champ) {
 	pc = champ->cars->pos % MEM_SIZE;
 	codage = ft_get_codage(core, champ);
 	arg = ft_get_args(core, champ, codage);
-	if (codage[0] == 3)
+	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (codage[1] == 3)
+	if (codage[1] == IND_CODE)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+        if (codage[0] == REG_CODE)
+            arg[0] = champ->cars->reg[arg[0] - 1];
+        if (codage[1] == REG_CODE)
+            arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] | arg[1]);
 		champ->cars->carry = 1;
 	} else
@@ -56,6 +64,10 @@ void    ft_08_opcode(t_core *core, t_champ *champ) {
 	if (codage[1] == 3)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+        if (codage[0] == REG_CODE)
+            arg[0] = champ->cars->reg[arg[0] - 1];
+        if (codage[1] == REG_CODE)
+            arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] ^ arg[1]);
 		champ->cars->carry = 1;
 	} else
@@ -68,8 +80,7 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 
 	if (champ->cars->carry) {
 		shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-		shift = champ->cars->pos % MEM_SIZE - 1 + shift % MEM_SIZE;
-		champ->cars->pos = shift % MEM_SIZE;
+		champ->cars->pos = (champ->cars->pos + shift - 1) % MEM_SIZE;
 		if (core->v)
 		{
 			r = 3 + ((champ->cars->pos%MEM_SIZE)/64)%64;
@@ -100,6 +111,11 @@ void    ft_10_opcode(t_core *core, t_champ *champ) {
 	arg = ft_get_args(core, champ, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg))
-		champ->cars->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, ((arg[0] + arg[1]) % IDX_MOD + pc) % MEM_SIZE);
+	if (ft_check_cod_and_arg(champ, codage, arg)) {
+        if (codage[0] == REG_CODE)
+            arg[0] = champ->cars->reg[arg[0] - 1];
+        if (codage[1] == REG_CODE)
+            arg[1] = champ->cars->reg[arg[1] - 1];
+		champ->cars->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, ((arg[0] + arg[1]) % IDX_MOD + pc - 1 ) % MEM_SIZE);
+    }
 }
