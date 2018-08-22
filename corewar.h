@@ -57,7 +57,7 @@ struct              s_car {
 
 void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
-void    ft_create_car(t_core *core, t_champ *champ, int pos);
+void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos);
 void    ft_make_check(t_core *core);
 void    ft_opcode_switcher(t_core *core, t_champ *champ);
 int     *ft_get_codage(t_core *core, t_champ *champ);

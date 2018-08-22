@@ -78,7 +78,7 @@ void    ft_start_fight(t_core *core) {
             tmp = tmp->next;
         }
         tmp = core->champs;
-        ft_dump(core);
+        //ft_dump(core);
         if (!core->v && core->dump != -1 && core->cycle == core->dump)
             ft_dump(core);
         if (core->v)

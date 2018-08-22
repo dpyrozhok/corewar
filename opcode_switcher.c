@@ -66,8 +66,8 @@ void    ft_switch_op_9_16(t_core *core, t_champ *champ)
         ft_10_opcode(core, champ);
     if (champ->cars->opcode == 11)
         ft_11_opcode(core, champ);
-//    if (champ->cars->opcode == 12)
-//        ft_12_opcode(core, champ);
+    if (champ->cars->opcode == 12)
+        ft_12_opcode(core, champ);
 //    if (champ->cars->opcode == 13)
 //        ft_13_opcode(core, champ);
 //    if (champ->cars->opcode == 14)

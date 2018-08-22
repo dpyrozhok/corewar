@@ -18,6 +18,30 @@ void ft_dump(t_core *core)
 	ft_printf("\n");
 }
 
+void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
+{
+    t_car   *car;
+    int     i;
+
+    i = 0;
+    car = (t_car *)ft_memalloc(sizeof(t_car));
+    car->pos = pos;
+    car->live = src->live;
+    car->id = champ->id;
+    while (i < REG_NUMBER) {
+        car->reg[i] = src->reg[i];
+        i++;
+    }
+    car->opcode = (int)core->arena[pos];
+    core->qt_car++;
+    if (car->opcode > 0 && car->opcode < 17)
+        car->cycle = op_tab[car->opcode - 1].cycle + 1;
+    champ->cars->prev->next = car;
+    car->prev = champ->cars->prev;
+    champ->cars->prev = car;
+    car->next = champ->cars;
+}
+
 void    ft_create_car(t_core *core, t_champ *champ, int pos)
 {
 	t_car   *car;
@@ -45,10 +69,10 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
 	if (car->opcode > 0 && car->opcode < 17)
 		car->cycle = op_tab[car->opcode - 1].cycle;  // must take value from op.c
 	if (champ->cars) {
-		car->prev = champ->cars->prev;
+        champ->cars->prev->next = car;
+        car->prev = champ->cars->prev;
+        champ->cars->prev = car;
 		car->next = champ->cars;
-		champ->cars->prev->next = car;
-		champ->cars->prev = car;
 	}
 	else
 	{

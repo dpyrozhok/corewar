@@ -6,29 +6,26 @@ void    ft_check_single_car(t_core *core, t_champ *champ, t_car *car)
         core->qt_car--;
         car->prev->next = car->next;
         car->next->prev = car->prev;
+        if (champ->cars == champ->cars->next)
+            champ->cars = NULL;
+        else
+            champ->cars = car->next;
         free(car);
-        champ->cars = NULL;
     }
-    car->live = 0;
+    else {
+        car->live = 0;
+        champ->cars = champ->cars->next;
+    }
 }
 
 void    ft_check_cars(t_core *core, t_champ *champ)
 {
-    t_car   *tmp;
     t_car   *start;
 
     start = champ->cars;
-    tmp = champ->cars;
-    if (tmp && tmp->next == start)
-        ft_check_single_car(core, champ, tmp);
-    else
-    {
-        while (tmp && tmp->next != start)
-        {
-            ft_check_single_car(core, champ, tmp);
-            tmp = tmp->next;
-        }
-    }
+    ft_check_single_car(core, champ, champ->cars);
+    while (champ->cars && champ->cars != start)
+            ft_check_single_car(core, champ, champ->cars);
 }
 
 void    ft_make_check(t_core *core) {

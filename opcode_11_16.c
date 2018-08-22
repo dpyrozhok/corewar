@@ -48,7 +48,7 @@ void    ft_12_opcode(t_core *core, t_champ *champ) {
 
 	new_pc = ft_read_2(core, champ->cars->pos % MEM_SIZE);
 	new_pc = (new_pc % IDX_MOD + champ->cars->pos) % MEM_SIZE;
-	ft_create_car(core, champ, new_pc); // вопрос переноситься ли жизнь процеса на новый ли нет? Однозначно, да
+	ft_copy_car(core, champ, champ->cars, new_pc);
 	champ->cars->pos += 2;
 }
 
@@ -88,6 +88,6 @@ void    ft_15_opcode(t_core *core, t_champ *champ) {
 
 	new_pc = ft_read_2(core, champ->cars->pos % MEM_SIZE);
 	new_pc = (new_pc + champ->cars->pos) % MEM_SIZE;
-	ft_create_car(core, champ, new_pc); // вопрос переноситься ли жизнь процеса на новый ли нет?
+    ft_copy_car(core, champ, champ->cars, new_pc);
 	champ->cars->pos += 2;
 }
