@@ -8,7 +8,7 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 	int *arg;
 	int pc;
 	int *codage;
-	int pos,r,c;
+	int ag,pos,r,c;
 
 	pc = champ->cars->pos % MEM_SIZE;
 	codage = ft_get_codage(core, champ);
@@ -24,21 +24,39 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc  ) % MEM_SIZE);
 		if (core->v)
 		{
-			pos = pc + (arg[1] + arg[2]) % IDX_MOD % MEM_SIZE;
+			ag = champ->cars->reg[arg[0] - 1];
+			pos = ((arg[1] + arg[2]) % IDX_MOD + pc  ) % MEM_SIZE;
+			champ->cars->rp = pos;
+			champ->cars->sw = 1;
 			r = 3+((pos%MEM_SIZE)/64)%64;
 			c = 3+(3*((pos%MEM_SIZE)%64))%192;
+			attron(A_BOLD);
 			attron(COLOR_PAIR(champ->c));
-			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] >> 24));
-			c += 3;
+			mvprintw(r,c,"%02x", (unsigned char)(ag >> 24));
+			ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
+			pos++;
+			r = 3+((pos%MEM_SIZE)/64)%64;
+			c = 3+(3*((pos%MEM_SIZE)%64))%192;
+			// c += 3;
 			// c %= 64; ?? нужно ли
 			// r += c/64; 
-			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] >> 16 & 255));
-			c += 3;
-			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] >> 8 & 255));
-			c += 3;
-			mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0] - 1] & 255));
+			mvprintw(r,c,"%02x", (unsigned char)(ag >> 16 & 255));
+			ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
+			pos++;
+			r = 3+((pos%MEM_SIZE)/64)%64;
+			c = 3+(3*((pos%MEM_SIZE)%64))%192;
+			// c += 3;
+			mvprintw(r,c,"%02x", (unsigned char)(ag >> 8 & 255));
+			ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
+			pos++;
+			r = 3+((pos%MEM_SIZE)/64)%64;
+			c = 3+(3*((pos%MEM_SIZE)%64))%192;
+			// c += 3;
+			mvprintw(r,c,"%02x", (unsigned char)(ag & 255));
+			ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
 			attroff(COLOR_PAIR(champ->c));
-			ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
+			attroff(A_BOLD);
+			// ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
 		}
 	}
 }

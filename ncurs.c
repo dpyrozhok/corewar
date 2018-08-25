@@ -202,11 +202,60 @@ int		cnt_dig(int nbr)
 	return (cnt);
 }
 
+void	do_last(t_core *core)
+{
+	int i, r, c, j, k;
+	double s;
+	// int i, r, c;
+	t_champ *curr;
+
+	r = core->l;
+	// mvprintw(r, 200, "[");
+	i = 0;
+	s = 0.0;
+	curr = core->champs;
+	while (i++ < core->qt_champ)
+	{
+		s += (double)curr->s_live;
+		curr = curr->next;
+	}
+	c = 0;
+	if (s)
+	{
+		i = 0;
+		s = 50.0/s;
+		curr = core->champs;
+		while (i++ < core->qt_champ)	
+		{
+			j = 0;
+			k = s * curr->s_live;
+			if (k)
+				k++;
+			// if (s)
+			attron(A_BOLD | COLOR_PAIR(curr->c));
+			while (k - j++ > 0)
+			{
+				mvprintw(r, 201+c, "-");
+				if (c < 50)
+					c++;
+			}
+			// mvprintw(r, 201+c, "%*s", 50-c, "--------------------------------------------------");
+			// if (s)
+			attroff(A_BOLD | COLOR_PAIR(curr->c));
+			curr = curr->next;
+		}
+		mvprintw(r++, 201+c, "]");
+	}
+	refresh();
+}
+
 void	do_ncurs(t_core *core)
 {
 
 	//	int ch;
-	int i, r, c;
+	int i, r, c, j, k;
+	double s;
+	// int i, r, c;
 	t_champ *curr;
 	static int sw = 0;
 
@@ -262,11 +311,62 @@ void	do_ncurs(t_core *core)
 
 	mvprintw(r++, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
-	mvprintw(r++, 200, "[--------------------------------------------------]");
-	attron(A_BOLD);
-	mvprintw(++r, 200, "Live breakdown for last period :");
-	attroff(A_BOLD);
-	mvprintw(++r, 200, "[--------------------------------------------------]");
+	// mvprintw(r++, 200, "[--------------------------------------------------]");
+	
+	mvprintw(r, 200, "[");
+	i = 0;
+	s = 0.0;
+	curr = core->champs;
+	while (i++ < core->qt_champ)
+	{
+		s += (double)curr->s_live;
+		curr = curr->next;
+	}
+	c = 0;
+	if (s)
+	{
+		i = 0;
+		s = 50.0/s;
+		curr = core->champs;
+		while (i++ < core->qt_champ)	
+		{
+			j = 0;
+			k = s * curr->s_live;
+			if (k)
+				k++;
+			// if (s)
+			attron(A_BOLD | COLOR_PAIR(curr->c));
+			while (k - j++ > 0)
+			{
+				mvprintw(r, 201+c, "-");
+				if (c < 50)
+					c++;
+			}
+			// mvprintw(r, 201+c, "%*s", 50-c, "--------------------------------------------------");
+			// if (s)
+			attroff(A_BOLD | COLOR_PAIR(curr->c));
+			curr = curr->next;
+		}
+		mvprintw(r++, 201+c, "]");
+	}
+	else if (sw == 1)
+	{
+		mvprintw(r++, 201, "--------------------------------------------------]");
+		sw = 2;
+	}
+	else
+		r++;
+	if (sw == 2)
+	{
+		attron(A_BOLD);
+		mvprintw(++r, 200, "Live breakdown for last period :");
+		attroff(A_BOLD);
+		mvprintw(++r, 200, "[--------------------------------------------------]");
+		core->l = r;
+		sw = 3;
+	}
+	else
+		r += 2;
 	attron(A_BOLD);
 	r++;
 	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
@@ -337,13 +437,13 @@ void	init_ncurs(void)
 	init_pair(4, COLOR_WHITE, COLOR_BLACK); // белый цвет по дефолту, -1
 	init_pair(0, COLOR_WHITE, COLOR_BLACK); // белый цвет по дефолту, -1
 	init_pair(20, COLOR_GREEN, COLOR_BLACK); // зеленый бот
-	init_pair(21, COLOR_YELLOW, COLOR_BLACK); // желтый бот
+	init_pair(21, COLOR_MAGENTA, COLOR_BLACK); // желтый бот
 	init_pair(22, COLOR_BLUE, COLOR_BLACK); // синий бот
 	init_pair(23, COLOR_RED, COLOR_BLACK); // красный бот
-	init_pair(30, COLOR_GREEN, COLOR_WHITE); // команда под кареткой зеленого
-	init_pair(31, COLOR_YELLOW, COLOR_WHITE); // команда под кареткой желтого
-	init_pair(32, COLOR_BLUE, COLOR_WHITE); // команда под кареткой синего
-	init_pair(33, COLOR_RED, COLOR_WHITE); // команда под каретой красного
+	init_pair(30, COLOR_WHITE, COLOR_GREEN); // команда под кареткой зеленого
+	init_pair(31, COLOR_WHITE, COLOR_MAGENTA); // команда под кареткой желтого
+	init_pair(32, COLOR_WHITE, COLOR_BLUE); // команда под кареткой синего
+	init_pair(33, COLOR_WHITE, COLOR_RED); // команда под каретой красного
 
 	init_win_params(&win, 67, 196, 1, 0);
 	//	print_win_params(&win);
@@ -374,6 +474,19 @@ void	init_ncurs(void)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	getch();
+
+
+    // if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
+    //     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+    //     exit(11);
+    // }
+
+    // /* ... */
+
+    // SDL_Quit();
+
+
+	// system("afplay Track1.mp3&");
 }
 
 

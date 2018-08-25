@@ -6,7 +6,7 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/08/18 22:09:44 by vlevko           ###   ########.fr        #
+#    Updated: 2018/08/24 10:53:19 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC = main.c \
     op_handler.c
 
 OBJ = $(SRC:.c=.o)
+
+# SDL = SDL2-2.0.8/x86_64-w64-mingw32/lib/libSDL2.a
 
 all: $(NAME)
 

@@ -240,7 +240,7 @@ void	check_file(char *str)
 	check_null(file);
 	file->ret = read(fd, &file->code, CHAMP_MAX_SIZE);
 	if (file->ret != file->size)
-		exit(p_err(116, "Bot size mismatch", ft_itoa((int)file->ret)));
+		exit(p_err(117, "Bot size mismatch", ft_itoa((int)file->ret)));
 	ft_strclr(file->buf);
 	file->ret = read(fd, &file->buf, 1);
 	if (file->ret > 0)
@@ -252,12 +252,14 @@ void	check_args(int ac, char **av, t_core *core)
 {
 	int i;
 	int c;
+	int f;
 	int fd;
 
 	if (ac == 1)
 		p_usage();
 	i = 1;
 	c = 0;
+	f = 0;
 	while (i < ac)
 	{
 		if (c > MAX_ARGS_NUMBER)
@@ -291,9 +293,18 @@ void	check_args(int ac, char **av, t_core *core)
 			op();
 		}
 		else
+		{
 			check_file(av[i]);
+			f++;
+		}
 		i++;
 	}
+	if (core->v && core->dump != -1)
+		exit(p_err(118, "Invalid arguments usage", NULL));
+	if (!f)
+		exit(p_err(119, "Missed bot file", NULL));
+	else if (f > MAX_PLAYERS)
+		exit(p_err(120, "Exceeded number of bots", ft_itoa(f)));
 }
 
 void	op(void)

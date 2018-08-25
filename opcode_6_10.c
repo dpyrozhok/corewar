@@ -76,11 +76,12 @@ void    ft_08_opcode(t_core *core, t_champ *champ) {
 
 void    ft_09_opcode(t_core *core, t_champ *champ) {
 	int shift;
-	int r,c;
+	// int r,c;
 
 	if (champ->cars->carry) {
 		shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
 		champ->cars->pos = (champ->cars->pos + shift - 1) % MEM_SIZE;
+		/*
 		if (core->v)
 		{
 			r = 3 + ((champ->cars->pos%MEM_SIZE)/64)%64;
@@ -94,8 +95,9 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 			attroff(A_REVERSE);
 			// attroff(COLOR_PAIR(core->a[champ->cars->pos]));
 			attroff(COLOR_PAIR(champ->cc));
-			ft_memset(core->a+1 + champ->cars->pos%MEM_SIZE, champ->cc, 1);
+			ft_memset(core->a + champ->cars->pos%MEM_SIZE, champ->cc, 1);
 		}
+		*/
 	}
 	else
 		champ->cars->pos += 2;

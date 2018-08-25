@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "ncurs.h"
 
 void    ft_check_single_car(t_core *core, t_champ *champ, t_car *car)
 {
@@ -37,6 +38,8 @@ void    ft_make_check(t_core *core) {
     s_live = 0;
     core->qt_check++;
     tmp = core->champs;
+    if (core->v)
+        do_last(core);
     while (tmp)
     {
         ft_check_cars(core, tmp);

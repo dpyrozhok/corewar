@@ -26,6 +26,7 @@ typedef struct          s_core {
 	int				v;
 	int				c;
 	unsigned char	*a;
+	int				l;
 }                       t_core;
 
 struct          s_champ {
@@ -52,6 +53,8 @@ struct              s_car {
 	int             cycle;
 	t_car    		*next;
 	t_car    		*prev;
+	int				sw;
+	int				rp;
 };
 
 
