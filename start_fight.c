@@ -150,6 +150,8 @@ void    ft_start_fight(t_core *core) {
     {
         // do_ncurs(NULL);
         do_ncurs(core);
+        if (core->l)
+            mvprintw(core->l - 3, 201, "--------------------------------------------------]");
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
         getch(); endwin();
     }

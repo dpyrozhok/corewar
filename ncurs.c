@@ -204,7 +204,7 @@ int		cnt_dig(int nbr)
 
 void	do_last(t_core *core)
 {
-	int i, r, c, j, k;
+	int i, r, c, j, k, d;
 	double s;
 	// int i, r, c;
 	t_champ *curr;
@@ -222,15 +222,27 @@ void	do_last(t_core *core)
 	c = 0;
 	if (s)
 	{
+
 		i = 0;
 		s = 50.0/s;
+		
+		k = 0;
+		curr = core->champs;
+		while(i++ < core->qt_champ)
+			k = k + s * (double)curr->s_live;
+		d = 50 - k;
+
+		i = 0;
 		curr = core->champs;
 		while (i++ < core->qt_champ)	
 		{
 			j = 0;
 			k = s * curr->s_live;
-			if (k)
+			if (k && d > 0)
+			{
 				k++;
+				d--;
+			}
 			// if (s)
 			attron(A_BOLD | COLOR_PAIR(curr->c));
 			while (k - j++ > 0)
@@ -244,7 +256,7 @@ void	do_last(t_core *core)
 			attroff(A_BOLD | COLOR_PAIR(curr->c));
 			curr = curr->next;
 		}
-		mvprintw(r++, 201+c, "]");
+		// mvprintw(r++, 201+c, "]");
 	}
 	refresh();
 }
@@ -253,7 +265,7 @@ void	do_ncurs(t_core *core)
 {
 
 	//	int ch;
-	int i, r, c, j, k;
+	int i, r, c, j, k, d;
 	double s;
 	// int i, r, c;
 	t_champ *curr;
@@ -327,13 +339,24 @@ void	do_ncurs(t_core *core)
 	{
 		i = 0;
 		s = 50.0/s;
+		
+		k = 0;
+		curr = core->champs;
+		while(i++ < core->qt_champ)
+			k = k + s * (double)curr->s_live;
+		d = 50 - k;
+
+		i = 0;
 		curr = core->champs;
 		while (i++ < core->qt_champ)	
 		{
 			j = 0;
 			k = s * curr->s_live;
-			if (k)
+			if (k && d > 0)
+			{
 				k++;
+				d--;
+			}
 			// if (s)
 			attron(A_BOLD | COLOR_PAIR(curr->c));
 			while (k - j++ > 0)
@@ -347,7 +370,8 @@ void	do_ncurs(t_core *core)
 			attroff(A_BOLD | COLOR_PAIR(curr->c));
 			curr = curr->next;
 		}
-		mvprintw(r++, 201+c, "]");
+		r++;
+		// mvprintw(r++, 201+c, "]");
 	}
 	else if (sw == 1)
 	{
