@@ -223,29 +223,38 @@ void	do_last(t_core *core)
 	if (s)
 	{
 
-		i = 0;
-		s = 50.0/s;
+		s = 50/s;
 		
+		i = 0;
 		k = 0;
 		curr = core->champs;
 		while(i++ < core->qt_champ)
-			k = k + s * (double)curr->s_live;
+		{
+			if (curr->s_live && (s * curr->s_live < 1))
+				k++;
+			else
+				k += (s * curr->s_live);
+			curr = curr->next;
+		}
 		d = 50 - k;
 
 		i = 0;
 		curr = core->champs;
 		while (i++ < core->qt_champ)	
 		{
-			j = 0;
-			k = s * curr->s_live;
+			if (curr->s_live && (s * curr->s_live < 1))
+				k = 1;
+			else
+				k = s * curr->s_live;
 			if (k && d > 0)
 			{
 				k++;
 				d--;
 			}
 			// if (s)
+			j = 0;
 			attron(A_BOLD | COLOR_PAIR(curr->c));
-			while (k - j++ > 0)
+			while (j++ < k)
 			{
 				mvprintw(r, 201+c, "-");
 				if (c < 50)
@@ -256,7 +265,7 @@ void	do_last(t_core *core)
 			attroff(A_BOLD | COLOR_PAIR(curr->c));
 			curr = curr->next;
 		}
-		// mvprintw(r++, 201+c, "]");
+		mvprintw(r, 251, "]");
 	}
 	refresh();
 }
@@ -304,7 +313,7 @@ void	do_ncurs(t_core *core)
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
 
-	r = 12;
+	r = 14;
 	i = 0;
 	curr = core->champs;
 	while (i++ < core->qt_champ)
@@ -337,29 +346,42 @@ void	do_ncurs(t_core *core)
 	c = 0;
 	if (s)
 	{
-		i = 0;
 		s = 50.0/s;
+		// mvprintw(2,200,"delta: %f", s);
 		
+		i = 0;
 		k = 0;
 		curr = core->champs;
 		while(i++ < core->qt_champ)
-			k = k + s * (double)curr->s_live;
+		{
+			if (curr->s_live && (s * curr->s_live < 1))
+				k++;
+			else
+				k += (s * curr->s_live);
+				
+				// mvprintw(2,225,"mi %d", (int)s*1);
+			curr = curr->next;
+		}
+		// mvprintw(2,225,"sum: %d", k);
+		// getch();
 		d = 50 - k;
-
 		i = 0;
 		curr = core->champs;
 		while (i++ < core->qt_champ)	
 		{
-			j = 0;
-			k = s * curr->s_live;
+			if (curr->s_live && (s * curr->s_live < 1))
+				k = 1;
+			else
+				k = s * curr->s_live;
 			if (k && d > 0)
 			{
 				k++;
 				d--;
 			}
 			// if (s)
+			j = 0;
 			attron(A_BOLD | COLOR_PAIR(curr->c));
-			while (k - j++ > 0)
+			while (j++ < k)
 			{
 				mvprintw(r, 201+c, "-");
 				if (c < 50)
@@ -370,8 +392,8 @@ void	do_ncurs(t_core *core)
 			attroff(A_BOLD | COLOR_PAIR(curr->c));
 			curr = curr->next;
 		}
-		r++;
-		// mvprintw(r++, 201+c, "]");
+		// r++;
+		mvprintw(r++, 201+c, "]");
 	}
 	else if (sw == 1)
 	{
@@ -498,6 +520,7 @@ void	init_ncurs(void)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	getch();
+	mvprintw(12, 200, "Speed: 1x");
 
 
     // if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {

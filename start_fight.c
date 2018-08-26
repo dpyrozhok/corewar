@@ -103,56 +103,115 @@ void    ft_touch_car(t_core *core, t_champ *champ)
         champ->cars->cycle--;
 }
 
+void    *myThreadFun(void *ptr)
+{
+    int     ch;
+    int     *p;
+
+    p = (int*)ptr;
+    while ((ch = getch()) != 27)
+    {
+        if (ch == KEY_F(1))
+        {
+            *p = 100000;
+            mvprintw(12, 200, "Speed: %dx     ", 100000/(*p));
+        }
+        else if (ch == KEY_UP)
+        {
+            *p /= (*p > 1 ? 10 : 1);
+            mvprintw(12, 200, "Speed: %dx     ", 100000/(*p));
+        }
+        //     ((t_core*)(ptr))->t *= 10;
+        else if (ch == KEY_DOWN)
+        {
+            *p *= (*p < 1000000 ? 10 : 1);
+            if (*p != 1000000)
+                mvprintw(12, 200, "Speed: %dx     ", 100000/(*p));
+            else
+                mvprintw(12, 200, "Speed: %.1fx     ", 0.5);
+        }
+        //     ((t_core*)(ptr))->t *= 10;
+    }
+    endwin();
+    exit(121);
+    return (NULL);
+}
+
 void    ft_start_fight(t_core *core) {
     t_champ *tmp;
     t_car   *car;
+    pthread_t thread_id;
 
     tmp = NULL;
     if (core->v)
     {
-        getch();
+        pthread_create(&thread_id, NULL, myThreadFun, (void*)&(core->t));
+        // pthread_join(thread_id, NULL);
+        // getch();
         attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
-    }
-    while (core->c_to_die > 0 && core->qt_car > 0) {
-        while (tmp)
-        {
-            if (tmp->cars) {
-                car = tmp->cars;
-                ft_touch_car(core, tmp);
-                tmp->cars = tmp->cars->next;
-                while (car != tmp->cars) {
+        while (core->c_to_die > 0 && core->qt_car > 0) {
+            while (tmp)
+            {
+                if (tmp->cars) {
+                    car = tmp->cars;
                     ft_touch_car(core, tmp);
                     tmp->cars = tmp->cars->next;
+                    while (car != tmp->cars) {
+                        ft_touch_car(core, tmp);
+                        tmp->cars = tmp->cars->next;
+                    }
                 }
+                tmp = tmp->next;
             }
-            tmp = tmp->next;
-        }
-        tmp = core->champs;
-        //ft_dump(core);
-        if (core->dump != -1 && core->cycle == core->dump)
-            ft_dump(core);
-        if (core->v)
-        {
+            tmp = core->champs;
+            //ft_dump(core);
+            if (core->dump != -1 && core->cycle == core->dump)
+                ft_dump(core);
             do_ncurs(core);
             // attron(A_BOLD); mvprintw(8, 208, "%d", core->cycle);
             // attroff(A_BOLD); refresh();
-            // usleep(10000);
+            usleep(core->t);
             // getch();
+            //usleep(100000);
+            core->cycle++;
+            if (core->cycle == core->c_to_die + core->last_check) {
+                ft_make_check(core);
+                core->last_check = core->cycle;
+            }
         }
-        //usleep(100000);
-        core->cycle++;
-        if (core->cycle == core->c_to_die + core->last_check) {
-            ft_make_check(core);
-            core->last_check = core->cycle;
-        }
-    }
-    if (core->v)
-    {
         // do_ncurs(NULL);
         do_ncurs(core);
         if (core->l)
             mvprintw(core->l - 3, 201, "--------------------------------------------------]");
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
         getch(); endwin();
+    }
+    else
+    {
+        while (core->c_to_die > 0 && core->qt_car > 0) {
+            while (tmp)
+            {
+                if (tmp->cars) {
+                    car = tmp->cars;
+                    ft_touch_car(core, tmp);
+                    tmp->cars = tmp->cars->next;
+                    while (car != tmp->cars) {
+                        ft_touch_car(core, tmp);
+                        tmp->cars = tmp->cars->next;
+                    }
+                }
+                tmp = tmp->next;
+            }
+            tmp = core->champs;
+            //ft_dump(core);
+            if (core->dump != -1 && core->cycle == core->dump)
+                ft_dump(core);
+            //usleep(100000);
+            core->cycle++;
+            if (core->cycle == core->c_to_die + core->last_check) {
+                ft_make_check(core);
+                core->last_check = core->cycle;
+            }
+        }
     }
 }

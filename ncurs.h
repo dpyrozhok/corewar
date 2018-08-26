@@ -1,7 +1,7 @@
 #ifndef NCURS_H
 # define NCURS_H
 # include <ncurses.h>
-# include <math.h>
+# include <pthread.h>
 # include "corewar.h"
 # include "libft/get_next_line.h"
 // # include "SDL2-2.0.8/x86_64-w64-mingw32/include/SDL2/SDL.h"
