@@ -21,7 +21,8 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 			arg[1] = champ->cars->reg[arg[1] - 1];
 		if (codage[2] == REG_CODE)
 			arg[2] = champ->cars->reg[arg[2] - 1];
-		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc  ) % MEM_SIZE);
+		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
+
 		if (core->v)
 		{
 			ag = champ->cars->reg[arg[0] - 1];

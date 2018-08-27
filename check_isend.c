@@ -26,7 +26,9 @@ void    ft_check_cars(t_core *core, t_champ *champ)
     start = champ->cars;
     ft_check_single_car(core, champ, champ->cars);
     while (champ->cars && champ->cars != start)
-            ft_check_single_car(core, champ, champ->cars);
+        ft_check_single_car(core, champ, champ->cars);
+//    if (champ->cars)
+//        champ->cars = champ->cars->next;
 }
 
 void    ft_make_check(t_core *core) {

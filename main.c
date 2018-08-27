@@ -4,16 +4,25 @@
 void ft_dump(t_core *core)
 {
 	int i;
+    int j;
+    t_champ             *tmp;
 
 	i = 0;
-	ft_printf("Cycle: %i\n", core->cycle);
-	ft_printf("\n");
+    j = 1;
+	ft_printf("Introducing contestants...");
+    tmp = core->champs;
+    while (tmp) {
+        ft_printf("\n* Player %i, weighing %i bytes, \"%s\" (\"%s\") !", j, tmp->size, tmp->name, tmp->comment);
+        j++;
+        tmp = tmp->next;
+    }
 	while (i < MEM_SIZE)
 	{
+        if (i % 64 == 0) {
+            ft_printf("\n%#06x : ", i);
+        }
 		ft_printf("%02x ", core->arena[i]);
 		i++;
-		if (i % 64 == 0)
-			ft_printf("\n");
 	}
 	ft_printf("\n");
 }
@@ -52,10 +61,15 @@ void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
     core->qt_car++;
     if (car->opcode > 0 && car->opcode < 17)
         car->cycle = op_tab[car->opcode - 1].cycle + 1;
-    champ->cars->prev->next = car;
-    car->prev = champ->cars->prev;
-    champ->cars->prev = car;
-    car->next = champ->cars;
+//    champ->cars->prev->next = car; // вариант когда новый процесс становится в конец стека
+//    car->prev = champ->cars->prev;
+//    champ->cars->prev = car;
+//    car->next = champ->cars;
+    src->next->prev = car; // вариант когда новый процесс становится сразу после родителя
+    car->next = src->next;
+    src->next = car;
+    car->prev = src;
+
 }
 
 void    ft_create_car(t_core *core, t_champ *champ, int pos)

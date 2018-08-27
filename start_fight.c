@@ -26,7 +26,7 @@ void    ft_touch_car(t_core *core, t_champ *champ)
             attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
         champ->cars->cycle = 0;
-        if (champ->cars->opcode > 0 && champ->cars->opcode < 16)
+        if (champ->cars->opcode > 0 && champ->cars->opcode < 17)
         {
             if (core->v && champ->cars->sw)
             {
@@ -229,9 +229,10 @@ void    ft_start_fight(t_core *core) {
             }
             tmp = core->champs;
             //ft_dump(core);
-            if (core->dump != -1 && core->cycle == core->dump)
+            if (core->dump != -1 && core->dump == core->cycle) {
                 ft_dump(core);
-            //usleep(100000);
+                exit(0);
+            }
             core->cycle++;
             if (core->cycle == core->c_to_die + core->last_check) {
                 ft_make_check(core);
