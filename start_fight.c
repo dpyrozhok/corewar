@@ -111,49 +111,37 @@ void    *myThreadFun(void *ptr)
     p = (t_core*)ptr;
     while ((ch = getch()) != 27) // ESC
     {
-        if (ch == KEY_F(1)) // F1 - reset speed
-        {
+        if (!(p)->p && ch == KEY_F(1)) // F1 - reset speed
             (p)->t = 100000;
-            mvprintw(12, 200, "Speed: %dx     ", 100000/(p)->t);
-        }
-        else if ((p)->t > 1 && ch == KEY_UP) // ARROW UP - speed up
+        else if (!(p)->p && ch == KEY_UP) // ARROW UP - speed up
         {
-            (p)->t /= ((p)->t > 1 ? 10 : 1);
-            mvprintw(12, 200, "Speed: %dx     ", 100000/(p)->t);
-        }
-        //     ((t_core*)(ptr))->t *= 10;
-        else if ((p)->t < 1000000 && ch == KEY_DOWN) // ARROW DOWN - speed down
-        {
-            (p)->t *= ((p)->t < 1000000 ? 10 : 1);
-            if ((p)->t != 1000000)
-                mvprintw(12, 200, "Speed: %dx     ", 100000/(p)->t);
+            if ((p)->t > 10000)
+                (p)->t /= 10;
             else
-                mvprintw(12, 200, "Speed: %.1fx     ", 0.5);
+            {
+                (p)->t = 0;
+                pthread_exit(NULL);
+                exit(131);
+            }
         }
-        else if ((p)->p == 0 && ch == KEY_LEFT) // ARROW LEFT - pause
-        {
-            // if ((p)->p)
-            // {
-                (p)->p = 1;
-                attron(A_BOLD);
-                mvprintw(3, 200, "** PAUSED ** ");
-                attroff(A_BOLD);
-                // refresh();
-            // }
-        }
-        else if ((p)->p == 1 && ch == KEY_RIGHT) // ARROW RIGHT - play
-        {
+        else if (!(p)->p && (p)->t < 1000000 && ch == KEY_DOWN) // ARROW DOWN - speed down
+            (p)->t *= 10;
+        else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
+            (p)->p = 1;
+        else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
                 (p)->p = 0;
-                attron(A_BOLD);
-                mvprintw(3, 200, "** RUNNING **");
-                attroff(A_BOLD);
-                // refresh();
-        }
-        // usleep(100000);
-        //     ((t_core*)(ptr))->t *= 10;
     }
     endwin();
     exit(121);
+    return (NULL);
+}
+
+void    *myThreadFun2(void *ptr)
+{
+    if (!ptr)
+    play("Track1.wav");
+    pthread_exit(NULL);
+    exit(132);
     return (NULL);
 }
 
@@ -161,12 +149,13 @@ void    ft_start_fight(t_core *core) {
     t_champ *tmp;
     t_car   *car;
     pthread_t thread_id;
+    pthread_t thread_id2;
 
     tmp = NULL;
     if (core->v)
     {
         pthread_create(&thread_id, NULL, myThreadFun, (void*)core);
-        // pthread_join(thread_id, NULL);
+        pthread_create(&thread_id2, NULL, myThreadFun2, NULL);
         // getch();
         attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
         while (core->c_to_die > 0 && core->qt_car > 0) {
@@ -184,17 +173,19 @@ void    ft_start_fight(t_core *core) {
                 tmp = tmp->next;
             }
             tmp = core->champs;
-            //ft_dump(core);
-            if (core->dump != -1 && core->cycle == core->dump)
-                ft_dump(core);
             do_ncurs(core);
             // attron(A_BOLD); mvprintw(8, 208, "%d", core->cycle);
             // attroff(A_BOLD); refresh();
-            usleep(core->t);
+            if (core->t)
+                usleep(core->t);
             // getch();
             //usleep(100000);
             while (core->p)
             {
+                attron(A_BOLD);
+                mvprintw(3, 200, "** PAUSED ** ");
+                attroff(A_BOLD);
+                refresh();
                 usleep(100000);
                 // continue ;
             }

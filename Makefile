@@ -6,7 +6,7 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/08/26 13:14:26 by vlevko           ###   ########.fr        #
+#    Updated: 2018/08/27 13:14:31 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(NAME): $(OBJ)
 	make -C libft
 	@#make -C ft_printf
 	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
-	gcc -Wall -Wextra -Werror $^ -lpthread -lncurses -L./libft -lft -o $@
+	gcc -Wall -Wextra -Werror $^ -lsdl2 -lpthread -lncurses -L./libft -lft -o $@
 	
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $<

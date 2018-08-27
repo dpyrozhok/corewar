@@ -43,11 +43,9 @@ void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
 		r = 3 + (pos/64);
 		c = 3 + 3*(pos%64);
 		attron(COLOR_PAIR(champ->c));
-		// attron(COLOR_PAIR(champ->c));
 		attron(A_REVERSE);
 		mvprintw(r, c, "%02x", core->arena[pos]);
 		attroff(A_REVERSE);
-		// attroff(COLOR_PAIR(champ->c));
 		attroff(COLOR_PAIR(champ->c));
 		refresh();
 	}
@@ -181,7 +179,7 @@ void    ft_parse_champion(t_core *core, int fd)
 	champ->id = core->init_nub;
 	champ->c = 20 + core->c++;
 	core->c = core->c % 4;
-	champ->cc = champ->c+10; // сделать по % мод чтоб переворачивался цвет
+	champ->cc = champ->c+10;
 	champ->s_live = 0;
 	if (!core->champs)
 		core->champs = champ;

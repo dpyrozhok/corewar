@@ -1,5 +1,86 @@
 #include "ncurs.h"
 
+Uint32		g_len;
+Uint8		*g_buf;
+
+/*
+	>> SDL block
+
+	#define NUM_SOUNDS 2
+
+	struct sample {
+		Uint8 *data;
+		Uint32 *dpos;
+		Uint32 *dlen;
+	} sounds[NUM_SOUNDS];
+
+	extern void mixaudio(void *unused, Uint8 *stream, int len);
+
+	void mixaudio(void *unused, Uint8 *stream, int len)
+	{
+		int i;
+		Uint32 amount;
+		for (i=0; i<NUM_SOUNDS; i++) {
+			amount  = (sounds[i].dlen-sounds[i].dpos);
+			if (amount > len) {
+				amount = len;
+			}
+			SDL_MixAudio(stream, &sounds[i].data[sounds[i].dpos], amount, SDL_MIX_MAXVOLUME);
+			sounds[i].dpos += amount;
+		}
+	}
+
+	void PlaySound(char *file)
+	{
+		int index;
+
+		SDL_AudioSpec wave;
+
+		Uint8 *data;
+		Uint32 dlen;
+		SDL_AudioCVT cvt;
+		for (index = 0; index<NUM_SOUNDS; ++index) {
+			if (sounds[index].dpos == sounds[index].dlen) {
+				break;
+			}
+		}
+		if (index == NUM_SOUNDS)
+			return;
+		if (SDL_LoadWAV(file, &wave, &data, &dlen) == NULL) {
+			fprintf(stderr, "Couldn't load %s: %s\n", file, SDL_GetError());
+			return;
+		}
+		SDL_BuildAudioCVT(&cvt, wave.format, wave.channels, wave.freq, AUDIO_S16, 2, 22050);
+		vt.buf = malloc(dlen*cvt.len_mult);
+		memcpy(cvt.buf, data, dlen);
+	}
+
+	SDL_Audio fmt;
+
+	fmt.freq = 22050;
+
+	fmt.format = AUDIO_S16;
+
+	fmt.channels = 2;
+
+	fmt.samples = 512;
+
+	fmt.callback = mixaudio;
+
+	fmt.userdata = NULL;
+
+	if (SDL_OpenAudio(&fmt, NULL) < 0) {
+		fprintf(stderr, "Unable to open audio: %s\n", SDL_GetError());
+		exit(1);
+	}
+
+	SDL_PauseAudio(0);
+
+	SDL_CloseAudio();
+
+
+	<< SDL block
+*/
 WINDOW *create_newwin(int height, int width, int starty, int startx);
 void destroy_win(WINDOW *local_win);
 
@@ -309,9 +390,16 @@ void	do_ncurs(t_core *core)
 	}
 
 	attron(A_BOLD);
+	mvprintw(3, 200, "** RUNNING **");
 	mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
+	if (core->t != 1000000 && core->t)
+        mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
+    else if (core->t)
+        mvprintw(12, 200, "Speed: 0.1x     ");
+    else
+        mvprintw(12, 200, "Speed: Stealth     ");
 
 	r = 14;
 	i = 0;
@@ -520,22 +608,90 @@ void	init_ncurs(void)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	getch();
-	mvprintw(12, 200, "Speed: 1x");
+
+	/*
+    if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
+        SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+        endwin();
+        exit(11);
+    }
+
+	SDL_AudioSpec want, have;
+
+	SDL_memset(&want, 0, sizeof(want)); // or SDL_zero(want)
+	want.freq = 48000;
+	want.format = AUDIO_F32;
+	want.channels = 2;
+	want.samples = 4096;
+	want.callback = MyAudioCallback; // you wrote this function elsewhere.
+
+	if (SDL_OpenAudio(&want, &have) < 0) {
+	    SDL_Log("Failed to open audio: %s", SDL_GetError());
+	} else {
+	    if (have.format != want.format) {
+	        SDL_Log("We didn't get Float32 audio format.");
+	    }
+	    SDL_PauseAudio(0); // start audio playing.
+	    SDL_Delay(5000); // let the audio callback play some sound for 5 seconds.
+	    SDL_CloseAudio();
+	}
 
 
-    // if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
-    //     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
-    //     exit(11);
-    // }
-
-    // /* ... */
-
-    // SDL_Quit();
-
-
-	// system("afplay Track1.mp3&");
+	system("afplay Track1.mp3&");
+    SDL_Quit();
+	*/
+	// sound("Track1.wav");
+    // getch();
 }
 
+void	callback(void *udata, Uint8 *stream, int len)
+{
+	Uint32 tmp;
+
+	tmp = len;
+	if (g_len == 0)
+		return ;
+	else if (tmp > g_len)
+		len = g_len;
+	udata = NULL;
+	SDL_memset(stream, 0, len);
+	SDL_memcpy(stream, g_buf, len);
+	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
+	g_len -= len;
+	g_buf += len;
+}
+
+void	play(char *src)
+{
+	SDL_AudioSpec	spec;
+	Uint32			len;
+	Uint8			*buf;
+
+	if (SDL_Init(SDL_INIT_AUDIO) != 0)
+	{
+		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+		return ;
+	}
+	if (SDL_LoadWAV(src, &spec, &buf, &len) == NULL)
+	{
+		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
+		return ;
+	}
+	spec.callback = callback;
+	spec.userdata = NULL;
+	if (SDL_OpenAudio(&spec, NULL) < 0)
+	{
+		SDL_Log("Unable to open audio: %s", SDL_GetError());
+		return ;
+	}
+	g_len = len;
+	g_buf = buf;
+	SDL_PauseAudio(0);
+	while (g_len > 0)
+		SDL_Delay(500);
+	SDL_CloseAudio();
+	SDL_FreeWAV(buf);
+}
 
 void init_win_params(WIN *p_win, int h, int w, int sy, int sx)
 {
