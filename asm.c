@@ -19,7 +19,7 @@ int		ft_check_format(char *name)
 	char *format;
 
 	format = ft_strchr(name, '.');
-	if (ft_strcmp(format, ".s") == 0)
+	if (format && ft_strcmp(format, ".s") == 0)
 		return (1);
 	else
 		return (0);
@@ -275,7 +275,7 @@ int		main(int ac, char **av)
 	if (ac < 2 || ac > 3)
 		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
 	if (!ft_check_format(av[1]))
-		return (ft_printf("Can'head read source file\n"));
+		return (ft_printf("Not valid file\n"));
 	else
 		name = ft_get_name(av[1]);
 
