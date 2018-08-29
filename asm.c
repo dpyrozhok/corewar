@@ -34,10 +34,12 @@ char		*ft_get_name(char *name)
 	i = 0;
 	while (name[i] != '.')
 		i++;
-	get = malloc(sizeof(char) * i);
+	get = malloc(sizeof(char) * (i + 1));
 	ft_strncpy(get, name, i);
+	get[i] = '\0';
 	tmp = get;
 	get = ft_strjoin(get, ".cor");
+	get[i + 4] = '\0';
 	free(tmp);
 	return (get);
 }
