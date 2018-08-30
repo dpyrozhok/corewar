@@ -1,6 +1,8 @@
 #include "corewar.h"
 
 void    ft_put_4(t_core *core, int arg, int pos) {
+    if (pos < 0)
+        pos = MEM_SIZE + pos;
     core->arena[pos % MEM_SIZE] = (unsigned char)(arg >> 24);
     core->arena[(pos + 1) % MEM_SIZE] = (unsigned char)(arg >> 16 & 255);
     core->arena[(pos + 2) % MEM_SIZE] = (unsigned char)(arg >> 8 & 255);
@@ -10,6 +12,8 @@ void    ft_put_4(t_core *core, int arg, int pos) {
 int     ft_read_1(t_core *core, int pos) {
     int    ret;
 
+    if (pos < 0)
+        pos = MEM_SIZE + pos;
     ret = (int)(
             (unsigned char)core->arena[(pos + 1) % MEM_SIZE]
     );
@@ -17,23 +21,27 @@ int     ft_read_1(t_core *core, int pos) {
 }
 
 int     ft_read_2(t_core *core, int pos) {
-    int    ret;
+    short    ret;
 
-    ret = (int)(
-            (unsigned char)core->arena[(pos + 1) % MEM_SIZE] << 8 |
-            (unsigned char)core->arena[(pos + 2) % MEM_SIZE]
+    if (pos < 0)
+        pos = MEM_SIZE + pos;
+    ret = (short)(
+            core->arena[(pos + 1) % MEM_SIZE] << 8 |
+            core->arena[(pos + 2) % MEM_SIZE]
     );
-    return ret;
+    return (int)ret;
 }
 
 int     ft_read_4(t_core *core, int pos) {
     int    ret;
 
+    if (pos < 0)
+        pos = MEM_SIZE + pos;
     ret = (int)(
-            (unsigned char)core->arena[(pos + 1) % MEM_SIZE] << 24 |
-            (unsigned char)core->arena[(pos + 2) % MEM_SIZE] << 16 |
-            (unsigned char)core->arena[(pos + 3) % MEM_SIZE] << 8 |
-            (unsigned char)core->arena[(pos + 4) % MEM_SIZE]
+            core->arena[(pos + 1) % MEM_SIZE] << 24 |
+            core->arena[(pos + 2) % MEM_SIZE] << 16 |
+            core->arena[(pos + 3) % MEM_SIZE] << 8 |
+            core->arena[(pos + 4) % MEM_SIZE]
     );
     return ret;
 }

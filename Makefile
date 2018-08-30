@@ -34,7 +34,7 @@ $(NAME): $(OBJ)
 	make -C libft
 	@#make -C ft_printf
 	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
-	gcc -Wall -Wextra -Werror $^ -lsdl2 -lpthread -lncurses -L./libft -lft -o $@
+	gcc -Wall -Wextra -Werror $^ -lpthread -lncurses -L./libft -lft -o $@
 	
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $<

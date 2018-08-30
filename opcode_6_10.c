@@ -23,7 +23,10 @@ void    ft_06_opcode(t_core *core, t_champ *champ) {
         if (codage[1] == REG_CODE)
             arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] & arg[1]);
-		champ->cars->carry = 1;
+		if (!champ->cars->reg[arg[2] - 1])
+			champ->cars->carry = 1;
+		else
+			champ->cars->carry = 0;
 	} else
 		champ->cars->carry = 0;
 }
@@ -46,7 +49,10 @@ void    ft_07_opcode(t_core *core, t_champ *champ) {
         if (codage[1] == REG_CODE)
             arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] | arg[1]);
-		champ->cars->carry = 1;
+		if (!champ->cars->reg[arg[2] - 1])
+			champ->cars->carry = 1;
+		else
+			champ->cars->carry = 0;
 	} else
 		champ->cars->carry = 0;
 }
@@ -69,7 +75,10 @@ void    ft_08_opcode(t_core *core, t_champ *champ) {
         if (codage[1] == REG_CODE)
             arg[1] = champ->cars->reg[arg[1] - 1];
 		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] ^ arg[1]);
-		champ->cars->carry = 1;
+		if (!champ->cars->reg[arg[2] - 1])
+			champ->cars->carry = 1;
+		else
+			champ->cars->carry = 0;
 	} else
 		champ->cars->carry = 0;
 }
@@ -106,18 +115,21 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 void    ft_10_opcode(t_core *core, t_champ *champ) {
 	int *arg;
 	int pc;
+    int pos;
 	int *codage;
 
 	pc = champ->cars->pos % MEM_SIZE;
 	codage = ft_get_codage(core, champ);
 	arg = ft_get_args(core, champ, codage);
-	if (codage[0] == 3)
+	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (ft_check_cod_and_arg(champ, codage, arg)) {
         if (codage[0] == REG_CODE)
             arg[0] = champ->cars->reg[arg[0] - 1];
         if (codage[1] == REG_CODE)
             arg[1] = champ->cars->reg[arg[1] - 1];
-		champ->cars->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, ((arg[0] + arg[1]) % IDX_MOD + pc - 1 ) % MEM_SIZE);
+        pos = (arg[0] + arg[1]) % IDX_MOD + pc - 1;
+        pos = pos % MEM_SIZE;
+		champ->cars->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, pos);
     }
 }

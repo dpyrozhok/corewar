@@ -139,7 +139,7 @@ void    *myThreadFun(void *ptr)
 void    *myThreadFun2(void *ptr)
 {
     if (!ptr)
-    play("Track1.wav");
+    //play("Track1.wav");
     pthread_exit(NULL);
     exit(132);
     return (NULL);
