@@ -219,7 +219,7 @@ void		ft_read_head(t_my *inf, char *name)
 	}
 }
 
-int     ft_reg(const char *line, t_my *inf)
+int     ft_reg(const char *line, t_my *inf, int end)
 {
     int m;
 	int z;
@@ -231,10 +231,10 @@ int     ft_reg(const char *line, t_my *inf)
         while (line[m] >= '0' && line[m] <= '9')
             m++;
         ft_go_space(line, &(m));
-        if (line[m] != ',' && line[m] != '\0')
-		{
+		if (end == 0 && line[m] != '\0')
+			return (0);
+       if (end != 0 && line[m] != ',')
             return (0);
-        }
         if (((z = ft_atoi(line + inf->x + 1)) < 100) && z > 0)
         {
             inf->x = m + 1; // +1 propusk zapyatoi
@@ -252,7 +252,7 @@ int 	ft_lable()
 	return (1);
 }
 
-int		ft_dir(const char *line, t_my *inf)
+int		ft_dir(const char *line, t_my *inf, int end)
 {
 	int 	m;
 
@@ -267,18 +267,17 @@ int		ft_dir(const char *line, t_my *inf)
 		while(line[m] >= '0' && line[m] <= '9')
 			m++;
 		ft_go_space(line, &(m));
-		if (line[m] != ',' && line[m] != '\0')
+		if (end == 0 && line[m] != '\0')
 			return (0);
-		else
-		{
-			inf->x = m + 1;
-			return (1);
-		}
+		if (end != 0 && line[m] != ',')
+			return (0);
+		inf->x = m + 1;
+		return (1);
 	}
 
 }
 
-int 	ft_ind(const char *line, t_my *inf)
+int 	ft_ind(const char *line, t_my *inf, int end)
 {
 	int 	m;
 
@@ -286,13 +285,12 @@ int 	ft_ind(const char *line, t_my *inf)
 	while(line[m] >= '0' && line[m] <= '9')
 		m++;
 	ft_go_space(line, &(m));
-	if (line[m] != ',' && line[m] != '\0')
+	if (end == 0 && line[m] != '\0')
 		return (0);
-	else
-	{
-		inf->x = m + 1;
-		return (1);
-	}
+	if (end != 0 && line[m] != ',')
+		return (0);
+	inf->x = m + 1;
+	return (1);
 }
 
 int     ft_check_args(t_my *inf, char *line, int num_command)
@@ -305,11 +303,11 @@ int     ft_check_args(t_my *inf, char *line, int num_command)
     while (i < 3 && (z = OP(num_command).args[i++]) != 0)
 	{
 		ft_go_space(line, &(inf->x));
-        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf) == 1))
+        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf, OP(num_command).args[i + 1])))
             continue;
-        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf) ==1))
+        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf, OP(num_command).args[i + 1])))
 			continue;
-   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf)))
+   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf, OP(num_command).args[i + 1])))
 			continue;
 		else
 			return (0);
