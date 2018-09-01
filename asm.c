@@ -187,7 +187,6 @@ void		ft_read_head(t_my *inf, char *name)
 		ft_printf("error: open\n");
 		exit(1);
 	}
-//    char name2[132] = {0};
 	name2 = ft_memalloc(PROG_NAME_LENGTH + 4); // 132
 	comment = ft_memalloc(COMMENT_LENGTH + 4); // 2052
 
@@ -220,11 +219,102 @@ void		ft_read_head(t_my *inf, char *name)
 	}
 }
 
-int     ft_check_args(t_my *inf, char *name, int num_command)
+int     ft_reg(const char *line, t_my *inf)
 {
-    int ch = 0;
-    ft_go_space(name, inf->x);
+    int m;
+	int z;
 
+    if (line[inf->x] == 'r')
+    {
+        m = inf->x;
+        m++;
+        while (line[m] >= '0' && line[m] <= '9')
+            m++;
+        ft_go_space(line, &(m));
+        if (line[m] != ',' && line[m] != '\0')
+		{
+            return (0);
+        }
+        if (((z = ft_atoi(line + inf->x + 1)) < 100) && z > 0)
+        {
+            inf->x = m + 1; // +1 propusk zapyatoi
+            return (1);
+        }
+        else
+            return (0);
+    }
+    else
+        return (0);
+}
+
+int 	ft_lable()
+{
+	return (1);
+}
+
+int		ft_dir(const char *line, t_my *inf)
+{
+	int 	m;
+
+	if (line[inf->x] != '%')
+		return (0);
+	m = inf->x;
+	m++;
+	if (line[m] == ':')
+		return (ft_lable());
+	else
+	{
+		while(line[m] >= '0' && line[m] <= '9')
+			m++;
+		ft_go_space(line, &(m));
+		if (line[m] != ',' && line[m] != '\0')
+			return (0);
+		else
+		{
+			inf->x = m + 1;
+			return (1);
+		}
+	}
+
+}
+
+int 	ft_ind(const char *line, t_my *inf)
+{
+	int 	m;
+
+	m = inf->x;
+	while(line[m] >= '0' && line[m] <= '9')
+		m++;
+	ft_go_space(line, &(m));
+	if (line[m] != ',' && line[m] != '\0')
+		return (0);
+	else
+	{
+		inf->x = m + 1;
+		return (1);
+	}
+}
+
+int     ft_check_args(t_my *inf, char *line, int num_command)
+{
+    int z;
+    int i;
+
+    i = 0;
+	ft_go_space(inf->head->line, &(inf->x));
+    while (i < 3 && (z = OP(num_command).args[i++]) != 0)
+	{
+		ft_go_space(line, &(inf->x));
+        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf) == 1))
+            continue;
+        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf) ==1))
+			continue;
+   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf)))
+			continue;
+		else
+			return (0);
+    }
+	return (1);
 }
 
 void		ft_read_body(t_my *inf, char *name)
@@ -232,7 +322,8 @@ void		ft_read_body(t_my *inf, char *name)
     int i;
     int j = 0;
 
-    char command_name[6] = {0};
+    char command_name[6];
+	ft_bzero(command_name, 6);
     inf->x = 0;
     name = inf->head->line;
     while (name[inf->x++] != LABEL_CHAR);
@@ -254,7 +345,11 @@ void		ft_read_body(t_my *inf, char *name)
         }
         j++;
     } // zapisali imya komandi v fail
-    ft_check_args(inf, name + inf->x, j);
+    if (ft_check_args(inf, name, j - 1) == 0)
+	{
+		ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
+		exit(1);
+	}
     free(name);
 }
 
@@ -332,10 +427,11 @@ int		main(int ac, char **av)
 
 	ft_read_head(&inf, name);
 	ft_throu_empt_lines(&inf);
-    free(name);
+
 	ft_read_body(&inf, name);
 
 	ft_printf("Writing output program to %s", name);
+	free(name);
 	return (0);
 
 }
