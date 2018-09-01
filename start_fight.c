@@ -15,7 +15,7 @@ void    ft_get_n_car_value(t_core *core, t_champ *champ)
 void    ft_touch_car(t_core *core, t_champ *champ)
 {
     int pos,r,c;
- 
+
     if (champ->cars->cycle < 2) {
         if (core->v)
         {
@@ -68,7 +68,7 @@ void    ft_touch_car(t_core *core, t_champ *champ)
             attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
         */
-        champ->cars->pos++;
+        champ->cars->pos++; // в этом месте лажа при прижке и обновлении кода следующей кареткой
         ft_get_n_car_value(core, champ);
         if (core->v)
         {
@@ -139,7 +139,7 @@ void    *myThreadFun(void *ptr)
 void    *myThreadFun2(void *ptr)
 {
     if (!ptr)
-    //play("Track1.wav");
+        //play("Track1.wav");
     pthread_exit(NULL);
     exit(132);
     return (NULL);

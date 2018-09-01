@@ -27,8 +27,7 @@ void    ft_06_opcode(t_core *core, t_champ *champ) {
 			champ->cars->carry = 1;
 		else
 			champ->cars->carry = 0;
-	} else
-		champ->cars->carry = 0;
+	}
 }
 
 void    ft_07_opcode(t_core *core, t_champ *champ) {
@@ -53,8 +52,7 @@ void    ft_07_opcode(t_core *core, t_champ *champ) {
 			champ->cars->carry = 1;
 		else
 			champ->cars->carry = 0;
-	} else
-		champ->cars->carry = 0;
+	}
 }
 
 void    ft_08_opcode(t_core *core, t_champ *champ) {
@@ -79,8 +77,7 @@ void    ft_08_opcode(t_core *core, t_champ *champ) {
 			champ->cars->carry = 1;
 		else
 			champ->cars->carry = 0;
-	} else
-		champ->cars->carry = 0;
+	}
 }
 
 void    ft_09_opcode(t_core *core, t_champ *champ) {
@@ -89,7 +86,10 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 
 	if (champ->cars->carry) {
 		shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-		champ->cars->pos = (champ->cars->pos + shift - 1) % MEM_SIZE;
+        shift = champ->cars->pos + shift - 1;
+        if (shift < 0)
+            shift = MEM_SIZE + shift;
+		champ->cars->pos = shift % MEM_SIZE;
 		/*
 		if (core->v)
 		{

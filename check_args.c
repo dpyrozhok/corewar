@@ -195,19 +195,19 @@ void	check_null(t_check *file)
 
 void	check_bot_name(t_check *file)
 {
-	int		i;
-	char *str;
+//	int		i;
+//	char *str;
 
 	if (file->ret != PROG_NAME_LENGTH)
 		exit(p_err(114, "Bot name length mismatch", ft_itoa((int)file->ret)));
-	i = 0;
-	while(i < PROG_NAME_LENGTH)
-	{
-		str = ft_strchr(LABEL_CHARS, file->name[i]);
-		if (str == NULL)
-			exit(p_err(113, "Invalid character in the bot name", file->name));
-		i++;
-	}
+//	i = 0;
+//	while(i < PROG_NAME_LENGTH)
+//	{
+//		str = ft_strchr(LABEL_CHARS, file->name[i]);  // лишняя проверка лейбл сайз нужен только для асм
+//		if (str == NULL)
+//			exit(p_err(113, "Invalid character in the bot name", file->name));
+//		i++;
+//	}
 }
 
 void	check_file(char *str)
