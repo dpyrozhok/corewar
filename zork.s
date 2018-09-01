@@ -3,8 +3,7 @@
 
 
 
-
-.name "zork"
+   .name "zork"
 
 
 

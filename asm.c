@@ -78,14 +78,12 @@ int		convert_end(int new)
 	return (new);
 }
 
-char	*ft_go_space(char *line, int *x)
+void		ft_go_space(char *line, int *x)
 {
-	while (*line && (*line == ' ' || *line == '\t'))
-	{
-		line++;
-		(*x)++;
-	}
-	return (line);
+    while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
+    {
+        (*x)++;
+    }
 }
 
 void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
@@ -117,10 +115,9 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 		ft_printf("Lexical error[TOKEN][%i:%i]. %s should ends with \"\n", inf.y, inf.x + 1, define + 1);
 		exit(1);
 	}
-	line += i + 1;
 	inf.x++;
-	line = ft_go_space(line, &(inf.x));
-	if (*(line) != '\0')
+    ft_go_space(line, &(inf.x));
+	if (inf.head->line[inf.x] != '\0')
 	{
 		ft_printf("Lexical error[TOKEN][%i:%i]. Excess information after %s\n", inf.y, inf.x + 1, define + 1);
 		exit(1);
@@ -129,50 +126,52 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 
 void	ft_name_comment(t_my inf, char *define, char **buf)
 {
-	/// CHECK Define
-	char 	*line;
+    /// CHECK Define
+//	char 	*line;
 
-	inf.x = 0;
-	if (!inf.head || !inf.head->next)
-	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n", inf.y,0);
-		exit(1);
-	}
-	line = ft_go_space(inf.head->line, &(inf.x));
-	if (!(line == ft_strstr(line, define)))
-	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n", inf.y, inf.x, define);
-		exit(1);
-	}
-	line += ft_strlen(define);
-	inf.x += ft_strlen(define);
-	line = ft_go_space(line, &(inf.x));
-	if (*(line) != '"')
-	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. %s should starts with \"\n", inf.y, inf.x, define + 1);
-		exit(1);
-	}
-	line++;
-	inf.x++;
-	/// WRITE Define
-	ft_write_name_comment(buf, line, define, inf);
+    inf.x = 0;
+    if (!inf.head || !inf.head->next)
+    {
+        ft_printf("Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n", inf.y,0);
+        exit(1);
+    }
+    ft_go_space(inf.head->line, &(inf.x));
+    if (inf.head->line + inf.x != ft_strstr(inf.head->line + inf.x, define))
+    {
+        ft_printf("Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n", inf.y, inf.x, define);
+        exit(1);
+    }
+    inf.x += ft_strlen(define);
+    ft_go_space(inf.head->line, &(inf.x));
+    if (inf.head->line[inf.x] != '"')
+    {
+        ft_printf("Lexical error[TOKEN][%i:%i]. %s should starts with \"\n", inf.y, inf.x, define + 1);
+        exit(1);
+    }
+    inf.x++;
+    /// WRITE Define
+	ft_write_name_comment(buf, inf.head->line + inf.x, define, inf);
 }
 
 void		ft_throu_empt_lines(t_my *inf)
 {
-	char 	*l;
+    t_text	*p_t;
 
-	while(inf->head && inf->head->line)
-	{
-		l = ft_go_space(inf->head->line, &(inf->x));
-		if (*l == '\0')
-		{
-			inf->head = inf->head->next;
-			inf->y++;
-		}
-		else
-			break ;
-	}
+    inf->x = 0;
+    while(inf->head && inf->head->line)
+    {
+        ft_go_space(inf->head->line, &(inf->x));
+        if (inf->head->line[inf->x] == '\0')
+        {
+            free(inf->head->line);
+            p_t = inf->head;
+            inf->head = inf->head->next;
+            free(p_t);
+            inf->y++;
+        }
+        else
+            break ;
+    }
 }
 
 void		ft_read_head(t_my *inf, char *name)
