@@ -197,6 +197,8 @@ CMakeFiles/CORE.dir/libft/type.c.o: ../libft/type.c
 CMakeFiles/CORE.dir/libft/unicode.c.o: ../libft/libft.h
 CMakeFiles/CORE.dir/libft/unicode.c.o: ../libft/unicode.c
 
+CMakeFiles/CORE.dir/main.c.o: ../main.c
+
 CMakeFiles/CORE.dir/op.c.o: .././libft/libft.h
 CMakeFiles/CORE.dir/op.c.o: ../op.c
 CMakeFiles/CORE.dir/op.c.o: ../op.h

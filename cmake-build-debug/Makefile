@@ -1905,6 +1905,33 @@ libft/unicode.c.s:
 	$(MAKE) -f CMakeFiles/CORE.dir/build.make CMakeFiles/CORE.dir/libft/unicode.c.s
 .PHONY : libft/unicode.c.s
 
+main.o: main.c.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) -f CMakeFiles/CORE.dir/build.make CMakeFiles/CORE.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) -f CMakeFiles/CORE.dir/build.make CMakeFiles/CORE.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) -f CMakeFiles/CORE.dir/build.make CMakeFiles/CORE.dir/main.c.s
+.PHONY : main.c.s
+
 op.o: op.c.o
 
 .PHONY : op.o
@@ -2139,6 +2166,9 @@ help:
 	@echo "... libft/unicode.o"
 	@echo "... libft/unicode.i"
 	@echo "... libft/unicode.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... op.o"
 	@echo "... op.i"
 	@echo "... op.s"

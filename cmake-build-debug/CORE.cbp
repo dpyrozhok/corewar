@@ -284,6 +284,9 @@
 		<Unit filename="/Users/dpyrozho/CORE/libft/unicode.c">
 			<Option target="CORE"/>
 		</Unit>
+		<Unit filename="/Users/dpyrozho/CORE/main.c">
+			<Option target="CORE"/>
+		</Unit>
 		<Unit filename="/Users/dpyrozho/CORE/op.c">
 			<Option target="CORE"/>
 		</Unit>

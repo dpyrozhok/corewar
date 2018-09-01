@@ -70,6 +70,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/dpyrozho/CORE/libft/read.c" "/Users/dpyrozho/CORE/cmake-build-debug/CMakeFiles/CORE.dir/libft/read.c.o"
   "/Users/dpyrozho/CORE/libft/type.c" "/Users/dpyrozho/CORE/cmake-build-debug/CMakeFiles/CORE.dir/libft/type.c.o"
   "/Users/dpyrozho/CORE/libft/unicode.c" "/Users/dpyrozho/CORE/cmake-build-debug/CMakeFiles/CORE.dir/libft/unicode.c.o"
+  "/Users/dpyrozho/CORE/main.c" "/Users/dpyrozho/CORE/cmake-build-debug/CMakeFiles/CORE.dir/main.c.o"
   "/Users/dpyrozho/CORE/op.c" "/Users/dpyrozho/CORE/cmake-build-debug/CMakeFiles/CORE.dir/op.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

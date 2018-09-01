@@ -188,8 +188,9 @@ void		ft_read_head(t_my *inf, char *name)
 		ft_printf("error: open\n");
 		exit(1);
 	}
-	name2 = ft_memalloc(PROG_NAME_LENGTH + 4);
-	comment = ft_memalloc(COMMENT_LENGTH + 4);
+//    char name2[132] = {0};
+	name2 = ft_memalloc(PROG_NAME_LENGTH + 4); // 132
+	comment = ft_memalloc(COMMENT_LENGTH + 4); // 2052
 
 	/// MAGIC NUMBER
 	magic_num = convert_end(COREWAR_EXEC_MAGIC);
@@ -198,11 +199,11 @@ void		ft_read_head(t_my *inf, char *name)
 	///NAME
 	ft_throu_empt_lines(inf);
 	ft_name_comment(*inf, NAME_CMD_STRING, &name2);
-	write(g_fd, &name2,sizeof(name2));
+	write(g_fd, name2, 132);
 
 	/// BOTSIZE
 	char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	write(g_fd, &(botsize), 2); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	write(g_fd, &(botsize), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	///COMMENT
 	if (inf->head->next)
@@ -212,7 +213,7 @@ void		ft_read_head(t_my *inf, char *name)
 	}
 	ft_throu_empt_lines(inf);
 	ft_name_comment(*inf, COMMENT_CMD_STRING, &comment);
-	write(g_fd, &comment,sizeof(comment));
+	write(g_fd, comment, 2052);
 	if (inf->head->next)
 	{
 		inf->head = inf->head->next;
@@ -220,9 +221,42 @@ void		ft_read_head(t_my *inf, char *name)
 	}
 }
 
-void		ft_read_body(t_my inf, char *name)
+int     ft_check_args(t_my *inf, char *name, int num_command)
 {
+    int ch = 0;
+    ft_go_space(name, inf->x);
 
+}
+
+void		ft_read_body(t_my *inf, char *name)
+{
+    int i;
+    int j = 0;
+
+    char command_name[6] = {0};
+    inf->x = 0;
+    name = inf->head->line;
+    while (name[inf->x++] != LABEL_CHAR);
+    while (name[inf->x] == ' ' || name[inf->x] == '\t')
+        inf->x++;
+    while(name[inf->x] >= 97 && name[inf->x] <= 122) {
+        command_name[j] = name[inf->x];
+        j++;
+        inf->x++;
+    }
+    j = 0;
+    while (j < 16)
+    {
+        if (ft_strcmp(command_name, OP(j).name) == 0)
+        {
+            j = j + 1;
+            write(g_fd, &j, 1);
+            break;
+        }
+        j++;
+    } // zapisali imya komandi v fail
+    ft_check_args(inf, name + inf->x, j);
+    free(name);
 }
 
 void	ft_obnul(t_my	*inf, char *name)
@@ -266,6 +300,7 @@ void    ft_print_txt(t_text *t)
 		ft_printf("%s\t\n", p_t->line);
 }
 
+
 int		main(int ac, char **av)
 {
 	char *name;
@@ -298,9 +333,10 @@ int		main(int ac, char **av)
 
 	ft_read_head(&inf, name);
 	ft_throu_empt_lines(&inf);
-	ft_read_body(inf, name);
+    free(name);
+	ft_read_body(&inf, name);
+
 	ft_printf("Writing output program to %s", name);
-	free(name);
 	return (0);
 
 }

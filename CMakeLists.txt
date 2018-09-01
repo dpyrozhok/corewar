@@ -72,5 +72,6 @@ add_executable(CORE
         libft/unicode.c
         asm.c
         asm.h
+        main.c
         op.c
         op.h)

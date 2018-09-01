@@ -65,6 +65,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/CORE.dir/libft/type.c.o"
   "CMakeFiles/CORE.dir/libft/unicode.c.o"
   "CMakeFiles/CORE.dir/asm.c.o"
+  "CMakeFiles/CORE.dir/main.c.o"
   "CMakeFiles/CORE.dir/op.c.o"
   "CORE.pdb"
   "CORE"
