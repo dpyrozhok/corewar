@@ -381,17 +381,30 @@ void		ft_read_body(t_my *inf, char *name)
 		j = 0;
 		name = inf->head->line;
 		if (ft_is_label_name(name))
-			ft_label(name, inf);
-		ft_go_space(name, &(inf->x));
-		if(name[inf->x] == '\0')
 		{
-			p_t = inf->head;
-			inf->head = inf->head->next;
-			free(p_t);
-			inf->y++;
-			ft_throu_empt_lines(inf);
-			name = inf->head->line;
+			ft_label(name, inf);
+			ft_go_space(name, &(inf->x));
+			if(name[inf->x] == '\0')
+			{
+				p_t = inf->head;
+				if (inf->head->next)
+					inf->head = inf->head->next;
+				else
+				{
+					ft_printf("Syntax error at token [%i:%i]. END (null)\n", inf->y, inf->x + 1);
+					exit(1);
+				}
+				free(p_t);
+				inf->y++;
+				ft_throu_empt_lines(inf);
+				if (inf->head == NULL)
+					return ; //vyhod dlya pustogo lebla
+				name = inf->head->line;
+			}
+			if (ft_is_label_name(name))
+				continue ;
 		}
+		ft_go_space(name, (&inf->x));
 		while (ft_isalpha(name[inf->x]) && j < 5){
 			command_name[j] = name[inf->x];
 			j++;
