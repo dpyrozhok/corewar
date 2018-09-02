@@ -315,40 +315,59 @@ int     ft_check_args(t_my *inf, char *line, int num_command)
 	return (1);
 }
 
+int 	ft_is_label_name(char *name)
+{
+	int 	i;
+
+	i = 0;
+	ft_go_space(name, &i);
+	while (name[i] && name[i] != LABEL_CHAR && (ft_isdigit(name[i]) || ft_isalpha(name[i])))
+		i++;
+	return ((name[i] == LABEL_CHAR) ? 1 : 0);
+}
+
 void		ft_read_body(t_my *inf, char *name)
 {
-    int i;
-    int j = 0;
+    int j;
+	t_text	*p_t;
 
     char command_name[6];
-	ft_bzero(command_name, 6);
-    inf->x = 0;
-    name = inf->head->line;
-    while (name[inf->x++] != LABEL_CHAR);
-    while (name[inf->x] == ' ' || name[inf->x] == '\t')
-        inf->x++;
-    while(name[inf->x] >= 97 && name[inf->x] <= 122) {
-        command_name[j] = name[inf->x];
-        j++;
-        inf->x++;
-    }
-    j = 0;
-    while (j < 16)
-    {
-        if (ft_strcmp(command_name, OP(j).name) == 0)
-        {
-            j = j + 1;
-            write(g_fd, &j, 1);
-            break;
-        }
-        j++;
-    } // zapisali imya komandi v fail
-    if (ft_check_args(inf, name, j - 1) == 0)
+	while (inf->head)
 	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
-		exit(1);
+		ft_throu_empt_lines(inf);
+		ft_bzero(command_name, 6);
+		inf->x = 0;
+		j = 0;
+		name = inf->head->line;
+		if (ft_is_label_name(name))
+			while (name[inf->x++] != LABEL_CHAR);
+		while (name[inf->x] == ' ' || name[inf->x] == '\t')
+			inf->x++;
+		while (name[inf->x] >= 97 && name[inf->x] <= 122) {
+			command_name[j] = name[inf->x];
+			j++;
+			inf->x++;
+		}
+		j = 0;
+		while (j < 16) {
+			if (ft_strcmp(command_name, OP(j).name) == 0) {
+				j = j + 1;
+				write(g_fd, &j, 1);
+				break;
+			}
+			j++;
+		} // zapisali imya komandi v fail
+		if (ft_check_args(inf, name, j - 1) == 0)
+		{
+			ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
+			exit(1);
+		}
+		free(name);
+		p_t = inf->head;
+		inf->head = inf->head->next;
+		inf->y++;
+		free(p_t);
 	}
-    free(name);
 }
 
 void	ft_obnul(t_my	*inf, char *name)
@@ -424,7 +443,7 @@ int		main(int ac, char **av)
 
 
 	ft_read_head(&inf, name);
-	ft_throu_empt_lines(&inf);
+//	ft_throu_empt_lines(&inf);
 
 	ft_read_body(&inf, name);
 
