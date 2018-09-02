@@ -287,6 +287,8 @@ int 	ft_ind(const char *line, t_my *inf, int end)
 	int 	m;
 
 	m = inf->x;
+	if (line[m] == '-')
+		m++;
 	while(line[m] >= '0' && line[m] <= '9')
 		m++;
 	ft_go_space(line, &(m));
@@ -327,7 +329,7 @@ int 	ft_is_label_name(char *name)
 
 	i = 0;
 	ft_go_space(name, &i);
-	while (name[i] && name[i] != LABEL_CHAR && (ft_isdigit(name[i]) || ft_isalpha(name[i])))
+	while (name[i] && name[i] != LABEL_CHAR && (ft_isdigit(name[i]) || ft_isalpha(name[i]) || name[i] == '_'))
 		i++;
 	return ((name[i] == LABEL_CHAR) ? 1 : 0);
 }
@@ -376,6 +378,8 @@ void		ft_read_body(t_my *inf, char *name)
 	while (inf->head)
 	{
 		ft_throu_empt_lines(inf);
+		if (!inf->head)
+			return ;
 		ft_bzero(command_name, 6);
 		inf->x = 0;
 		j = 0;
@@ -501,45 +505,45 @@ int 	ft_gnl_without_com(int fd, char **line)
 
 int		main(int ac, char **av)
 {
-	char *name;
-	t_my inf;
-	t_text *new_t;
-	int i;
-
-	i = 1;
-	if (ac < 2 || ac > 3)
-		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
-	if (!ft_check_format(av[1]))
-		return (ft_printf("Not valid file\n"));
-	else
-		name = ft_get_name(av[1]);
-
-
-	//reading
-	ft_obnul(&inf, av[1]);
-	new_t = (t_text *) malloc(sizeof(t_text));
-	new_t->next = NULL;
-	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
-	{
-		ft_push_t_back(&inf, new_t, i++);
-		new_t = (t_text *) malloc(sizeof(t_text));
-		new_t->next = NULL;
-	}
-	free(new_t);
-	ft_print_txt(inf.head);
-
-
-	ft_read_head(&inf, name);
-//	ft_throu_empt_lines(&inf);
-
-	ft_read_body(&inf, name);
-
-	ft_printf("Writing output program to %s", name);
-	free(name);
-//	int fd = open(av[1], O_RDONLY);
-//	char *line;
-//	ft_gnl_without_com(fd, &line);
-//	ft_printf("%s\n", line);
+//	char *name;
+//	t_my inf;
+//	t_text *new_t;
+//	int i;
+//
+//	i = 1;
+//	if (ac < 2 || ac > 3)
+//		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
+//	if (!ft_check_format(av[1]))
+//		return (ft_printf("Not valid file\n"));
+//	else
+//		name = ft_get_name(av[1]);
+//
+//
+//	//reading
+//	ft_obnul(&inf, av[1]);
+//	new_t = (t_text *) malloc(sizeof(t_text));
+//	new_t->next = NULL;
+//	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
+//	{
+//		ft_push_t_back(&inf, new_t, i++);
+//		new_t = (t_text *) malloc(sizeof(t_text));
+//		new_t->next = NULL;
+//	}
+//	free(new_t);
+//	ft_print_txt(inf.head);
+//
+//
+//	ft_read_head(&inf, name);
+////	ft_throu_empt_lines(&inf);
+//
+//	ft_read_body(&inf, name);
+//
+//	ft_printf("Writing output program to %s", name);
+//	free(name);
+	int fd = open(av[1], O_RDONLY);
+	char *line;
+	ft_gnl_without_com(fd, &line);
+	ft_printf("%s\n", line);
 	return (0);
 
 }
