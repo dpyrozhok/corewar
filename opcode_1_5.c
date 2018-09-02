@@ -72,6 +72,8 @@ void    ft_03_opcode(t_core *core, t_champ *champ) {
 			{
 				ag = champ->cars->reg[arg[0] - 1];
 				pos = (arg[1] % IDX_MOD + pc) % MEM_SIZE;
+				if (pos < 0)
+					pos = MEM_SIZE + pos;
 				champ->cars->rp = pos;
 				champ->cars->sw = 1;
 				r = 3+((pos%MEM_SIZE)/64)%64;
@@ -86,19 +88,19 @@ void    ft_03_opcode(t_core *core, t_champ *champ) {
 				// c += 3;
 				// c %= 192; ?? нужно ли
 				// r += c/64;
-				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]-1] >> 16 & 255));
+				mvprintw(r,c,"%02x", (unsigned char)(ag >> 16 & 255));
 				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
 				pos++;
 				r = 3+((pos%MEM_SIZE)/64)%64;
 				c = 3+(3*((pos%MEM_SIZE)%64))%192;
 				// c += 3;
-				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]-1] >> 8 & 255));
+				mvprintw(r,c,"%02x", (unsigned char)(ag >> 8 & 255));
 				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
 				pos++;
 				r = 3+((pos%MEM_SIZE)/64)%64;
 				c = 3+(3*((pos%MEM_SIZE)%64))%192;
 				// c += 3;
-				mvprintw(r,c,"%02x", (unsigned char)(champ->cars->reg[arg[0]-1] & 255));
+				mvprintw(r,c,"%02x", (unsigned char)(ag & 255));
 				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
 				attroff(COLOR_PAIR(champ->c));
 				attroff(A_BOLD);

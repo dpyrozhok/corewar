@@ -74,27 +74,28 @@ void    ft_touch_car(t_core *core, t_champ *champ)
         {
             r = 3 + ((champ->cars->pos%MEM_SIZE)/64)%64;
             c = 3 + (3*((champ->cars->pos%MEM_SIZE)%64))%192;
-            if (champ->cars->opcode == 1 && champ->s_live)
+            // if (champ->cars->opcode == 1 && champ->s_live) // ? champ_id == opcode' id
+            if (champ->cars->opcode == 1 && champ->c == core->a[champ->cars->pos%MEM_SIZE]) // champ_id == opcode_id
             {
                 attron(A_BOLD | COLOR_PAIR(champ->cc));
                 ft_memset(core->a+champ->cars->pos%MEM_SIZE, champ->c, 1);
             }
-            else if (champ->cars->opcode == 1)
-                attron(A_BOLD | COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]+10));
-            else if (champ->cars->opcode && champ->s_live)
-            {
-                attron(A_REVERSE | COLOR_PAIR(champ->c));
-                ft_memset(core->a+champ->cars->pos%MEM_SIZE, champ->c, 1);
-            }
+            // else if (champ->cars->opcode == 1)
+                // attron(A_BOLD | COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]+10));
+            // else if (champ->cars->opcode && champ->s_live)
+            // {
+                // attron(A_REVERSE | COLOR_PAIR(champ->c));
+                // ft_memset(core->a+champ->cars->pos%MEM_SIZE, champ->c, 1);
+            // }
             else
                 attron(A_REVERSE | COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
-            // attron(A_REVERSE);
+            //// attron(A_REVERSE);
             mvprintw(r, c, "%02x", core->arena[champ->cars->pos%MEM_SIZE]);
-            // attroff(A_REVERSE);
+            //// attroff(A_REVERSE);
             if (champ->cars->opcode == 1)
                 attroff(A_BOLD | COLOR_PAIR(champ->cc));
-            else if (champ->cars->opcode && champ->s_live)
-                attroff(A_REVERSE | COLOR_PAIR(champ->c));
+            // else if (champ->cars->opcode && champ->s_live)
+                // attroff(A_REVERSE | COLOR_PAIR(champ->c));
             else
                 attroff(A_REVERSE | COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
         }
@@ -129,9 +130,10 @@ void    *myThreadFun(void *ptr)
         else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
             (p)->p = 1;
         else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
-                (p)->p = 0;
+            (p)->p = 0;
     }
     endwin();
+    SDL_Quit();
     exit(121);
     return (NULL);
 }
@@ -139,7 +141,10 @@ void    *myThreadFun(void *ptr)
 void    *myThreadFun2(void *ptr)
 {
     if (!ptr)
-        //play("Track1.wav");
+    {
+        ;
+        // play("Track1.wav");
+    }
     pthread_exit(NULL);
     exit(132);
     return (NULL);
@@ -184,8 +189,9 @@ void    ft_start_fight(t_core *core) {
             {
                 attron(A_BOLD);
                 mvprintw(3, 200, "** PAUSED ** ");
-                attroff(A_BOLD);
                 refresh();
+            mvprintw(3, 200, "** RUNNING **");
+                attroff(A_BOLD);
                 usleep(100000);
                 // continue ;
             }
@@ -200,7 +206,7 @@ void    ft_start_fight(t_core *core) {
         if (core->l)
             mvprintw(core->l - 3, 201, "--------------------------------------------------]");
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
-        getch(); endwin();
+        refresh(); getch(); endwin(); SDL_Quit();
     }
     else
     {

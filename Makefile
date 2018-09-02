@@ -6,7 +6,7 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/08/27 13:14:31 by vlevko           ###   ########.fr        #
+#    Updated: 2018/09/02 12:19:22 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = main.c \
 
 OBJ = $(SRC:.c=.o)
 
-# SDL = SDL2-2.0.8/x86_64-w64-mingw32/lib/libSDL2.a
+SDL = -L./SDL2/build/.libs/ -lSDL2
 
 all: $(NAME)
 
@@ -34,7 +34,7 @@ $(NAME): $(OBJ)
 	make -C libft
 	@#make -C ft_printf
 	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
-	gcc -Wall -Wextra -Werror $^ -lpthread -lncurses -L./libft -lft -o $@
+	gcc -Wall -Wextra -Werror $^ $(SDL) -lpthread -lncurses -L./libft -lft -o $@
 	
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $<

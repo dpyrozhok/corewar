@@ -40,8 +40,8 @@ void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
 	car->sw = 0;
 	if (core->v)
 	{
-		r = 3 + (pos/64);
-		c = 3 + 3*(pos%64);
+		r = 3 + ((pos%MEM_SIZE)/64)%64;
+		c = 3 + (3*((pos%MEM_SIZE)%64))%192;
 		attron(COLOR_PAIR(champ->c));
 		attron(A_REVERSE);
 		mvprintw(r, c, "%02x", core->arena[pos]);
@@ -122,7 +122,7 @@ void    ft_place_champ(t_core *core)
 	tmp = core->champs;
 	if (core->v)
 	{
-		init_ncurs();
+		init_ncurs(core);
 		do_ncurs(core);
 	}
 	while (tmp) {
@@ -134,7 +134,7 @@ void    ft_place_champ(t_core *core)
 			c = 3 + 3*(shift % 64);
 			while (i < tmp->size)
 			{
-				mvprintw(r, c, "%02x ", tmp->code[i]);
+				mvprintw(r, c, "%02x", tmp->code[i]);
 				if ((1+i + shift%64) % 64 == 0 && !(i == 0 && shift == 0))
 				{
 					c = 3;

@@ -1,86 +1,8 @@
 #include "ncurs.h"
 
-//Uint32		g_len;
-//Uint8		*g_buf;
+Uint32		g_len;
+Uint8		*g_buf;
 
-/*
-	>> SDL block
-
-	#define NUM_SOUNDS 2
-
-	struct sample {
-		Uint8 *data;
-		Uint32 *dpos;
-		Uint32 *dlen;
-	} sounds[NUM_SOUNDS];
-
-	extern void mixaudio(void *unused, Uint8 *stream, int len);
-
-	void mixaudio(void *unused, Uint8 *stream, int len)
-	{
-		int i;
-		Uint32 amount;
-		for (i=0; i<NUM_SOUNDS; i++) {
-			amount  = (sounds[i].dlen-sounds[i].dpos);
-			if (amount > len) {
-				amount = len;
-			}
-			SDL_MixAudio(stream, &sounds[i].data[sounds[i].dpos], amount, SDL_MIX_MAXVOLUME);
-			sounds[i].dpos += amount;
-		}
-	}
-
-	void PlaySound(char *file)
-	{
-		int index;
-
-		SDL_AudioSpec wave;
-
-		Uint8 *data;
-		Uint32 dlen;
-		SDL_AudioCVT cvt;
-		for (index = 0; index<NUM_SOUNDS; ++index) {
-			if (sounds[index].dpos == sounds[index].dlen) {
-				break;
-			}
-		}
-		if (index == NUM_SOUNDS)
-			return;
-		if (SDL_LoadWAV(file, &wave, &data, &dlen) == NULL) {
-			fprintf(stderr, "Couldn't load %s: %s\n", file, SDL_GetError());
-			return;
-		}
-		SDL_BuildAudioCVT(&cvt, wave.format, wave.channels, wave.freq, AUDIO_S16, 2, 22050);
-		vt.buf = malloc(dlen*cvt.len_mult);
-		memcpy(cvt.buf, data, dlen);
-	}
-
-	SDL_Audio fmt;
-
-	fmt.freq = 22050;
-
-	fmt.format = AUDIO_S16;
-
-	fmt.channels = 2;
-
-	fmt.samples = 512;
-
-	fmt.callback = mixaudio;
-
-	fmt.userdata = NULL;
-
-	if (SDL_OpenAudio(&fmt, NULL) < 0) {
-		fprintf(stderr, "Unable to open audio: %s\n", SDL_GetError());
-		exit(1);
-	}
-
-	SDL_PauseAudio(0);
-
-	SDL_CloseAudio();
-
-
-	<< SDL block
-*/
 WINDOW *create_newwin(int height, int width, int starty, int startx);
 void destroy_win(WINDOW *local_win);
 
@@ -368,61 +290,63 @@ void	do_ncurs(t_core *core)
 	}
 	if (sw == 0)
 	{
-		i = 0;
-		r = 3;
-		c = 3;
-		while (i < MEM_SIZE)
-		{
-			mvprintw(r, c, "%02x ", core->arena[i]);
-			i++;
-			if (i % 64 == 0)
-			{
-				c = 3;
-				r++;
-			}
-			else
-				c += 3;
-		}
-		attron(A_BOLD);
-		mvprintw(3, 200, "** WELCOME **");
-		attroff(A_BOLD);
+		// i = 0;
+		// r = 3;
+		// c = 3;
+		// while (i < MEM_SIZE)
+		// {
+		// 	mvprintw(r, c, "%02x ", core->arena[i]);
+		// 	i++;
+		// 	if (i % 64 == 0)
+		// 	{
+		// 		c = 3;
+		// 		r++;
+		// 	}
+		// 	else
+		// 		c += 3;
+		// }
 		sw = 1;
 	}
 
 	attron(A_BOLD);
-	mvprintw(3, 200, "** RUNNING **");
-	mvprintw(5, 200, "Cycles/second limit : %d", 50);
+	// mvprintw(3, 200, "** RUNNING **");
+	// mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
 	if (core->t != 1000000 && core->t)
-        mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
-    else if (core->t)
-        mvprintw(12, 200, "Speed: 0.1x     ");
-    else
-        mvprintw(12, 200, "Speed: Stealth     ");
-
+	{
+	    mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
+	}
+	else if (core->t)
+	{
+	    mvprintw(12, 200, "Speed: 0.1x     ");
+	}
+	else
+	{
+	    mvprintw(12, 200, "Speed: Stealth     ");
+	}
 	r = 14;
 	i = 0;
 	curr = core->champs;
 	while (i++ < core->qt_champ)
 	{
-		mvprintw(r, 200, "Player %d : ", curr->id);
-		attron(COLOR_PAIR(curr->c));
-		mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
-		attroff(COLOR_PAIR(curr->c));
-		mvprintw(r, 202, "Last live : ");
+		// mvprintw(r, 200, "Player %d : ", curr->id);
+		// attron(COLOR_PAIR(curr->c));
+		r++;// mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
+		// attroff(COLOR_PAIR(curr->c));
+		// mvprintw(r, 202, "Last live : ");
 		mvprintw(r++, 214, "%21d", curr->last_live);
-		mvprintw(r, 202, "Lives in current period : ");
+		// mvprintw(r, 202, "Lives in current period : ");
 		mvprintw(r, 228, "%7d", curr->s_live);
 		r += 2;
 		curr = curr->next;
 	}
 
-	mvprintw(r++, 200, "Live breakdown for current period :");
+	r++;// mvprintw(r++, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
 	// mvprintw(r++, 200, "[--------------------------------------------------]");
 	
-	mvprintw(r, 200, "[");
+	// mvprintw(r, 200, "[");
 	i = 0;
 	s = 0.0;
 	curr = core->champs;
@@ -485,31 +409,32 @@ void	do_ncurs(t_core *core)
 	}
 	else if (sw == 1)
 	{
-		mvprintw(r++, 201, "--------------------------------------------------]");
+		r++;// mvprintw(r++, 201, "--------------------------------------------------]");
 		sw = 2;
 	}
 	else
 		r++;
 	if (sw == 2)
 	{
-		attron(A_BOLD);
-		mvprintw(++r, 200, "Live breakdown for last period :");
-		attroff(A_BOLD);
-		mvprintw(++r, 200, "[--------------------------------------------------]");
+		// attron(A_BOLD);
+		++r;// mvprintw(++r, 200, "Live breakdown for last period :");
+		// attroff(A_BOLD);
+		++r;// mvprintw(++r, 200, "[--------------------------------------------------]");
 		core->l = r;
 		sw = 3;
 	}
 	else
 		r += 2;
-	attron(A_BOLD);
+	// attron(A_BOLD);
 	r++;
-	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
-	r++;
-	mvprintw(++r, 200, "CYCLE_DELTA : %d", CYCLE_DELTA);
-	r++;
-	mvprintw(++r, 200, "NBR_LIVE : %d", NBR_LIVE);
-	r++;
-	mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
+	mvprintw(++r, 215, "%d", core->c_to_die);
+	// mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
+	// r++;
+	// ++r;// mvprintw(++r, 200, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	// r++;
+	// ++r;// mvprintw(++r, 200, "NBR_LIVE : %d", NBR_LIVE);
+	// r++;
+	// ++r;// mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();
@@ -547,10 +472,12 @@ void	do_ncurs(t_core *core)
 	*/
 }
 
-void	init_ncurs(void)
+void	init_ncurs(t_core *core)
 {
 	WIN win;
 	WIN win2;
+	int i, r, c;
+	t_champ *curr;
 
 	initscr();
 	if (LINES < 69 || COLS < 254)
@@ -607,7 +534,76 @@ void	init_ncurs(void)
 	mvprintw(67/2 -1, (196 - (int)ft_strlen("MAKE PEACE NOT WAR"))/2, "MAKE PEACE NOT WAR");
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
+	refresh();
 	getch();
+
+	attron(A_BOLD);
+	mvprintw(67/2 -1, (196 - (int)ft_strlen("MAKE PEACE NOT WAR"))/2, "                  ");
+	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "                         ");
+	mvprintw(67/2, (196 - (int)ft_strlen("* W E L C O M E *"))/2, "* W E L C O M E *");
+	refresh();
+	mvprintw(67/2, (196 - (int)ft_strlen("* W E L C O M E *"))/2, "                 ");
+
+	mvprintw(3, 200, "** RUNNING **");
+	mvprintw(5, 200, "Cycles/second limit : %d", 50);
+	mvprintw(8, 200, "Cycle : %d", core->cycle);
+	mvprintw(10, 200, "Processes : %d", core->qt_car);
+    mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
+
+	r = 14;
+	i = 0;
+	curr = core->champs;
+	while (i++ < core->qt_champ)
+	{
+		mvprintw(r, 200, "Player %d : ", curr->id);
+		attron(COLOR_PAIR(curr->c));
+		mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
+		attroff(COLOR_PAIR(curr->c));
+		mvprintw(r, 202, "Last live : ");
+		mvprintw(r++, 214, "%21d", curr->last_live);
+		mvprintw(r, 202, "Lives in current period : ");
+		mvprintw(r, 228, "%7d", curr->s_live);
+		r += 2;
+		curr = curr->next;
+	}
+	mvprintw(r++, 200, "Live breakdown for current period :");
+	attroff(A_BOLD);
+	mvprintw(r++, 200, "[--------------------------------------------------]");
+	attron(A_BOLD);
+	mvprintw(++r, 200, "Live breakdown for last period :");
+	attroff(A_BOLD);
+	mvprintw(++r, 200, "[--------------------------------------------------]");
+	core->l = r;
+	attron(A_BOLD);
+	r++;
+	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
+	r++;
+	mvprintw(++r, 200, "CYCLE_DELTA : %d", CYCLE_DELTA);
+	r++;
+	mvprintw(++r, 200, "NBR_LIVE : %d", NBR_LIVE);
+	r++;
+	mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
+	attroff(COLOR_PAIR(4));
+	attroff(A_BOLD);
+	refresh();
+getch();
+	i = 0;
+	r = 3;
+	c = 3;
+	while (i < MEM_SIZE)
+	{
+		mvprintw(r, c, "%02x ", core->arena[i]);
+		i++;
+		if (i % 64 == 0)
+		{
+			c = 3;
+			r++;
+		}
+		else
+			c += 3;
+	}
+	usleep(1000000);
+	refresh();
 
 	/*
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
@@ -644,54 +640,55 @@ void	init_ncurs(void)
     // getch();
 }
 
-//void	callback(void *udata, Uint8 *stream, int len)
-//{
-//	Uint32 tmp;
-//
-//	tmp = len;
-//	if (g_len == 0)
-//		return ;
-//	else if (tmp > g_len)
-//		len = g_len;
-//	udata = NULL;
-//	SDL_memset(stream, 0, len);
-//	SDL_memcpy(stream, g_buf, len);
-//	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
-//	g_len -= len;
-//	g_buf += len;
-//}
-//
-//void	play(char *src)
-//{
-//	SDL_AudioSpec	spec;
-//	Uint32			len;
-//	Uint8			*buf;
-//
-//	if (SDL_Init(SDL_INIT_AUDIO) != 0)
-//	{
-//		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
-//		return ;
-//	}
-//	if (SDL_LoadWAV(src, &spec, &buf, &len) == NULL)
-//	{
-//		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
-//		return ;
-//	}
-//	spec.callback = callback;
-//	spec.userdata = NULL;
-//	if (SDL_OpenAudio(&spec, NULL) < 0)
-//	{
-//		SDL_Log("Unable to open audio: %s", SDL_GetError());
-//		return ;
-//	}
-//	g_len = len;
-//	g_buf = buf;
-//	SDL_PauseAudio(0);
-//	while (g_len > 0)
-//		SDL_Delay(500);
-//	SDL_CloseAudio();
-//	SDL_FreeWAV(buf);
-//}
+void	callback(void *udata, Uint8 *stream, int len)
+{
+	Uint32 tmp;
+
+	tmp = len;
+	if (g_len == 0)
+		return ;
+	else if (tmp > g_len)
+		len = g_len;
+	if (udata)
+		udata = NULL;
+	SDL_memset(stream, 0, len);
+	SDL_memcpy(stream, g_buf, len);
+	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
+	g_len -= len;
+	g_buf += len;
+}
+
+void	play(char *src)
+{
+	SDL_AudioSpec	spec;
+	Uint32			len;
+	Uint8			*buf;
+
+	if (SDL_Init(SDL_INIT_AUDIO) != 0)
+	{
+		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+		return ;
+	}
+	if (SDL_LoadWAV(src, &spec, &buf, &len) == NULL)
+	{
+		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
+		return ;
+	}
+	spec.callback = callback;
+	spec.userdata = NULL;
+	if (SDL_OpenAudio(&spec, NULL) < 0)
+	{
+		SDL_Log("Unable to open audio: %s", SDL_GetError());
+		return ;
+	}
+	g_len = len;
+	g_buf = buf;
+	SDL_PauseAudio(0);
+	while (g_len > 0)
+		SDL_Delay(500);
+	SDL_CloseAudio();
+	SDL_FreeWAV(buf);
+}
 
 void init_win_params(WIN *p_win, int h, int w, int sy, int sx)
 {
