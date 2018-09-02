@@ -332,6 +332,41 @@ int 	ft_is_label_name(char *name)
 	return ((name[i] == LABEL_CHAR) ? 1 : 0);
 }
 
+void    ft_push_l_back(t_my *my, t_label *new)
+{
+	t_label  *p_l;
+
+	p_l = my->label;
+	while (p_l->next)
+	{
+		p_l = p_l->next;
+	}
+	if (p_l->name)
+		p_l->next = new;
+	else
+		my->label = new;
+}
+
+void	ft_label(char *name, t_my *inf)
+{
+	t_label	*new;
+	int 	i;
+
+	ft_go_space(inf->head->line, &inf->x);
+	i = inf->x;
+	new = (t_label*)malloc(sizeof(t_label));
+	new->next = NULL;
+	new->size = -1;
+	while (name[i++] && name[i] != LABEL_CHAR);
+	new->name = (char*)malloc(sizeof(char) * (i - inf->x + 1));
+	i = 0;
+	while (name[inf->x] && name[inf->x] != LABEL_CHAR)
+		new->name[i++] = name[inf->x++];
+	inf->x++;
+	new->name[i] = '\0';
+	ft_push_l_back(inf, new);
+}
+
 void		ft_read_body(t_my *inf, char *name)
 {
     int j;
@@ -346,16 +381,25 @@ void		ft_read_body(t_my *inf, char *name)
 		j = 0;
 		name = inf->head->line;
 		if (ft_is_label_name(name))
-			while (name[inf->x++] != LABEL_CHAR);
-		while (name[inf->x] == ' ' || name[inf->x] == '\t')
-			inf->x++;
-		while (name[inf->x] >= 97 && name[inf->x] <= 122) {
+			ft_label(name, inf);
+		ft_go_space(name, &(inf->x));
+		if(name[inf->x] == '\0')
+		{
+			p_t = inf->head;
+			inf->head = inf->head->next;
+			free(p_t);
+			inf->y++;
+			ft_throu_empt_lines(inf);
+			name = inf->head->line;
+		}
+		while (ft_isalpha(name[inf->x]) && j < 5){
 			command_name[j] = name[inf->x];
 			j++;
 			inf->x++;
 		}
 		j = 0;
-		while (j < 16) {
+		while (j < 16)
+		{
 			if (ft_strcmp(command_name, OP(j).name) == 0) {
 				j = j + 1;
 				write(g_fd, &j, 1);
@@ -380,6 +424,9 @@ void	ft_obnul(t_my	*inf, char *name)
 {
 	inf->fd = open(name, O_RDONLY);
 	inf->head = (t_text*)malloc(sizeof(t_text));
+	inf->label = (t_label*)malloc(sizeof(t_label));
+	inf->label->name = NULL;
+	inf->label->next = NULL;
 	inf->head->line = NULL;
 	inf->head->next = NULL;
 	inf->x = 1;
@@ -387,7 +434,7 @@ void	ft_obnul(t_my	*inf, char *name)
 
 }
 
-void    ft_push_back(t_my *my, t_text *new, int i)
+void    ft_push_t_back(t_my *my, t_text *new, int i)
 {
 	t_text  *p_t;
 
@@ -461,7 +508,7 @@ int		main(int ac, char **av)
 	new_t->next = NULL;
 	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
 	{
-		ft_push_back(&inf, new_t, i++);
+		ft_push_t_back(&inf, new_t, i++);
 		new_t = (t_text *) malloc(sizeof(t_text));
 		new_t->next = NULL;
 	}

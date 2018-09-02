@@ -29,12 +29,20 @@ typedef struct      s_text
     int             i;
 }                   t_text;
 
-typedef struct s_my
+typedef struct      s_label
 {
-    t_text *head;
-    int fd;
-	int x;
-	int y;
-}               t_my;
+	char            *name;
+	struct s_label  *next;
+	int             size;
+}                   t_label;
+
+typedef struct		s_my
+{
+    t_text			*head;
+	t_label			*label;
+    int				fd;
+	int				x;
+	int				y;
+}					t_my;
 
 #endif
