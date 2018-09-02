@@ -116,7 +116,7 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 		exit(1);
 	}
 	inf.x++;
-    ft_go_space(line, &(inf.x));
+    ft_go_space(inf.head->line, &(inf.x));
 	if (inf.head->line[inf.x] != '\0')
 	{
 		ft_printf("Lexical error[TOKEN][%i:%i]. Excess information after %s\n", inf.y, inf.x + 1, define + 1);
@@ -247,8 +247,11 @@ int     ft_reg(const char *line, t_my *inf, int end)
         return (0);
 }
 
-int 	ft_lable()
+int 	ft_lable(t_my *inf)
 {
+	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',')
+		inf->x++;
+	inf->x++;
 	return (1);
 }
 
@@ -261,9 +264,11 @@ int		ft_dir(const char *line, t_my *inf, int end)
 	m = inf->x;
 	m++;
 	if (line[m] == ':')
-		return (ft_lable());
+		return (ft_lable(inf));
 	else
 	{
+		if (line[m] == '-')
+			m++;
 		while(line[m] >= '0' && line[m] <= '9')
 			m++;
 		ft_go_space(line, &(m));
@@ -300,14 +305,15 @@ int     ft_check_args(t_my *inf, char *line, int num_command)
 
     i = 0;
 	ft_go_space(inf->head->line, &(inf->x));
-    while (i < 3 && (z = OP(num_command).args[i++]) != 0)
+    while (i < 3 && (z = OP(num_command).args[i]) != 0)
 	{
+		i++;
 		ft_go_space(line, &(inf->x));
-        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf, OP(num_command).args[i + 1])))
+        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
             continue;
-        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf, OP(num_command).args[i + 1])))
+        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf, (i == 3) ? 0 :  OP(num_command).args[i])))
 			continue;
-   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf, OP(num_command).args[i + 1])))
+   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
 			continue;
 		else
 			return (0);
@@ -412,6 +418,27 @@ void    ft_print_txt(t_text *t)
 }
 
 
+int 	ft_gnl_without_com(int fd, char **line)
+{
+	char 	*new;
+	int 	i;
+	int 	r;
+
+	r = get_next_line(fd, line);
+	if (ft_strchr(*line, '#'))
+	{
+		i = 0;
+		while ((*line)[i] != '#')
+			i++;
+		new = (char*)malloc(sizeof(char) * (i + 2));
+		ft_strncpy(new, *line, i);
+		new[i] = '\0';
+		ft_memdel(line);
+		*line = new;
+	}
+	return (r);
+}
+
 int		main(int ac, char **av)
 {
 	char *name;
@@ -432,7 +459,7 @@ int		main(int ac, char **av)
 	ft_obnul(&inf, av[1]);
 	new_t = (t_text *) malloc(sizeof(t_text));
 	new_t->next = NULL;
-	while (get_next_line(inf.fd, &(new_t->line)) > 0)
+	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
 	{
 		ft_push_back(&inf, new_t, i++);
 		new_t = (t_text *) malloc(sizeof(t_text));
@@ -449,6 +476,10 @@ int		main(int ac, char **av)
 
 	ft_printf("Writing output program to %s", name);
 	free(name);
+//	int fd = open(av[1], O_RDONLY);
+//	char *line;
+//	ft_gnl_without_com(fd, &line);
+//	ft_printf("%s\n", line);
 	return (0);
 
 }
