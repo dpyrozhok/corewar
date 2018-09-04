@@ -174,34 +174,17 @@ void		ft_throu_empt_lines(t_my *inf)
     }
 }
 
-void		ft_read_head(t_my *inf, char *name)
+void		ft_read_head(t_my *inf)
 {
-	char	*name2;
-	char	*comment;
-	int		magic_num;
-
-
-	if ((g_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
-					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-	{
-		ft_printf("error: open\n");
-		exit(1);
-	}
-	name2 = ft_memalloc(PROG_NAME_LENGTH + 4); // 132
-	comment = ft_memalloc(COMMENT_LENGTH + 4); // 2052
+	inf->name2 = ft_memalloc(PROG_NAME_LENGTH); // 128
+	inf->comment = ft_memalloc(COMMENT_LENGTH); // 2048
 
 	/// MAGIC NUMBER
-	magic_num = convert_end(COREWAR_EXEC_MAGIC);
-	write(g_fd, &magic_num, sizeof(magic_num));
+	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC);
 
 	///NAME
 	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, NAME_CMD_STRING, &name2);
-	write(g_fd, name2, 132);
-
-	/// BOTSIZE
-	char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	write(g_fd, &(botsize), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	ft_name_comment(*inf, NAME_CMD_STRING, &inf->name2);
 
 	///COMMENT
 	if (inf->head->next)
@@ -210,8 +193,7 @@ void		ft_read_head(t_my *inf, char *name)
 		inf->y++;
 	}
 	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, COMMENT_CMD_STRING, &comment);
-	write(g_fd, comment, 2052);
+	ft_name_comment(*inf, COMMENT_CMD_STRING, &inf->comment);
 	if (inf->head->next)
 	{
 		inf->head = inf->head->next;
@@ -235,7 +217,7 @@ int     ft_reg(const char *line, t_my *inf, int end)
 			return (0);
        if (end != 0 && line[m] != ',')
             return (0);
-        if (((z = ft_atoi(line + inf->x + 1)) < 100) && z > 0)
+        if (((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
         {
             inf->x = m + 1; // +1 propusk zapyatoi
             return (1);
@@ -338,15 +320,15 @@ void    ft_push_l_back(t_my *my, t_label *new)
 {
 	t_label  *p_l;
 
-	p_l = my->label;
-	while (p_l->next)
+	p_l = my->label_s;
+	while (p_l && p_l->next)
 	{
 		p_l = p_l->next;
 	}
 	if (p_l->name)
 		p_l->next = new;
 	else
-		my->label = new;
+		my->label_s = new;
 }
 
 void	ft_label(char *name, t_my *inf)
@@ -369,10 +351,20 @@ void	ft_label(char *name, t_my *inf)
 	ft_push_l_back(inf, new);
 }
 
-void		ft_read_body(t_my *inf, char *name)
+void	ft_command(int j, t_my *inf)
+{
+	t_comm	*new;
+
+	new = (t_comm*)malloc(sizeof(t_comm));
+	new->name = ft_strdup(OP(j).name);
+
+}
+
+void		ft_read_body(t_my *inf)
 {
     int j;
 	t_text	*p_t;
+	char *name;
 
     char command_name[6];
 	while (inf->head)
@@ -417,14 +409,15 @@ void		ft_read_body(t_my *inf, char *name)
 		j = 0;
 		while (j < 16)
 		{
-			if (ft_strcmp(command_name, OP(j).name) == 0) {
-				j = j + 1;
-				write(g_fd, &j, 1);
+			if (ft_strcmp(command_name, OP(j).name) == 0)
+			{
+				ft_command(j, inf);
+//				write(g_fd, &j, 1);
 				break;
 			}
 			j++;
 		} // zapisali imya komandi v fail
-		if (ft_check_args(inf, name, j - 1) == 0)
+		if (ft_check_args(inf, name, j) == 0)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
 			exit(1);
@@ -441,9 +434,16 @@ void	ft_obnul(t_my	*inf, char *name)
 {
 	inf->fd = open(name, O_RDONLY);
 	inf->head = (t_text*)malloc(sizeof(t_text));
-	inf->label = (t_label*)malloc(sizeof(t_label));
-	inf->label->name = NULL;
-	inf->label->next = NULL;
+	inf->label_s = (t_label*)malloc(sizeof(t_label));
+	inf->label_e = (t_label*)malloc(sizeof(t_label));
+	inf->command = (t_comm*)malloc(sizeof(t_comm));
+	inf->command->label = NULL;
+	inf->command->next = NULL;
+	inf->command->size = -1;
+	inf->label_s->name = NULL;
+	inf->label_s->next = NULL;
+	inf->label_e->name = NULL;
+	inf->label_e->next = NULL;
 	inf->head->line = NULL;
 	inf->head->next = NULL;
 	inf->x = 1;
@@ -489,10 +489,10 @@ int 	ft_gnl_without_com(int fd, char **line)
 	int 	r;
 
 	r = get_next_line(fd, line);
-	if (ft_strchr(*line, '#'))
+	if (ft_strchr(*line, '#') || ft_strchr(*line, ';'))
 	{
 		i = 0;
-		while ((*line)[i] != '#')
+		while ((*line)[i] != '#' && (*line)[i] != ';')
 			i++;
 		new = (char*)malloc(sizeof(char) * (i + 2));
 		ft_strncpy(new, *line, i);
@@ -503,9 +503,45 @@ int 	ft_gnl_without_com(int fd, char **line)
 	return (r);
 }
 
+void	ft_check_end( t_my *inf)
+{
+	char 	c;
+
+	lseek(inf->fd,-1,SEEK_END);
+	read(inf->fd, &c, 1);
+	if (c != '\n')
+	{
+		ft_printf("Syntax error[TOKEN][%i:0]. Unexpected end of input \n", inf->y);
+		exit(1);
+	}
+}
+
+int	ft_pliz_write_to_file(t_my *inf)
+{
+	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
+					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+	{
+		ft_printf("error: open\n");
+		exit(1);
+	}
+	char *botsize = {0};
+	write(g_fd, &inf->magic_num, sizeof(inf->magic_num));
+	write(g_fd, inf->name2, 128);
+	write(g_fd, &botsize, 4);
+
+	/// BOTSIZE
+//	char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	write(g_fd, &(botsize), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	/// NASTYA KAKAHA
+
+	write(g_fd, inf->comment, 2048);
+	write(g_fd, &botsize, 4);
+
+
+	return (0);
+}
 int		main(int ac, char **av)
 {
-	char *name;
 	t_my inf;
 	t_text *new_t;
 	int i;
@@ -516,7 +552,7 @@ int		main(int ac, char **av)
 	if (!ft_check_format(av[1]))
 		return (ft_printf("Not valid file\n"));
 	else
-		name = ft_get_name(av[1]);
+		inf.file_name = ft_get_name(av[1]);
 
 
 	//reading
@@ -533,23 +569,14 @@ int		main(int ac, char **av)
 	ft_print_txt(inf.head);
 
 
-	ft_read_head(&inf, name);
+	ft_read_head(&inf);
 //	ft_throu_empt_lines(&inf);
 
-	ft_read_body(&inf, name);
-
-	ft_printf("Writing output program to %s", name);
-	free(name);
-//	int fd = open(av[1], O_RDONLY), i;
-//	char *line;
-//	i = get_next_line(fd, &line);
-//	ft_printf("1:%i %s\n", i, line);
-//	i = get_next_line(fd, &line);
-//	ft_printf("2:%i %s\n", i, line);
-//	i = get_next_line(fd, &line);
-//	ft_printf("3:%i %s\n", i, line);
-//	ft_gnl_without_com(fd, &line);
-//	ft_printf("%s\n", line);
+	ft_read_body(&inf);
+	ft_check_end(&inf);
+	ft_pliz_write_to_file(&inf);
+	ft_printf("Writing output program to %s", inf.file_name);
+	free(inf.file_name);
 	return (0);
 
 }

@@ -36,13 +36,32 @@ typedef struct      s_label
 	int             size;
 }                   t_label;
 
+typedef struct      s_comm
+{
+	char            *name;
+	char 			*label;
+
+
+	char 			*arg[3];
+	int             size;
+	struct s_com  	*next;
+}                   t_comm;
+
+
 typedef struct		s_my
 {
     t_text			*head;
-	t_label			*label;
+	t_label			*label_s;
+	t_label			*label_e;
+	t_comm			*command;
     int				fd;
 	int				x;
 	int				y;
+	int 			magic_num;
+	char 			*name2;
+	char 			*comment;
+	char 			*file_name;
+
 }					t_my;
 
 #endif
