@@ -405,7 +405,7 @@ void		ft_read_body(t_my *inf, char *name)
 					return ; //vyhod dlya pustogo lebla
 				name = inf->head->line;
 			}
-			if (ft_is_label_name(name))
+			if (ft_is_label_name(name + inf->x))
 				continue ;
 		}
 		ft_go_space(name, (&inf->x));
@@ -505,45 +505,51 @@ int 	ft_gnl_without_com(int fd, char **line)
 
 int		main(int ac, char **av)
 {
-//	char *name;
-//	t_my inf;
-//	t_text *new_t;
-//	int i;
-//
-//	i = 1;
-//	if (ac < 2 || ac > 3)
-//		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
-//	if (!ft_check_format(av[1]))
-//		return (ft_printf("Not valid file\n"));
-//	else
-//		name = ft_get_name(av[1]);
-//
-//
-//	//reading
-//	ft_obnul(&inf, av[1]);
-//	new_t = (t_text *) malloc(sizeof(t_text));
-//	new_t->next = NULL;
-//	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
-//	{
-//		ft_push_t_back(&inf, new_t, i++);
-//		new_t = (t_text *) malloc(sizeof(t_text));
-//		new_t->next = NULL;
-//	}
-//	free(new_t);
-//	ft_print_txt(inf.head);
-//
-//
-//	ft_read_head(&inf, name);
-////	ft_throu_empt_lines(&inf);
-//
-//	ft_read_body(&inf, name);
-//
-//	ft_printf("Writing output program to %s", name);
-//	free(name);
-	int fd = open(av[1], O_RDONLY);
-	char *line;
-	ft_gnl_without_com(fd, &line);
-	ft_printf("%s\n", line);
+	char *name;
+	t_my inf;
+	t_text *new_t;
+	int i;
+
+	i = 1;
+	if (ac < 2 || ac > 3)
+		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
+	if (!ft_check_format(av[1]))
+		return (ft_printf("Not valid file\n"));
+	else
+		name = ft_get_name(av[1]);
+
+
+	//reading
+	ft_obnul(&inf, av[1]);
+	new_t = (t_text *) malloc(sizeof(t_text));
+	new_t->next = NULL;
+	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
+	{
+		ft_push_t_back(&inf, new_t, i++);
+		new_t = (t_text *) malloc(sizeof(t_text));
+		new_t->next = NULL;
+	}
+	free(new_t);
+	ft_print_txt(inf.head);
+
+
+	ft_read_head(&inf, name);
+//	ft_throu_empt_lines(&inf);
+
+	ft_read_body(&inf, name);
+
+	ft_printf("Writing output program to %s", name);
+	free(name);
+//	int fd = open(av[1], O_RDONLY), i;
+//	char *line;
+//	i = get_next_line(fd, &line);
+//	ft_printf("1:%i %s\n", i, line);
+//	i = get_next_line(fd, &line);
+//	ft_printf("2:%i %s\n", i, line);
+//	i = get_next_line(fd, &line);
+//	ft_printf("3:%i %s\n", i, line);
+//	ft_gnl_without_com(fd, &line);
+//	ft_printf("%s\n", line);
 	return (0);
 
 }
