@@ -39,12 +39,12 @@ typedef struct      s_label
 typedef struct      s_comm
 {
 	char            *name;
-	char 			*label;
-
-
+	t_label 		*label;
+    char			comm_id;
+	char 			arg_id[3]; //1-T_REG 2-T_DIR 3-T_IND 0 - Net arg
 	char 			*arg[3];
 	int             size;
-	struct s_com  	*next;
+	struct s_comm  	*next;
 }                   t_comm;
 
 
@@ -53,11 +53,13 @@ typedef struct		s_my
     t_text			*head;
 	t_label			*label_s;
 	t_label			*label_e;
-	t_comm			*command;
+	t_comm			*command_s;
+    t_comm			*command_e;
     int				fd;
 	int				x;
 	int				y;
 	int 			magic_num;
+    char            *botsiz;
 	char 			*name2;
 	char 			*comment;
 	char 			*file_name;
