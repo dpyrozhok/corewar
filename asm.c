@@ -592,6 +592,9 @@ void	ft_check_end( t_my *inf)
 
 int	ft_pliz_write_to_file(t_my *inf)
 {
+	char	*botsize;
+	int 	i_bot_size;
+
 	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
 					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
@@ -602,18 +605,34 @@ int	ft_pliz_write_to_file(t_my *inf)
 	write(g_fd, &inf->magic_num, sizeof(inf->magic_num));
 	write(g_fd, inf->name2, 128);
 	write(g_fd, &nulek, 4);
-
-	/// BOTSIZE
-//	char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	write(g_fd, &(inf->botsiz), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
+	write(g_fd, &(nulek), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	write(g_fd, inf->comment, 2048);
 	write(g_fd, &nulek, 4);
 
-
 	return (0);
 }
+
+int 	ft_write_commands(t_my *inf)
+{
+	t_comm *start;
+	int change_comm_id;
+	int codage;
+
+	codage = 1;
+	start = inf->command_s;
+	if(start != NULL)
+	{
+		change_comm_id = start->comm_id + 1;
+		write(g_fd, &change_comm_id, 1);
+		if (start->codage)
+		{
+			codage>>;//
+
+			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
+		}
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_my inf;
@@ -649,6 +668,7 @@ int		main(int ac, char **av)
 	ft_read_body(&inf);
 	ft_check_end(&inf);
 	ft_pliz_write_to_file(&inf);
+	ft_write_commands(&inf);
 	ft_printf("Writing output program to %s", inf.file_name);
 	free(inf.file_name);
 	return (0);
