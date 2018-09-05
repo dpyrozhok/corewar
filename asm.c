@@ -205,8 +205,18 @@ void		ft_read_head(t_my *inf)
 
 int 	ft_lable(t_my *inf, int arg_i)
 {
-	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',')
+	int 	start;
+	int 	end;
+
+	start = inf->x;
+	end = 0;
+	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
+			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
+	{
 		inf->x++;
+	}
+	end = inf->x;
+	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start + 1, end - start - 1);
 	inf->x++;
 	return (1);
 }
@@ -247,6 +257,8 @@ int		ft_dir(const char *line, t_my *inf, int is_end)
 
     while (inf->command_e->arg[arg_i] != NULL)
         arg_i++;
+	inf->command_e->arg_id[arg_i] = 2;
+	inf->command_e->size += inf->command_e->t_dir_size;
 	if (line[m] == ':')
 		return (ft_lable(inf, arg_i));
 	else
@@ -263,35 +275,33 @@ int 	ft_ind(const char *line, t_my *inf, int is_end)
     arg_i = 0;
     while (inf->command_e->arg[arg_i] != NULL)
         arg_i++;
+	inf->command_e->arg_id[arg_i] = 3;
+	inf->command_e->size += 2;
     if (line[m] == ':')
         return (ft_lable(inf, arg_i));
     else
         return (ft_num(inf, arg_i, m, is_end));
 }
 
-int     ft_reg(const char *line, t_my *inf, int end)
+int     ft_reg(const char *line, t_my *inf, int is_end)
 {
-    int m;
-    int z;
+    int 	m;
+    int		z;
+	int 	arg_i;
 
+	arg_i = 0;
     if (line[inf->x] == 'r')
     {
+		while (inf->command_e->arg[arg_i] != NULL)
+			arg_i++;
+		inf->command_e->arg_id[arg_i] = 1;
+		inf->command_e->size += 1;
         m = inf->x;
         m++;
-        while (line[m] >= '0' && line[m] <= '9')
-                m++;
-        ft_go_space(line, &(m));
-        if (end == 0 && line[m] != '\0')
-            return (0);
-        if (end != 0 && line[m] != ',')
-            return (0);
-        if (((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
-        {
-            inf->x = m + 1; // +1 propusk zapyatoi
-            return (1);
-        }
-        else
-            return (0);
+        if (line[m] >= '0' && line[m] <= '9' && ((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
+			return (ft_num(inf, arg_i, m, is_end));
+		else
+			return (0);
     }
     else
         return (0);
@@ -403,7 +413,26 @@ void	ft_command(int j, t_my *inf)
     new->arg[0] = NULL;
     new->arg[1] = NULL;
     new->arg[2] = NULL;
+	new->arg_id[0] = 0;
+	new->arg_id[1] = 0;
+	new->arg_id[2] = 0;
+	new->size = 1;
+	new->t_dir_size = 0;
+	new->codage = 0;
     ft_push_c_back(inf, new);
+}
+
+int 		size_dira(int j)
+{
+	if ((j >= 0 && j <= 7) || j == 12 || j == 15)
+		return (4);
+	else
+		return (2);
+}
+
+int 	codage(int j)
+{
+	return ((j == 0 || j == 8 || j == 12 || j == 14)  ? 0 : 1);
 }
 
 void		ft_read_body(t_my *inf)
@@ -463,6 +492,10 @@ void		ft_read_body(t_my *inf)
 			}
 			j++;
 		} // zapisali imya komandi v fail
+		inf->command_e->comm_id = (char)j;
+		inf->command_e->t_dir_size = size_dira(j);
+		inf->command_e->codage = (char)codage(j);
+		inf->command_e->size += (int)inf->command_e->codage;
 		if (ft_check_args(inf, line, j) == 0)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
