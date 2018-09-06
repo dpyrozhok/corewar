@@ -4,32 +4,34 @@
 #include "corewar.h"
 #include "ncurs.h"
 
-void    ft_11_opcode(t_core *core, t_champ *champ) {
+void    ft_11_opcode(t_core *core, t_car *car) {
+	t_champ *champ;
 	int *arg;
 	int pc;
 	int *codage;
 	int ag,pos,r,c;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[1] == 3)
 		arg[1] = ft_read_4(core, (arg[1] + pc - 1) % IDX_MOD);
-	if (ft_check_cod_and_arg(champ, codage, arg))
+	if (ft_check_cod_and_arg(car, codage, arg))
 	{
 		if (codage[1] == REG_CODE)
-			arg[1] = champ->cars->reg[arg[1] - 1];
+			arg[1] = car->reg[arg[1] - 1];
 		if (codage[2] == REG_CODE)
-			arg[2] = champ->cars->reg[arg[2] - 1];
-		ft_put_4(core, champ->cars->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
+			arg[2] = car->reg[arg[2] - 1];
+		ft_put_4(core, car->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
 		if (core->v)
 		{
-			ag = champ->cars->reg[arg[0] - 1];
+			champ = ft_get_champ(core, car->id);
+			ag = car->reg[arg[0] - 1];
 			pos = ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE;
 			if (pos < 0)
 				pos = MEM_SIZE + pos;
-			champ->cars->rp = pos;
-			champ->cars->sw = 1;
+			car->rp = pos;
+			car->sw = 1;
 			r = 3+((pos%MEM_SIZE)/64)%64;
 			c = 3+(3*((pos%MEM_SIZE)%64))%192;
 			attron(A_BOLD);
@@ -63,62 +65,62 @@ void    ft_11_opcode(t_core *core, t_champ *champ) {
 	}
 }
 
-void    ft_12_opcode(t_core *core, t_champ *champ) {
+void    ft_12_opcode(t_core *core, t_car *car) {
 	int new_pc;
 
-	new_pc = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-	new_pc = (new_pc % IDX_MOD + champ->cars->pos) % MEM_SIZE;
+	new_pc = ft_read_2(core, car->pos % MEM_SIZE);
+	new_pc = (new_pc % IDX_MOD + car->pos) % MEM_SIZE;
 	if (new_pc < 0)
 		new_pc = MEM_SIZE + new_pc;
-	ft_copy_car(core, champ, champ->cars, new_pc);
-	champ->cars->pos += 2;
+	ft_copy_car(core, car, new_pc);
+	car->pos += 2;
 }
 
-void    ft_13_opcode(t_core *core, t_champ *champ) {
+void    ft_13_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, arg[0] + pc);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-		champ->cars->reg[arg[1] - 1] = (unsigned int)arg[0];
-		if (!champ->cars->reg[arg[1] - 1])
-			champ->cars->carry = 1;
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		car->reg[arg[1] - 1] = (unsigned int)arg[0];
+		if (!car->reg[arg[1] - 1])
+			car->carry = 1;
 		else
-			champ->cars->carry = 0;
+			car->carry = 0;
 	}
 }
 
-void    ft_14_opcode(t_core *core, t_champ *champ) {
+void    ft_14_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, arg[0] % IDX_MOD + pc);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-		champ->cars->reg[arg[2] - 1] = (unsigned int) ft_read_4(core, ((arg[0] + arg[1]) + pc - 1) % MEM_SIZE);
-		if (!champ->cars->reg[arg[2] - 1])
-			champ->cars->carry = 1;
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		car->reg[arg[2] - 1] = (unsigned int) ft_read_4(core, ((arg[0] + arg[1]) + pc - 1) % MEM_SIZE);
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
 		else
-			champ->cars->carry = 0;
+			car->carry = 0;
 	}
 }
 
-void    ft_15_opcode(t_core *core, t_champ *champ) {
+void    ft_15_opcode(t_core *core, t_car *car) {
 	int new_pc;
 
-	new_pc = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-	new_pc = (new_pc % IDX_MOD + champ->cars->pos) % MEM_SIZE;
+	new_pc = ft_read_2(core, car->pos % MEM_SIZE);
+	new_pc = (new_pc % IDX_MOD + car->pos) % MEM_SIZE;
 	if (new_pc < 0)
 		new_pc = MEM_SIZE + new_pc;
-	ft_copy_car(core, champ, champ->cars, new_pc);
-	champ->cars->pos += 2;
+	ft_copy_car(core, car, new_pc);
+	car->pos += 2;
 }

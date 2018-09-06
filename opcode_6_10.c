@@ -5,91 +5,91 @@
 #include "corewar.h"
 #include "ncurs.h"
 
-void    ft_06_opcode(t_core *core, t_champ *champ) {
+void    ft_06_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (codage[1] == IND_CODE)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
-        if (codage[0] == REG_CODE)
-            arg[0] = champ->cars->reg[arg[0] - 1];
-        if (codage[1] == REG_CODE)
-            arg[1] = champ->cars->reg[arg[1] - 1];
-		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] & arg[1]);
-		if (!champ->cars->reg[arg[2] - 1])
-			champ->cars->carry = 1;
+	if (ft_check_cod_and_arg(car, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+		if (codage[0] == REG_CODE)
+			arg[0] = car->reg[arg[0] - 1];
+		if (codage[1] == REG_CODE)
+			arg[1] = car->reg[arg[1] - 1];
+		car->reg[arg[2] - 1] = (unsigned int)(arg[0] & arg[1]);
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
 		else
-			champ->cars->carry = 0;
+			car->carry = 0;
 	}
 }
 
-void    ft_07_opcode(t_core *core, t_champ *champ) {
+void    ft_07_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (codage[1] == IND_CODE)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
-        if (codage[0] == REG_CODE)
-            arg[0] = champ->cars->reg[arg[0] - 1];
-        if (codage[1] == REG_CODE)
-            arg[1] = champ->cars->reg[arg[1] - 1];
-		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] | arg[1]);
-		if (!champ->cars->reg[arg[2] - 1])
-			champ->cars->carry = 1;
+	if (ft_check_cod_and_arg(car, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+		if (codage[0] == REG_CODE)
+			arg[0] = car->reg[arg[0] - 1];
+		if (codage[1] == REG_CODE)
+			arg[1] = car->reg[arg[1] - 1];
+		car->reg[arg[2] - 1] = (unsigned int)(arg[0] | arg[1]);
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
 		else
-			champ->cars->carry = 0;
+			car->carry = 0;
 	}
 }
 
-void    ft_08_opcode(t_core *core, t_champ *champ) {
+void    ft_08_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (codage[1] == 3)
 		arg[1] = ft_read_4(core, (arg[1] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg) && arg[2] < 17 && arg[2] > 0) {
-        if (codage[0] == REG_CODE)
-            arg[0] = champ->cars->reg[arg[0] - 1];
-        if (codage[1] == REG_CODE)
-            arg[1] = champ->cars->reg[arg[1] - 1];
-		champ->cars->reg[arg[2] - 1] = (unsigned int)(arg[0] ^ arg[1]);
-		if (!champ->cars->reg[arg[2] - 1])
-			champ->cars->carry = 1;
+	if (ft_check_cod_and_arg(car, codage, arg) && arg[2] < 17 && arg[2] > 0) {
+		if (codage[0] == REG_CODE)
+			arg[0] = car->reg[arg[0] - 1];
+		if (codage[1] == REG_CODE)
+			arg[1] = car->reg[arg[1] - 1];
+		car->reg[arg[2] - 1] = (unsigned int)(arg[0] ^ arg[1]);
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
 		else
-			champ->cars->carry = 0;
+			car->carry = 0;
 	}
 }
 
-void    ft_09_opcode(t_core *core, t_champ *champ) {
+void    ft_09_opcode(t_core *core, t_car *car) {
 	int shift;
 	// int r,c;
 
-	if (champ->cars->carry) {
-		shift = ft_read_2(core, champ->cars->pos % MEM_SIZE);
-        shift = champ->cars->pos + shift - 1;
-        if (shift < 0)
-            shift = MEM_SIZE + shift;
-		champ->cars->pos = shift % MEM_SIZE;
+	if (car->carry) {
+		shift = ft_read_2(core, car->pos % MEM_SIZE);
+		shift = car->pos + shift - 1;
+		if (shift < 0)
+			shift = MEM_SIZE + shift;
+		car->pos = shift % MEM_SIZE;
 		/*
 		if (core->v)
 		{
@@ -109,27 +109,27 @@ void    ft_09_opcode(t_core *core, t_champ *champ) {
 		*/
 	}
 	else
-		champ->cars->pos += 2;
+		car->pos += 2;
 }
 
-void    ft_10_opcode(t_core *core, t_champ *champ) {
+void    ft_10_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
-    int pos;
+	int pos;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == IND_CODE)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-        if (codage[0] == REG_CODE)
-            arg[0] = champ->cars->reg[arg[0] - 1];
-        if (codage[1] == REG_CODE)
-            arg[1] = champ->cars->reg[arg[1] - 1];
-        pos = (arg[0] + arg[1]) % IDX_MOD + pc - 1;
-        pos = pos % MEM_SIZE;
-		champ->cars->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, pos);
-    }
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		if (codage[0] == REG_CODE)
+			arg[0] = car->reg[arg[0] - 1];
+		if (codage[1] == REG_CODE)
+			arg[1] = car->reg[arg[1] - 1];
+		pos = (arg[0] + arg[1]) % IDX_MOD + pc - 1;
+		pos = pos % MEM_SIZE;
+		car->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, pos);
+	}
 }

@@ -5,16 +5,18 @@
 #include "corewar.h"
 #include "ncurs.h"
 
-void    ft_01_opcode(t_core *core, t_champ *champ) {
+void    ft_01_opcode(t_core *core, t_car *car) {
 	// int r,c;
+	t_champ *champ;
 
-	if (champ->id == ft_read_4(core, champ->cars->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
+	if (car->id == ft_read_4(core, car->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
+		champ = ft_get_champ(core, car->id);
 		champ->s_live++;
 		champ->last_live = core->cycle;
 		core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
 	}
-	champ->cars->live = 1; // каретка (процесс) жив в этом цикле
-	champ->cars->pos += 4;
+	car->live = 1; // каретка (процесс) жив в этом цикле
+	car->pos += 4;
 	/*
 	if (core->v)
 	{
@@ -34,48 +36,49 @@ void    ft_01_opcode(t_core *core, t_champ *champ) {
 	*/
 }
 
-void    ft_02_opcode(t_core *core, t_champ *champ) {
+void    ft_02_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int pc;
 	int *codage;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-		champ->cars->reg[arg[1] - 1] = (unsigned int)arg[0];
-        if (!arg[0])
-		    champ->cars->carry = 1;
-        else
-            champ->cars->carry = 0;
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		car->reg[arg[1] - 1] = (unsigned int)arg[0];
+		if (!arg[0])
+			car->carry = 1;
+		else
+			car->carry = 0;
 	}
 }
-
-void    ft_03_opcode(t_core *core, t_champ *champ) {
+void    ft_03_opcode(t_core *core, t_car *car) {
+	t_champ *champ;
 	int *arg;
 	int pc;
 	int *codage;
 	int ag, pos, r, c;
 
-	pc = champ->cars->pos % MEM_SIZE;
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
+	pc = car->pos % MEM_SIZE;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
+	if (ft_check_cod_and_arg(car, codage, arg)) {
 		if (codage[1] != 3)
-			champ->cars->reg[arg[1] - 1] = champ->cars->reg[arg[0] - 1];
+			car->reg[arg[1] - 1] = car->reg[arg[0] - 1];
 		else
 		{
-			ft_put_4(core, champ->cars->reg[arg[0] - 1], (arg[1] % IDX_MOD + pc) % MEM_SIZE);
+			ft_put_4(core, car->reg[arg[0] - 1], (arg[1] % IDX_MOD + pc) % MEM_SIZE);
 			if (core->v)
 			{
-				ag = champ->cars->reg[arg[0] - 1];
+				champ = ft_get_champ(core, car->id);
+				ag = car->reg[arg[0] - 1];
 				pos = (arg[1] % IDX_MOD + pc) % MEM_SIZE;
 				if (pos < 0)
 					pos = MEM_SIZE + pos;
-				champ->cars->rp = pos;
-				champ->cars->sw = 1;
+				car->rp = pos;
+				car->sw = 1;
 				r = 3+((pos%MEM_SIZE)/64)%64;
 				c = 3+(3*((pos%MEM_SIZE)%64))%192;
 				attron(A_BOLD);
@@ -110,32 +113,32 @@ void    ft_03_opcode(t_core *core, t_champ *champ) {
 	}
 }
 
-void    ft_04_opcode(t_core *core, t_champ *champ) {
+void    ft_04_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int *codage;
 
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-		champ->cars->reg[arg[2] - 1] = champ->cars->reg[arg[0] - 1] + champ->cars->reg[arg[1] - 1];
-        if (!champ->cars->reg[arg[2] - 1])
-            champ->cars->carry = 1;
-        else
-            champ->cars->carry = 0;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] + car->reg[arg[1] - 1];
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
+		else
+			car->carry = 0;
 	}
 }
 
-void    ft_05_opcode(t_core *core, t_champ *champ) {
+void    ft_05_opcode(t_core *core, t_car *car) {
 	int *arg;
 	int *codage;
 
-	codage = ft_get_codage(core, champ);
-	arg = ft_get_args(core, champ, codage);
-	if (ft_check_cod_and_arg(champ, codage, arg)) {
-		champ->cars->reg[arg[2] - 1] = champ->cars->reg[arg[0] - 1] - champ->cars->reg[arg[1] - 1];
-        if (!champ->cars->reg[arg[2] - 1])
-            champ->cars->carry = 1;
-        else
-            champ->cars->carry = 0;
+	codage = ft_get_codage(core, car);
+	arg = ft_get_args(core, car, codage);
+	if (ft_check_cod_and_arg(car, codage, arg)) {
+		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] - car->reg[arg[1] - 1];
+		if (!car->reg[arg[2] - 1])
+			car->carry = 1;
+		else
+			car->carry = 0;
 	}
 }

@@ -27,9 +27,11 @@ void ft_dump(t_core *core)
 	ft_printf("\n");
 }
 
-void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
+void    ft_copy_car(t_core *core, t_car *src, int pos)
 {
+	t_champ *champ;
     t_car   *car;
+	t_car   *tmp;
     int     i;
     int	r,c;
 
@@ -40,6 +42,7 @@ void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
 	car->sw = 0;
 	if (core->v)
 	{
+		champ = ft_get_champ(core, car->id);
 		r = 3 + ((pos%MEM_SIZE)/64)%64;
 		c = 3 + (3*((pos%MEM_SIZE)%64))%192;
 		attron(COLOR_PAIR(champ->c));
@@ -49,30 +52,27 @@ void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos)
 		attroff(COLOR_PAIR(champ->c));
 		refresh();
 	}
+	car->state = 1;
     car->live = src->live;
-    car->id = champ->id;
-    while (i < REG_NUMBER) {
-        car->reg[i] = src->reg[i];
-        i++;
-    }
-    car->opcode = (int)core->arena[pos];
-    core->qt_car++;
-    if (car->opcode > 0 && car->opcode < 17)
-        car->cycle = op_tab[car->opcode - 1].cycle + 1;
-//    champ->cars->prev->next = car; // вариант когда новый процесс становится в конец стека
-//    car->prev = champ->cars->prev;
-//    champ->cars->prev = car;
-//    car->next = champ->cars;
-    src->next->prev = car; // вариант когда новый процесс становится сразу после родителя
-    car->next = src->next;
-    src->next = car;
-    car->prev = src;
-
+	car->id = src->id;
+	while (i < REG_NUMBER) {
+		car->reg[i] = src->reg[i];
+		i++;
+	}
+	core->qt_car++;
+	car->cycle = -1;
+	car->opcode = 0;
+	tmp = core->cars;
+	while(tmp->next)
+		tmp = tmp->next;
+	tmp->next = car;
+	car->prev = tmp;
 }
 
 void    ft_create_car(t_core *core, t_champ *champ, int pos)
 {
 	t_car   *car;
+	t_car   *tmp;
 	int r,c;
 
 	car = (t_car *)ft_memalloc(sizeof(t_car));
@@ -91,25 +91,24 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
 	}
 	car->sw = 0;
 	car->rp = 0;
-	car->pos = pos;
-	car->id = champ->id;
-	car->reg[0] = (unsigned int)champ->id;
-	car->opcode = (int)core->arena[pos];
-	core->qt_car++;
-	if (car->opcode > 0 && car->opcode < 17)
-		car->cycle = op_tab[car->opcode - 1].cycle;  // must take value from op.c
-	if (champ->cars) {
-        champ->cars->prev->next = car;
-        car->prev = champ->cars->prev;
-        champ->cars->prev = car;
-		car->next = champ->cars;
-	}
-	else
-	{
-		champ->cars = car;
-		car->next = car;
-		car->prev = car;
-	}
+    car->pos = pos;
+    car->state = 1;
+    car->id = champ->id;
+    car->reg[0] = (unsigned int)champ->id;
+    core->qt_car++;
+    car->next = NULL;
+    car->prev = NULL;
+    car->cycle = -1;
+    if (core->cars)
+    {
+        tmp = core->cars;
+        while(tmp->next)
+            tmp = tmp->next;
+        tmp->next = car;
+        car->prev = tmp;
+    }
+    else
+        core->cars = car;
 }
 
 void    ft_place_champ(t_core *core)

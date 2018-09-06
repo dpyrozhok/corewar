@@ -14,6 +14,7 @@ typedef struct s_car	t_car;
 typedef struct          s_core {
 	unsigned char   *arena;
 	struct s_champ  *champs;
+	t_car    		*cars;
 	int             qt_champ;
 	int             qt_car;
 	int             init_nub;
@@ -39,7 +40,6 @@ struct          s_champ {
 	int             s_live;
 	int             last_live;
 	unsigned char   *code;
-	t_car    		*cars;
 	t_champ  		*next;
 	int				c;
 	int				cc;
@@ -48,6 +48,7 @@ struct          s_champ {
 struct              s_car {
 	int             pos;
 	int             carry;
+	int             state;
 	int             id;
 	int             live;
 	unsigned int    reg[REG_NUMBER];
@@ -59,32 +60,32 @@ struct              s_car {
 	int				rp;
 };
 
-
 void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
-void    ft_copy_car(t_core *core, t_champ *champ, t_car *src, int pos);
+void    ft_copy_car(t_core *core, t_car *src, int pos);
 void    ft_make_check(t_core *core);
-void    ft_opcode_switcher(t_core *core, t_champ *champ);
-int     *ft_get_codage(t_core *core, t_champ *champ);
-int     ft_check_cod_and_arg(t_champ *champ, int const *cod, int const *arg);
-int 	*ft_get_args(t_core *core, t_champ *champ, int const *cod);
+void    ft_opcode_switcher(t_core *core, t_car *car);
+t_champ *ft_get_champ(t_core *core, int id);
+int     *ft_get_codage(t_core *core, t_car *car);
+int     ft_check_cod_and_arg(t_car *car, int const *cod, int const *arg);
+int 	*ft_get_args(t_core *core, t_car *car, int const *cod);
 int     ft_read_1(t_core *core, int pos);
 int 	ft_read_2(t_core *core, int pos);
 int 	ft_read_4(t_core *core, int pos);
 void    ft_put_4(t_core *core, int arg, int pos);
-void    ft_01_opcode(t_core *core, t_champ *champ);
-void    ft_02_opcode(t_core *core, t_champ *champ);
-void    ft_03_opcode(t_core *core, t_champ *champ);
-void    ft_04_opcode(t_core *core, t_champ *champ);
-void    ft_05_opcode(t_core *core, t_champ *champ);
-void    ft_06_opcode(t_core *core, t_champ *champ);
-void    ft_07_opcode(t_core *core, t_champ *champ);
-void    ft_08_opcode(t_core *core, t_champ *champ);
-void    ft_09_opcode(t_core *core, t_champ *champ);
-void    ft_10_opcode(t_core *core, t_champ *champ);
-void    ft_11_opcode(t_core *core, t_champ *champ);
-void    ft_12_opcode(t_core *core, t_champ *champ);
-void    ft_13_opcode(t_core *core, t_champ *champ);
-void    ft_14_opcode(t_core *core, t_champ *champ);
-void    ft_15_opcode(t_core *core, t_champ *champ);
+void    ft_01_opcode(t_core *core, t_car *car);
+void    ft_02_opcode(t_core *core, t_car *car);
+void    ft_03_opcode(t_core *core, t_car *car);
+void    ft_04_opcode(t_core *core, t_car *car);
+void    ft_05_opcode(t_core *core, t_car *car);
+void    ft_06_opcode(t_core *core, t_car *car);
+void    ft_07_opcode(t_core *core, t_car *car);
+void    ft_08_opcode(t_core *core, t_car *car);
+void    ft_09_opcode(t_core *core, t_car *car);
+void    ft_10_opcode(t_core *core, t_car *car);
+void    ft_11_opcode(t_core *core, t_car *car);
+void    ft_12_opcode(t_core *core, t_car *car);
+void    ft_13_opcode(t_core *core, t_car *car);
+void    ft_14_opcode(t_core *core, t_car *car);
+void    ft_15_opcode(t_core *core, t_car *car);
 #endif

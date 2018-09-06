@@ -26,7 +26,8 @@ SRC = main.c \
 
 OBJ = $(SRC:.c=.o)
 
-SDL = -L./SDL2/build/.libs/ -lSDL2
+# SDL = -L./SDL2/build/.libs/ -lSDL2
+SDL = -F /Library/Frameworks -framework SDL2
 
 all: $(NAME)
 
