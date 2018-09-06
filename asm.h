@@ -25,24 +25,47 @@
 typedef struct      s_text
 {
     char            *line;
+	int             i;
     struct s_text   *next;
-    int             i;
 }                   t_text;
 
 typedef struct      s_label
 {
 	char            *name;
-	struct s_label  *next;
 	int             size;
+	struct s_label  *next;
 }                   t_label;
+
+typedef struct      s_comm
+{
+	char            *name;
+    char			comm_id;
+	char 			arg_id[3]; //1-T_REG 2-T_DIR 3-T_IND 0 - Net arg
+	char 			*arg[3];
+	char 			codage;
+	int             size;
+	int 			t_dir_size;
+	t_label 		*label;
+	struct s_comm  	*next;
+}                   t_comm;
+
 
 typedef struct		s_my
 {
     t_text			*head;
-	t_label			*label;
+	t_label			*label_s;
+	t_label			*label_e;
+	t_comm			*command_s;
+    t_comm			*command_e;
     int				fd;
 	int				x;
 	int				y;
+	int 			magic_num;
+    char            *botsiz;
+	char 			*name2;
+	char 			*comment;
+	char 			*file_name;
+
 }					t_my;
 
 #endif

@@ -174,34 +174,17 @@ void		ft_throu_empt_lines(t_my *inf)
     }
 }
 
-void		ft_read_head(t_my *inf, char *name)
+void		ft_read_head(t_my *inf)
 {
-	char	*name2;
-	char	*comment;
-	int		magic_num;
-
-
-	if ((g_fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
-					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-	{
-		ft_printf("error: open\n");
-		exit(1);
-	}
-	name2 = ft_memalloc(PROG_NAME_LENGTH + 4); // 132
-	comment = ft_memalloc(COMMENT_LENGTH + 4); // 2052
+	inf->name2 = ft_memalloc(PROG_NAME_LENGTH); // 128
+	inf->comment = ft_memalloc(COMMENT_LENGTH); // 2048
 
 	/// MAGIC NUMBER
-	magic_num = convert_end(COREWAR_EXEC_MAGIC);
-	write(g_fd, &magic_num, sizeof(magic_num));
+	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC);
 
 	///NAME
 	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, NAME_CMD_STRING, &name2);
-	write(g_fd, name2, 132);
-
-	/// BOTSIZE
-	char *botsize = "a"; // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	write(g_fd, &(botsize), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	ft_name_comment(*inf, NAME_CMD_STRING, &inf->name2);
 
 	///COMMENT
 	if (inf->head->next)
@@ -210,8 +193,7 @@ void		ft_read_head(t_my *inf, char *name)
 		inf->y++;
 	}
 	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, COMMENT_CMD_STRING, &comment);
-	write(g_fd, comment, 2052);
+	ft_name_comment(*inf, COMMENT_CMD_STRING, &inf->comment);
 	if (inf->head->next)
 	{
 		inf->head = inf->head->next;
@@ -219,87 +201,111 @@ void		ft_read_head(t_my *inf, char *name)
 	}
 }
 
-int     ft_reg(const char *line, t_my *inf, int end)
-{
-    int m;
-	int z;
 
-    if (line[inf->x] == 'r')
-    {
-        m = inf->x;
-        m++;
-        while (line[m] >= '0' && line[m] <= '9')
-            m++;
-        ft_go_space(line, &(m));
-		if (end == 0 && line[m] != '\0')
-			return (0);
-       if (end != 0 && line[m] != ',')
-            return (0);
-        if (((z = ft_atoi(line + inf->x + 1)) < 100) && z > 0)
-        {
-            inf->x = m + 1; // +1 propusk zapyatoi
-            return (1);
-        }
-        else
-            return (0);
-    }
-    else
-        return (0);
-}
 
-int 	ft_lable(t_my *inf)
+int 	ft_lable(t_my *inf, int arg_i)
 {
-	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',')
+	int 	start;
+	int 	end;
+
+	start = inf->x;
+	end = 0;
+	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
+			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
+	{
 		inf->x++;
+	}
+	end = inf->x;
+	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start + 1, end - start - 1);
 	inf->x++;
 	return (1);
 }
 
-int		ft_dir(const char *line, t_my *inf, int end)
+int     ft_num(t_my *inf, int arg_i, int m, int is_end)
+{
+    int     n_start;
+    int     n_end;
+    char    *line;
+
+    line = inf->head->line;
+    n_start = m;
+    if (line[m] == '-')
+        m++;
+    while(line[m] >= '0' && line[m] <= '9')
+        m++;
+    n_end = m;
+    ft_go_space(line, &(m));
+    if (is_end == 0 && line[m] != '\0')
+        return (0);
+    if (is_end != 0 && line[m] != ',')
+        return (0);
+    inf->x = m + 1;
+    inf->command_e->arg[arg_i] = ft_strsub(line, n_start, n_end - n_start);
+    return (1);
+}
+
+int		ft_dir(const char *line, t_my *inf, int is_end)
 {
 	int 	m;
+    int     arg_i;
 
 	if (line[inf->x] != '%')
 		return (0);
 	m = inf->x;
 	m++;
+    arg_i = 0;
+
+    while (inf->command_e->arg[arg_i] != NULL)
+        arg_i++;
+	inf->command_e->arg_id[arg_i] = 2;
+	inf->command_e->size += inf->command_e->t_dir_size;
 	if (line[m] == ':')
-		return (ft_lable(inf));
+		return (ft_lable(inf, arg_i));
 	else
-	{
-		if (line[m] == '-')
-			m++;
-		while(line[m] >= '0' && line[m] <= '9')
-			m++;
-		ft_go_space(line, &(m));
-		if (end == 0 && line[m] != '\0')
-			return (0);
-		if (end != 0 && line[m] != ',')
-			return (0);
-		inf->x = m + 1;
-		return (1);
-	}
+        return (ft_num(inf, arg_i, m, is_end));
 
 }
 
-int 	ft_ind(const char *line, t_my *inf, int end)
+int 	ft_ind(const char *line, t_my *inf, int is_end)
 {
-	int 	m;
+    int 	m;
+    int     arg_i;
 
-	m = inf->x;
-	if (line[m] == '-')
-		m++;
-	while(line[m] >= '0' && line[m] <= '9')
-		m++;
-	ft_go_space(line, &(m));
-	if (end == 0 && line[m] != '\0')
-		return (0);
-	if (end != 0 && line[m] != ',')
-		return (0);
-	inf->x = m + 1;
-	return (1);
+    m = inf->x;
+    arg_i = 0;
+    while (inf->command_e->arg[arg_i] != NULL)
+        arg_i++;
+	inf->command_e->arg_id[arg_i] = 3;
+	inf->command_e->size += 2;
+    if (line[m] == ':')
+        return (ft_lable(inf, arg_i));
+    else
+        return (ft_num(inf, arg_i, m, is_end));
 }
 
+int     ft_reg(const char *line, t_my *inf, int is_end)
+{
+    int 	m;
+    int		z;
+	int 	arg_i;
+
+	arg_i = 0;
+    if (line[inf->x] == 'r')
+    {
+		while (inf->command_e->arg[arg_i] != NULL)
+			arg_i++;
+		inf->command_e->arg_id[arg_i] = 1;
+		inf->command_e->size += 1;
+        m = inf->x;
+        m++;
+        if (line[m] >= '0' && line[m] <= '9' && ((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
+			return (ft_num(inf, arg_i, m, is_end));
+		else
+			return (0);
+    }
+    else
+        return (0);
+}
 int     ft_check_args(t_my *inf, char *line, int num_command)
 {
     int z;
@@ -338,15 +344,21 @@ void    ft_push_l_back(t_my *my, t_label *new)
 {
 	t_label  *p_l;
 
-	p_l = my->label;
-	while (p_l->next)
-	{
-		p_l = p_l->next;
-	}
-	if (p_l->name)
-		p_l->next = new;
-	else
-		my->label = new;
+	p_l = my->label_s;
+    if (my->label_e)
+        my->label_e->next = new;
+    else
+    {
+        while (p_l && p_l->next)
+        {
+            p_l = p_l->next;
+        }
+        if (p_l)
+            p_l->next = new;
+        else
+            my->label_s = new;
+    }
+    my->label_e = new;
 }
 
 void	ft_label(char *name, t_my *inf)
@@ -369,10 +381,65 @@ void	ft_label(char *name, t_my *inf)
 	ft_push_l_back(inf, new);
 }
 
-void		ft_read_body(t_my *inf, char *name)
+void    ft_push_c_back(t_my *my, t_comm *new)
+{
+    t_comm  *p_c;
+
+    p_c = my->command_s;
+    if (my->command_e)
+        my->command_e->next = new;
+    else
+    {
+        while (p_c && p_c->next)
+        {
+            p_c = p_c->next;
+        }
+        if (p_c)
+            p_c->next = new;
+        else
+            my->command_s = new;
+    }
+    my->command_e = new;
+}
+
+void	ft_command(int j, t_my *inf)
+{
+	t_comm	*new;
+
+	new = (t_comm*)malloc(sizeof(t_comm));
+	new->name = ft_strdup(OP(j).name);
+    new->next = NULL;
+    new->label = inf->label_e;
+    new->arg[0] = NULL;
+    new->arg[1] = NULL;
+    new->arg[2] = NULL;
+	new->arg_id[0] = 0;
+	new->arg_id[1] = 0;
+	new->arg_id[2] = 0;
+	new->size = 1;
+	new->t_dir_size = 0;
+	new->codage = 0;
+    ft_push_c_back(inf, new);
+}
+
+int 		size_dira(int j)
+{
+	if ((j >= 0 && j <= 7) || j == 12 || j == 15)
+		return (4);
+	else
+		return (2);
+}
+
+int 	codage(int j)
+{
+	return ((j == 0 || j == 8 || j == 12 || j == 14)  ? 0 : 1);
+}
+
+void		ft_read_body(t_my *inf)
 {
     int j;
 	t_text	*p_t;
+	char *line;
 
     char command_name[6];
 	while (inf->head)
@@ -383,12 +450,12 @@ void		ft_read_body(t_my *inf, char *name)
 		ft_bzero(command_name, 6);
 		inf->x = 0;
 		j = 0;
-		name = inf->head->line;
-		if (ft_is_label_name(name))
+		line = inf->head->line;
+		if (ft_is_label_name(line))
 		{
-			ft_label(name, inf);
-			ft_go_space(name, &(inf->x));
-			if(name[inf->x] == '\0')
+			ft_label(line, inf);
+			ft_go_space(line, &(inf->x));
+			if(line[inf->x] == '\0')
 			{
 				p_t = inf->head;
 				if (inf->head->next)
@@ -403,33 +470,38 @@ void		ft_read_body(t_my *inf, char *name)
 				ft_throu_empt_lines(inf);
 				if (inf->head == NULL)
 					return ; //vyhod dlya pustogo lebla
-				name = inf->head->line;
+                line = inf->head->line;
 			}
-			if (ft_is_label_name(name + inf->x))
+			if (ft_is_label_name(line + inf->x))
 				continue ;
 		}
-		ft_go_space(name, (&inf->x));
-		while (ft_isalpha(name[inf->x]) && j < 5){
-			command_name[j] = name[inf->x];
+		ft_go_space(line, (&inf->x));
+		while (ft_isalpha(line[inf->x]) && j < 5){
+			command_name[j] = line[inf->x];
 			j++;
 			inf->x++;
 		}
 		j = 0;
 		while (j < 16)
 		{
-			if (ft_strcmp(command_name, OP(j).name) == 0) {
-				j = j + 1;
-				write(g_fd, &j, 1);
+			if (ft_strcmp(command_name, OP(j).name) == 0)
+			{
+				ft_command(j, inf);
+//				write(g_fd, &j, 1);
 				break;
 			}
 			j++;
 		} // zapisali imya komandi v fail
-		if (ft_check_args(inf, name, j - 1) == 0)
+		inf->command_e->comm_id = (char)j;
+		inf->command_e->t_dir_size = size_dira(j);
+		inf->command_e->codage = (char)codage(j);
+		inf->command_e->size += (int)inf->command_e->codage;
+		if (ft_check_args(inf, line, j) == 0)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
 			exit(1);
 		}
-		free(name);
+		free(line);
 		p_t = inf->head;
 		inf->head = inf->head->next;
 		inf->y++;
@@ -441,13 +513,15 @@ void	ft_obnul(t_my	*inf, char *name)
 {
 	inf->fd = open(name, O_RDONLY);
 	inf->head = (t_text*)malloc(sizeof(t_text));
-	inf->label = (t_label*)malloc(sizeof(t_label));
-	inf->label->name = NULL;
-	inf->label->next = NULL;
+    inf->label_s = NULL;
+	inf->label_e = NULL;
+	inf->command_s = NULL;
+    inf->command_e = NULL;
 	inf->head->line = NULL;
 	inf->head->next = NULL;
 	inf->x = 1;
 	inf->y = 1;
+    inf->botsiz = "0";
 
 }
 
@@ -489,10 +563,10 @@ int 	ft_gnl_without_com(int fd, char **line)
 	int 	r;
 
 	r = get_next_line(fd, line);
-	if (ft_strchr(*line, '#'))
+	if (ft_strchr(*line, '#') || ft_strchr(*line, ';'))
 	{
 		i = 0;
-		while ((*line)[i] != '#')
+		while ((*line)[i] != '#' && (*line)[i] != ';')
 			i++;
 		new = (char*)malloc(sizeof(char) * (i + 2));
 		ft_strncpy(new, *line, i);
@@ -503,9 +577,64 @@ int 	ft_gnl_without_com(int fd, char **line)
 	return (r);
 }
 
+void	ft_check_end( t_my *inf)
+{
+	char 	c;
+
+	lseek(inf->fd,-1,SEEK_END);
+	read(inf->fd, &c, 1);
+	if (c != '\n')
+	{
+		ft_printf("Syntax error[TOKEN][%i:0]. Unexpected end of input \n", inf->y);
+		exit(1);
+	}
+}
+
+int	ft_pliz_write_to_file(t_my *inf)
+{
+	char	*botsize;
+	int 	i_bot_size;
+
+	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
+					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+	{
+		ft_printf("error: open\n");
+		exit(1);
+	}
+	char *nulek = {0};
+	write(g_fd, &inf->magic_num, sizeof(inf->magic_num));
+	write(g_fd, inf->name2, 128);
+	write(g_fd, &nulek, 4);
+	write(g_fd, &(nulek), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	write(g_fd, inf->comment, 2048);
+	write(g_fd, &nulek, 4);
+
+	return (0);
+}
+
+int 	ft_write_commands(t_my *inf)
+{
+	t_comm *start;
+	int change_comm_id;
+	int codage;
+
+	codage = 1;
+	start = inf->command_s;
+	if(start != NULL)
+	{
+		change_comm_id = start->comm_id + 1;
+		write(g_fd, &change_comm_id, 1);
+		if (start->codage)
+		{
+			codage>>;//
+
+			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
+		}
+	}
+}
+
 int		main(int ac, char **av)
 {
-	char *name;
 	t_my inf;
 	t_text *new_t;
 	int i;
@@ -516,7 +645,7 @@ int		main(int ac, char **av)
 	if (!ft_check_format(av[1]))
 		return (ft_printf("Not valid file\n"));
 	else
-		name = ft_get_name(av[1]);
+		inf.file_name = ft_get_name(av[1]);
 
 
 	//reading
@@ -533,23 +662,15 @@ int		main(int ac, char **av)
 	ft_print_txt(inf.head);
 
 
-	ft_read_head(&inf, name);
+	ft_read_head(&inf);
 //	ft_throu_empt_lines(&inf);
 
-	ft_read_body(&inf, name);
-
-	ft_printf("Writing output program to %s", name);
-	free(name);
-//	int fd = open(av[1], O_RDONLY), i;
-//	char *line;
-//	i = get_next_line(fd, &line);
-//	ft_printf("1:%i %s\n", i, line);
-//	i = get_next_line(fd, &line);
-//	ft_printf("2:%i %s\n", i, line);
-//	i = get_next_line(fd, &line);
-//	ft_printf("3:%i %s\n", i, line);
-//	ft_gnl_without_com(fd, &line);
-//	ft_printf("%s\n", line);
+	ft_read_body(&inf);
+	ft_check_end(&inf);
+	ft_pliz_write_to_file(&inf);
+	ft_write_commands(&inf);
+	ft_printf("Writing output program to %s", inf.file_name);
+	free(inf.file_name);
 	return (0);
 
 }
