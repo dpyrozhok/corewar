@@ -36,6 +36,12 @@ typedef struct      s_label
 	struct s_label  *next;
 }                   t_label;
 
+typedef struct     		s_use_label
+{
+	char 				*label;
+	struct s_use_label  *next;
+}                  		t_use_label;
+
 typedef struct      s_comm
 {
 	char            *name;
@@ -55,6 +61,7 @@ typedef struct		s_my
     t_text			*head;
 	t_label			*label_s;
 	t_label			*label_e;
+	t_use_label		*use_label;
 	t_comm			*command_s;
     t_comm			*command_e;
     int				fd;

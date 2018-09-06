@@ -202,15 +202,24 @@ void		ft_read_head(t_my *inf)
 	}
 }
 
+void	ft_push_u_front(t_use_label **begin_list, t_use_label *elem)
+{
+	if (!*begin_list)
+		elem->next = NULL;
+	else
+		elem->next = *begin_list;
+	*begin_list = elem;
+}
 
 
 int 	ft_lable(t_my *inf, int arg_i)
 {
 	int 	start;
 	int 	end;
+	t_use_label	*new;
 
+	new = (t_use_label*)malloc(sizeof(t_use_label));
 	start = inf->x;
-	end = 0;
 	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
 			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
 	{
@@ -218,6 +227,9 @@ int 	ft_lable(t_my *inf, int arg_i)
 	}
 	end = inf->x;
 	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start + 1, end - start - 1);
+	new->label = ft_strsub(inf->head->line, start + 2, end - start - 1);
+	new->next = NULL;
+	ft_push_u_front(&(inf->use_label), new);
 	inf->x++;
 	return (1);
 }
@@ -488,11 +500,10 @@ void		ft_read_body(t_my *inf)
 			if (ft_strcmp(command_name, OP(j).name) == 0)
 			{
 				ft_command(j, inf);
-//				write(g_fd, &j, 1);
 				break;
 			}
 			j++;
-		} // zapisali imya komandi v fail
+		}
 		inf->command_e->comm_id = (char)j;
 		inf->command_e->t_dir_size = size_dira(j);
 		inf->command_e->codage = (char)codage(j);
@@ -520,6 +531,7 @@ void	ft_obnul(t_my	*inf, char *name)
     inf->command_e = NULL;
 	inf->head->line = NULL;
 	inf->head->next = NULL;
+	inf->use_label = NULL;
 	inf->x = 1;
 	inf->y = 1;
     inf->botsiz = "0";
@@ -659,8 +671,6 @@ int 	arguements_to_file(t_comm *start)
 			ft_write_num(start->arg[i], start, start->t_dir_size);
 		if (start->arg_id[i] == 3 && start->arg[i][0] != ':')
 			ft_write_num(start->arg[i], start, 2);
-//		if (start->arg_id[i] == 3)
-//			ft_write_ind(start->arg[i], start);
 		i++;
 	}
 }
@@ -693,6 +703,31 @@ int 	ft_write_commands(t_my *inf)
 		arguements_to_file(start);
 		start = start->next;
 	}
+}
+
+int 			ft_check_correct_labels(t_my *inf)
+{
+	t_label *all;
+	t_use_label *to_check;
+
+	all = inf->label_s;
+	to_check = inf->use_label;
+	while (to_check != NULL)
+	{
+		while (all != NULL)
+			{
+			if (ft_strcmp(all->name, to_check->label) == 0)
+				break;
+			else
+				all = all->next;
+		}
+		if (all == NULL)
+			return (0);
+		else
+			to_check = to_check->next;
+		all = inf->label_s;
+	}
+	return (1);
 }
 
 int		main(int ac, char **av)
@@ -729,6 +764,11 @@ int		main(int ac, char **av)
 
 	ft_read_body(&inf);
 	ft_check_end(&inf);
+	if (ft_check_correct_labels(&inf) == 0)
+	{
+		ft_printf("Wrong ssilka to label\n");
+		exit(1);
+	}
 	ft_pliz_write_to_file(&inf);
 	ft_write_commands(&inf);
 	ft_printf("Writing output program to %s", inf.file_name);
