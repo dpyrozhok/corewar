@@ -44,14 +44,9 @@ char		*ft_get_name(char *name)
 	return (get);
 }
 
-static int	is_little(void)
+int	is_little(void)
 {
-	char		a;
-
-	a = 1;
-	if (a >> 2 == 0)
-		return (1);
-	return (0);
+	return(1);
 }
 
 int	ft_change(int ch)
@@ -76,6 +71,12 @@ int		convert_end(int new)
 		new = ft_change(new) + ch;
 	}
 	return (new);
+}
+
+int		convert_end_two_bytes(int new)
+{
+	if (is_little() == 1)
+			return (new << 8) | ((new >> 8) & 0xFF);
 }
 
 void		ft_go_space(char *line, int *x)
@@ -612,24 +613,85 @@ int	ft_pliz_write_to_file(t_my *inf)
 	return (0);
 }
 
+int 	ft_write_label(char *arg, t_comm *start, int size)
+{
+
+}
+
+int 	ft_write_num(char *arg, t_comm *start, int size)
+{
+	int 	ch;
+
+	ch = ft_atoi(arg);
+	if (size == 2)
+	{
+		ch = convert_end_two_bytes(ch);
+		write(g_fd, &ch, (size_t)size);
+		return (0);
+	}
+	ch = convert_end(ch);
+	write(g_fd, &ch, (size_t)size);
+	return (0);
+}
+
+int 		ft_write_reg(char *arg, t_comm *start)
+{
+	int 	ch;
+
+	ch = ft_atoi(arg);
+	write(g_fd, &ch, 1);
+}
+
+int 	arguements_to_file(t_comm *start)
+{
+	int 	i;
+
+	i = 0;
+	while(start->arg[i])
+	{
+		if (start->arg_id[i] == 1)
+			ft_write_reg(start->arg[i], start);
+		if (start->arg_id[i] == 2 && start->arg[i][0] == ':')
+			ft_write_label(start->arg[i], start, start->t_dir_size);
+		if (start->arg_id[i] == 3 && start->arg[i][0] == ':')
+			ft_write_label(start->arg[i], start, 2);
+		if (start->arg_id[i] == 2 && start->arg[i][0] != ':')
+			ft_write_num(start->arg[i], start, start->t_dir_size);
+		if (start->arg_id[i] == 3 && start->arg[i][0] != ':')
+			ft_write_num(start->arg[i], start, 2);
+//		if (start->arg_id[i] == 3)
+//			ft_write_ind(start->arg[i], start);
+		i++;
+	}
+}
+
 int 	ft_write_commands(t_my *inf)
 {
 	t_comm *start;
 	int change_comm_id;
 	int codage;
+	int i;
 
-	codage = 1;
+	i = 0;
+	codage = 0;
 	start = inf->command_s;
-	if(start != NULL)
+	while(start != NULL)
 	{
 		change_comm_id = start->comm_id + 1;
 		write(g_fd, &change_comm_id, 1);
 		if (start->codage)
 		{
-			codage>>;//
-
+			while (i < 3)
+			{
+				codage = codage | start->arg_id[i];
+				codage = codage<<2;
+				i++;
+			}
+			write(g_fd, &codage, 1);
 			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
 		}
+		arguements_to_file(start);
+		start = start->next;
 	}
 }
 
