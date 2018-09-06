@@ -219,15 +219,15 @@ int 	ft_lable(t_my *inf, int arg_i)
 	t_use_label	*new;
 
 	new = (t_use_label*)malloc(sizeof(t_use_label));
+	if (inf->head->line[inf->x] == '%')
+		inf->x++;
 	start = inf->x;
 	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
 			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
-	{
 		inf->x++;
-	}
 	end = inf->x;
 	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start + 1, end - start - 1);
-	new->label = ft_strsub(inf->head->line, start + 2, end - start - 1);
+	new->label = ft_strsub(inf->head->line, start + 1, end - start - 1);
 	new->next = NULL;
 	ft_push_u_front(&(inf->use_label), new);
 	inf->x++;
@@ -432,6 +432,10 @@ void	ft_command(int j, t_my *inf)
 	new->size = 1;
 	new->t_dir_size = 0;
 	new->codage = 0;
+	if (inf->command_s)
+		new->cidr = inf->command_e->cidr + 1;
+	else
+		new->cidr = 1;
     ft_push_c_back(inf, new);
 }
 
@@ -504,6 +508,11 @@ void		ft_read_body(t_my *inf)
 			}
 			j++;
 		}
+		if (j >=16)
+		{
+			ft_printf("Lexical error[TOKEN][%i:%i]. Not a command %s\n", inf->y, inf->x + 1, command_name);
+			exit(1);
+		}
 		inf->command_e->comm_id = (char)j;
 		inf->command_e->t_dir_size = size_dira(j);
 		inf->command_e->codage = (char)codage(j);
@@ -534,7 +543,7 @@ void	ft_obnul(t_my	*inf, char *name)
 	inf->use_label = NULL;
 	inf->x = 1;
 	inf->y = 1;
-    inf->botsiz = "0";
+    inf->botsize = 0;
 
 }
 
@@ -625,9 +634,59 @@ int	ft_pliz_write_to_file(t_my *inf)
 	return (0);
 }
 
-int 	ft_write_label(char *arg, t_comm *start, int size)
+int		ft_find_label(t_comm *all, char *ssilka)
 {
+	while (all != NULL)
+	{
+		if (ft_strcmp(all->label->name, ssilka) == 0)
+			return (all->cidr);
+		all = all->next;
+	}
+}
 
+int 	from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all)
+{
+	int		first;
+	int 	last;
+	int 	znak;
+	int 	size;
+
+	size = 0;
+	znak = (do_ssylk > do_comm) ? 1 : -1;
+	first = (do_ssylk < do_comm) ? do_ssylk : do_comm;
+	last = (do_ssylk > do_comm) ? do_ssylk : do_comm;
+	while (all != NULL)
+	{
+		if (all->cidr == first)
+		{
+			while (all->cidr != last)
+			{
+				size += all->size;
+				all = all->next;
+			}
+			return (size * znak);
+		}
+		all = all->next;
+	}
+}
+
+int 		ft_write_label(char *ssilka, t_comm *this_command, int size_byte, t_comm *all)
+{
+	int 	ch;
+	int 	do_ssylk;
+	int 	do_comm;
+
+	ch = 0;
+
+	do_ssylk = ft_find_label(all, ssilka + 1);
+	do_comm = this_command->cidr;
+	ch = from_ssylk_to_command(do_ssylk, do_comm, all);
+	if (size_byte == 2)
+		ch = convert_end_two_bytes(ch);
+	else
+		ch = convert_end(ch);
+	write(g_fd, &ch, (size_t)size_byte);
+	return (0);
 }
 
 int 	ft_write_num(char *arg, t_comm *start, int size)
@@ -654,23 +713,23 @@ int 		ft_write_reg(char *arg, t_comm *start)
 	write(g_fd, &ch, 1);
 }
 
-int 	arguements_to_file(t_comm *start)
+int 	arguements_to_file(t_comm *this_command, t_comm *all)
 {
 	int 	i;
 
 	i = 0;
-	while(start->arg[i])
+	while(this_command->arg[i])
 	{
-		if (start->arg_id[i] == 1)
-			ft_write_reg(start->arg[i], start);
-		if (start->arg_id[i] == 2 && start->arg[i][0] == ':')
-			ft_write_label(start->arg[i], start, start->t_dir_size);
-		if (start->arg_id[i] == 3 && start->arg[i][0] == ':')
-			ft_write_label(start->arg[i], start, 2);
-		if (start->arg_id[i] == 2 && start->arg[i][0] != ':')
-			ft_write_num(start->arg[i], start, start->t_dir_size);
-		if (start->arg_id[i] == 3 && start->arg[i][0] != ':')
-			ft_write_num(start->arg[i], start, 2);
+		if (this_command->arg_id[i] == 1)
+			ft_write_reg(this_command->arg[i], this_command);
+		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] == ':')
+			ft_write_label(this_command->arg[i], this_command, this_command->t_dir_size, all);
+		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] == ':')
+			ft_write_label(this_command->arg[i], this_command, 2, all);
+		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] != ':')
+			ft_write_num(this_command->arg[i], this_command, this_command->t_dir_size);
+		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] != ':')
+			ft_write_num(this_command->arg[i], this_command, 2);
 		i++;
 	}
 }
@@ -700,7 +759,7 @@ int 	ft_write_commands(t_my *inf)
 			write(g_fd, &codage, 1);
 			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
 		}
-		arguements_to_file(start);
+		arguements_to_file(start, inf->command_s);
 		start = start->next;
 	}
 }
@@ -728,6 +787,23 @@ int 			ft_check_correct_labels(t_my *inf)
 		all = inf->label_s;
 	}
 	return (1);
+}
+
+
+int 	ft_write_botsize(t_my *inf)
+{
+	t_comm *all;
+
+	all = inf->command_s;
+
+	while (all != NULL)
+	{
+		inf->botsize += all->size;
+		all = all->next;
+	}
+	lseek(g_fd,136,SEEK_SET);
+	inf->botsize = convert_end(inf->botsize);
+	write(g_fd, &inf->botsize, 4);
 }
 
 int		main(int ac, char **av)
@@ -771,6 +847,7 @@ int		main(int ac, char **av)
 	}
 	ft_pliz_write_to_file(&inf);
 	ft_write_commands(&inf);
+	ft_write_botsize(&inf);
 	ft_printf("Writing output program to %s", inf.file_name);
 	free(inf.file_name);
 	return (0);

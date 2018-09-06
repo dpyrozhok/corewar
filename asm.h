@@ -51,6 +51,7 @@ typedef struct      s_comm
 	char 			codage;
 	int             size;
 	int 			t_dir_size;
+	int 			cidr;
 	t_label 		*label;
 	struct s_comm  	*next;
 }                   t_comm;
@@ -68,7 +69,7 @@ typedef struct		s_my
 	int				x;
 	int				y;
 	int 			magic_num;
-    char            *botsiz;
+    int            	botsize;
 	char 			*name2;
 	char 			*comment;
 	char 			*file_name;
