@@ -13,6 +13,7 @@ void ft_dump(t_core *core)
     tmp = core->champs;
     while (tmp) {
         ft_printf("\n* Player %i, weighing %i bytes, \"%s\" (\"%s\") !", j, tmp->size, tmp->name, tmp->comment);
+        // printf("\n* Player %i, weighing %i bytes, \"%s\" (\"%s\") !", j, tmp->size, tmp->name, tmp->comment);
         j++;
         tmp = tmp->next;
     }
@@ -40,6 +41,7 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
     car->pos = pos;
 	car->rp = 0;
 	car->sw = 0;
+	car->id = src->id;
 	if (core->v)
 	{
 		champ = ft_get_champ(core, car->id);
@@ -50,11 +52,10 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 		mvprintw(r, c, "%02x", core->arena[pos]);
 		attroff(A_REVERSE);
 		attroff(COLOR_PAIR(champ->c));
-		refresh();
+	    refresh();
 	}
 	car->state = 1;
     car->live = src->live;
-	car->id = src->id;
 	while (i < REG_NUMBER) {
 		car->reg[i] = src->reg[i];
 		i++;
@@ -73,22 +74,9 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
 {
 	t_car   *car;
 	t_car   *tmp;
-	int r,c;
 
 	car = (t_car *)ft_memalloc(sizeof(t_car));
-	if (core->v)
-	{
-		r = 3 + (pos/64);
-		c = 3 + 3*(pos%64);
-		attron(COLOR_PAIR(core->a[pos]));
-		// attron(COLOR_PAIR(champ->c));
-		attron(A_REVERSE);
-		mvprintw(r, c, "%02x", core->arena[pos]);
-		attroff(A_REVERSE);
-		// attroff(COLOR_PAIR(champ->c));
-		attroff(COLOR_PAIR(core->a[pos]));
-		refresh();
-	}
+
 	car->sw = 0;
 	car->rp = 0;
     car->pos = pos;
@@ -163,12 +151,14 @@ void    ft_parse_champion(t_core *core, int fd)
 
 	champ = (t_champ *)ft_memalloc(sizeof(t_champ));
 	read(fd, &buf, 4);
+	ft_memset(&champ->name, '\0', PROG_NAME_LENGTH + 1);
 	read(fd, &champ->name, PROG_NAME_LENGTH);
 	champ->name[PROG_NAME_LENGTH] = '\0';
 	read(fd, &buf, 4);
 	read(fd, &buf, 4);
 	size = (unsigned int)((unsigned char)buf[0] << 24 | (unsigned char)buf[1] << 16 | (unsigned char)buf[2] << 8 | (unsigned char)buf[3]);
 	champ->size = size;
+	ft_memset(&champ->comment, '\0', COMMENT_LENGTH + 1);
 	read(fd, &champ->comment, COMMENT_LENGTH);
 	champ->comment[COMMENT_LENGTH] = '\0';
 	read(fd, &buf, 4);
@@ -221,5 +211,6 @@ int main(int ac, char **av)
 	}
 	ft_place_champ(core);
 	ft_start_fight(core);
+	// system("leaks corewar");
 	return 0;
 }

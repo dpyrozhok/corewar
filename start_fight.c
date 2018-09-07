@@ -3,6 +3,9 @@
 
 void    ft_get_n_car_value(t_core *core, t_car *car)
 {
+    t_champ *champ;
+    int r,c;
+ 
     if (core->arena[car->pos % MEM_SIZE] > 0 && core->arena[car->pos % MEM_SIZE] < 17)
     {
         car->opcode = core->arena[car->pos % MEM_SIZE];
@@ -10,6 +13,30 @@ void    ft_get_n_car_value(t_core *core, t_car *car)
     }
     else
         car->opcode = 0;
+    if (core->v)
+    {
+        champ = ft_get_champ(core, car->id);
+        r = 3 + ((car->pos%MEM_SIZE)/64)%64;
+        c = 3 + (3*((car->pos%MEM_SIZE)%64))%192;
+        // r = 3 + (pos/64);
+        // c = 3 + 3*(pos%64);
+        if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
+            attron(A_BOLD | COLOR_PAIR(champ->cc));
+        else
+            attron(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
+        // attron(COLOR_PAIR(core->a[pos]));
+        // attron(A_REVERSE);
+        // attron(COLOR_PAIR(champ->c));
+        mvprintw(r, c, "%02x", core->arena[car->pos%MEM_SIZE]);
+        // attroff(COLOR_PAIR(champ->c));
+        // attroff(A_REVERSE);
+        // attroff(COLOR_PAIR(core->a[pos]));
+        if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE])
+            attroff(A_BOLD | COLOR_PAIR(champ->cc));
+        else
+            attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
+        refresh();
+    }
 }
 
 void    ft_touch_car(t_core *core, t_car *car)
@@ -81,7 +108,7 @@ void    ft_touch_car(t_core *core, t_car *car)
             if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
             {
                 attron(A_BOLD | COLOR_PAIR(champ->cc));
-                ft_memset(core->a+car->pos%MEM_SIZE, champ->c, 1);
+                // ft_memset(core->a+car->pos%MEM_SIZE, champ->c, 1);
             }
             // else if (champ->cars->opcode == 1)
                 // attron(A_BOLD | COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]+10));
@@ -95,7 +122,7 @@ void    ft_touch_car(t_core *core, t_car *car)
             //// attron(A_REVERSE);
             mvprintw(r, c, "%02x", core->arena[car->pos%MEM_SIZE]);
             //// attroff(A_REVERSE);
-            if (car->opcode == 1)
+            if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE])
                 attroff(A_BOLD | COLOR_PAIR(champ->cc));
             // else if (champ->cars->opcode && champ->s_live)
                 // attroff(A_REVERSE | COLOR_PAIR(champ->c));
@@ -123,16 +150,18 @@ void    *myThreadFun(void *ptr)
                 (p)->t /= 10;
             else
             {
-                (p)->t = 0;
-                pthread_exit(NULL);
-                exit(131);
+                (p)->t = 1;
+                // pthread_exit(NULL);
+                // exit(131);
             }
         }
         else if (!(p)->p && (p)->t < 1000000 && ch == KEY_DOWN) // ARROW DOWN - speed down
             (p)->t *= 10;
-        else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
+        else if (!(p)->p && ch == ' ') // SPACE - pause
+        // else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
             (p)->p = 1;
-        else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
+        else if ((p)->p && ch == ' ') // SPACE - play
+        // else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
             (p)->p = 0;
     }
     endwin();
@@ -163,7 +192,7 @@ void    ft_start_fight(t_core *core) {
         pthread_create(&thread_id, NULL, myThreadFun, (void*)core);
         pthread_create(&thread_id2, NULL, myThreadFun2, NULL);
         // getch();
-        attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
+        // attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
         while (core->c_to_die > 0 && core->qt_car > 0) {
             tmp = core->cars;
             core->cycle++;
@@ -186,9 +215,8 @@ void    ft_start_fight(t_core *core) {
             {
                 attron(A_BOLD);
                 mvprintw(3, 200, "** PAUSED ** ");
-                refresh();
-            mvprintw(3, 200, "** RUNNING **");
                 attroff(A_BOLD);
+                refresh();
                 usleep(100000);
                 // continue ;
             }

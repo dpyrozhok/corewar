@@ -23,7 +23,6 @@ void print_win_params(WIN *p_win);
 void init_win_params2(WIN *p_win, int h, int w, int sy, int sx);
 void create_box(WIN *win, bool flag);
 
-
 int	init_help(void)
 {
 	initscr();
@@ -309,7 +308,7 @@ void	do_ncurs(t_core *core)
 	}
 
 	attron(A_BOLD);
-	// mvprintw(3, 200, "** RUNNING **");
+	mvprintw(3, 200, "** RUNNING **");
 	// mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
