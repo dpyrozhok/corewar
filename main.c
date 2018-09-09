@@ -41,6 +41,7 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
     car->pos = pos;
 	car->rp = 0;
 	car->sw = 0;
+	car->carry = src->carry;
 	car->id = src->id;
 	if (core->v)
 	{
@@ -54,7 +55,7 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 		attroff(COLOR_PAIR(champ->c));
 	    refresh();
 	}
-	car->state = 1;
+	car->state = src->state;
     car->live = src->live;
 	while (i < REG_NUMBER) {
 		car->reg[i] = src->reg[i];
@@ -67,6 +68,7 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 	while(tmp->next)
 		tmp = tmp->next;
 	tmp->next = car;
+    car->num = tmp->num + 1;
 	car->prev = tmp;
 }
 
@@ -87,12 +89,14 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
     car->next = NULL;
     car->prev = NULL;
     car->cycle = -1;
+    car->num = 1;
     if (core->cars)
     {
         tmp = core->cars;
         while(tmp->next)
             tmp = tmp->next;
         tmp->next = car;
+        car->num = tmp->num + 1;
         car->prev = tmp;
     }
     else
@@ -170,6 +174,7 @@ void    ft_parse_champion(t_core *core, int fd)
 	core->c = core->c % 4;
 	champ->cc = champ->c+10;
 	champ->s_live = 0;
+    champ->all_live = 0;
 	if (!core->champs)
 		core->champs = champ;
 	else

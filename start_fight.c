@@ -165,7 +165,7 @@ void    *myThreadFun(void *ptr)
             (p)->p = 0;
     }
     endwin();
-    SDL_Quit();
+    //SDL_Quit();
     exit(121);
     return (NULL);
 }
@@ -230,13 +230,15 @@ void    ft_start_fight(t_core *core) {
         if (core->l)
             mvprintw(core->l - 3, 201, "--------------------------------------------------]");
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
-        refresh(); getch(); endwin(); SDL_Quit();
+        refresh(); getch(); endwin(); //SDL_Quit();
     }
     else
     {
         while (core->c_to_die > 0 && core->qt_car > 0) {
             tmp = core->cars;
             core->cycle++;
+            if (core->cycle == 4316)
+            {}
             while (tmp->next)
                 tmp = tmp->next;
             while (tmp) {

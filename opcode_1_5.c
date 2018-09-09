@@ -9,12 +9,13 @@ void    ft_01_opcode(t_core *core, t_car *car) {
 	// int r,c;
 	t_champ *champ;
 
+    champ = ft_get_champ(core, car->id);
 	if (car->id == ft_read_4(core, car->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
-		champ = ft_get_champ(core, car->id);
-		champ->s_live++;
 		champ->last_live = core->cycle;
+        champ->s_live++;
 		core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
 	}
+    champ->all_live++;
 	car->live = 1; // каретка (процесс) жив в этом цикле
 	car->pos += 4;
 	/*
@@ -48,7 +49,7 @@ void    ft_02_opcode(t_core *core, t_car *car) {
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
 	if (ft_check_cod_and_arg(car, codage, arg)) {
 		car->reg[arg[1] - 1] = (unsigned int)arg[0];
-		if (!arg[0])
+		if (arg[0] == 0)
 			car->carry = 1;
 		else
 			car->carry = 0;
@@ -121,7 +122,7 @@ void    ft_04_opcode(t_core *core, t_car *car) {
 	arg = ft_get_args(core, car, codage);
 	if (ft_check_cod_and_arg(car, codage, arg)) {
 		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] + car->reg[arg[1] - 1];
-		if (!car->reg[arg[2] - 1])
+		if (car->reg[arg[2] - 1] == 0)
 			car->carry = 1;
 		else
 			car->carry = 0;
@@ -136,7 +137,7 @@ void    ft_05_opcode(t_core *core, t_car *car) {
 	arg = ft_get_args(core, car, codage);
 	if (ft_check_cod_and_arg(car, codage, arg)) {
 		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] - car->reg[arg[1] - 1];
-		if (!car->reg[arg[2] - 1])
+		if (car->reg[arg[2] - 1] == 0)
 			car->carry = 1;
 		else
 			car->carry = 0;

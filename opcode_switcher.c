@@ -48,10 +48,13 @@ int     ft_read_4(t_core *core, int pos) {
 
 void    ft_opcode_switcher(t_core *core, t_car *car)
 {
+    if (car->pos < 0)
+        car->pos = MEM_SIZE + car->pos;
     void (*f[])(t_core *core, t_car *car) = {ft_01_opcode, ft_02_opcode, ft_03_opcode,
                                              ft_04_opcode, ft_05_opcode, ft_06_opcode,
                                              ft_07_opcode, ft_08_opcode, ft_09_opcode,
                                              ft_10_opcode, ft_11_opcode, ft_12_opcode,
-                                             ft_13_opcode, ft_14_opcode, ft_15_opcode};
+                                             ft_13_opcode, ft_14_opcode, ft_15_opcode,
+                                             ft_16_opcode};
     f[car->opcode - 1](core, car);
 }

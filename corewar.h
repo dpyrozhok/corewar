@@ -38,6 +38,7 @@ struct          s_champ {
 	unsigned int    size;
 	int             id;
 	int             s_live;
+	int             all_live;
 	int             last_live;
 	unsigned char   *code;
 	t_champ  		*next;
@@ -49,6 +50,7 @@ struct              s_car {
 	int             pos;
 	int             carry;
 	int             state;
+	int 			num;
 	int             id;
 	int             live;
 	unsigned int    reg[REG_NUMBER];
@@ -88,4 +90,5 @@ void    ft_12_opcode(t_core *core, t_car *car);
 void    ft_13_opcode(t_core *core, t_car *car);
 void    ft_14_opcode(t_core *core, t_car *car);
 void    ft_15_opcode(t_core *core, t_car *car);
+void    ft_16_opcode(t_core *core, t_car *car);
 #endif
