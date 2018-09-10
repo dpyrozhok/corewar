@@ -105,7 +105,8 @@ void    ft_touch_car(t_core *core, t_car *car)
             r = 3 + ((car->pos%MEM_SIZE)/64)%64;
             c = 3 + (3*((car->pos%MEM_SIZE)%64))%192;
             // if (champ->cars->opcode == 1 && champ->s_live) // ? champ_id == opcode' id
-            if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
+            if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
+            // if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
             {
                 attron(A_BOLD | COLOR_PAIR(champ->cc));
                 // ft_memset(core->a+car->pos%MEM_SIZE, champ->c, 1);
@@ -122,7 +123,7 @@ void    ft_touch_car(t_core *core, t_car *car)
             //// attron(A_REVERSE);
             mvprintw(r, c, "%02x", core->arena[car->pos%MEM_SIZE]);
             //// attroff(A_REVERSE);
-            if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE])
+            if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE])
                 attroff(A_BOLD | COLOR_PAIR(champ->cc));
             // else if (champ->cars->opcode && champ->s_live)
                 // attroff(A_REVERSE | COLOR_PAIR(champ->c));
