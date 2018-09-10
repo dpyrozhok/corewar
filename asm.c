@@ -12,7 +12,6 @@
 #include "asm.h"
 
 int g_fd;
-int g_fd1;
 
 int		ft_check_format(char *name)
 {
@@ -27,9 +26,9 @@ int		ft_check_format(char *name)
 
 char		*ft_get_name(char *name)
 {
-	char	*get;
-	int		i;
-	char	*tmp;
+	char			*get;
+	unsigned int	i;
+	char			*tmp;
 
 	i = 0;
 	while (name[i] != '.')
@@ -67,12 +66,8 @@ unsigned int		convert_end(unsigned int ch, char bytes)
 	return (new);
 }
 
-//int		convert_end_two_bytes(int new)
-//{
-//			return (new << 8) | ((new >> 8) & 0xFF);
-//}
 
-void		ft_go_space(char *line, int *x)
+void		ft_go_space(char *line, unsigned int *x)
 {
     while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
     {
@@ -215,7 +210,9 @@ int 	ft_lable(t_my *inf, int arg_i)
 	new = (t_use_label*)malloc(sizeof(t_use_label));
 	if (inf->head->line[inf->x] == '%')
 		inf->x++;
-	start = (unsigned int)inf->x;
+	start = inf->x;
+	new->x = inf->x;
+	new->y = inf->y;
 	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
 			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
 		inf->x++;
@@ -228,10 +225,10 @@ int 	ft_lable(t_my *inf, int arg_i)
 	return (1);
 }
 
-int     ft_num(t_my *inf, int arg_i, int m, int is_end)
+int     ft_num(t_my *inf, int arg_i, unsigned int m, int is_end)
 {
-    int     n_start;
-    int     n_end;
+    unsigned int     n_start;
+    unsigned int     n_end;
     char    *line;
 
     line = inf->head->line;
@@ -253,7 +250,7 @@ int     ft_num(t_my *inf, int arg_i, int m, int is_end)
 
 int		ft_dir(const char *line, t_my *inf, int is_end)
 {
-	int 	m;
+	unsigned int 	m;
     int     arg_i;
 
 	if (line[inf->x] != '%')
@@ -275,7 +272,7 @@ int		ft_dir(const char *line, t_my *inf, int is_end)
 
 int 	ft_ind(const char *line, t_my *inf, int is_end)
 {
-    int 	m;
+    unsigned int 	m;
     int     arg_i;
 
     m = inf->x;
@@ -292,9 +289,9 @@ int 	ft_ind(const char *line, t_my *inf, int is_end)
 
 int     ft_reg(const char *line, t_my *inf, int is_end)
 {
-    int 	m;
-    int		z;
-	int 	arg_i;
+    unsigned int 	m;
+    int				z;
+	int 			arg_i;
 
 	arg_i = 0;
     if (line[inf->x] == 'r')
@@ -338,7 +335,7 @@ int     ft_check_args(t_my *inf, char *line, int num_command)
 
 int 	ft_is_label_name(char *name)
 {
-	int 	i;
+	unsigned int 	i;
 
 	i = 0;
 	ft_go_space(name, &i);
@@ -437,7 +434,7 @@ void	ft_command(int j, t_my *inf)
     ft_push_c_back(inf, new);
 }
 
-int 		size_dira(int j)
+unsigned int 		size_dira(int j)
 {
 	if ((j >= 0 && j <= 7) || j == 12 || j == 15)
 		return (4);
@@ -473,18 +470,12 @@ void		ft_read_body(t_my *inf)
 			if(line[inf->x] == '\0')
 			{
 				p_t = inf->head;
-//				if (inf->head->next)
-					inf->head = inf->head->next;
-//				else
-//				{
-//					ft_printf("Syntax error at token [%i:%i]. END (null)\n", inf->y, inf->x + 1);
-//					exit(1);
-//				}
+				inf->head = inf->head->next;
 				free(p_t);
 				inf->y++;
 				ft_throu_empt_lines(inf);
 				if (inf->head == NULL)
-					return ; //vyhod dlya pustogo lebla
+					return ;
                 line = inf->head->line;
 			}
 			if (ft_is_label_name(line + inf->x))
@@ -578,9 +569,9 @@ void    ft_print_txt(t_text *t)
 
 int 	ft_gnl_without_com(int fd, char **line)
 {
-	char 	*new;
-	int 	i;
-	int 	r;
+	char			*new;
+	unsigned int	i;
+	int				r;
 
 	r = get_next_line(fd, line);
 	if (ft_strchr(*line, '#') || ft_strchr(*line, ';'))
@@ -591,7 +582,7 @@ int 	ft_gnl_without_com(int fd, char **line)
 		new = (char*)malloc(sizeof(char) * (i + 2));
 		ft_strncpy(new, *line, i);
 		new[i] = '\0';
-		ft_memdel(line);
+		ft_memdel((void**)line);
 		*line = new;
 	}
 	return (r);
@@ -612,9 +603,6 @@ void	ft_check_end( t_my *inf)
 
 int	ft_pliz_write_to_file(t_my *inf)
 {
-	char	*botsize;
-	int 	i_bot_size;
-
 	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
 					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
@@ -625,7 +613,7 @@ int	ft_pliz_write_to_file(t_my *inf)
 	write(g_fd, &inf->magic_num, sizeof(inf->magic_num));
 	write(g_fd, inf->name2, 128);
 	write(g_fd, &nulek, 4);
-	write(g_fd, &(nulek), 4); // botsize nujno budet naiti!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	write(g_fd, &(nulek), 4);
 	write(g_fd, inf->comment, 2048);
 	write(g_fd, &nulek, 4);
 
@@ -643,6 +631,7 @@ int 	ft_empty_label(t_my *inf, char *ssilka)
 			return (all->cidr);
 		all = all->next;
 	}
+	return (-1);
 }
 
 int		ft_find_label(t_comm *all, char *ssilka, t_my *inf)
@@ -683,20 +672,21 @@ int 	from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all)
 		}
 		all = all->next;
 	}
+	return (-1);
 }
 
 int 		ft_write_label(t_my *inf, char *ssilka, t_comm *this_command, int size_byte)
 {
-	int 	ch;
+	unsigned int 	ch;
 	int 	do_ssylk;
 	int 	do_comm;
 	t_comm	*all;
 
-	ch = 0;
+
 	all = inf->command_s;
 	do_ssylk = ft_find_label(all, ssilka + 1, inf);
 	do_comm = this_command->cidr;
-	ch = from_ssylk_to_command(do_ssylk, do_comm, all);
+	ch = (unsigned)from_ssylk_to_command(do_ssylk, do_comm, all);
 	if (size_byte == 2)
 		ch = convert_end(ch, 2);
 	else
@@ -705,7 +695,7 @@ int 		ft_write_label(t_my *inf, char *ssilka, t_comm *this_command, int size_byt
 	return (0);
 }
 
-int 	ft_write_num(char *arg, t_comm *start, int size) {
+int 	ft_write_num(char *arg, unsigned int size) {
 	unsigned int ch;
 
 	ch = (unsigned int)ft_atoi(arg);
@@ -723,7 +713,7 @@ int 	ft_write_num(char *arg, t_comm *start, int size) {
 	return (0);
 }
 
-int 		ft_write_reg(char *arg, t_comm *start)
+void 		ft_write_reg(char *arg)
 {
 	int 	ch;
 
@@ -731,7 +721,7 @@ int 		ft_write_reg(char *arg, t_comm *start)
 	write(g_fd, &ch, 1);
 }
 
-int 	arguements_to_file(t_my *inf, t_comm *this_command, t_comm *all)
+void 	arguements_to_file(t_my *inf, t_comm *this_command)
 {
 	int 	i;
 
@@ -739,20 +729,20 @@ int 	arguements_to_file(t_my *inf, t_comm *this_command, t_comm *all)
 	while(i < 3 && this_command->arg[i])
 	{
 		if (this_command->arg_id[i] == 1)
-			ft_write_reg(this_command->arg[i], this_command);
+			ft_write_reg(this_command->arg[i]);
 		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] == ':')
 			ft_write_label(inf, this_command->arg[i], this_command, this_command->t_dir_size);
 		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] == ':')
 			ft_write_label(inf, this_command->arg[i], this_command, 2);
 		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] != ':')
-			ft_write_num(this_command->arg[i], this_command, this_command->t_dir_size);
+			ft_write_num(this_command->arg[i], this_command->t_dir_size);
 		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] != ':')
-			ft_write_num(this_command->arg[i], this_command, 2);
+			ft_write_num(this_command->arg[i], 2);
 		i++;
 	}
 }
 
-int 	ft_write_commands(t_my *inf)
+void 	ft_write_commands(t_my *inf)
 {
 	t_comm *start;
 	int change_comm_id;
@@ -768,8 +758,6 @@ int 	ft_write_commands(t_my *inf)
 		write(g_fd, &change_comm_id, 1);
 		if (start->codage)
 		{
-			if (start->cidr	== 11)
-				;
 			while (i < 3)
 			{
 				codage = codage | start->arg_id[i];
@@ -777,16 +765,15 @@ int 	ft_write_commands(t_my *inf)
 				i++;
 			}
 			write(g_fd, &codage, 1);
-			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
 		}
-		arguements_to_file(inf, start, inf->command_s);
+		arguements_to_file(inf, start);
 		start = start->next;
 		codage = 0;
 		i = 0;
 	}
 }
 
-int 			ft_check_correct_labels(t_my *inf)
+t_use_label 			*ft_check_correct_labels(t_my *inf)
 {
 	t_label *all;
 	t_use_label *to_check;
@@ -803,16 +790,16 @@ int 			ft_check_correct_labels(t_my *inf)
 				all = all->next;
 		}
 		if (all == NULL)
-			return (0);
+			return (to_check);
 		else
 			to_check = to_check->next;
 		all = inf->label_s;
 	}
-	return (1);
+	return (NULL);
 }
 
 
-int 	ft_write_botsize(t_my *inf)
+void 	ft_write_botsize(t_my *inf)
 {
 	t_comm *all;
 
@@ -832,11 +819,12 @@ int		main(int ac, char **av)
 {
 	t_my inf;
 	t_text *new_t;
+	t_use_label	*p_use_l;
 	int i;
 
 	i = 1;
 	if (ac < 2 || ac > 3)
-		return (ft_printf("Invalid number of arguements")); // inform invalid number of arguement
+		return (ft_printf("Invalid number of arguements"));
 	if (!ft_check_format(av[1]))
 		return (ft_printf("Not valid file\n"));
 	else
@@ -858,13 +846,12 @@ int		main(int ac, char **av)
 
 
 	ft_read_head(&inf);
-//	ft_throu_empt_lines(&inf);
 
 	ft_read_body(&inf);
 	ft_check_end(&inf);
-	if (ft_check_correct_labels(&inf) == 0)
+	if ((p_use_l = ft_check_correct_labels(&inf)) && p_use_l != NULL)
 	{
-		ft_printf("Wrong ssilka to label\n");
+		ft_printf("Syntax error[TOKEN][%i:%i].Wrong ssilka to label (%s)\n", p_use_l->y, p_use_l->x, p_use_l->label);
 		exit(1);
 	}
 	ft_pliz_write_to_file(&inf);

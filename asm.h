@@ -41,6 +41,8 @@ typedef struct     		s_use_label
 {
 	char 				*label;
 	struct s_use_label  *next;
+	unsigned int		x;
+	unsigned int		y;
 }                  		t_use_label;
 
 typedef struct      s_comm
@@ -51,7 +53,7 @@ typedef struct      s_comm
 	char 			*arg[3];
 	char 			codage;
 	int             size;
-	int 			t_dir_size;
+	unsigned int 	t_dir_size;
 	int 			cidr;
 	t_label 		*label;
 	struct s_comm  	*next;
@@ -67,10 +69,10 @@ typedef struct		s_my
 	t_comm			*command_s;
     t_comm			*command_e;
     int				fd;
-	int				x;
-	int				y;
+	unsigned int	x;
+	unsigned int	y;
 	int 			magic_num;
-    int            	botsize;
+    unsigned int	botsize;
 	char 			*name2;
 	char 			*comment;
 	char 			*file_name;
