@@ -33,6 +33,7 @@ typedef struct      s_label
 {
 	char            *name;
 	int             size;
+	int 			cidr;
 	struct s_label  *next;
 }                   t_label;
 

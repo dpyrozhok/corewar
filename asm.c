@@ -44,40 +44,33 @@ char		*ft_get_name(char *name)
 	return (get);
 }
 
-int	is_little(void)
+unsigned int		convert_end(unsigned int ch, char bytes)
 {
-	return(1);
-}
+	unsigned char *new_ptr;
+	unsigned char *ch_ptr;
+	unsigned int new;
 
-int	ft_change(int ch)
-{
-	int		new;
-
-	new = ch & 0xff;
-	ch = (ch & 0xff00) / 0xff;
-	ch = ch + (new * 0x100);
-	return (ch);
-}
-
-int		convert_end(int new)
-{
-	int ch;
-
-	if (is_little() == 1)
+	new_ptr = (unsigned char *)&new;
+	ch_ptr = (unsigned char *)&ch;
+	if (bytes == 4)
 	{
-		ch = new & 0xffff;
-		new = (new & 0xffff0000) / 0xffff;
-		ch = ft_change(ch) * 0x10000;
-		new = ft_change(new) + ch;
+		new_ptr[0] = ch_ptr[3];
+		new_ptr[1] = ch_ptr[2];
+		new_ptr[2] = ch_ptr[1];
+		new_ptr[3] = ch_ptr[0];
+	}
+	if (bytes == 2)
+	{
+		new_ptr[0] = ch_ptr[1];
+		new_ptr[1] = ch_ptr[0];
 	}
 	return (new);
 }
 
-int		convert_end_two_bytes(int new)
-{
-	if (is_little() == 1)
-			return (new << 8) | ((new >> 8) & 0xFF);
-}
+//int		convert_end_two_bytes(int new)
+//{
+//			return (new << 8) | ((new >> 8) & 0xFF);
+//}
 
 void		ft_go_space(char *line, int *x)
 {
@@ -181,7 +174,7 @@ void		ft_read_head(t_my *inf)
 	inf->comment = ft_memalloc(COMMENT_LENGTH); // 2048
 
 	/// MAGIC NUMBER
-	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC);
+	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC, 4);
 
 	///NAME
 	ft_throu_empt_lines(inf);
@@ -214,20 +207,21 @@ void	ft_push_u_front(t_use_label **begin_list, t_use_label *elem)
 
 int 	ft_lable(t_my *inf, int arg_i)
 {
-	int 	start;
-	int 	end;
-	t_use_label	*new;
+	unsigned int 	start;
+	int 			end;
+	t_use_label		*new;
+
 
 	new = (t_use_label*)malloc(sizeof(t_use_label));
 	if (inf->head->line[inf->x] == '%')
 		inf->x++;
-	start = inf->x;
+	start = (unsigned int)inf->x;
 	while (inf->head->line[inf->x] != '\0' && inf->head->line[inf->x] != ',' &&
 			inf->head->line[inf->x] != ' ' && inf->head->line[inf->x] != '\t')
 		inf->x++;
 	end = inf->x;
-	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start + 1, end - start - 1);
-	new->label = ft_strsub(inf->head->line, start + 1, end - start - 1);
+	inf->command_e->arg[arg_i] = ft_strsub(inf->head->line, start, end - start);
+	new->label = ft_strsub(inf->head->line, start, end - start);
 	new->next = NULL;
 	ft_push_u_front(&(inf->use_label), new);
 	inf->x++;
@@ -382,6 +376,10 @@ void	ft_label(char *name, t_my *inf)
 	ft_go_space(inf->head->line, &inf->x);
 	i = inf->x;
 	new = (t_label*)malloc(sizeof(t_label));
+	if (inf->command_e)
+		new->cidr = inf->command_e->cidr + 1;
+	else
+		new->cidr = 1;
 	new->next = NULL;
 	new->size = -1;
 	while (name[i++] && name[i] != LABEL_CHAR);
@@ -449,7 +447,7 @@ int 		size_dira(int j)
 
 int 	codage(int j)
 {
-	return ((j == 0 || j == 8 || j == 12 || j == 14)  ? 0 : 1);
+	return ((j == 0 || j == 8 || j == 11 || j == 14)  ? 0 : 1);
 }
 
 void		ft_read_body(t_my *inf)
@@ -475,13 +473,13 @@ void		ft_read_body(t_my *inf)
 			if(line[inf->x] == '\0')
 			{
 				p_t = inf->head;
-				if (inf->head->next)
+//				if (inf->head->next)
 					inf->head = inf->head->next;
-				else
-				{
-					ft_printf("Syntax error at token [%i:%i]. END (null)\n", inf->y, inf->x + 1);
-					exit(1);
-				}
+//				else
+//				{
+//					ft_printf("Syntax error at token [%i:%i]. END (null)\n", inf->y, inf->x + 1);
+//					exit(1);
+//				}
 				free(p_t);
 				inf->y++;
 				ft_throu_empt_lines(inf);
@@ -634,14 +632,31 @@ int	ft_pliz_write_to_file(t_my *inf)
 	return (0);
 }
 
-int		ft_find_label(t_comm *all, char *ssilka)
+int 	ft_empty_label(t_my *inf, char *ssilka)
 {
+	t_label *all;
+
+	all = inf->label_s;
 	while (all != NULL)
 	{
+		if (ft_strcmp(all->name, ssilka) == 0)
+			return (all->cidr);
+		all = all->next;
+	}
+}
+
+int		ft_find_label(t_comm *all, char *ssilka, t_my *inf)
+{
+	while (all->label == NULL)
+		all = all->next;
+	while (all != NULL)
+	{
+
 		if (ft_strcmp(all->label->name, ssilka) == 0)
 			return (all->cidr);
 		all = all->next;
 	}
+	return (ft_empty_label(inf, ssilka));
 }
 
 int 	from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all)
@@ -659,7 +674,7 @@ int 	from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all)
 	{
 		if (all->cidr == first)
 		{
-			while (all->cidr != last)
+			while (all && all->cidr != last)
 			{
 				size += all->size;
 				all = all->next;
@@ -670,38 +685,41 @@ int 	from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all)
 	}
 }
 
-int 		ft_write_label(char *ssilka, t_comm *this_command, int size_byte, t_comm *all)
+int 		ft_write_label(t_my *inf, char *ssilka, t_comm *this_command, int size_byte)
 {
 	int 	ch;
 	int 	do_ssylk;
 	int 	do_comm;
+	t_comm	*all;
 
 	ch = 0;
-
-	do_ssylk = ft_find_label(all, ssilka + 1);
+	all = inf->command_s;
+	do_ssylk = ft_find_label(all, ssilka + 1, inf);
 	do_comm = this_command->cidr;
 	ch = from_ssylk_to_command(do_ssylk, do_comm, all);
 	if (size_byte == 2)
-		ch = convert_end_two_bytes(ch);
+		ch = convert_end(ch, 2);
 	else
-		ch = convert_end(ch);
+		ch = convert_end(ch, 4);
 	write(g_fd, &ch, (size_t)size_byte);
 	return (0);
 }
 
-int 	ft_write_num(char *arg, t_comm *start, int size)
-{
-	int 	ch;
+int 	ft_write_num(char *arg, t_comm *start, int size) {
+	unsigned int ch;
 
-	ch = ft_atoi(arg);
-	if (size == 2)
-	{
-		ch = convert_end_two_bytes(ch);
-		write(g_fd, &ch, (size_t)size);
+	ch = (unsigned int)ft_atoi(arg);
+	if (size == 2) {
+		ch = convert_end(ch, 2);
+		write(g_fd, &ch, size);
 		return (0);
 	}
-	ch = convert_end(ch);
-	write(g_fd, &ch, (size_t)size);
+	if (ch < 0) {
+		write(g_fd, &ch, size);
+		return (0);
+	}
+	ch = convert_end(ch, 4);
+	write(g_fd, &ch, size);
 	return (0);
 }
 
@@ -713,19 +731,19 @@ int 		ft_write_reg(char *arg, t_comm *start)
 	write(g_fd, &ch, 1);
 }
 
-int 	arguements_to_file(t_comm *this_command, t_comm *all)
+int 	arguements_to_file(t_my *inf, t_comm *this_command, t_comm *all)
 {
 	int 	i;
 
 	i = 0;
-	while(this_command->arg[i])
+	while(i < 3 && this_command->arg[i])
 	{
 		if (this_command->arg_id[i] == 1)
 			ft_write_reg(this_command->arg[i], this_command);
 		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] == ':')
-			ft_write_label(this_command->arg[i], this_command, this_command->t_dir_size, all);
+			ft_write_label(inf, this_command->arg[i], this_command, this_command->t_dir_size);
 		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] == ':')
-			ft_write_label(this_command->arg[i], this_command, 2, all);
+			ft_write_label(inf, this_command->arg[i], this_command, 2);
 		if (this_command->arg_id[i] == 2 && this_command->arg[i][0] != ':')
 			ft_write_num(this_command->arg[i], this_command, this_command->t_dir_size);
 		if (this_command->arg_id[i] == 3 && this_command->arg[i][0] != ':')
@@ -750,6 +768,8 @@ int 	ft_write_commands(t_my *inf)
 		write(g_fd, &change_comm_id, 1);
 		if (start->codage)
 		{
+			if (start->cidr	== 11)
+				;
 			while (i < 3)
 			{
 				codage = codage | start->arg_id[i];
@@ -759,8 +779,10 @@ int 	ft_write_commands(t_my *inf)
 			write(g_fd, &codage, 1);
 			//ZAPIS CODAGE I ARGUMENTOV// LABLOV PO ETIM ARGUMENTAM // I BOT_SIZE//
 		}
-		arguements_to_file(start, inf->command_s);
+		arguements_to_file(inf, start, inf->command_s);
 		start = start->next;
+		codage = 0;
+		i = 0;
 	}
 }
 
@@ -775,7 +797,7 @@ int 			ft_check_correct_labels(t_my *inf)
 	{
 		while (all != NULL)
 			{
-			if (ft_strcmp(all->name, to_check->label) == 0)
+			if (ft_strcmp(all->name, to_check->label + 1) == 0)
 				break;
 			else
 				all = all->next;
@@ -802,7 +824,7 @@ int 	ft_write_botsize(t_my *inf)
 		all = all->next;
 	}
 	lseek(g_fd,136,SEEK_SET);
-	inf->botsize = convert_end(inf->botsize);
+	inf->botsize = convert_end(inf->botsize, 4);
 	write(g_fd, &inf->botsize, 4);
 }
 
