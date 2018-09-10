@@ -13,10 +13,90 @@
   <component name="ChangeListManager">
     <list default="true" id="3083a0ac-2024-428d-8636-f720f8640b7b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/42.s" afterPath="$PROJECT_DIR$/42.s" />
+      <change beforePath="$PROJECT_DIR$/Car.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Car.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Death.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Gagnant.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Gagnant.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Octobre_Rouge_V4.2.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Octobre_Rouge_V4.2.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Survivor.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Torpille.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/a.out" afterPath="" />
       <change beforePath="$PROJECT_DIR$/asm.c" afterPath="$PROJECT_DIR$/asm.c" />
-      <change beforePath="$PROJECT_DIR$/asm.h" afterPath="$PROJECT_DIR$/asm.h" />
+      <change beforePath="$PROJECT_DIR$/barriere.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/barriere.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/bguy/sam_2.0.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/bjacob/doge.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/brandazz/Rainbow_dash.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/cdivry/youforkmytralala.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/clafleur/big_feet.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/dcohen/loose.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/ekocevar/mandragore.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/esusseli/gedeon.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/evlasova/terminator.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/fcorre/ultimate-surrender.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gbir/_.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gjestin/salamahenagalabadoun.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gleger/Machine-gun.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gmange/corelol.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gpetrov/MarineKing.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/gudepard/Kappa.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/hmichals/Wall.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/hmoutaou/Misaka_Mikoto.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/kelickel/Varimathras.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/kmonrose/justin_bee.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/ldesgoui/_honeybadger.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/lseguin/skynet.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/lsirigna/live.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/mbacoux/meowluigi.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/mconraux/dubo.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/rabid-on/jinx.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/results.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/rmasse/THUNDER.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/sbuono/Asombra.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/srabah-m/littlepuppy.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/tdemay/champ.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/vrey/darksasuke.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2014/ybouvet/casimir.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/adenis/Explosive_Kitty.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/agregoir/Kittystrophic.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/gnebie/ultima.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/iburel/gateau.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/jaustry/mise_a_jour_windows95.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/nolivier/run_Kitty_RUN.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/pzarmehr/overwatch.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/championships/2017/tbillard/Douceur_power.s" afterPath="" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CORE" afterPath="$PROJECT_DIR$/cmake-build-debug/CORE" />
+      <change beforePath="$PROJECT_DIR$/ex.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ex.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/bee_gees.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/bigzork.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/fluttershy.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/helltrain.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/turtle.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/zork.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/examples/zork.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jumper.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jumper.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lde.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/leeloo.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/mat.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/maxidef.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/maxidef.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/mortel.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/mortel.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/new.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/sebc.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/slider2.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/slider2.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/tdc2.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/tdc3.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/tdc4.s" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/toto.cor" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/toto.s" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,21 +119,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="42.s" pinned="false" current-in-tab="false">
+      <file leaf-file-name="42.s" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/42.s">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="15" />
+            <state relative-caret-position="360">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="asm.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="asm.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asm.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
-              <caret line="680" column="21" lean-forward="true" selection-start-line="680" selection-start-column="21" selection-end-line="680" selection-end-column="21" />
+            <state relative-caret-position="460">
+              <caret line="950" column="17" lean-forward="true" selection-start-line="950" selection-start-column="17" selection-end-line="950" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ft_memdel.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libft/ft_memdel.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,8 +152,8 @@
       <file leaf-file-name="asm.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/asm.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="35" />
+            <state relative-caret-position="187">
+              <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -92,6 +182,10 @@
       <find>convert_end_two_bytes</find>
       <find>use_la</find>
       <find>Sy</find>
+      <find>free</find>
+      <find>malloc</find>
+      <find>read_</find>
+      <find>exit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,7 +259,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.CORE">
-    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CORE" RUN_TARGET_NAME="CORE" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
     </configuration>
     <configuration name="CORE" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="42.s" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CORE" TARGET_NAME="CORE" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CORE" RUN_TARGET_NAME="CORE">
@@ -192,12 +286,12 @@
       <workItem from="1536234350773" duration="3000" />
       <workItem from="1536234363295" duration="4163000" />
       <workItem from="1536242676029" duration="182000" />
-      <workItem from="1536574873058" duration="12045000" />
+      <workItem from="1536574873058" duration="17150000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16393000" />
+    <option name="totallyTimeSpent" value="21498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="362" y="23" width="2198" height="1258" extended-state="0" />
@@ -253,31 +347,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>686</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>768</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>737</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>706</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>846</line>
-          <option name="timeStamp" value="44" />
+          <line>622</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -402,24 +476,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/asm.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="35" />
+        <state relative-caret-position="187">
+          <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/42.s">
+    <entry file="file://$PROJECT_DIR$/libft/ft_memdel.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="15" />
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asm.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="680" column="21" lean-forward="true" selection-start-line="680" selection-start-column="21" selection-end-line="680" selection-end-column="21" />
+        <state relative-caret-position="460">
+          <caret line="950" column="17" lean-forward="true" selection-start-line="950" selection-start-column="17" selection-end-line="950" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/42.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>

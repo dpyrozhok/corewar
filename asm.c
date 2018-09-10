@@ -13,6 +13,51 @@
 
 int g_fd;
 
+void	ft_free(t_my *inf)
+{
+	t_label		*p_l;
+	t_use_label	*p_use_l;
+	t_comm		*p_c;
+	t_text		*p_t;
+	int 		i;
+
+
+	while (inf->head)
+	{
+		p_t = inf->head;
+		inf->head = inf->head->next;
+		free(p_t->line);
+		free(p_t);
+	}
+	while (inf->label_s)
+	{
+		p_l = inf->label_s;
+		inf->label_s = inf->label_s->next;
+		free(p_l->name);
+		free(p_l);
+	}
+	while (inf->command_s)
+	{
+		p_c = inf->command_s;
+		inf->command_s = inf->command_s->next;
+		i = 0;
+		while (i < 3 && p_c->arg[i])
+			free(p_c->arg[i++]);
+		free(p_c->name);
+		free(p_c);
+	}
+	while (inf->use_label)
+	{
+		p_use_l = inf->use_label;
+		inf->use_label = inf->use_label->next;
+		free(p_use_l->label);
+		free(p_use_l);
+	}
+	free(inf->name2);
+	free(inf->comment);
+	free(inf->file_name);
+}
+
 int		ft_check_format(char *name)
 {
 	char *format;
@@ -34,6 +79,8 @@ char		*ft_get_name(char *name)
 	while (name[i] != '.')
 		i++;
 	get = malloc(sizeof(char) * (i + 1));
+	ft_printf("37 %p\n", get);
+	ft_printf("37 %p\n", &get);
 	ft_strncpy(get, name, i);
 	get[i] = '\0';
 	tmp = get;
@@ -87,6 +134,8 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 		if (i >= max_i)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Too big %s\n", inf.y, inf.x, define + 1);
+			while(1);
+			system("leaks");
 			exit(1);
 		}
 		(*buf)[i] = line[i];
@@ -102,6 +151,8 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 	if (line[i] != '"')
 	{
 		ft_printf("Lexical error[TOKEN][%i:%i]. %s should ends with \"\n", inf.y, inf.x + 1, define + 1);
+		while(1);
+		system("leaks");
 		exit(1);
 	}
 	inf.x++;
@@ -109,25 +160,28 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 	if (inf.head->line[inf.x] != '\0')
 	{
 		ft_printf("Lexical error[TOKEN][%i:%i]. Excess information after %s\n", inf.y, inf.x + 1, define + 1);
+		while(1);
+		system("leaks");
 		exit(1);
 	}
 }
 
 void	ft_name_comment(t_my inf, char *define, char **buf)
 {
-    /// CHECK Define
-//	char 	*line;
-
     inf.x = 0;
     if (!inf.head || !inf.head->next)
     {
         ft_printf("Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n", inf.y,0);
+		while(1);
+		system("leaks");
         exit(1);
     }
     ft_go_space(inf.head->line, &(inf.x));
     if (inf.head->line + inf.x != ft_strstr(inf.head->line + inf.x, define))
     {
         ft_printf("Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n", inf.y, inf.x, define);
+		while(1);
+		system("leaks");
         exit(1);
     }
     inf.x += ft_strlen(define);
@@ -135,6 +189,8 @@ void	ft_name_comment(t_my inf, char *define, char **buf)
     if (inf.head->line[inf.x] != '"')
     {
         ft_printf("Lexical error[TOKEN][%i:%i]. %s should starts with \"\n", inf.y, inf.x, define + 1);
+		while(1);
+		system("leaks");
         exit(1);
     }
     inf.x++;
@@ -165,8 +221,14 @@ void		ft_throu_empt_lines(t_my *inf)
 
 void		ft_read_head(t_my *inf)
 {
+	t_text	*p_t;
+
 	inf->name2 = ft_memalloc(PROG_NAME_LENGTH); // 128
+	ft_printf("172 %p\n", inf->name2);
+	ft_printf("172 %p\n", &inf->name2);
 	inf->comment = ft_memalloc(COMMENT_LENGTH); // 2048
+	ft_printf("175 %p\n", inf->comment);
+	ft_printf("175 %p\n", &inf->comment);
 
 	/// MAGIC NUMBER
 	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC, 4);
@@ -178,14 +240,20 @@ void		ft_read_head(t_my *inf)
 	///COMMENT
 	if (inf->head->next)
 	{
+		p_t = inf->head;
 		inf->head = inf->head->next;
+		free(p_t->line);
+		free(p_t);
 		inf->y++;
 	}
 	ft_throu_empt_lines(inf);
 	ft_name_comment(*inf, COMMENT_CMD_STRING, &inf->comment);
 	if (inf->head->next)
 	{
+		p_t = inf->head;
 		inf->head = inf->head->next;
+		free(p_t->line);
+		free(p_t);
 		inf->y++;
 	}
 }
@@ -208,6 +276,8 @@ int 	ft_lable(t_my *inf, int arg_i)
 
 
 	new = (t_use_label*)malloc(sizeof(t_use_label));
+	ft_printf("224 %p\n", new);
+	ft_printf("224 %p\n", &new);
 	if (inf->head->line[inf->x] == '%')
 		inf->x++;
 	start = inf->x;
@@ -373,6 +443,8 @@ void	ft_label(char *name, t_my *inf)
 	ft_go_space(inf->head->line, &inf->x);
 	i = inf->x;
 	new = (t_label*)malloc(sizeof(t_label));
+	ft_printf("391 %p\n", new);
+	ft_printf("391 %p\n", &new);
 	if (inf->command_e)
 		new->cidr = inf->command_e->cidr + 1;
 	else
@@ -381,6 +453,8 @@ void	ft_label(char *name, t_my *inf)
 	new->size = -1;
 	while (name[i++] && name[i] != LABEL_CHAR);
 	new->name = (char*)malloc(sizeof(char) * (i - inf->x + 1));
+	ft_printf("401 %p\n", new->name);
+	ft_printf("401 %p\n", &new->name);
 	i = 0;
 	while (name[inf->x] && name[inf->x] != LABEL_CHAR)
 		new->name[i++] = name[inf->x++];
@@ -415,6 +489,8 @@ void	ft_command(int j, t_my *inf)
 	t_comm	*new;
 
 	new = (t_comm*)malloc(sizeof(t_comm));
+	ft_printf("437 %p\n", new);
+	ft_printf("437 %p\n", &new);
 	new->name = ft_strdup(OP(j).name);
     new->next = NULL;
     new->label = inf->label_e;
@@ -471,6 +547,7 @@ void		ft_read_body(t_my *inf)
 			{
 				p_t = inf->head;
 				inf->head = inf->head->next;
+				free(p_t->line);
 				free(p_t);
 				inf->y++;
 				ft_throu_empt_lines(inf);
@@ -500,6 +577,8 @@ void		ft_read_body(t_my *inf)
 		if (j >=16)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Not a command %s\n", inf->y, inf->x + 1, command_name);
+			while(1);
+			system("leaks");
 			exit(1);
 		}
 		inf->command_e->comm_id = (char)j;
@@ -509,12 +588,14 @@ void		ft_read_body(t_my *inf)
 		if (ft_check_args(inf, line, j) == 0)
 		{
 			ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1);
+			while(1);
+			system("leaks");
 			exit(1);
 		}
-		free(line);
 		p_t = inf->head;
 		inf->head = inf->head->next;
 		inf->y++;
+		free(p_t->line);
 		free(p_t);
 	}
 }
@@ -522,13 +603,11 @@ void		ft_read_body(t_my *inf)
 void	ft_obnul(t_my	*inf, char *name)
 {
 	inf->fd = open(name, O_RDONLY);
-	inf->head = (t_text*)malloc(sizeof(t_text));
+	inf->head = NULL;
     inf->label_s = NULL;
 	inf->label_e = NULL;
 	inf->command_s = NULL;
     inf->command_e = NULL;
-	inf->head->line = NULL;
-	inf->head->next = NULL;
 	inf->use_label = NULL;
 	inf->x = 1;
 	inf->y = 1;
@@ -541,6 +620,11 @@ void    ft_push_t_back(t_my *my, t_text *new, int i)
 	t_text  *p_t;
 
 	p_t = my->head;
+	if (!p_t)
+	{
+		my->head = new;
+		return ;
+	}
 	new->i = i;
 	while (p_t->next)
 	{
@@ -580,6 +664,8 @@ int 	ft_gnl_without_com(int fd, char **line)
 		while ((*line)[i] != '#' && (*line)[i] != ';')
 			i++;
 		new = (char*)malloc(sizeof(char) * (i + 2));
+		ft_printf("607 %p\n", new);
+		ft_printf("607 %p\n", &new);
 		ft_strncpy(new, *line, i);
 		new[i] = '\0';
 		ft_memdel((void**)line);
@@ -597,6 +683,8 @@ void	ft_check_end( t_my *inf)
 	if (c != '\n')
 	{
 		ft_printf("Syntax error[TOKEN][%i:0]. Unexpected end of input \n", inf->y);
+		while(1);
+		system("leaks");
 		exit(1);
 	}
 }
@@ -607,6 +695,8 @@ int	ft_pliz_write_to_file(t_my *inf)
 					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
 		ft_printf("error: open\n");
+		while(1);
+		system("leaks");
 		exit(1);
 	}
 	char *nulek = {0};
@@ -815,50 +905,60 @@ void 	ft_write_botsize(t_my *inf)
 	write(g_fd, &inf->botsize, 4);
 }
 
-int		main(int ac, char **av)
+
+
+void	ft_read_all(t_my *inf)
 {
-	t_my inf;
 	t_text *new_t;
-	t_use_label	*p_use_l;
 	int i;
 
 	i = 1;
-	if (ac < 2 || ac > 3)
-		return (ft_printf("Invalid number of arguements"));
-	if (!ft_check_format(av[1]))
-		return (ft_printf("Not valid file\n"));
-	else
-		inf.file_name = ft_get_name(av[1]);
-
-
-	//reading
-	ft_obnul(&inf, av[1]);
 	new_t = (t_text *) malloc(sizeof(t_text));
+	ft_printf("882 %p\n", new_t);
+	ft_printf("882 %p\n", &new_t);
 	new_t->next = NULL;
-	while (ft_gnl_without_com(inf.fd, &(new_t->line)) > 0)
+	while (ft_gnl_without_com(inf->fd, &(new_t->line)) > 0)
 	{
-		ft_push_t_back(&inf, new_t, i++);
+		ft_push_t_back(inf, new_t, i++);
 		new_t = (t_text *) malloc(sizeof(t_text));
+		ft_printf("889 %p\n", new_t);
+		ft_printf("889 %p\n", &new_t);
 		new_t->next = NULL;
 	}
+	free(new_t->line);
 	free(new_t);
-	ft_print_txt(inf.head);
+	ft_print_txt(inf->head);
+}
 
+int		main(int ac, char **av)
+{
+	t_my inf;
+	t_use_label	*p_use_l;
 
+	if (ac < 2 || ac > 3 || !ft_check_format(av[1]))
+		return (ft_printf("Not valid arguement\n"));
+	else
+		inf.file_name = ft_get_name(av[1]);
+	ft_obnul(&inf, av[1]);
+	ft_read_all(&inf);
 	ft_read_head(&inf);
-
 	ft_read_body(&inf);
 	ft_check_end(&inf);
 	if ((p_use_l = ft_check_correct_labels(&inf)) && p_use_l != NULL)
 	{
+		ft_free(&inf);
 		ft_printf("Syntax error[TOKEN][%i:%i].Wrong ssilka to label (%s)\n", p_use_l->y, p_use_l->x, p_use_l->label);
+		while(1);
+		system("leaks");
 		exit(1);
 	}
 	ft_pliz_write_to_file(&inf);
 	ft_write_commands(&inf);
 	ft_write_botsize(&inf);
+	ft_free(&inf);
 	ft_printf("Writing output program to %s", inf.file_name);
-	free(inf.file_name);
+	while(1);
+	system("leaks");
 	return (0);
 
 }
