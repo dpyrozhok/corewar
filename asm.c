@@ -114,10 +114,10 @@ unsigned int		convert_end(unsigned int ch, char bytes)
 
 void		ft_go_space(char *line, unsigned int *x)
 {
-    while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
-    {
-        (*x)++;
-    }
+	while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
+	{
+		(*x)++;
+	}
 }
 
 void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
@@ -131,7 +131,7 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 	{
 		if (i >= max_i)
 		{
-			ft_printf("Lexical error[TOKEN][%i:%i]. Too big %s\n", inf.y, inf.x, define + 1);
+			ft_printf(LE1 , inf.y, inf.x, define + 1);
 			exit(1);
 		}
 		(*buf)[i] = line[i];
@@ -146,79 +146,73 @@ void	ft_write_name_comment(char **buf, char *line, char *define, t_my inf)
 	}
 	if (line[i] != '"')
 	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. %s should ends with \"\n", inf.y, inf.x + 1, define + 1);
+		ft_printf(LE2, inf.y, inf.x + 1, define + 1);
 		exit(1);
 	}
 	inf.x++;
-    ft_go_space(inf.head->line, &(inf.x));
+	ft_go_space(inf.head->line, &(inf.x));
 	if (inf.head->line[inf.x] != '\0')
 	{
-		ft_printf("Lexical error[TOKEN][%i:%i]. Excess information after %s\n", inf.y, inf.x + 1, define + 1);
+		ft_printf(LE3, inf.y, inf.x + 1, define + 1);
 		exit(1);
 	}
 }
 
 void	ft_name_comment(t_my inf, char *define, char **buf)
 {
-    inf.x = 0;
-    if (!inf.head || !inf.head->next)
-    {
-        ft_printf("Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n", inf.y,0);
-        exit(1);
-    }
-    ft_go_space(inf.head->line, &(inf.x));
-    if (inf.head->line + inf.x != ft_strstr(inf.head->line + inf.x, define))
-    {
-        ft_printf("Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n", inf.y, inf.x, define);
-        exit(1);
-    }
-    inf.x += ft_strlen(define);
-    ft_go_space(inf.head->line, &(inf.x));
-    if (inf.head->line[inf.x] != '"')
-    {
-        ft_printf("Lexical error[TOKEN][%i:%i]. %s should starts with \"\n", inf.y, inf.x, define + 1);
-        exit(1);
-    }
-    inf.x++;
+	inf.x = 0;
+	if (!inf.head || !inf.head->next)
+	{
+		ft_printf(LE4, inf.y,0);
+		exit(1);
+	}
+	ft_go_space(inf.head->line, &(inf.x));
+	if (inf.head->line + inf.x != ft_strstr(inf.head->line + inf.x, define))
+	{
+		ft_printf( LE5 , inf.y, inf.x, define);
+		exit(1);
+	}
+	inf.x += ft_strlen(define);
+	ft_go_space(inf.head->line, &(inf.x));
+	if (inf.head->line[inf.x] != '"')
+	{
+		ft_printf(LE6, inf.y, inf.x, define + 1);
+		exit(1);
+	}
+	inf.x++;
 	ft_write_name_comment(buf, inf.head->line + inf.x, define, inf);
 }
 
 void		ft_throu_empt_lines(t_my *inf)
 {
-    t_text	*p_t;
+	t_text	*p_t;
 
-    inf->x = 0;
-    while(inf->head && inf->head->line)
-    {
-        ft_go_space(inf->head->line, &(inf->x));
-        if (inf->head->line[inf->x] == '\0')
-        {
-            free(inf->head->line);
-            p_t = inf->head;
-            inf->head = inf->head->next;
-            free(p_t);
-            inf->y++;
-        }
-        else
-            break ;
-    }
+	inf->x = 0;
+	while(inf->head && inf->head->line)
+	{
+		ft_go_space(inf->head->line, &(inf->x));
+		if (inf->head->line[inf->x] == '\0')
+		{
+			free(inf->head->line);
+			p_t = inf->head;
+			inf->head = inf->head->next;
+			free(p_t);
+			inf->y++;
+		}
+		else
+			break ;
+	}
 }
 
 void		ft_read_head(t_my *inf)
 {
 	t_text	*p_t;
 
-	inf->name2 = ft_memalloc(PROG_NAME_LENGTH); // 128
-	inf->comment = ft_memalloc(COMMENT_LENGTH); // 2048
-
-	/// MAGIC NUMBER
+	inf->name2 = ft_memalloc(PROG_NAME_LENGTH);
+	inf->comment = ft_memalloc(COMMENT_LENGTH);
 	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC, 4);
-
-	///NAME
 	ft_throu_empt_lines(inf);
 	ft_name_comment(*inf, NAME_CMD_STRING, &inf->name2);
-
-	///COMMENT
 	if (inf->head->next)
 	{
 		p_t = inf->head;
@@ -251,8 +245,8 @@ void	ft_push_u_front(t_use_label **begin_list, t_use_label *elem)
 
 int 	ft_lable(t_my *inf, int arg_i)
 {
-	unsigned int 	start;
-	int 			end;
+	unsigned int	start;
+	int				end;
 	t_use_label		*new;
 
 
@@ -274,115 +268,115 @@ int 	ft_lable(t_my *inf, int arg_i)
 	return (1);
 }
 
-int     ft_num(t_my *inf, int arg_i, unsigned int m, int is_end)
+int					ft_num(t_my *inf, int arg_i, unsigned int m, int is_end)
 {
-    unsigned int     n_start;
-    unsigned int     n_end;
-    char    *line;
+	unsigned int	n_start;
+	unsigned int	n_end;
+	char			*line;
 
-    line = inf->head->line;
-    n_start = m;
-    if (line[m] == '-')
-        m++;
-    while(line[m] >= '0' && line[m] <= '9')
-        m++;
-    n_end = m;
-    ft_go_space(line, &(m));
-    if (is_end == 0 && line[m] != '\0')
-        return (0);
-    if (is_end != 0 && line[m] != ',')
-        return (0);
-    inf->x = m + 1;
-    inf->command_e->arg[arg_i] = ft_strsub(line, n_start, n_end - n_start);
-    return (1);
+	line = inf->head->line;
+	n_start = m;
+	if (line[m] == '-')
+		m++;
+	while(line[m] >= '0' && line[m] <= '9')
+		m++;
+	n_end = m;
+	ft_go_space(line, &(m));
+	if (is_end == 0 && line[m] != '\0')
+		return (0);
+	if (is_end != 0 && line[m] != ',')
+		return (0);
+	inf->x = m + 1;
+	inf->command_e->arg[arg_i] = ft_strsub(line, n_start, n_end - n_start);
+	return (1);
 }
 
-int		ft_dir(const char *line, t_my *inf, int is_end)
+int					ft_dir(const char *line, t_my *inf, int is_end)
 {
-	unsigned int 	m;
-    int     arg_i;
+	unsigned int	m;
+	int				arg_i;
 
 	if (line[inf->x] != '%')
 		return (0);
 	m = inf->x;
 	m++;
-    arg_i = 0;
+	arg_i = 0;
 
-    while (inf->command_e->arg[arg_i] != NULL)
-        arg_i++;
+	while (inf->command_e->arg[arg_i] != NULL)
+		arg_i++;
 	inf->command_e->arg_id[arg_i] = 2;
 	inf->command_e->size += inf->command_e->t_dir_size;
 	if (line[m] == ':')
 		return (ft_lable(inf, arg_i));
 	else
-        return (ft_num(inf, arg_i, m, is_end));
+		return (ft_num(inf, arg_i, m, is_end));
 
 }
 
-int 	ft_ind(const char *line, t_my *inf, int is_end)
+int					ft_ind(const char *line, t_my *inf, int is_end)
 {
-    unsigned int 	m;
-    int     arg_i;
+	unsigned int	m;
+	int				arg_i;	
 
-    m = inf->x;
-    arg_i = 0;
-    while (inf->command_e->arg[arg_i] != NULL)
-        arg_i++;
+	m = inf->x;
+	arg_i = 0;
+	while (inf->command_e->arg[arg_i] != NULL)
+		arg_i++;
 	inf->command_e->arg_id[arg_i] = 3;
 	inf->command_e->size += 2;
-    if (line[m] == ':')
-        return (ft_lable(inf, arg_i));
-    else
-        return (ft_num(inf, arg_i, m, is_end));
+	if (line[m] == ':')
+		return (ft_lable(inf, arg_i));
+	else
+		return (ft_num(inf, arg_i, m, is_end));
 }
 
-int     ft_reg(const char *line, t_my *inf, int is_end)
+int					ft_reg(const char *line, t_my *inf, int is_end)
 {
-    unsigned int 	m;
-    int				z;
-	int 			arg_i;
+	unsigned int	m;
+	int				z;
+	int				arg_i;
 
 	arg_i = 0;
-    if (line[inf->x] == 'r')
-    {
+	if (line[inf->x] == 'r')
+{
 		while (inf->command_e->arg[arg_i] != NULL)
 			arg_i++;
 		inf->command_e->arg_id[arg_i] = 1;
 		inf->command_e->size += 1;
-        m = inf->x;
-        m++;
-        if (line[m] >= '0' && line[m] <= '9' && ((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
+		m = inf->x;
+		m++;
+		if (line[m] >= '0' && line[m] <= '9' && ((z = ft_atoi(line + inf->x + 1)) < 100) && z >= 0)
 			return (ft_num(inf, arg_i, m, is_end));
 		else
 			return (0);
-    }
-    else
-        return (0);
+	}
+	else
+		return (0);
 }
-int     ft_check_args(t_my *inf, char *line, int num_command)
+int				ft_check_args(t_my *inf, char *line, int num_command)
 {
-    int z;
-    int i;
+	int			z;
+	int			i;
 
-    i = 0;
+	i = 0;
 	ft_go_space(inf->head->line, &(inf->x));
-    while (i < 3 && (z = OP(num_command).args[i]) != 0)
+	while (i < 3 && (z = OP(num_command).args[i]) != 0)
 	{
 		i++;
 		ft_go_space(line, &(inf->x));
-        if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
-            continue;
-        if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf, (i == 3) ? 0 :  OP(num_command).args[i])))
+		if ((z == 1 || z == 3 || z == 5 || z == 7) && (ft_reg(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
 			continue;
-   		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
+		if ((z == 2 || z == 3 || z == 6 || z == 7) && (ft_dir(line, inf, (i == 3) ? 0 :  OP(num_command).args[i])))
+			continue;
+		if ((z == 4 || z == 5 || z == 6 || z == 7) && (ft_ind(line, inf, (i == 3) ? 0 : OP(num_command).args[i])))
 			continue;
 		else
 			return (0);
-    }
+	}
 	return (1);
 }
 
-int 	ft_is_label_name(char *name)
+int		ft_is_label_name(char *name)
 {
 	unsigned int 	i;
 
@@ -393,31 +387,31 @@ int 	ft_is_label_name(char *name)
 	return ((name[i] == LABEL_CHAR) ? 1 : 0);
 }
 
-void    ft_push_l_back(t_my *my, t_label *new)
+void	ft_push_l_back(t_my *my, t_label *new)
 {
 	t_label  *p_l;
 
 	p_l = my->label_s;
-    if (my->label_e)
-        my->label_e->next = new;
-    else
-    {
-        while (p_l && p_l->next)
-        {
-            p_l = p_l->next;
-        }
-        if (p_l)
-            p_l->next = new;
-        else
-            my->label_s = new;
-    }
-    my->label_e = new;
+	if (my->label_e)
+		my->label_e->next = new;
+	else
+	{
+		while (p_l && p_l->next)
+		{
+			p_l = p_l->next;
+		}
+		if (p_l)
+			p_l->next = new;
+		else
+			my->label_s = new;
+	}
+	my->label_e = new;
 }
 
 void	ft_label(char *name, t_my *inf)
 {
 	t_label	*new;
-	int 	i;
+	int 	i;	
 
 	ft_go_space(inf->head->line, &inf->x);
 	i = inf->x;
@@ -438,25 +432,25 @@ void	ft_label(char *name, t_my *inf)
 	ft_push_l_back(inf, new);
 }
 
-void    ft_push_c_back(t_my *my, t_comm *new)
+void	ft_push_c_back(t_my *my, t_comm *new)
 {
-    t_comm  *p_c;
-
-    p_c = my->command_s;
-    if (my->command_e)
-        my->command_e->next = new;
-    else
-    {
-        while (p_c && p_c->next)
-        {
-            p_c = p_c->next;
-        }
-        if (p_c)
-            p_c->next = new;
-        else
-            my->command_s = new;
-    }
-    my->command_e = new;
+	t_comm  *p_c;	
+	
+	p_c = my->command_s;
+	if (my->command_e)
+		my->command_e->next = new;
+	else
+	{
+		while (p_c && p_c->next)
+		{
+	p_c = p_c->next;
+		}
+		if (p_c)
+	p_c->next = new;
+		else
+	my->command_s = new;
+	}
+	my->command_e = new;
 }
 
 void	ft_command(int j, t_my *inf)
@@ -465,11 +459,11 @@ void	ft_command(int j, t_my *inf)
 
 	new = (t_comm*)malloc(sizeof(t_comm));
 	new->name = ft_strdup(OP(j).name);
-    new->next = NULL;
-    new->label = inf->label_e;
-    new->arg[0] = NULL;
-    new->arg[1] = NULL;
-    new->arg[2] = NULL;
+	new->next = NULL;
+	new->label = inf->label_e;
+	new->arg[0] = NULL;
+	new->arg[1] = NULL;
+	new->arg[2] = NULL;
 	new->arg_id[0] = 0;
 	new->arg_id[1] = 0;
 	new->arg_id[2] = 0;
@@ -480,7 +474,7 @@ void	ft_command(int j, t_my *inf)
 		new->cidr = inf->command_e->cidr + 1;
 	else
 		new->cidr = 1;
-    ft_push_c_back(inf, new);
+	ft_push_c_back(inf, new);
 }
 
 unsigned int 		size_dira(int j)
@@ -498,11 +492,11 @@ int 	codage(int j)
 
 void		ft_read_body(t_my *inf)
 {
-    int j;
+	int j;
 	t_text	*p_t;
 	char *line;
 
-    char command_name[6];
+	char command_name[6];
 	while (inf->head)
 	{
 		ft_throu_empt_lines(inf);
@@ -526,7 +520,7 @@ void		ft_read_body(t_my *inf)
 				ft_throu_empt_lines(inf);
 				if (inf->head == NULL)
 					return ;
-                line = inf->head->line;
+				line = inf->head->line;
 			}
 			if (ft_is_label_name(line + inf->x))
 				continue ;
@@ -575,18 +569,18 @@ void	ft_obnul(t_my	*inf, char *name)
 {
 	inf->fd = open(name, O_RDONLY);
 	inf->head = NULL;
-    inf->label_s = NULL;
+	inf->label_s = NULL;
 	inf->label_e = NULL;
 	inf->command_s = NULL;
-    inf->command_e = NULL;
+	inf->command_e = NULL;
 	inf->use_label = NULL;
 	inf->x = 1;
 	inf->y = 1;
-    inf->botsize = 0;
+	inf->botsize = 0;
 
 }
 
-void    ft_push_t_back(t_my *my, t_text *new, int i)
+void			ft_push_t_back(t_my *my, t_text *new, int i)
 {
 	t_text  *p_t;
 
@@ -607,9 +601,9 @@ void    ft_push_t_back(t_my *my, t_text *new, int i)
 		my->head = new;
 }
 
-void    ft_print_txt(t_text *t)
+void			ft_print_txt(t_text *t)
 {
-	t_text      *p_t;
+	t_text		*p_t;
 
 	p_t = t;
 	while (p_t->next)
@@ -622,7 +616,7 @@ void    ft_print_txt(t_text *t)
 }
 
 
-int 	ft_gnl_without_com(int fd, char **line)
+int					ft_gnl_without_com(int fd, char **line)
 {
 	char			*new;
 	unsigned int	i;
@@ -643,7 +637,7 @@ int 	ft_gnl_without_com(int fd, char **line)
 	return (r);
 }
 
-void	ft_check_end( t_my *inf)
+void				ft_check_end( t_my *inf)
 {
 	char 	c;
 
@@ -656,7 +650,7 @@ void	ft_check_end( t_my *inf)
 	}
 }
 
-int	ft_pliz_write_to_file(t_my *inf)
+int					ft_pliz_write_to_file(t_my *inf)
 {
 	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
 					 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
@@ -674,7 +668,7 @@ int	ft_pliz_write_to_file(t_my *inf)
 	return (0);
 }
 
-int 	ft_empty_label(t_my *inf, char *ssilka)
+int					ft_empty_label(t_my *inf, char *ssilka)
 {
 	t_label *all;
 
