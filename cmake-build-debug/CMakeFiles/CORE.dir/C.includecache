@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/dpyrozho/CORE/./libft/libft.h
+/Users/amalkevy/cor_git/./libft/libft.h
 unistd.h
 -
 string.h
@@ -24,15 +24,15 @@ wchar.h
 locale.h
 -
 
-/Users/dpyrozho/CORE/asm.c
+/Users/amalkevy/cor_git/asm.c
 asm.h
-/Users/dpyrozho/CORE/asm.h
+/Users/amalkevy/cor_git/asm.h
 
-/Users/dpyrozho/CORE/asm.h
+/Users/amalkevy/cor_git/asm.h
 libft/libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 op.h
-/Users/dpyrozho/CORE/op.h
+/Users/amalkevy/cor_git/op.h
 fcntl.h
 -
 string.h
@@ -42,239 +42,239 @@ stdio.h
 fcntl.h
 -
 
-/Users/dpyrozho/CORE/libft/ft_atoi.c
+/Users/amalkevy/cor_git/libft/ft_atoi.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_bzero.c
+/Users/amalkevy/cor_git/libft/ft_bzero.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_isalnum.c
+/Users/amalkevy/cor_git/libft/ft_isalnum.c
 
-/Users/dpyrozho/CORE/libft/ft_isalpha.c
+/Users/amalkevy/cor_git/libft/ft_isalpha.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_isascii.c
+/Users/amalkevy/cor_git/libft/ft_isascii.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_isdigit.c
+/Users/amalkevy/cor_git/libft/ft_isdigit.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_isprint.c
+/Users/amalkevy/cor_git/libft/ft_isprint.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_itoa.c
+/Users/amalkevy/cor_git/libft/ft_itoa.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstadd.c
+/Users/amalkevy/cor_git/libft/ft_lstadd.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstdel.c
+/Users/amalkevy/cor_git/libft/ft_lstdel.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstdelone.c
+/Users/amalkevy/cor_git/libft/ft_lstdelone.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstiter.c
+/Users/amalkevy/cor_git/libft/ft_lstiter.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstmap.c
+/Users/amalkevy/cor_git/libft/ft_lstmap.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_lstnew.c
+/Users/amalkevy/cor_git/libft/ft_lstnew.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memalloc.c
+/Users/amalkevy/cor_git/libft/ft_memalloc.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memccpy.c
+/Users/amalkevy/cor_git/libft/ft_memccpy.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memchr.c
+/Users/amalkevy/cor_git/libft/ft_memchr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memcmp.c
+/Users/amalkevy/cor_git/libft/ft_memcmp.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memcpy.c
+/Users/amalkevy/cor_git/libft/ft_memcpy.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memdel.c
+/Users/amalkevy/cor_git/libft/ft_memdel.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memmove.c
+/Users/amalkevy/cor_git/libft/ft_memmove.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_memset.c
+/Users/amalkevy/cor_git/libft/ft_memset.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_printf.c
+/Users/amalkevy/cor_git/libft/ft_printf.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putchar.c
+/Users/amalkevy/cor_git/libft/ft_putchar.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putchar_fd.c
+/Users/amalkevy/cor_git/libft/ft_putchar_fd.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putendl.c
+/Users/amalkevy/cor_git/libft/ft_putendl.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putendl_fd.c
+/Users/amalkevy/cor_git/libft/ft_putendl_fd.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putnbr.c
+/Users/amalkevy/cor_git/libft/ft_putnbr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putnbr_fd.c
+/Users/amalkevy/cor_git/libft/ft_putnbr_fd.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putstr.c
+/Users/amalkevy/cor_git/libft/ft_putstr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_putstr_fd.c
+/Users/amalkevy/cor_git/libft/ft_putstr_fd.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strcat.c
+/Users/amalkevy/cor_git/libft/ft_strcat.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strchr.c
+/Users/amalkevy/cor_git/libft/ft_strchr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strclr.c
+/Users/amalkevy/cor_git/libft/ft_strclr.c
 
-/Users/dpyrozho/CORE/libft/ft_strcmp.c
+/Users/amalkevy/cor_git/libft/ft_strcmp.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strcpy.c
+/Users/amalkevy/cor_git/libft/ft_strcpy.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strdel.c
+/Users/amalkevy/cor_git/libft/ft_strdel.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strdup.c
+/Users/amalkevy/cor_git/libft/ft_strdup.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strequ.c
+/Users/amalkevy/cor_git/libft/ft_strequ.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_striter.c
+/Users/amalkevy/cor_git/libft/ft_striter.c
 
-/Users/dpyrozho/CORE/libft/ft_striteri.c
+/Users/amalkevy/cor_git/libft/ft_striteri.c
 
-/Users/dpyrozho/CORE/libft/ft_strjoin.c
+/Users/amalkevy/cor_git/libft/ft_strjoin.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strlcat.c
+/Users/amalkevy/cor_git/libft/ft_strlcat.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strlen.c
+/Users/amalkevy/cor_git/libft/ft_strlen.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strmap.c
+/Users/amalkevy/cor_git/libft/ft_strmap.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strmapi.c
+/Users/amalkevy/cor_git/libft/ft_strmapi.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strncat.c
+/Users/amalkevy/cor_git/libft/ft_strncat.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strncmp.c
+/Users/amalkevy/cor_git/libft/ft_strncmp.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strncpy.c
+/Users/amalkevy/cor_git/libft/ft_strncpy.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strnequ.c
+/Users/amalkevy/cor_git/libft/ft_strnequ.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strnew.c
+/Users/amalkevy/cor_git/libft/ft_strnew.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strnstr.c
+/Users/amalkevy/cor_git/libft/ft_strnstr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strrchr.c
+/Users/amalkevy/cor_git/libft/ft_strrchr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strstr.c
+/Users/amalkevy/cor_git/libft/ft_strstr.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strsub.c
+/Users/amalkevy/cor_git/libft/ft_strsub.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_strtrim.c
+/Users/amalkevy/cor_git/libft/ft_strtrim.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/ft_tolower.c
+/Users/amalkevy/cor_git/libft/ft_tolower.c
 
-/Users/dpyrozho/CORE/libft/ft_toupper.c
+/Users/amalkevy/cor_git/libft/ft_toupper.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/get_next_line.c
+/Users/amalkevy/cor_git/libft/get_next_line.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 fcntl.h
 -
 
-/Users/dpyrozho/CORE/libft/itoa_base.c
+/Users/amalkevy/cor_git/libft/itoa_base.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 unistd.h
 -
 string.h
@@ -292,33 +292,33 @@ wchar.h
 locale.h
 -
 
-/Users/dpyrozho/CORE/libft/pr_num_str.c
+/Users/amalkevy/cor_git/libft/pr_num_str.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/pr_uni_char.c
+/Users/amalkevy/cor_git/libft/pr_uni_char.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/read.c
+/Users/amalkevy/cor_git/libft/read.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/type.c
+/Users/amalkevy/cor_git/libft/type.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/libft/unicode.c
+/Users/amalkevy/cor_git/libft/unicode.c
 libft.h
-/Users/dpyrozho/CORE/libft/libft.h
+/Users/amalkevy/cor_git/libft/libft.h
 
-/Users/dpyrozho/CORE/main.c
+/Users/amalkevy/cor_git/main.c
 
-/Users/dpyrozho/CORE/op.c
+/Users/amalkevy/cor_git/op.c
 op.h
-/Users/dpyrozho/CORE/op.h
+/Users/amalkevy/cor_git/op.h
 
-/Users/dpyrozho/CORE/op.h
+/Users/amalkevy/cor_git/op.h
 ./libft/libft.h
-/Users/dpyrozho/CORE/./libft/libft.h
+/Users/amalkevy/cor_git/./libft/libft.h
 

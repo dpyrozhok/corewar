@@ -504,6 +504,10 @@ void		ft_read_body(t_my *inf)
 			}
 			j++;
 		}
+		if (j >= 16)
+		{
+			ft_printf("Lexical error[TOKEN][%i:%i]. Not a command %s\n", inf->y, inf->x + 1, command_name);
+		}
 		inf->command_e->comm_id = (char)j;
 		inf->command_e->t_dir_size = size_dira(j);
 		inf->command_e->codage = (char)codage(j);
