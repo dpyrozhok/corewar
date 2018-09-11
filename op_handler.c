@@ -28,11 +28,15 @@ t_champ *ft_get_champ(t_core *core, int id)
 int ft_check_cod_and_arg(t_car *car, int const *cod, int const *arg) {
     int i;
     int op;
+    int t_val;
 
     i = 0;
     op = car->opcode - 1;
     while (i < op_tab[op].qt_arg) {
-        if (!(cod[i] & op_tab[op].arg[i])) // проверка валидные значение в codage маски вверху
+        t_val = cod[i];
+        if (t_val == IND_CODE)
+            t_val = T_IND;
+        if (!(t_val & op_tab[op].arg[i])) // проверка валидные значение в codage маски вверху
             return 0;
         else if (cod[i] == REG_CODE) // проверка если T_REG
         {

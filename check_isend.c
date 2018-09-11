@@ -6,6 +6,8 @@ void    ft_check_cars(t_core *core)
     t_car   *tmp;
 
     tmp = core->cars;
+    while (tmp->next)
+        tmp = tmp->next;
     while (tmp) {
         if (tmp->state) {
             if (!tmp->live) {
@@ -14,7 +16,7 @@ void    ft_check_cars(t_core *core)
             } else
                 tmp->live = 0;
         }
-        tmp = tmp->next;
+        tmp = tmp->prev;
     }
 }
 
@@ -29,7 +31,6 @@ void    ft_make_check(t_core *core) {
     champ = core->champs;
     if (core->v)
         do_last(core);
-    ft_check_cars(core);
     while (champ)
     {
         a_l += champ->all_live;
@@ -44,4 +45,5 @@ void    ft_make_check(t_core *core) {
         core->qt_check = 0;
         core->c_to_die -= CYCLE_DELTA;
     }
+    ft_check_cars(core);
 }

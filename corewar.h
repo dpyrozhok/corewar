@@ -75,6 +75,7 @@ int     ft_read_1(t_core *core, int pos);
 int 	ft_read_2(t_core *core, int pos);
 int 	ft_read_4(t_core *core, int pos);
 void    ft_put_4(t_core *core, int arg, int pos);
+void    ft_free(t_core *core);
 void    ft_01_opcode(t_core *core, t_car *car);
 void    ft_02_opcode(t_core *core, t_car *car);
 void    ft_03_opcode(t_core *core, t_car *car);

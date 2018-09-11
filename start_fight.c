@@ -238,8 +238,6 @@ void    ft_start_fight(t_core *core) {
         while (core->c_to_die > 0 && core->qt_car > 0) {
             tmp = core->cars;
             core->cycle++;
-            if (core->cycle == 4316)
-            {}
             while (tmp->next)
                 tmp = tmp->next;
             while (tmp) {
@@ -250,6 +248,7 @@ void    ft_start_fight(t_core *core) {
             }
             if (core->dump != -1 && core->dump == core->cycle) {
                 ft_dump(core);
+                //ft_free(core); // нужно ли?
                 exit(0);
             }
             if (core->cycle == core->c_to_die + core->last_check) {
@@ -257,5 +256,6 @@ void    ft_start_fight(t_core *core) {
                 core->last_check = core->cycle;
             }
         }
+        ft_make_check(core);
     }
 }

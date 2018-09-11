@@ -1,15 +1,13 @@
 #include "corewar.h"
 #include "check_args.h"
 
-void ft_dump(t_core *core)
+void   ft_introduce(t_core *core)
 {
-	int i;
     int j;
     t_champ             *tmp;
 
-	i = 0;
     j = 1;
-	ft_printf("Introducing contestants...");
+    ft_printf("Introducing contestants...");
     tmp = core->champs;
     while (tmp) {
         ft_printf("\n* Player %i, weighing %i bytes, \"%s\" (\"%s\") !", j, tmp->size, tmp->name, tmp->comment);
@@ -17,6 +15,13 @@ void ft_dump(t_core *core)
         j++;
         tmp = tmp->next;
     }
+}
+
+void ft_dump(t_core *core)
+{
+	int i;
+
+	i = 0;
 	while (i < MEM_SIZE)
 	{
         if (i % 64 == 0) {
@@ -68,6 +73,8 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 	while(tmp->next)
 		tmp = tmp->next;
 	tmp->next = car;
+	if (tmp->num == 118)
+    {}
     car->num = tmp->num + 1;
 	car->prev = tmp;
 }
@@ -186,6 +193,44 @@ void    ft_parse_champion(t_core *core, int fd)
 	}
 }
 
+void ft_free(t_core *core)
+{
+    t_champ *champ;
+    t_car   *car;
+
+    while (core->champs)
+    {
+        free(core->champs->code);
+        champ = core->champs->next;
+        free(core->champs);
+        core->champs = champ;
+    }
+    while (core->cars)
+    {
+        car = core->cars->next;
+        free(core->cars);
+        core->cars = car;
+    }
+    free(core->arena);
+    free(core->a);
+    free(core);
+}
+
+void    ft_winner_is(t_core *core)
+{
+    int i;
+    t_champ *champ;
+
+    i = 0;
+    champ = core->champs;
+    while (champ) {
+        i++;
+        if (champ->id == core->winner_id)
+            ft_printf("\nContestant %i, \"%s\", has won !\n", i, champ->name);
+        champ = champ->next;
+    }
+}
+
 int main(int ac, char **av)
 {
 	t_core *core;
@@ -193,7 +238,7 @@ int main(int ac, char **av)
 	int fd;
 
 	i = 1;
-	setbuf(stdout, 0);
+	//setbuf(stdout, 0);
 	core = (t_core *)ft_memalloc(sizeof(t_core));
 	core->dump = -1;
 	core->c = 0;
@@ -214,8 +259,13 @@ int main(int ac, char **av)
 		}
 		i++;
 	}
+	if (!core->v)
+        ft_introduce(core);
 	ft_place_champ(core);
 	ft_start_fight(core);
-	// system("leaks corewar");
+    if (!core->v)
+	    ft_winner_is(core);
+	ft_free(core);
+	//system("leaks corewar");
 	return 0;
 }
