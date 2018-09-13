@@ -1,6 +1,7 @@
 #ifndef COREWAR_COREWAR_H
 #define COREWAR_COREWAR_H
 
+#include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
 # include "libft/libft.h"
@@ -30,7 +31,7 @@ typedef struct          s_core {
 	int				l;
 	int				t;
 	int				p;
-pthread_mutex_t m;
+    pthread_mutex_t m;
 }                       t_core;
 
 struct          s_champ {

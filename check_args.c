@@ -245,6 +245,7 @@ void	check_file(char *str)
 	file->ret = read(fd, &file->buf, 1);
 	if (file->ret > 0)
 		exit(p_err(112, "Invalid bot size", NULL));
+	free(file);
 	close(fd);
 }
 

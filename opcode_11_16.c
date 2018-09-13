@@ -71,6 +71,8 @@ void    ft_11_opcode(t_core *core, t_car *car) {
             pthread_mutex_unlock(&core->m);
 		}
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_12_opcode(t_core *core, t_car *car) {
@@ -101,6 +103,8 @@ void    ft_13_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_14_opcode(t_core *core, t_car *car) {
@@ -114,12 +118,18 @@ void    ft_14_opcode(t_core *core, t_car *car) {
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, arg[0] % IDX_MOD + pc);
 	if (ft_check_cod_and_arg(car, codage, arg)) {
+        if (codage[0] == REG_CODE)
+            arg[0] = (int)car->reg[arg[0] - 1];
+        if (codage[1] == REG_CODE)
+            arg[1] = (int)car->reg[arg[1] - 1];
 		car->reg[arg[2] - 1] = (unsigned int) ft_read_4(core, ((arg[0] + arg[1]) + pc - 1) % MEM_SIZE);
 		if (car->reg[arg[2] - 1] == 0)
 			car->carry = 1;
 		else
 			car->carry = 0;
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_15_opcode(t_core *core, t_car *car) {
@@ -140,4 +150,6 @@ void    ft_16_opcode(t_core *core, t_car *car) {
     codage = ft_get_codage(core, car);
     arg = ft_get_args(core, car, codage);
     arg[0] = (int)car->reg[arg[0] - 1];
+    free(arg);
+    free(codage);
 }

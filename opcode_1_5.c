@@ -54,6 +54,8 @@ void    ft_02_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+	free(arg);
+	free(codage);
 }
 void    ft_03_opcode(t_core *core, t_car *car) {
 	t_champ *champ;
@@ -120,6 +122,8 @@ void    ft_03_opcode(t_core *core, t_car *car) {
 			}
 		}
 	}
+	free(arg);
+	free(codage);
 }
 
 void    ft_04_opcode(t_core *core, t_car *car) {
@@ -135,6 +139,8 @@ void    ft_04_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+	free(arg);
+	free(codage);
 }
 
 void    ft_05_opcode(t_core *core, t_car *car) {
@@ -150,4 +156,6 @@ void    ft_05_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+	free(arg);
+	free(codage);
 }

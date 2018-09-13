@@ -28,6 +28,8 @@ void    ft_06_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_07_opcode(t_core *core, t_car *car) {
@@ -53,6 +55,8 @@ void    ft_07_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_08_opcode(t_core *core, t_car *car) {
@@ -78,6 +82,8 @@ void    ft_08_opcode(t_core *core, t_car *car) {
 		else
 			car->carry = 0;
 	}
+    free(arg);
+    free(codage);
 }
 
 void    ft_09_opcode(t_core *core, t_car *car) {
@@ -132,4 +138,6 @@ void    ft_10_opcode(t_core *core, t_car *car) {
 		pos = pos % MEM_SIZE;
 		car->reg[arg[2] - 1] = (unsigned int)ft_read_4(core, pos);
 	}
+    free(arg);
+    free(codage);
 }
