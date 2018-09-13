@@ -176,7 +176,12 @@ void    *myThreadFun(void *ptr)
     while ((ch = getch())) // ESC
     // while ((ch = getch()) != 27) // ESC
     {
-        if (ch == 27 && (p)->t)
+        if ((p)->t == -1)
+        {
+            (p)->t = -2;
+            pthread_exit(NULL);
+        }
+        else if (ch == 27 && (p)->t)
             break ;
         else if (!(p)->p && ch == KEY_F(1)) // F1 - reset speed
         {
@@ -309,11 +314,16 @@ void    ft_start_fight(t_core *core) {
             pthread_mutex_unlock(&core->m);
         }
         pthread_mutex_lock(&core->m);
+        core->t = -1;
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
         //refresh();
         pthread_mutex_unlock(&core->m);
-
-        getch(); endwin(); //SDL_Quit();
+        while (core->t > -2)
+        {
+            ;
+        }
+        //getch();
+        endwin(); //SDL_Quit();
     }
     else
     {

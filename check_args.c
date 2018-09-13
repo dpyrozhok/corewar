@@ -238,13 +238,15 @@ void	check_file(char *str)
 		exit(p_err(115, "Bot comment length mismatch", ft_itoa((int)file->ret)));
 	file->ret = read(fd, &file->buf, 4);
 	check_null(file);
-	file->ret = read(fd, &file->code, CHAMP_MAX_SIZE);
+	file->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * file->size);
+	file->ret = read(fd, file->code, CHAMP_MAX_SIZE);
 	if (file->ret != file->size)
 		exit(p_err(117, "Bot size mismatch", ft_itoa((int)file->ret)));
 	ft_strclr(file->buf);
 	file->ret = read(fd, &file->buf, 1);
 	if (file->ret > 0)
 		exit(p_err(112, "Invalid bot size", NULL));
+	free(&file->code);
 	free(file);
 	close(fd);
 }

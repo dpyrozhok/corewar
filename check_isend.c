@@ -4,6 +4,7 @@
 void    ft_check_cars(t_core *core)
 {
     t_car   *tmp;
+    int pos,r,c;
 
     tmp = core->cars;
     while (tmp->next)
@@ -13,6 +14,46 @@ void    ft_check_cars(t_core *core)
             if (!tmp->live) {
                 tmp->state = 0;
                 core->qt_car--;
+                if (core->v)
+                {
+                    pthread_mutex_lock(&core->m);
+                    
+                    if (tmp->sw)
+                    {
+                        tmp->sw = 0;
+                        pos = tmp->rp;
+                        r = 3+((pos%MEM_SIZE)/64)%64;
+                        c = 3+(3*((pos%MEM_SIZE)%64))%192;
+                        attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        mvprintw(r,c,"%02x", (unsigned char)(core->arena[pos%MEM_SIZE]));
+                        attroff(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        pos++;
+                        r = 3+((pos%MEM_SIZE)/64)%64;
+                        c = 3+(3*((pos%MEM_SIZE)%64))%192;
+                        attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        mvprintw(r,c,"%02x", (unsigned char)(core->arena[pos%MEM_SIZE]));
+                        attroff(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        pos++;
+                        r = 3+((pos%MEM_SIZE)/64)%64;
+                        c = 3+(3*((pos%MEM_SIZE)%64))%192;
+                        attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        mvprintw(r,c,"%02x", (unsigned char)(core->arena[pos%MEM_SIZE]));
+                        attroff(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        pos++;
+                        r = 3+((pos%MEM_SIZE)/64)%64;
+                        c = 3+(3*((pos%MEM_SIZE)%64))%192;
+                        attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                        mvprintw(r,c,"%02x", (unsigned char)(core->arena[pos%MEM_SIZE]));
+                        attroff(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+                    }
+                    r = 3+((tmp->pos%MEM_SIZE)/64)%64;
+                    c = 3+(3*((tmp->pos%MEM_SIZE)%64))%192;
+                    attron(COLOR_PAIR(core->a[tmp->pos%MEM_SIZE]));
+                    mvprintw(r,c,"%02x", core->arena[tmp->pos%MEM_SIZE]);
+                    attroff(COLOR_PAIR(core->a[tmp->pos%MEM_SIZE]));
+                    
+                    pthread_mutex_unlock(&core->m);
+                }
             } else
                 tmp->live = 0;
         }
