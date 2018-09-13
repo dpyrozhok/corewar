@@ -61,9 +61,9 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 		attroff(A_REVERSE);
 		attroff(COLOR_PAIR(champ->c));
 	    
-	    /*
-	    refresh();
-	    */
+
+	    //refresh();
+
     
         pthread_mutex_unlock(&core->m);
 	}
@@ -154,9 +154,9 @@ void    ft_place_champ(t_core *core)
 			attroff(COLOR_PAIR(tmp->c));
 			ft_memset(core->a + shift, tmp->c, tmp->size);
 
-			/*
+
 			refresh();
-			*/
+
 
             pthread_mutex_unlock(&core->m);
 		}

@@ -310,7 +310,7 @@ void    ft_start_fight(t_core *core) {
         }
         pthread_mutex_lock(&core->m);
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
-        refresh();
+        //refresh();
         pthread_mutex_unlock(&core->m);
 
         getch(); endwin(); //SDL_Quit();
