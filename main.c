@@ -50,6 +50,8 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 	car->id = src->id;
 	if (core->v)
 	{
+        pthread_mutex_lock(&core->m);
+
 		champ = ft_get_champ(core, car->id);
 		r = 3 + ((pos%MEM_SIZE)/64)%64;
 		c = 3 + (3*((pos%MEM_SIZE)%64))%192;
@@ -59,6 +61,8 @@ void    ft_copy_car(t_core *core, t_car *src, int pos)
 		attroff(A_REVERSE);
 		attroff(COLOR_PAIR(champ->c));
 	    refresh();
+    
+        pthread_mutex_unlock(&core->m);
 	}
 	car->state = src->state;
     car->live = src->live;
@@ -126,6 +130,8 @@ void    ft_place_champ(t_core *core)
 	while (tmp) {
 		if (core->v)
 		{
+            pthread_mutex_lock(&core->m);
+
 			attron(COLOR_PAIR(tmp->c));
 			i = 0;
 			r = 3 + (shift / 64);
@@ -145,6 +151,8 @@ void    ft_place_champ(t_core *core)
 			attroff(COLOR_PAIR(tmp->c));
 			ft_memset(core->a + shift, tmp->c, tmp->size);
 			refresh();
+
+            pthread_mutex_unlock(&core->m);
 		}
 		ft_memcpy(core->arena + shift, tmp->code, tmp->size);
 		ft_create_car(core, tmp, shift);

@@ -25,6 +25,8 @@ void    ft_11_opcode(t_core *core, t_car *car) {
 		ft_put_4(core, car->reg[arg[0] - 1], ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
 		if (core->v)
 		{
+            pthread_mutex_lock(&core->m);
+
 			champ = ft_get_champ(core, car->id);
 			ag = car->reg[arg[0] - 1];
 			pos = ((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE;
@@ -61,6 +63,9 @@ void    ft_11_opcode(t_core *core, t_car *car) {
 			attroff(COLOR_PAIR(champ->c));
 			attroff(A_BOLD);
 			// ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
+			refresh();
+        
+            pthread_mutex_unlock(&core->m);
 		}
 	}
 }

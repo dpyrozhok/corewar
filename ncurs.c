@@ -21,7 +21,7 @@ typedef struct _WIN_struct {
 void init_win_params(WIN *p_win, int h, int w, int sy, int sx);
 void print_win_params(WIN *p_win);
 void init_win_params2(WIN *p_win, int h, int w, int sy, int sx);
-void create_box(WIN *win, bool flag);
+void create_box(WIN *win, bool flag, t_core *core);
 
 int	init_help(void)
 {
@@ -123,8 +123,10 @@ int			p_help(size_t i, size_t j, int fd, char c)
 
 void    *myThreadFun4(void *ptr)
 {
+	t_core *p;
     int sw = 0;
 
+    p = (t_core *)ptr;
     if (!ptr)
     {
         ; // ? Fatal error sound
@@ -134,13 +136,17 @@ void    *myThreadFun4(void *ptr)
     {
         if (LINES < 69 || COLS < 254)
         {
-  			system("reset");
+		    pthread_mutex_lock(&(p)->m);
+
             clear();
             refresh();
             endwin();
+  			system("reset");
   			// SDL_Quit(); // ? Check
             ft_printf("'corewar' shut down unexpectedly. Resize window to min 254 cols and 69 rows. Currently %d cols and %d rows.\n", COLS, LINES);
             exit(122);
+
+		    pthread_mutex_unlock(&(p)->m);
         }
     }
     // pthread_exit(NULL);
@@ -249,6 +255,9 @@ void	do_last(t_core *core)
 		curr = curr->next;
 	}
 	c = 0;
+    
+    pthread_mutex_lock(&core->m);
+	
 	if (s)
 	{
 
@@ -297,6 +306,8 @@ void	do_last(t_core *core)
 		mvprintw(r, 251, "]");
 	}
 	refresh();
+    
+    pthread_mutex_unlock(&core->m);
 }
 
 void	do_ncurs(t_core *core)
@@ -333,6 +344,8 @@ void	do_ncurs(t_core *core)
 		// }
 		sw = 1;
 	}
+   
+    pthread_mutex_lock(&core->m);
 
 	attron(A_BOLD);
 	mvprintw(3, 200, "** RUNNING **");
@@ -464,6 +477,9 @@ void	do_ncurs(t_core *core)
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();
+    
+    pthread_mutex_unlock(&core->m);
+
 	// cbreak();
 	// keypad(stdscr, TRUE);
 	// noecho();
@@ -506,6 +522,7 @@ void	init_ncurs(t_core *core)
 	t_champ *curr;
     pthread_t thread_id3;
 
+    pthread_mutex_init(&core->m, NULL);
 	initscr();
 	if (LINES < 69 || COLS < 254)
 	{
@@ -537,24 +554,34 @@ void	init_ncurs(t_core *core)
 	//	print_win_params(&win);
 	init_win_params2(&win2, 67, 56, 1, 197);
 
+    pthread_mutex_lock(&core->m);
+
 	attron(COLOR_PAIR(1) | A_BOLD);
 	mvprintw(0, (254 - (int)ft_strlen("C O R E W A R")) / 2, "C O R E W A R");
-	refresh();
 	attroff(COLOR_PAIR(1) | A_BOLD);
+	refresh();
+
+    pthread_mutex_unlock(&core->m);
 
 	attron(A_REVERSE);
 	attron(A_BOLD);
+
 	attron(COLOR_PAIR(2));
-	create_box(&win, TRUE);
+	create_box(&win, TRUE, core);
 	attroff(COLOR_PAIR(2));
+
 	attron(COLOR_PAIR(3));
-	create_box(&win2, FALSE);
+	create_box(&win2, FALSE, core);
 	attroff(COLOR_PAIR(3));
+	
+	attroff(A_REVERSE);
+	
+    pthread_mutex_lock(&core->m);
+	
 	attron(COLOR_PAIR(4));
 	// attron(A_BOLD | COLOR_PAIR(3));
 	//	mvprintw(3, 3, "00");
 	//	attroff(A_BOLD | COLOR_PAIR(3));
-	attroff(A_REVERSE);
 	//	attron(COLOR_PAIR(25));
 	//	mvprintw(3, 7, "00");
 	//	attroff(COLOR_PAIR(25));
@@ -562,15 +589,20 @@ void	init_ncurs(t_core *core)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	refresh();
-pthread_create(&thread_id3, NULL, myThreadFun4, NULL);
+    
+    pthread_mutex_unlock(&core->m);
+
+pthread_create(&thread_id3, NULL, myThreadFun4, (void*)core);
 pthread_detach(thread_id3);
 getch();
+    
+    pthread_mutex_lock(&core->m);
 
 	attron(A_BOLD);
 	mvprintw(67/2 -1, (196 - (int)ft_strlen("MAKE PEACE NOT WAR"))/2, "                  ");
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "                         ");
 	mvprintw(67/2, (196 - (int)ft_strlen("* W E L C O M E *"))/2, "* W E L C O M E *");
-	refresh();
+	// refresh();
 	mvprintw(67/2, (196 - (int)ft_strlen("* W E L C O M E *"))/2, "                 ");
 
 	mvprintw(3, 200, "** RUNNING **");
@@ -615,10 +647,16 @@ getch();
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();
+    
+    pthread_mutex_unlock(&core->m);
+
 getch();
 	i = 0;
 	r = 3;
 	c = 3;
+
+    pthread_mutex_lock(&core->m);
+
 	while (i < MEM_SIZE)
 	{
 		mvprintw(r, c, "%02x ", core->arena[i]);
@@ -633,6 +671,8 @@ getch();
 	}
 	usleep(1000000);
 	refresh();
+
+    pthread_mutex_unlock(&core->m);
 
 	/*
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
@@ -768,10 +808,12 @@ void print_win_params(WIN *p_win)
 }
 
 
-void create_box(WIN *p_win, bool flag)
+void create_box(WIN *p_win, bool flag, t_core *core)
 {
 	// int i, j;
 	int x, y, w, h;
+
+    pthread_mutex_lock(&core->m);
 
 	x = p_win->startx;
 	y = p_win->starty;
@@ -822,6 +864,8 @@ void create_box(WIN *p_win, bool flag)
 		mvvline(y + 1, x + w, p_win->border.rs, h - 1);
 	}
 	refresh();
+    
+    pthread_mutex_unlock(&core->m);
 }
 
 void	do_acs(void)
