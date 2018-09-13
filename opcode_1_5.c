@@ -13,6 +13,8 @@ void    ft_01_opcode(t_core *core, t_car *car) {
 	if (car->id == ft_read_4(core, car->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
 		champ->last_live = core->cycle;
         champ->s_live++;
+		if (!core->v && core->dump == -1)
+        	printf("\nPlayer %i (%s) is said to be alive", champ->num, champ->name);
 		core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
 	}
     champ->all_live++;

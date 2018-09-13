@@ -119,11 +119,13 @@ void    ft_create_car(t_core *core, t_champ *champ, int pos)
 
 void    ft_place_champ(t_core *core)
 {
+    int j;
 	t_champ *tmp;
 	int    shift;
 	unsigned int i, r, c;
 
 	shift = 0;
+	j = 0;
 	tmp = core->champs;
 	if (core->v)
 	{
@@ -160,9 +162,12 @@ void    ft_place_champ(t_core *core)
 
             pthread_mutex_unlock(&core->m);
 		}
+		j++;
+		tmp->num = j;
 		ft_memcpy(core->arena + shift, tmp->code, tmp->size);
 		ft_create_car(core, tmp, shift);
 		shift += MEM_SIZE / core->qt_champ;
+		core->winner_id = tmp->id;
 		tmp = tmp->next;
 	}
 }
@@ -232,15 +237,12 @@ void ft_free(t_core *core)
 
 void    ft_winner_is(t_core *core)
 {
-    int i;
     t_champ *champ;
 
-    i = 0;
     champ = core->champs;
     while (champ) {
-        i++;
         if (champ->id == core->winner_id)
-            ft_printf("\nContestant %i, \"%s\", has won !\n", i, champ->name);
+            ft_printf("\nContestant %i, \"%s\", has won !\n", champ->num, champ->name);
         champ = champ->next;
     }
 }

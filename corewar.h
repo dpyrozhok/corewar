@@ -39,6 +39,7 @@ struct          s_champ {
 	unsigned char   comment[COMMENT_LENGTH + 1];
 	unsigned int    size;
 	int             id;
+	int             num;
 	int             s_live;
 	int             all_live;
 	int             last_live;
