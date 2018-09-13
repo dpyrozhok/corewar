@@ -30,6 +30,7 @@ typedef struct          s_core {
 	int				l;
 	int				t;
 	int				p;
+pthread_mutex_t m;
 }                       t_core;
 
 struct          s_champ {

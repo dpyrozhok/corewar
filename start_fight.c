@@ -20,7 +20,8 @@ void    ft_get_n_car_value(t_core *core, t_car *car)
         c = 3 + (3*((car->pos%MEM_SIZE)%64))%192;
         // r = 3 + (pos/64);
         // c = 3 + 3*(pos%64);
-        if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
+        if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
+        // if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
             attron(A_BOLD | COLOR_PAIR(champ->cc));
         else
             attron(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
@@ -31,7 +32,8 @@ void    ft_get_n_car_value(t_core *core, t_car *car)
         // attroff(COLOR_PAIR(champ->c));
         // attroff(A_REVERSE);
         // attroff(COLOR_PAIR(core->a[pos]));
-        if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE])
+        if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
+        // if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE])
             attroff(A_BOLD | COLOR_PAIR(champ->cc));
         else
             attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
@@ -105,7 +107,8 @@ void    ft_touch_car(t_core *core, t_car *car)
             r = 3 + ((car->pos%MEM_SIZE)/64)%64;
             c = 3 + (3*((car->pos%MEM_SIZE)%64))%192;
             // if (champ->cars->opcode == 1 && champ->s_live) // ? champ_id == opcode' id
-            if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
+            if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
+            // if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
             // if (car->opcode == 1 && champ->c == core->a[car->pos%MEM_SIZE]) // champ_id == opcode_id
             {
                 attron(A_BOLD | COLOR_PAIR(champ->cc));
@@ -123,7 +126,8 @@ void    ft_touch_car(t_core *core, t_car *car)
             //// attron(A_REVERSE);
             mvprintw(r, c, "%02x", core->arena[car->pos%MEM_SIZE]);
             //// attroff(A_REVERSE);
-            if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE])
+            if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
+            // if (core->arena[car->pos%MEM_SIZE] == 1 && champ->c == core->a[car->pos%MEM_SIZE])
                 attroff(A_BOLD | COLOR_PAIR(champ->cc));
             // else if (champ->cars->opcode && champ->s_live)
                 // attroff(A_REVERSE | COLOR_PAIR(champ->c));
@@ -160,10 +164,18 @@ void    *myThreadFun(void *ptr)
             (p)->t *= 10;
         else if (!(p)->p && ch == ' ') // SPACE - pause
         // else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
+        {
+            // pthread_mutex_lock(&(p)->m);
             (p)->p = 1;
+            // pthread_mutex_unlock(&(p)->m);
+        }
         else if ((p)->p && ch == ' ') // SPACE - play
         // else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
+        {
+            // pthread_mutex_lock(&(p)->m);
             (p)->p = 0;
+            // pthread_mutex_unlock(&(p)->m);
+        }
     }
     endwin();
     //SDL_Quit();
@@ -188,10 +200,13 @@ void    ft_start_fight(t_core *core) {
     pthread_t thread_id;
     pthread_t thread_id2;
 
+    // pthread_mutex_init(&core->m, NULL);
     if (core->v)
     {
         pthread_create(&thread_id, NULL, myThreadFun, (void*)core);
+        pthread_detach(thread_id);
         pthread_create(&thread_id2, NULL, myThreadFun2, NULL);
+        pthread_detach(thread_id2);
         // getch();
         // attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
         while (core->c_to_die > 0 && core->qt_car > 0) {

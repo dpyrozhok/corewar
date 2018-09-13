@@ -121,6 +121,33 @@ int			p_help(size_t i, size_t j, int fd, char c)
 	return (0);
 }
 
+void    *myThreadFun4(void *ptr)
+{
+    int sw = 0;
+
+    if (!ptr)
+    {
+        ; // ? Fatal error sound
+        // play("Track1.wav");
+    }
+    while (!sw)
+    {
+        if (LINES < 69 || COLS < 254)
+        {
+  			system("reset");
+            clear();
+            refresh();
+            endwin();
+  			// SDL_Quit(); // ? Check
+            ft_printf("'corewar' shut down unexpectedly. Resize window to min 254 cols and 69 rows. Currently %d cols and %d rows.\n", COLS, LINES);
+            exit(122);
+        }
+    }
+    // pthread_exit(NULL);
+    // SDL_Quit();
+    return (NULL);
+}
+
 void	do_win(void)
 {
 	WINDOW *my_win;
@@ -477,6 +504,7 @@ void	init_ncurs(t_core *core)
 	WIN win2;
 	int i, r, c;
 	t_champ *curr;
+    pthread_t thread_id3;
 
 	initscr();
 	if (LINES < 69 || COLS < 254)
@@ -534,7 +562,9 @@ void	init_ncurs(t_core *core)
 	mvprintw(67/2, (196 - (int)ft_strlen("PRESS ANY KEY TO CONTINUE"))/2, "PRESS ANY KEY TO CONTINUE");
 	attroff(A_BOLD);
 	refresh();
-	getch();
+pthread_create(&thread_id3, NULL, myThreadFun4, NULL);
+pthread_detach(thread_id3);
+getch();
 
 	attron(A_BOLD);
 	mvprintw(67/2 -1, (196 - (int)ft_strlen("MAKE PEACE NOT WAR"))/2, "                  ");
