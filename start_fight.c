@@ -39,7 +39,10 @@ void    ft_get_n_car_value(t_core *core, t_car *car)
             attroff(A_BOLD | COLOR_PAIR(champ->cc));
         else
             attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
+
+        /*
         refresh();
+        */
 
         pthread_mutex_unlock(&core->m);
     }
@@ -62,7 +65,10 @@ void    ft_touch_car(t_core *core, t_car *car)
             attron(COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
             mvprintw(r,c,"%02x", core->arena[car->pos%MEM_SIZE]);
             attroff(COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
+
+            /*
             refresh();
+            */
 
             pthread_mutex_unlock(&core->m);
         }
@@ -97,7 +103,10 @@ void    ft_touch_car(t_core *core, t_car *car)
                 attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
                 mvprintw(r,c,"%02x", (unsigned char)(core->arena[pos%MEM_SIZE]));
                 attroff(COLOR_PAIR(core->a[pos%MEM_SIZE]));
+
+                /*
                 refresh();
+                */
                 
                 pthread_mutex_unlock(&core->m);
             }
@@ -164,9 +173,12 @@ void    *myThreadFun(void *ptr)
     t_core  *p;
 
     p = (t_core*)ptr;
-    while ((ch = getch()) != 27) // ESC
+    while ((ch = getch())) // ESC
+    // while ((ch = getch()) != 27) // ESC
     {
-        if (!(p)->p && ch == KEY_F(1)) // F1 - reset speed
+        if (ch == 27 && (p)->t)
+            break ;
+        else if (!(p)->p && ch == KEY_F(1)) // F1 - reset speed
         {
             pthread_mutex_lock(&(p)->m);
 
@@ -174,15 +186,15 @@ void    *myThreadFun(void *ptr)
          
             pthread_mutex_unlock(&(p)->m);
         }
-        else if (!(p)->p && ch == KEY_UP) // ARROW UP - speed up
+        else if (!(p)->p && (p)->t && ch == KEY_UP) // ARROW UP - speed up
         {
             pthread_mutex_lock(&(p)->m);
 
-            if ((p)->t > 10000)
+            if ((p)->t > 100)
                 (p)->t /= 10;
             else
             {
-                (p)->t = 1;
+                (p)->t = 0;
                 // pthread_exit(NULL);
                 // exit(131);
             }
@@ -197,14 +209,14 @@ void    *myThreadFun(void *ptr)
 
             pthread_mutex_unlock(&(p)->m);
         }
-        else if (!(p)->p && ch == ' ') // SPACE - pause
+        else if (!(p)->p && (p)->t && ch == ' ') // SPACE - pause
         // else if (!(p)->p && ch == KEY_LEFT) // ARROW LEFT - pause
         {
             pthread_mutex_lock(&(p)->m);
             (p)->p = 1;
             pthread_mutex_unlock(&(p)->m);
         }
-        else if ((p)->p && ch == ' ') // SPACE - play
+        else if ((p)->p && (p)->t && ch == ' ') // SPACE - play
         // else if ((p)->p && ch == KEY_RIGHT) // ARROW RIGHT - play
         {
             pthread_mutex_lock(&(p)->m);

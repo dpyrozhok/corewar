@@ -305,7 +305,10 @@ void	do_last(t_core *core)
 		}
 		mvprintw(r, 251, "]");
 	}
+
+	/*
 	refresh();
+	*/
     
     pthread_mutex_unlock(&core->m);
 }
@@ -351,7 +354,7 @@ void	do_ncurs(t_core *core)
 	mvprintw(3, 200, "** RUNNING **");
 	// mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
-	mvprintw(10, 200, "Processes : %d", core->qt_car);
+	mvprintw(10, 200, "Processes : %-10d", core->qt_car);
 	if (core->t != 1000000 && core->t)
 	{
 	    mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
@@ -466,7 +469,7 @@ void	do_ncurs(t_core *core)
 		r += 2;
 	// attron(A_BOLD);
 	r++;
-	mvprintw(++r, 215, "%d", core->c_to_die);
+	mvprintw(++r, 215, "%-10d", core->c_to_die);
 	// mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
 	// r++;
 	// ++r;// mvprintw(++r, 200, "CYCLE_DELTA : %d", CYCLE_DELTA);
@@ -559,7 +562,10 @@ void	init_ncurs(t_core *core)
 	attron(COLOR_PAIR(1) | A_BOLD);
 	mvprintw(0, (254 - (int)ft_strlen("C O R E W A R")) / 2, "C O R E W A R");
 	attroff(COLOR_PAIR(1) | A_BOLD);
+
+	/*
 	refresh();
+	*/
 
     pthread_mutex_unlock(&core->m);
 
@@ -646,11 +652,14 @@ getch();
 	mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
+
+	/*
 	refresh();
+	*/
     
     pthread_mutex_unlock(&core->m);
 
-getch();
+// getch();
 	i = 0;
 	r = 3;
 	c = 3;
@@ -669,8 +678,11 @@ getch();
 		else
 			c += 3;
 	}
-	usleep(1000000);
+	// usleep(1000000);
+
+	/*
 	refresh();
+	*/
 
     pthread_mutex_unlock(&core->m);
 
@@ -863,7 +875,10 @@ void create_box(WIN *p_win, bool flag, t_core *core)
 		mvvline(y + 1, x, p_win->border.ls, h - 1);
 		mvvline(y + 1, x + w, p_win->border.rs, h - 1);
 	}
+
+	/*
 	refresh();
+	*/
     
     pthread_mutex_unlock(&core->m);
 }
