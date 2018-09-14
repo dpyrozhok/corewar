@@ -31,6 +31,7 @@ typedef struct          s_core {
 	int				l;
 	int				t;
 	int				p;
+	int				f;
     pthread_mutex_t m;
 }                       t_core;
 

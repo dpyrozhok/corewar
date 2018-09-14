@@ -305,6 +305,21 @@ void	do_last(t_core *core)
 		}
 		mvprintw(r, 251, "]");
 	}
+	else
+	{
+        attron(COLOR_PAIR(4));
+		mvprintw(r, 201, "--------------------------------------------------]");
+        attroff(COLOR_PAIR(4));
+	}
+
+    if (core->l)
+    {
+        // pthread_mutex_lock(&core->m);
+        attron(COLOR_PAIR(4));
+        mvprintw(core->l - 3, 201, "--------------------------------------------------]");
+        attroff(COLOR_PAIR(4));
+        // pthread_mutex_unlock(&core->m);
+    }
 
 	/*
 	refresh();
@@ -467,8 +482,8 @@ void	do_ncurs(t_core *core)
 	}
 	else
 		r += 2;
-	// attron(A_BOLD);
 	r++;
+	attron(A_BOLD);
 	mvprintw(++r, 215, "%-10d", core->c_to_die);
 	// mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
 	// r++;
@@ -477,6 +492,18 @@ void	do_ncurs(t_core *core)
 	// ++r;// mvprintw(++r, 200, "NBR_LIVE : %d", NBR_LIVE);
 	// r++;
 	// ++r;// mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
+	// mvprintw(++r, 215, "%-10d", core->c_to_die);
+	
+	if (core->f)
+	{
+		curr = ft_get_champ(core, core->winner_id);
+		r += 8;
+		mvprintw(r, 200, "The winner is : ");
+		attron(COLOR_PAIR(curr->c));
+		mvprintw(r++, 216, "%s", curr->name);
+		attroff(COLOR_PAIR(curr->c));
+		mvprintw(++r, 200, "Press any key to exit");
+	}
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
 	refresh();

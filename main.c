@@ -261,6 +261,7 @@ int main(int ac, char **av)
 	core->l = 0;
 	core->t = 100000;
 	core->p = 0;
+	core->f = 0;
 	check_args(ac, av, core);
 	core->arena = (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
 	core->a = (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);

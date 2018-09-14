@@ -304,19 +304,22 @@ void    ft_start_fight(t_core *core) {
             }
         }
         // do_ncurs(NULL);
+        core->f = 1;
         do_ncurs(core);
+        do_last(core);
+        /**
         if (core->l)
         {
             pthread_mutex_lock(&core->m);
-
+            attron(COLOR_PAIR(4));
             mvprintw(core->l - 3, 201, "--------------------------------------------------]");
-
+            attroff(COLOR_PAIR(4));
             pthread_mutex_unlock(&core->m);
-        }
+        }**/
         pthread_mutex_lock(&core->m);
         core->t = -1;
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
-        //refresh();
+        refresh();
         pthread_mutex_unlock(&core->m);
         while (core->t > -2)
         {
