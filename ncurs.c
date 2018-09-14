@@ -368,6 +368,10 @@ void	do_ncurs(t_core *core)
 	attron(A_BOLD);
 	mvprintw(3, 200, "** RUNNING **");
 	// mvprintw(5, 200, "Cycles/second limit : %d", 50);
+	if (core->t)
+		mvprintw(5, 222,  "%-10d", 1000000/core->t);
+	else
+		mvprintw(5, 222, "Stealth");
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %-10d", core->qt_car);
 	if (core->t != 1000000 && core->t)
