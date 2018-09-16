@@ -129,7 +129,7 @@ void    ft_place_champ(t_core *core)
 	tmp = core->champs;
 	if (core->v)
 	{
-		ft_init_screen(core);
+		ft_init_screen(core, 0, 3, 3);
 		ft_draw(core);
 	}
 	while (tmp) {
