@@ -272,7 +272,7 @@ void	check_args(int ac, char **av, t_core *core)
 			fd = open("man/corewar.man", O_RDONLY);
 			if (fd == -1)
 				exit(p_err(1, "Cannot access the man file", "man/corewar.man"));
-			i = p_help(0, 0, fd, '\0');
+			i = ft_print_help(0, 0, fd, '\0');
 			close(fd);
 			exit(i);
 		}

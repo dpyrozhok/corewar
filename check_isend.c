@@ -69,7 +69,7 @@ void    ft_make_check(t_core *core) {
     core->qt_check++;
     champ = core->champs;
     if (core->v)
-        do_last(core);
+        ft_breakdown(core);
     while (champ)
     {
         if (champ->all_live >= NBR_LIVE)

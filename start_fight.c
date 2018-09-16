@@ -235,7 +235,6 @@ void    *myThreadFun(void *ptr)
     pthread_mutex_lock(&(p)->m);
 
     endwin();
-    //SDL_Quit();
     exit(121);
 
     pthread_mutex_unlock(&(p)->m);
@@ -248,7 +247,7 @@ void    *myThreadFun2(void *ptr)
     if (!ptr)
     {
         ;
-        // play("Track1.wav");
+        // ft_play_sound("Track1.wav");
     }
     pthread_exit(NULL);
     exit(132);
@@ -279,7 +278,7 @@ void    ft_start_fight(t_core *core) {
                 }
                 tmp = tmp->prev;
             }
-            do_ncurs(core);
+            ft_draw(core);
             // attron(A_BOLD); mvprintw(8, 208, "%d", core->cycle);
             // attroff(A_BOLD); refresh();
             if (core->t)
@@ -307,8 +306,8 @@ void    ft_start_fight(t_core *core) {
         }
         // do_ncurs(NULL);
         core->f = 1;
-        do_ncurs(core);
-        do_last(core);
+        ft_draw(core);
+        ft_breakdown(core);
         /**
         if (core->l)
         {
@@ -328,7 +327,7 @@ void    ft_start_fight(t_core *core) {
             ;
         }
         //getch();
-        endwin(); //SDL_Quit();
+        endwin();
     }
     else
     {

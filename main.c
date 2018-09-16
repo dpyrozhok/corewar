@@ -129,8 +129,8 @@ void    ft_place_champ(t_core *core)
 	tmp = core->champs;
 	if (core->v)
 	{
-		init_ncurs(core);
-		do_ncurs(core);
+		ft_init_screen(core);
+		ft_draw(core);
 	}
 	while (tmp) {
 		if (core->v)
