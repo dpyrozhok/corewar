@@ -203,19 +203,21 @@ void	ft_break_score(t_core *core, t_champ *curr, double step)
 		curr = curr->next;
 	}
 	ft_fill_score(core, core->champs, step, 50 - total);
+	attron(COLOR_PAIR(DEFAULT_COLOR));
 	mvprintw(core->l, 251, "]");
+	attroff(COLOR_PAIR(DEFAULT_COLOR));
 }
 
 void	ft_break_last(t_core *core)
 {
-	attron(COLOR_PAIR(4));
+	attron(COLOR_PAIR(DEFAULT_COLOR));
 	mvprintw(core->l, 201, "--------------------------------------------------]");
-	attroff(COLOR_PAIR(4));
+	attroff(COLOR_PAIR(DEFAULT_COLOR));
 	if (core->l)
 	{
-		attron(COLOR_PAIR(4));
+		attron(COLOR_PAIR(DEFAULT_COLOR));
 		mvprintw(core->l - 3, 201, "--------------------------------------------------]");
-		attroff(COLOR_PAIR(4));
+		attroff(COLOR_PAIR(DEFAULT_COLOR));
 	}	
 }
 
@@ -241,151 +243,132 @@ void	ft_breakdown(t_core *core)
 	pthread_mutex_unlock(&core->m);
 }
 
-void	ft_draw(t_core *core)
+void	ft_fill_new(t_core *core, double stp, int remain, int r)
 {
+	int		i;
+	int		j;
+	int		col;
+	int		ttl;
+	t_champ	*cur;
 
-	int i, r, c, j, k, d;
-	double s;
-	t_champ *curr;
-	static int sw = 0;
-
-	if (!core)
+	i = 0;
+	col = 0;
+	ttl = 0;
+	cur = core->champs;
+	while (i++ < core->qt_champ)	
 	{
-		sw = 0;
-		return ;
+		ttl = (cur->s_live && (stp * cur->s_live < 1)) ? 1 : stp * cur->s_live;
+		if (ttl && remain-- > 0)
+			ttl++;
+		j = 0;
+		attron(A_BOLD | COLOR_PAIR(cur->c));
+		while (j++ < ttl)
+		{
+			mvprintw(r, 201 + col, "-");
+			col = (col < 50) ? col + 1 : 50;
+		}
+		attroff(A_BOLD | COLOR_PAIR(cur->c));
+		cur = cur->next;
 	}
-	if (sw == 0)
-	{
-		sw = 1;
-	}
-   
-	pthread_mutex_lock(&core->m);
+}
 
-	attron(A_BOLD);
+void	ft_new_score(t_core *core, t_champ *curr, double step, int r)
+{
+	int	i;
+	int	total;
+
+	i = 0;
+	total = 0;
+	while(i++ < core->qt_champ)
+	{
+		if (curr->s_live && (step * curr->s_live < 1))
+			total++;
+		else
+			total += (step * curr->s_live);
+		curr = curr->next;
+	}
+	ft_fill_new(core, step, 50 - total, r);
+	attron(COLOR_PAIR(DEFAULT_COLOR));
+	mvprintw(core->l, 251, "]");
+	attroff(COLOR_PAIR(DEFAULT_COLOR));
+}
+
+void	ft_scoring(t_core *core, int r)
+{
+	int		i;
+	double	sum;
+	t_champ	*curr;
+
+	// pthread_mutex_lock(&core->m);
+	i = 0;
+	sum = 0.0;
+	curr = core->champs;
+	while (i++ < core->qt_champ)
+	{
+		sum += (double)curr->s_live;
+		curr = curr->next;
+	}
+	if (sum)
+		ft_new_score(core, core->champs, 50.0 / sum, r);
+	// pthread_mutex_unlock(&core->m);
+}
+
+void	ft_breaking(t_core *core)
+{
+	// pthread_mutex_lock(&core->m);
+	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
 	mvprintw(3, 200, "** RUNNING **");
-	// mvprintw(5, 200, "Cycles/second limit : %d", 50);
 	if (core->t)
-		mvprintw(5, 222,  "%-10d", 1000000/core->t);
+		mvprintw(5, 222,  "%-10d", 1000000 / core->t);
 	else
 		mvprintw(5, 222, "Stealth");
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %-10d", core->qt_car);
 	if (core->t != 1000000 && core->t)
-	{
 		mvprintw(12, 200, "Speed: %dx     ", 100000/core->t);
-	}
 	else if (core->t)
-	{
-		mvprintw(12, 200, "Speed: 0.1x     ");
-	}
+		mvprintw(12, 200, "Speed: 0.1x        ");
 	else
-	{
 		mvprintw(12, 200, "Speed: Stealth     ");
-	}
-	r = 14;
-	i = 0;
-	curr = core->champs;
-	while (i++ < core->qt_champ)
-	{
-		// mvprintw(r, 200, "Player %d : ", curr->id);
-		// attron(COLOR_PAIR(curr->c));
-		r++;// mvprintw(r++, 210 + cnt_dig(curr->id), "%s", curr->name);
-		// attroff(COLOR_PAIR(curr->c));
-		// mvprintw(r, 202, "Last live : ");
-		mvprintw(r++, 214, "%21d", curr->last_live);
-		// mvprintw(r, 202, "Lives in current period : ");
-		mvprintw(r, 228, "%7d", curr->s_live);
-		r += 2;
-		curr = curr->next;
-	}
+	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	// pthread_mutex_unlock(&core->m);
+}
 
-	r++;// mvprintw(r++, 200, "Live breakdown for current period :");
-	attroff(A_BOLD);
-	// mvprintw(r++, 200, "[--------------------------------------------------]");
-	
-	// mvprintw(r, 200, "[");
+void	ft_champing(t_core *core, int *r)
+{
+	int		i;
+	t_champ	*curr;
+
+	// pthread_mutex_lock(&core->m);
+	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
 	i = 0;
-	s = 0.0;
 	curr = core->champs;
 	while (i++ < core->qt_champ)
 	{
-		s += (double)curr->s_live;
+		(*r)++;
+		mvprintw((*r)++, 214, "%21d", curr->last_live);
+		mvprintw(*r, 228, "%7d", curr->s_live);
+		*r += 2;
 		curr = curr->next;
 	}
-	c = 0;
-	if (s)
-	{
-		s = 50.0/s;
-		// mvprintw(2,200,"delta: %f", s);
-		
-		i = 0;
-		k = 0;
-		curr = core->champs;
-		while(i++ < core->qt_champ)
-		{
-			if (curr->s_live && (s * curr->s_live < 1))
-				k++;
-			else
-				k += (s * curr->s_live);
-				
-				// mvprintw(2,225,"mi %d", (int)s*1);
-			curr = curr->next;
-		}
-		// mvprintw(2,225,"sum: %d", k);
-		// getch();
-		d = 50 - k;
-		i = 0;
-		curr = core->champs;
-		while (i++ < core->qt_champ)	
-		{
-			if (curr->s_live && (s * curr->s_live < 1))
-				k = 1;
-			else
-				k = s * curr->s_live;
-			if (k && d > 0)
-			{
-				k++;
-				d--;
-			}
-			// if (s)
-			j = 0;
-			attron(A_BOLD | COLOR_PAIR(curr->c));
-			while (j++ < k)
-			{
-				mvprintw(r, 201+c, "-");
-				if (c < 50)
-					c++;
-			}
-			// mvprintw(r, 201+c, "%*s", 50-c, "--------------------------------------------------");
-			// if (s)
-			attroff(A_BOLD | COLOR_PAIR(curr->c));
-			curr = curr->next;
-		}
-		// r++;
-		mvprintw(r++, 201+c, "]");
-	}
-	else if (sw == 1)
-	{
-		r++;// mvprintw(r++, 201, "--------------------------------------------------]");
-		sw = 2;
-	}
-	else
-		r++;
-	if (sw == 2)
-	{
-		// attron(A_BOLD);
-		++r;// mvprintw(++r, 200, "Live breakdown for last period :");
-		// attroff(A_BOLD);
-		++r;// mvprintw(++r, 200, "[--------------------------------------------------]");
-		core->l = r;
-		sw = 3;
-	}
-	else
-		r += 2;
-	r++;
-	attron(A_BOLD);
+	(*r)++;
+	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	// pthread_mutex_unlock(&core->m);	
+}
+
+void	ft_draw(t_core *core)
+{
+	int		r;
+	t_champ	*curr;
+
+	pthread_mutex_lock(&core->m);
+	r = 14;
+	ft_breaking(core);
+	ft_champing(core, &r);
+	ft_scoring(core, r);
+	r += 4;
+	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
 	mvprintw(++r, 215, "%-10d", core->c_to_die);
-	
 	if (core->f)
 	{
 		curr = ft_get_champ(core, core->winner_id);
@@ -396,12 +379,9 @@ void	ft_draw(t_core *core)
 		attroff(COLOR_PAIR(curr->c));
 		mvprintw(++r, 200, "Press any key to exit");
 	}
-	attroff(COLOR_PAIR(4));
-	attroff(A_BOLD);
+	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
 	refresh();
-	
 	pthread_mutex_unlock(&core->m);
-
 }
 
 void	ft_init_colorset(void)

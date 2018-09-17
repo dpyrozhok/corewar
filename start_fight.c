@@ -197,14 +197,15 @@ void    *myThreadFun(void *ptr)
         {
             pthread_mutex_lock(&(p)->m);
 
-            if ((p)->t > 1000)
+            if ((p)->t  > 1000)
                 (p)->t /= 10;
-            else
-            {
-                (p)->t = 0;
-                // pthread_exit(NULL);
-                // exit(131);
-            }
+            // else
+            // {
+                // (p)->t = 0;
+                //// pthread_mutex_unlock(&(p)->m);
+                //// pthread_exit(NULL);
+                //// exit(131);
+            // }
 
             pthread_mutex_unlock(&(p)->m);
         }

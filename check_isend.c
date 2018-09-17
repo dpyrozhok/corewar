@@ -70,6 +70,7 @@ void    ft_make_check(t_core *core) {
     champ = core->champs;
     if (core->v)
         ft_breakdown(core);
+    pthread_mutex_lock(&core->m);
     while (champ)
     {
         if (champ->all_live >= NBR_LIVE)
@@ -84,4 +85,5 @@ void    ft_make_check(t_core *core) {
         core->c_to_die -= CYCLE_DELTA;
     }
     ft_check_cars(core);
+    pthread_mutex_unlock(&core->m);
 }
