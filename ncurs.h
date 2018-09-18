@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ncurs.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
+/*   Updated: 2018/09/18 20:54:33 by vlevko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef NCURS_H
 # define NCURS_H
 # include <ncurses.h>
@@ -63,10 +75,18 @@
 # define CAR_C_COLOR 32
 # define CAR_D_COLOR 33
 
-int			ft_print_help(size_t i, size_t j, int fd, char c);
-void		ft_draw(t_core *core);
-void		ft_init_screen(t_core *core, int i, int r, int c);
-void		ft_breakdown(t_core *core);
-void		ft_play_sound(char *src);
+typedef struct	s_border
+{
+	int	startx;
+	int	starty;
+	int	height;
+	int	width;
+}				t_border;
+
+int				ft_print_help(size_t i, size_t j, int fd, char c);
+void			ft_draw(t_core *core);
+void			ft_init_screen(t_core *core, int i, int r, int c);
+void			ft_breakdown(t_core *core);
+void			ft_play_sound(char *src);
 
 #endif
