@@ -433,8 +433,8 @@ void	ft_init_win(t_core *core)
 	if (LINES < WIN_ROWS || COLS < WIN_COLS)
 	{
 		endwin();
-		// ft_printf("Resize window to min %d cols and %d rows. Currently %d cols and %d rows\n",0, 1, 2, 3);
-		printf("Resize window to min %d cols and %d rows. Currently %d cols and %d rows\n", WIN_COLS, WIN_ROWS, COLS, LINES);
+		//ft_printf("Resize window to min %d cols and %d rows. Currently %d cols and %d rows\n",0, 1, 2, 3);
+		ft_printf("Resize window to min %d cols and %d rows. Currently %d cols and %d rows\n", WIN_COLS, WIN_ROWS, COLS, LINES);
 		exit(0);
 	}
 	if (has_colors() == FALSE)
@@ -535,57 +535,57 @@ void	ft_init_screen(t_core *core, int i, int r, int c)
 	pthread_mutex_unlock(&core->m);
 }
 
-void	ft_play_callback(void *udata, Uint8 *stream, int len)
-{
-	Uint32 tmp;
-
-	tmp = len;
-	if (g_len == 0)
-		return ;
-	else if (tmp > g_len)
-		len = g_len;
-	if (udata)
-		udata = NULL;
-	SDL_memset(stream, 0, len);
-	SDL_memcpy(stream, g_buf, len);
-	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
-	g_len -= len;
-	g_buf += len;
-}
-
-void	ft_play_sound(char *src)
-{
-	SDL_AudioSpec	spec;
-	Uint32			len;
-	Uint8			*buf;
-
-	if (SDL_Init(SDL_INIT_AUDIO) != 0)
-	{
-		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
-		return ;
-	}
-	if (SDL_LoadWAV(src, &spec, &buf, &len) == NULL)
-	{
-		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
-		SDL_Quit();
-		return ;
-	}
-	spec.callback = ft_play_callback;
-	spec.userdata = NULL;
-	if (SDL_OpenAudio(&spec, NULL) < 0)
-	{
-		SDL_Log("Unable to open audio: %s", SDL_GetError());
-		return ;
-	}
-	g_len = len;
-	g_buf = buf;
-	SDL_PauseAudio(0);
-	while (g_len > 0)
-		SDL_Delay(500);
-	SDL_CloseAudio();
-	SDL_FreeWAV(buf);
-	SDL_Quit();
-}
+//void	ft_play_callback(void *udata, Uint8 *stream, int len)
+//{
+//	Uint32 tmp;
+//
+//	tmp = len;
+//	if (g_len == 0)
+//		return ;
+//	else if (tmp > g_len)
+//		len = g_len;
+//	if (udata)
+//		udata = NULL;
+//	SDL_memset(stream, 0, len);
+//	SDL_memcpy(stream, g_buf, len);
+//	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
+//	g_len -= len;
+//	g_buf += len;
+//}
+//
+//void	ft_play_sound(char *src)
+//{
+//	SDL_AudioSpec	spec;
+//	Uint32			len;
+//	Uint8			*buf;
+//
+//	if (SDL_Init(SDL_INIT_AUDIO) != 0)
+//	{
+//		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+//		return ;
+//	}
+//	if (SDL_LoadWAV(src, &spec, &buf, &len) == NULL)
+//	{
+//		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
+//		SDL_Quit();
+//		return ;
+//	}
+//	spec.callback = ft_play_callback;
+//	spec.userdata = NULL;
+//	if (SDL_OpenAudio(&spec, NULL) < 0)
+//	{
+//		SDL_Log("Unable to open audio: %s", SDL_GetError());
+//		return ;
+//	}
+//	g_len = len;
+//	g_buf = buf;
+//	SDL_PauseAudio(0);
+//	while (g_len > 0)
+//		SDL_Delay(500);
+//	SDL_CloseAudio();
+//	SDL_FreeWAV(buf);
+//	SDL_Quit();
+//}
 
 void ft_init_border_left(t_border *border)
 {

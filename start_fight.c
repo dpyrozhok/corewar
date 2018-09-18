@@ -284,7 +284,7 @@ void    ft_start_fight(t_core *core) {
         pthread_detach(thread_id2);
         // getch();
         // attron(A_BOLD); mvprintw(3, 200, "** RUNNING **"); attroff(A_BOLD);
-        while (core->c_to_die > 0 && core->qt_car > 0) {
+        while (core->qt_car > 0) {
             tmp = core->cars;
             core->cycle++;
             while (tmp->next)
@@ -316,11 +316,13 @@ void    ft_start_fight(t_core *core) {
                 usleep(100000);
                 // continue ;
             }
-            if (core->cycle == core->c_to_die + core->last_check) {
+            if (core->cycle == core->c_to_die + core->last_check || core->c_to_die <= 0) {
                 ft_make_check(core);
                 core->last_check = core->cycle;
             }
         }
+        core->cycle++;
+        ft_make_check(core);
         // do_ncurs(NULL);
         core->f = 1;
         ft_draw(core);
@@ -355,7 +357,7 @@ void    ft_start_fight(t_core *core) {
     }
     else
     {
-        while (core->c_to_die > 0 && core->qt_car > 0) {
+        while (core->qt_car > 0) {
             tmp = core->cars;
             core->cycle++;
             while (tmp->next)
@@ -371,11 +373,10 @@ void    ft_start_fight(t_core *core) {
                 //ft_free(core); // нужно ли?
                 exit(0);
             }
-            if (core->cycle == core->c_to_die + core->last_check) {
+            if (core->cycle == core->c_to_die + core->last_check || core->c_to_die <= 0) {
                 ft_make_check(core);
                 core->last_check = core->cycle;
             }
         }
-        ft_make_check(core);
     }
 }

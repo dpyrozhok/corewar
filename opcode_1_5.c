@@ -14,7 +14,7 @@ void    ft_01_opcode(t_core *core, t_car *car) {
 		champ->last_live = core->cycle;
         champ->s_live++;
 		if (!core->v && core->dump == -1)
-        	printf("\nPlayer %i (%s) is said to be alive", champ->num, champ->name);
+        	ft_printf("\nPlayer %i (%s) is said to be alive", champ->num, champ->name);
 		core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
 	}
     champ->all_live++;

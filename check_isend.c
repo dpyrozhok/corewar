@@ -84,6 +84,6 @@ void    ft_make_check(t_core *core) {
         core->qt_check = 0;
         core->c_to_die -= CYCLE_DELTA;
     }
-    ft_check_cars(core);
     pthread_mutex_unlock(&core->m);
+    ft_check_cars(core);
 }
