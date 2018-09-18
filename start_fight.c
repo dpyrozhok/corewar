@@ -199,13 +199,13 @@ void    *myThreadFun(void *ptr)
 
             if ((p)->t  > 1000)
                 (p)->t /= 10;
-            // else
-            // {
-                // (p)->t = 0;
-                //// pthread_mutex_unlock(&(p)->m);
-                //// pthread_exit(NULL);
-                //// exit(131);
-            // }
+            else
+            {
+                (p)->t = 0;
+                pthread_mutex_unlock(&(p)->m);
+                pthread_exit(NULL);
+                // exit(131);
+            }
 
             pthread_mutex_unlock(&(p)->m);
         }
@@ -243,6 +243,21 @@ void    *myThreadFun(void *ptr)
     return (NULL);
 }
 
+void    *myThreadFunE(void *ptr)
+{
+    int     ch;
+
+    if (ptr)
+    {
+        ;
+    }
+    while ((ch = getch())) // ANY CH
+    {
+        pthread_exit(NULL);
+    }
+    return (NULL);
+}
+
 void    *myThreadFun2(void *ptr)
 {
     if (!ptr)
@@ -258,6 +273,7 @@ void    *myThreadFun2(void *ptr)
 void    ft_start_fight(t_core *core) {
     t_car   *tmp;
     pthread_t thread_id;
+    pthread_t thread_id_end;
     pthread_t thread_id2;
 
     if (core->v)
@@ -319,15 +335,22 @@ void    ft_start_fight(t_core *core) {
             pthread_mutex_unlock(&core->m);
         }**/
         pthread_mutex_lock(&core->m);
-        core->t = -1;
+        if (core->t)
+            core->t = -1;
         attron(A_BOLD); mvprintw(3, 200, "** FINISH ** "); attroff(A_BOLD);
         refresh();
         pthread_mutex_unlock(&core->m);
-        while (core->t > -2)
+        if (core->t)
+            while (core->t > -2)
+            {
+                ;
+            }
+        else
         {
-            ;
+            pthread_create(&thread_id_end, NULL, myThreadFunE, NULL);
+            pthread_detach(thread_id_end);
+            // getch();
         }
-        //getch();
         endwin();
     }
     else
