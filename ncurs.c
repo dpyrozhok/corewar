@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/19 17:09:12 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/19 20:37:55 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	*ft_resize_win(void *ptr)
 			refresh();
 			endwin();
 			system("reset");
+			SDL_Quit();
 			ft_play_sound("Track0.wav");
 			ft_printf("'corewar' shut down unexpectedly. Resize window to min "
 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
@@ -312,7 +313,7 @@ void	ft_scoring(t_core *core, int r)
 void	ft_breaking(t_core *core)
 {
 	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
-	mvprintw(3, 200, "** RUNNING **");
+	mvprintw(3, 200, "%s", (core->f) ? "** FINISH ** " : "** RUNNING **");
 	if (core->t)
 		mvprintw(5, 222, "%-10d", 1000000 / core->t);
 	else
@@ -369,7 +370,8 @@ void	ft_draw(t_core *core)
 		attron(COLOR_PAIR(curr->c));
 		mvprintw(r++, 216, "%s", curr->name);
 		attroff(COLOR_PAIR(curr->c));
-		mvprintw(++r, 200, "Press any key to exit");
+		mvprintw(++r, 200, "Press %s %s", (core->t) ? "any key" : "ESC", \
+			"to exit");
 	}
 	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
 	refresh();
@@ -460,8 +462,18 @@ void	ft_fill_screen(t_core *core)
 	pthread_mutex_unlock(&core->m);
 }
 
+void	*ft_promo_audio(void *ptr)
+{
+	if (!ptr)
+		ft_play_sound("Track.wav");
+	pthread_exit(NULL);
+	return (NULL);
+}
+
 void	ft_init_win(t_core *core)
 {
+	// pthread_t	thread_promo;
+
 	initscr();
 	if (LINES < WIN_ROWS || COLS < WIN_COLS)
 	{
@@ -481,6 +493,8 @@ void	ft_init_win(t_core *core)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
+	// pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
+	// pthread_detach(thread_promo);
 	ft_init_colorset();
 	ft_fill_screen(core);
 }
