@@ -1,12 +1,18 @@
-//
-// Created by Vitalii LEVKO on 8/9/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
+/*   Updated: 2018/09/19 13:18:37 by vlevko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "check_args.h"
 
-void	op(void);
-
-int	ft_isspace(int c)
+int		ft_isspace(int c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' \
 	|| c == '\v' || c == '\f' || c == '\r')
@@ -14,7 +20,7 @@ int	ft_isspace(int c)
 	return (0);
 }
 
-int		p_err(int ret, char *str, char *orig)
+int		ft_err(int ret, char *str, char *orig)
 {
 	write(2, str, ft_strlen(str));
 	if (orig)
@@ -28,7 +34,7 @@ int		p_err(int ret, char *str, char *orig)
 	return (ret);
 }
 
-int		is_num(char *str)
+int		ft_is_num(char *str)
 {
 	if (str)
 	{
@@ -47,7 +53,7 @@ int		is_num(char *str)
 	return (0);
 }
 
-int 	is_posint(char *str)
+int		ft_is_posint(char *str)
 {
 	long long int	nb;
 
@@ -68,7 +74,7 @@ int 	is_posint(char *str)
 	return (int)(nb);
 }
 
-void	is_int(char *str, char *orig)
+void	ft_is_int(char *str, char *orig)
 {
 	long long int	nb;
 	int				sign;
@@ -89,42 +95,46 @@ void	is_int(char *str, char *orig)
 		nb = nb * 10 + (int)*str - '0';
 		str++;
 		if (nb > INT_MAX || (sign && -nb < INT_MIN))
-			exit(p_err(107, "Player number is out of 'int' range", orig));
+			exit(ft_err(107, "Player number is out of 'int' range", orig));
 	}
 }
 
-void	p_usage(void)
+void	ft_print_usage(void)
 {
-	ft_printf("usage: ./corewar [-help | [-v] [-dump nbr_cycles] [[-n number] champion1.cor] ...]\n");
+	ft_printf("usage: ./corewar [-help | [-v] [-dump nbr_cycles] "
+		"[[-n number] champion1.cor] ...]\n");
 	exit(0);
 }
 
-void	store_dump(int ac, char **av, int i, t_core *core)
+void	ft_store_dump(int ac, char **av, int i, t_core *core)
 {
 	int		dump;
 
 	if (core->dump != -1)
-		exit(p_err(101, "Invalid argument usage", av[i - 1]));
+		exit(ft_err(101, "Invalid argument usage", av[i - 1]));
 	if (i >= ac)
-		exit(p_err(102, "Missed dump cycle number", NULL));
-	if (!is_num(av[i]))
-		exit(p_err(103, "Dump cycle number is not a number", av[i]));
-	dump = is_posint(av[i]);
+		exit(ft_err(102, "Missed dump cycle number", NULL));
+	if (!ft_is_num(av[i]))
+		exit(ft_err(103, "Dump cycle number is not a number", av[i]));
+	dump = ft_is_posint(av[i]);
 	if (dump == -1)
-		exit(p_err(104, "Dump cycle number is out of positive 'int' range", av[i]));
+	{
+		ft_err(104, "Dump cycle number is out of positive 'int' range", av[i]);
+		exit(104);
+	}
 	core->dump = dump;
 }
 
-void 	check_num(int ac, char **av, int i)
+void	ft_check_num(int ac, char **av, int i)
 {
 	if (i >= ac)
-		exit(p_err(105, "Missed player number", NULL));
-	if (!is_num(av[i]))
-		exit(p_err(106, "Player number is not a number", av[i]));
-	is_int(av[i], av[i]);
+		exit(ft_err(105, "Missed player number", NULL));
+	if (!ft_is_num(av[i]))
+		exit(ft_err(106, "Player number is not a number", av[i]));
+	ft_is_int(av[i], av[i]);
 }
 
-int		str_inc(const char *haystack, const char *needle)
+int		ft_str_include(const char *haystack, const char *needle)
 {
 	const char	*h;
 	const char	*n;
@@ -150,18 +160,18 @@ int		str_inc(const char *haystack, const char *needle)
 	return (0);
 }
 
-void	check_filename(char *str)
+void	ft_check_filename(char *str)
 {
 	size_t	len;
 
 	len = ft_strlen(str);
 	if (len < 5)
-		exit(p_err(112, "Invalid file type", str));
-	if (!str_inc(str, ".cor"))
-		exit(p_err(113, "Invalid file type", str));
+		exit(ft_err(112, "Invalid file type", str));
+	if (!ft_str_include(str, ".cor"))
+		exit(ft_err(113, "Invalid file type", str));
 }
 
-int	check_dir(char *str)
+int		ft_check_dir(char *str)
 {
 	int		fd;
 
@@ -169,149 +179,149 @@ int	check_dir(char *str)
 	if (fd != -1)
 	{
 		close(fd);
-		exit(p_err(108, "Argument is not a file", str));
+		exit(ft_err(108, "Argument is not a file", str));
 	}
-	check_filename(str);
+	ft_check_filename(str);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		exit(p_err(2, "Unable to open file", str));
+		exit(ft_err(2, "Unable to open file", str));
 	return (fd);
 }
 
-void	check_null(t_check *file)
+void	ft_check_null(t_check *file)
 {
 	int i;
 
 	if (file->ret != 4)
-		exit(p_err(116, "Bot NULL bytes length mismatch", ft_itoa((int)file->ret)));
+	{
+		ft_err(116, "Bot NULL bytes length mismatch", ft_itoa((int)file->ret));
+		exit(116);
+	}
 	i = 0;
-	while(i < 4)
+	while (i < 4)
 	{
 		if (file->buf[i] != '\0')
-			exit(p_err(110, "Invalid NULL bytes", NULL));
+			exit(ft_err(110, "Invalid NULL bytes", NULL));
 		i++;
 	}
 }
 
-void	check_bot_name(t_check *file)
+void	ft_check_size(int fd, t_check **file)
 {
-//	int		i;
-//	char *str;
-
-	if (file->ret != PROG_NAME_LENGTH)
-		exit(p_err(114, "Bot name length mismatch", ft_itoa((int)file->ret)));
-//	i = 0;
-//	while(i < PROG_NAME_LENGTH)
-//	{
-//		str = ft_strchr(LABEL_CHARS, file->name[i]);  // лишняя проверка лейбл сайз нужен только для асм
-//		if (str == NULL)
-//			exit(p_err(113, "Invalid character in the bot name", file->name));
-//		i++;
-//	}
+	(*file)->size = (unsigned int)((unsigned char)(*file)->buf[0] << 24 \
+		| (unsigned char)(*file)->buf[1] << 16 \
+		| (unsigned char)(*file)->buf[2] << 8 \
+		| (unsigned char)(*file)->buf[3]);
+	if ((*file)->size > CHAMP_MAX_SIZE)
+		exit(ft_err(110, "Exceeded bot max size", NULL));
+	(*file)->ret = read(fd, &(*file)->comment, COMMENT_LENGTH);
+	if ((*file)->ret != COMMENT_LENGTH)
+	{
+		ft_err(115, "Bot comment length mismatch", ft_itoa((int)(*file)->ret));
+		exit(115);
+	}
+	(*file)->ret = read(fd, &(*file)->buf, 4);
+	ft_check_null((*file));
+	(*file)->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * \
+		(*file)->size);
+	(*file)->ret = read(fd, (*file)->code, CHAMP_MAX_SIZE);
+	if ((*file)->ret != (*file)->size)
+		exit(ft_err(117, "Bot size mismatch", ft_itoa((int)(*file)->ret)));
+	ft_strclr((*file)->buf);
+	(*file)->ret = read(fd, &(*file)->buf, 1);
+	if ((*file)->ret > 0)
+		exit(ft_err(112, "Invalid bot size", NULL));
+	free((*file)->code);
+	free(*file);
 }
 
-void	check_file(char *str)
+void	ft_check_file(char *str, int *bots, t_check *file)
 {
 	int		fd;
-	t_check *file;
 
-	fd = check_dir(str);
+	fd = ft_check_dir(str);
 	file = (t_check *)ft_memalloc(sizeof(t_check));
 	file->ret = read(fd, &file->buf, 4);
-	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
-		(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
+	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 \
+		| (unsigned char)file->buf[1] << 16 \
+		| (unsigned char)file->buf[2] << 8 \
+		| (unsigned char)file->buf[3]);
 	if (file->ret != 4 || file->size != COREWAR_EXEC_MAGIC)
-		exit(p_err(109, "Invalid magic bytes", NULL));
+		exit(ft_err(109, "Invalid magic bytes", NULL));
 	file->ret = read(fd, &file->name, PROG_NAME_LENGTH);
-	check_bot_name(file);
+	if (file->ret != PROG_NAME_LENGTH)
+		exit(ft_err(114, "Bot name length mismatch", ft_itoa((int)file->ret)));
 	file->ret = read(fd, &file->buf, 4);
-	check_null(file);
+	ft_check_null(file);
 	file->ret = read(fd, &file->buf, 4);
 	if (file->ret != 4)
-		exit(p_err(116, "Bot max size length mismatch", ft_itoa((int)file->ret)));
-	file->size = (unsigned int)((unsigned char)file->buf[0] << 24 | (unsigned char)file->buf[1] << 16 | \
-				(unsigned char)file->buf[2] << 8 | (unsigned char)file->buf[3]);
-	if (file->size > CHAMP_MAX_SIZE)
-		exit(p_err(110, "Exceeded bot max size", NULL));
-	file->ret = read(fd, &file->comment, COMMENT_LENGTH);
-	if (file->ret != COMMENT_LENGTH)
-		exit(p_err(115, "Bot comment length mismatch", ft_itoa((int)file->ret)));
-	file->ret = read(fd, &file->buf, 4);
-	check_null(file);
-	file->code = (unsigned char *)ft_memalloc(sizeof(unsigned char) * file->size);
-	file->ret = read(fd, file->code, CHAMP_MAX_SIZE);
-	if (file->ret != file->size)
-		exit(p_err(117, "Bot size mismatch", ft_itoa((int)file->ret)));
-	ft_strclr(file->buf);
-	file->ret = read(fd, &file->buf, 1);
-	if (file->ret > 0)
-		exit(p_err(112, "Invalid bot size", NULL));
-	free(file->code);
-	free(file);
+	{
+		ft_err(116, "Bot max size length mismatch", ft_itoa((int)file->ret));
+		exit(116);
+	}
+	ft_check_size(fd, &file);
 	close(fd);
+	*bots += 1;
 }
 
-void	check_args(int ac, char **av, t_core *core)
+void	ft_help(void)
 {
-	int i;
-	int c;
-	int f;
-	int fd;
+	int		fd;
+	int		ret;
+
+	fd = open("man/corewar.man", O_RDONLY);
+	if (fd == -1)
+		exit(ft_err(1, "Cannot access the man file", "man/corewar.man"));
+	ret = ft_print_help(0, 0, fd, '\0');
+	close(fd);
+	exit(ret);
+}
+
+int		ft_is_arg(int ac, char **av, t_core *core, int *i)
+{
+	if (!ft_strcmp(av[*i], "-v"))
+	{
+		core->v = 1;
+		return (1);
+	}
+	else if (!ft_strcmp(av[*i], "-dump"))
+	{
+		ft_store_dump(ac, av, ++(*i), core);
+		return (1);
+	}
+	else if (!ft_strcmp(av[*i], "-n"))
+	{
+		ft_check_num(ac, av, ++(*i));
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_check_args(int ac, char **av, t_core *core, int args)
+{
+	int		i;
+	int		bots;
 
 	if (ac == 1)
-		p_usage();
+		ft_print_usage();
 	i = 1;
-	c = 0;
-	f = 0;
+	bots = 0;
 	while (i < ac)
 	{
-		if (c > MAX_ARGS_NUMBER)
-			exit(p_err(100, "Exceeded number of args", av[i]));
+		if (args > MAX_ARGS_NUMBER)
+			exit(ft_err(100, "Exceeded number of args", av[i]));
 		if (!ft_strcmp(av[i], "-help"))
-		{
-			fd = open("man/corewar.man", O_RDONLY);
-			if (fd == -1)
-				exit(p_err(1, "Cannot access the man file", "man/corewar.man"));
-			i = ft_print_help(0, 0, fd, '\0');
-			close(fd);
-			exit(i);
-		}
-		else if (!ft_strcmp(av[i], "-v"))
-		{
-			c++;
-			core->v = 1;
-		}
-		else if (!ft_strcmp(av[i], "-dump"))
-		{
-			c++;
-			store_dump(ac, av, ++i, core);
-		}
-		else if (!ft_strcmp(av[i], "-n"))
-		{
-			c++;
-			check_num(ac, av, ++i);
-		}
-		else if (!ft_strcmp(av[i], "-op"))
-		{
-			op();
-		}
-		else
-		{
-			check_file(av[i]);
-			f++;
-		}
+			ft_help();
+		else if (ft_is_arg(ac, av, core, &i))
+			args++;
+		else 
+			ft_check_file(av[i], &bots, NULL);
 		i++;
 	}
 	if (core->v && core->dump != -1)
-		exit(p_err(118, "Invalid arguments usage", NULL));
-	if (!f)
-		exit(p_err(119, "Missed bot file", NULL));
-	else if (f > MAX_PLAYERS)
-		exit(p_err(120, "Exceeded number of bots", ft_itoa(f)));
-}
-
-void	op(void)
-{
-	printf("%s\n", op_tab[0].exp);
-	exit(0);
+		exit(ft_err(118, "Invalid arguments usage", NULL));
+	if (!bots)
+		exit(ft_err(119, "Missed bot file", NULL));
+	else if (bots > MAX_PLAYERS)
+		exit(ft_err(120, "Exceeded number of bots", ft_itoa(bots)));
 }

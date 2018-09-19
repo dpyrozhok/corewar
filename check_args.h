@@ -19,7 +19,7 @@ typedef struct	s_check
 	ssize_t			ret;
 }				t_check;
 
-void	check_args(int ac, char **av, t_core *core);
+void	ft_check_args(int ac, char **av, t_core *core, int args);
 
 
 #endif //COREWAR_CHECK_ARGS_H
