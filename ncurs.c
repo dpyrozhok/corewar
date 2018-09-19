@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/18 20:53:31 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/19 15:46:25 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -623,4 +623,39 @@ void	ft_play_sound(char *src)
 	SDL_CloseAudio();
 	SDL_FreeWAV(buf);
 	SDL_Quit();
+}
+
+void	ft_set_rc(int *r, int *c, int pos)
+{
+	*r = 3 + ((pos % MEM_SIZE) / 64) % 64;
+	*c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
+}
+
+void	ft_03_11_visual(t_core *core, t_car *car, int ag, int pos)
+{
+	int		r;
+	int		c;
+	t_champ	*champ;
+
+	pthread_mutex_lock(&core->m);
+	champ = ft_get_champ(core, car->id);
+	if (pos < 0)
+		pos = MEM_SIZE + pos;
+	car->rp = pos;
+	car->sw = 1;
+	attron(COLOR_PAIR(champ->c) | A_BOLD);
+	ft_set_rc(&r, &c, pos);
+	mvprintw(r, c, "%02x", (unsigned char)(ag >> 24));
+	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_set_rc(&r, &c, ++pos);
+	mvprintw(r, c, "%02x", (unsigned char)(ag >> 16 & 255));
+	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_set_rc(&r, &c, ++pos);
+	mvprintw(r, c, "%02x", (unsigned char)(ag >> 8 & 255));
+	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_set_rc(&r, &c, ++pos);
+	mvprintw(r, c, "%02x", (unsigned char)(ag & 255));
+	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	attroff(COLOR_PAIR(champ->c) | A_BOLD);
+	pthread_mutex_unlock(&core->m);
 }

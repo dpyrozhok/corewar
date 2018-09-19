@@ -5,20 +5,23 @@
 #include "corewar.h"
 #include "ncurs.h"
 
-void    ft_01_opcode(t_core *core, t_car *car) {
+void	ft_01_opcode(t_core *core, t_car *car)
+{
+	t_champ	*champ;
 	// int r,c;
-	t_champ *champ;
 
-    champ = ft_get_champ(core, car->id);
-	if (car->id == ft_read_4(core, car->pos % MEM_SIZE)) {  // codage нету, а labelsize == 4, поєтому читаем четыре байта
+	champ = ft_get_champ(core, car->id);
+	if (car->id == ft_read_4(core, car->pos % MEM_SIZE))
+	{
 		champ->last_live = core->cycle;
-        champ->s_live++;
+		champ->s_live++;
 		if (!core->v && core->dump == -1)
-        	ft_printf("\nPlayer %i (%s) is said to be alive", champ->num, champ->name);
-		core->winner_id = champ->id;  // условие кто последний сказал - тот и чемпион
+			ft_printf("\nPlayer %i (%s) is said to be alive", \
+				champ->num, champ->name);
+		core->winner_id = champ->id;
 	}
-    champ->all_live++;
-	car->live = 1; // каретка (процесс) жив в этом цикле
+	champ->all_live++;
+	car->live = 1;
 	car->pos += 4;
 	/*
 	if (core->v)
@@ -39,17 +42,19 @@ void    ft_01_opcode(t_core *core, t_car *car) {
 	*/
 }
 
-void    ft_02_opcode(t_core *core, t_car *car) {
-	int *arg;
-	int pc;
-	int *codage;
+void	ft_02_opcode(t_core *core, t_car *car)
+{
+	int		*arg;
+	int		pc;
+	int		*codage;
 
 	pc = car->pos % MEM_SIZE;
 	codage = ft_get_codage(core, car);
 	arg = ft_get_args(core, car, codage);
 	if (codage[0] == 3)
 		arg[0] = ft_read_4(core, (arg[0] % IDX_MOD + pc - 1) % MEM_SIZE);
-	if (ft_check_cod_and_arg(car, codage, arg)) {
+	if (ft_check_cod_and_arg(car, codage, arg))
+	{
 		car->reg[arg[1] - 1] = (unsigned int)arg[0];
 		if (arg[0] == 0)
 			car->carry = 1;
@@ -59,82 +64,42 @@ void    ft_02_opcode(t_core *core, t_car *car) {
 	free(arg);
 	free(codage);
 }
-void    ft_03_opcode(t_core *core, t_car *car) {
-	t_champ *champ;
-	int *arg;
-	int pc;
-	int *codage;
-	int ag, pos, r, c;
+
+void	ft_03_opcode(t_core *core, t_car *car)
+{
+	int		pc;
+	int		*arg;
+	int		*codage;
 
 	pc = car->pos % MEM_SIZE;
 	codage = ft_get_codage(core, car);
 	arg = ft_get_args(core, car, codage);
-	if (ft_check_cod_and_arg(car, codage, arg)) {
+	if (ft_check_cod_and_arg(car, codage, arg))
+	{
 		if (codage[1] != 3)
 			car->reg[arg[1] - 1] = car->reg[arg[0] - 1];
 		else
 		{
-			ft_put_4(core, car->reg[arg[0] - 1], (arg[1] % IDX_MOD + pc) % MEM_SIZE);
+			ft_put_4(core, car->reg[arg[0] - 1], \
+				(arg[1] % IDX_MOD + pc) % MEM_SIZE);
 			if (core->v)
-			{
-	            pthread_mutex_lock(&core->m);
-
-				champ = ft_get_champ(core, car->id);
-				ag = car->reg[arg[0] - 1];
-				pos = (arg[1] % IDX_MOD + pc) % MEM_SIZE;
-				if (pos < 0)
-					pos = MEM_SIZE + pos;
-				car->rp = pos;
-				car->sw = 1;
-				r = 3+((pos%MEM_SIZE)/64)%64;
-				c = 3+(3*((pos%MEM_SIZE)%64))%192;
-				attron(A_BOLD);
-				attron(COLOR_PAIR(champ->c));
-				mvprintw(r,c,"%02x", (unsigned char)(ag >> 24));
-				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
-				pos++;
-				r = 3+((pos%MEM_SIZE)/64)%64;
-				c = 3+(3*((pos%MEM_SIZE)%64))%192;
-				// c += 3;
-				// c %= 192; ?? нужно ли
-				// r += c/64;
-				mvprintw(r,c,"%02x", (unsigned char)(ag >> 16 & 255));
-				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
-				pos++;
-				r = 3+((pos%MEM_SIZE)/64)%64;
-				c = 3+(3*((pos%MEM_SIZE)%64))%192;
-				// c += 3;
-				mvprintw(r,c,"%02x", (unsigned char)(ag >> 8 & 255));
-				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
-				pos++;
-				r = 3+((pos%MEM_SIZE)/64)%64;
-				c = 3+(3*((pos%MEM_SIZE)%64))%192;
-				// c += 3;
-				mvprintw(r,c,"%02x", (unsigned char)(ag & 255));
-				ft_memset(core->a + (pos%MEM_SIZE), champ->c, 1);
-				attroff(COLOR_PAIR(champ->c));
-				attroff(A_BOLD);
-				// ft_memset(core->a+1 + pos%MEM_SIZE, champ->c, 4);
-				
-				/*
-				refresh();
-				*/
-	
-	            pthread_mutex_unlock(&core->m);
-			}
+				ft_03_11_visual(core, car, car->reg[arg[0] - 1], \
+					(arg[1] % IDX_MOD + pc) % MEM_SIZE);
 		}
 	}
 	free(arg);
 	free(codage);
 }
 
-void    ft_04_opcode(t_core *core, t_car *car) {
-	int *arg;
-	int *codage;
+void	ft_04_opcode(t_core *core, t_car *car)
+{
+	int		*arg;
+	int		*codage;
 
 	codage = ft_get_codage(core, car);
 	arg = ft_get_args(core, car, codage);
-	if (ft_check_cod_and_arg(car, codage, arg)) {
+	if (ft_check_cod_and_arg(car, codage, arg))
+	{
 		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] + car->reg[arg[1] - 1];
 		if (car->reg[arg[2] - 1] == 0)
 			car->carry = 1;
@@ -145,13 +110,15 @@ void    ft_04_opcode(t_core *core, t_car *car) {
 	free(codage);
 }
 
-void    ft_05_opcode(t_core *core, t_car *car) {
-	int *arg;
-	int *codage;
+void	ft_05_opcode(t_core *core, t_car *car)
+{
+	int		*arg;
+	int		*codage;
 
 	codage = ft_get_codage(core, car);
 	arg = ft_get_args(core, car, codage);
-	if (ft_check_cod_and_arg(car, codage, arg)) {
+	if (ft_check_cod_and_arg(car, codage, arg))
+	{
 		car->reg[arg[2] - 1] = car->reg[arg[0] - 1] - car->reg[arg[1] - 1];
 		if (car->reg[arg[2] - 1] == 0)
 			car->carry = 1;
