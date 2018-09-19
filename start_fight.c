@@ -155,6 +155,44 @@ void	ft_key_speedup(t_core *p)
 	pthread_mutex_unlock(&(p)->m);
 }
 
+void	ft_key_speeddown(t_core *p)
+{
+	pthread_mutex_lock(&(p)->m);
+	if (!(p)->p && (p)->t && (p)->t < 1000000)
+		(p)->t *= 10;
+	pthread_mutex_unlock(&(p)->m);
+}
+
+void	ft_key_reset(t_core *p)
+{
+	pthread_mutex_lock(&(p)->m);
+	if (!(p)->p)
+		(p)->t = 100000;
+	pthread_mutex_unlock(&(p)->m);
+}
+
+void	ft_key_finish(t_core *p)
+{
+	pthread_mutex_lock(&(p)->m);
+	if ((p)->t == -1)
+	{
+		(p)->t = -2;
+		pthread_exit(NULL);
+	}	
+	pthread_mutex_unlock(&(p)->m);
+}
+
+void	ft_key_terminate(t_core *p)
+{
+	pthread_mutex_lock(&(p)->m);
+	if ((p)->t)
+	{
+		endwin();
+		exit(121);
+	}
+	pthread_mutex_unlock(&(p)->m);
+}
+
 void	*ft_fight_key(void *ptr)
 {
 	int		ch;
@@ -163,35 +201,18 @@ void	*ft_fight_key(void *ptr)
 	p = (t_core*)ptr;
 	while ((ch = getch()))
 	{
-		if ((p)->t == -1)
-		{
-			(p)->t = -2;
-			pthread_exit(NULL);
-		}
-		else if (ch == 27 && (p)->t)
-			break ;
-		else if (!(p)->p && ch == KEY_F(1)) // F1 - reset speed
-		{
-			pthread_mutex_lock(&(p)->m);
-			(p)->t = 100000;
-			pthread_mutex_unlock(&(p)->m);
-		}
+		ft_key_finish(p);
+		if (ch == 27)
+			ft_key_terminate(p);
+		else if (ch == KEY_F(1))
+			ft_key_reset(p);
 		else if (ch == KEY_UP)
 			ft_key_speedup(p);
-		else if (!(p)->p && (p)->t < 1000000 && ch == KEY_DOWN) // ARROW DOWN - speed down
-		{
-			pthread_mutex_lock(&(p)->m);
-			(p)->t *= 10;
-			pthread_mutex_unlock(&(p)->m);
-		}
+		else if (ch == KEY_DOWN)
+			ft_key_speeddown(p);
 		else
 			ft_key_pause(p, ch);
-		
 	}
-	pthread_mutex_lock(&(p)->m);
-	endwin();
-	exit(121);
-	pthread_mutex_unlock(&(p)->m);
 	return (NULL);
 }
 
