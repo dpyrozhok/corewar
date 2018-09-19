@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/19 15:17:54 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/19 17:07:40 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ void			ft_init_screen(t_core *core, int i, int r, int c);
 void			ft_breakdown(t_core *core);
 void			ft_play_sound(char *src);
 void			ft_03_11_visual(t_core *core, t_car *car, int ag, int pos);
+void			ft_cars_visual(t_core *core, t_car *tmp);
 
 #endif

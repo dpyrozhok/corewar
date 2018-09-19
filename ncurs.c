@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/19 15:46:25 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/19 17:09:12 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -657,5 +657,46 @@ void	ft_03_11_visual(t_core *core, t_car *car, int ag, int pos)
 	mvprintw(r, c, "%02x", (unsigned char)(ag & 255));
 	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
 	attroff(COLOR_PAIR(champ->c) | A_BOLD);
+	pthread_mutex_unlock(&core->m);
+}
+
+void	ft_cars_hoff(t_core *core, t_car *tmp)
+{
+	int		pos;
+	int		r;
+	int		c;
+
+	tmp->sw = 0;
+	pos = tmp->rp;
+	ft_set_rc(&r, &c, pos);
+	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	ft_set_rc(&r, &c, ++pos);
+	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	ft_set_rc(&r, &c, ++pos);
+	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	ft_set_rc(&r, &c, ++pos);
+	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+}
+
+void	ft_cars_visual(t_core *core, t_car *tmp)
+{
+	int		r;
+	int		c;
+
+	pthread_mutex_lock(&core->m);
+	if (tmp->sw)
+		ft_cars_hoff(core, tmp);
+	ft_set_rc(&r, &c, tmp->pos);
+	attron(COLOR_PAIR(core->a[tmp->pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", core->arena[tmp->pos % MEM_SIZE]);
+	attroff(COLOR_PAIR(core->a[tmp->pos % MEM_SIZE]));
 	pthread_mutex_unlock(&core->m);
 }
