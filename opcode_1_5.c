@@ -8,18 +8,23 @@
 void	ft_01_opcode(t_core *core, t_car *car)
 {
 	t_champ	*champ;
+	int id;
 
-	champ = ft_get_champ(core, car->id);
-	if (car->id == ft_read_4(core, car->pos % MEM_SIZE))
+	id = ft_read_4(core, car->pos % MEM_SIZE);
+    champ = ft_get_champ(core, id);
+	if (champ)
 	{
 		champ->last_live = core->cycle;
 		champ->s_live++;
+        champ->all_live++;
 		if (!core->v && core->dump == -1)
 			ft_printf("\nPlayer %i (%s) is said to be alive", \
 				champ->num, champ->name);
 		core->winner_id = champ->id;
+	} else {
+        champ = ft_get_champ(core, car->id);
+        champ->all_live++;
 	}
-	champ->all_live++;
 	car->live = 1;
 	car->pos += 4;
 }
@@ -58,7 +63,7 @@ void	ft_03_opcode(t_core *core, t_car *car)
 	arg = ft_get_args(core, car, codage);
 	if (ft_check_cod_and_arg(car, codage, arg))
 	{
-		if (codage[1] != 3)
+		if (codage[1] != IND_CODE)
 			car->reg[arg[1] - 1] = car->reg[arg[0] - 1];
 		else
 		{

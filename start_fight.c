@@ -147,16 +147,16 @@ void	*ft_fight_key(void *ptr)
 	return (NULL);
 }
 
-void	*ft_fight_audio(void *ptr)
-{
-	if (!ptr)
-	{
-		SDL_Quit();
-		ft_play_sound("Track1.wav");
-	}
-	pthread_exit(NULL);
-	return (NULL);
-}
+//void	*ft_fight_audio(void *ptr)
+//{
+//	if (!ptr)
+//	{
+//		SDL_Quit();
+//		ft_play_sound("Track1.wav");
+//	}
+//	pthread_exit(NULL);
+//	return (NULL);
+//}
 
 void	ft_is_paused(t_core *core)
 {
@@ -203,12 +203,12 @@ void	ft_fight_visual(t_core *core)
 {
 	int			ch;
 	pthread_t	thread_id;
-	pthread_t	thread_id2;
+	//pthread_t	thread_id2;
 
 	pthread_create(&thread_id, NULL, ft_fight_key, (void*)core);
 	pthread_detach(thread_id);
-	pthread_create(&thread_id2, NULL, ft_fight_audio, NULL);
-	pthread_detach(thread_id2);
+	//pthread_create(&thread_id2, NULL, ft_fight_audio, NULL);
+	//pthread_detach(thread_id2);
 	ft_vfight_run(core, NULL);
 	core->f = 1;
 	ft_draw(core);
@@ -241,7 +241,6 @@ void	ft_fight(t_core *core, t_car *tmp)
 		if (core->dump != -1 && core->dump == core->cycle)
 		{
 			ft_dump(core);
-			//ft_free(core); // нужно ли?
 			exit(0);
 		}
 		if (core->cycle == core->c_to_die + core->last_check \

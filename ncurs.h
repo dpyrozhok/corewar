@@ -17,8 +17,8 @@
 # include "corewar.h"
 # include "libft/get_next_line.h"
 
-# include "SDL2-2.0.8/include/SDL.h"
-# include "SDL2-2.0.8/include/SDL_audio.h"
+//# include "SDL2-2.0.8/include/SDL.h"
+//# include "SDL2-2.0.8/include/SDL_audio.h"
 # undef main
 
 # define BORDER_LS ACS_VLINE
