@@ -17,7 +17,7 @@ void	ft_check_cars(t_core *core)
 				tmp->state = 0;
 				core->qt_car--;
 				if (core->v)
-					ft_cars_visual(core, tmp);
+					ft_vcars_check(core, tmp);
 			}
 			else
 				tmp->live = 0;

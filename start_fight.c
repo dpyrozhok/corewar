@@ -1,8 +1,6 @@
 #include "corewar.h"
 #include "ncurs.h"
 
-void	*myThreadFun(void *ptr);
-
 void	ft_get_n_car_value(t_core *core, t_car *car)
 {
 	t_champ	*champ;
@@ -37,89 +35,22 @@ void	ft_get_n_car_value(t_core *core, t_car *car)
 
 void	ft_touch_car(t_core *core, t_car *car)
 {
-	int		pos;
-	int		r;
-	int		c;
-	t_champ	*champ;
-
 	if (car->cycle == -1)
 		ft_get_n_car_value(core, car);
 	if (car->cycle < 2)
 	{
 		if (core->v)
-		{
-			pthread_mutex_lock(&core->m);
-			r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
-			c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
-			attron(COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-			mvprintw(r,c,"%02x", core->arena[car->pos % MEM_SIZE]);
-			attroff(COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-			pthread_mutex_unlock(&core->m);
-		}
+			ft_vcars_norev(core, car);
 		if (car->opcode > 0 && car->opcode < 17)
 		{
 			if (core->v && car->sw)
-			{
-				pthread_mutex_lock(&core->m);
-				car->sw = 0;
-				pos = car->rp;
-				r = 3 + ((pos % MEM_SIZE) / 64) % 64;
-				c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
-				attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
-				mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-				attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				pos++;
-				r = 3 + ((pos % MEM_SIZE) / 64) % 64;
-				c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
-				attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-				attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				pos++;
-				r = 3 + ((pos % MEM_SIZE) / 64) % 64;
-				c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
-				attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-				attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				pos++;
-				r = 3 + ((pos % MEM_SIZE) / 64) % 64;
-				c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
-				attron(COLOR_PAIR(core->a[pos%MEM_SIZE]));
-				mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-				attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-				pthread_mutex_unlock(&core->m);
-			}
+				ft_vcars_off(core, car);
 			ft_opcode_switcher(core, car);
 		}
-		/*
-		if (core->v)
-		{
-			r = 3+((champ->cars->pos%MEM_SIZE)/64)%64;
-			c = 3+(3*((champ->cars->pos%MEM_SIZE)%64))%192;
-			attron(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
-			mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
-			attroff(COLOR_PAIR(core->a[champ->cars->pos%MEM_SIZE]));
-		}
-		*/
 		car->cycle = -1;
 		car->pos++;
 		if (core->v)
-		{
-			pthread_mutex_lock(&core->m);
-			champ = ft_get_champ(core, car->id);
-			r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
-			c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
-			if (core->arena[car->pos % MEM_SIZE] == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
-				attron(A_BOLD | COLOR_PAIR(champ->cc));
-			else
-				attron(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-			mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
-			if (core->arena[car->pos % MEM_SIZE] == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
-				attroff(A_BOLD | COLOR_PAIR(champ->cc));
-			else
-				attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-			refresh();
-			pthread_mutex_unlock(&core->m);
-		}
+			ft_vcars_rev(core, car);
 	}
 	else
 		car->cycle--;

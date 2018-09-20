@@ -8,7 +8,6 @@
 void	ft_01_opcode(t_core *core, t_car *car)
 {
 	t_champ	*champ;
-	// int r,c;
 
 	champ = ft_get_champ(core, car->id);
 	if (car->id == ft_read_4(core, car->pos % MEM_SIZE))
@@ -23,23 +22,6 @@ void	ft_01_opcode(t_core *core, t_car *car)
 	champ->all_live++;
 	car->live = 1;
 	car->pos += 4;
-	/*
-	if (core->v)
-	{
-		r = 3+((champ->cars->pos%MEM_SIZE)/64)%64;
-		c = 3+(3*((champ->cars->pos%MEM_SIZE)%64))%192;
-		attron(COLOR_PAIR(champ->c));
-		// attron(COLOR_PAIR(core->a[champ->cars->pos]));
-		attron(A_REVERSE);
-		// attron(A_BOLD);
-		mvprintw(r,c,"%02x", core->arena[champ->cars->pos%MEM_SIZE]);
-		// attroff(A_BOLD);
-		attroff(A_REVERSE);
-		// attroff(COLOR_PAIR(core->a[champ->cars->pos]));
-		attroff(COLOR_PAIR(champ->c));
-		ft_memset(core->a + champ->cars->pos%MEM_SIZE, champ->c, 1);
-	}
-	*/
 }
 
 void	ft_02_opcode(t_core *core, t_car *car)
@@ -83,7 +65,7 @@ void	ft_03_opcode(t_core *core, t_car *car)
 			ft_put_4(core, car->reg[arg[0] - 1], \
 				(arg[1] % IDX_MOD + pc) % MEM_SIZE);
 			if (core->v)
-				ft_03_11_visual(core, car, car->reg[arg[0] - 1], \
+				ft_vcars_on(core, car, car->reg[arg[0] - 1], \
 					(arg[1] % IDX_MOD + pc) % MEM_SIZE);
 		}
 	}

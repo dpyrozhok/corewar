@@ -25,7 +25,7 @@ void	ft_11_opcode(t_core *core, t_car *car)
 		ft_put_4(core, car->reg[arg[0] - 1], \
 			((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
 		if (core->v)
-			ft_03_11_visual(core, car, car->reg[arg[0] - 1], \
+			ft_vcars_on(core, car, car->reg[arg[0] - 1], \
 				((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
 	}
 	free(arg);
