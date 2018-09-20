@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/20 11:10:54 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/20 14:16:32 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,23 +200,23 @@ void	ft_break_score(t_core *core, t_champ *curr, double step)
 		curr = curr->next;
 	}
 	ft_fill_score(core, core->champs, step, 50 - total);
-	attron(COLOR_PAIR(DEFAULT_COLOR));
+	attron(COLOR_PAIR(4));
 	mvprintw(core->l, 251, "]");
-	attroff(COLOR_PAIR(DEFAULT_COLOR));
+	attroff(COLOR_PAIR(4));
 }
 
 void	ft_break_last(t_core *core)
 {
-	attron(COLOR_PAIR(DEFAULT_COLOR));
+	attron(COLOR_PAIR(4));
 	mvprintw(core->l, 201, \
 		"--------------------------------------------------]");
-	attroff(COLOR_PAIR(DEFAULT_COLOR));
+	attroff(COLOR_PAIR(4));
 	if (core->l)
 	{
-		attron(COLOR_PAIR(DEFAULT_COLOR));
+		attron(COLOR_PAIR(4));
 		mvprintw(core->l - 3, 201, \
 			"--------------------------------------------------]");
-		attroff(COLOR_PAIR(DEFAULT_COLOR));
+		attroff(COLOR_PAIR(4));
 	}
 }
 
@@ -287,9 +287,9 @@ void	ft_new_score(t_core *core, t_champ *curr, double step, int r)
 		curr = curr->next;
 	}
 	ft_fill_new(core, step, 50 - total, r);
-	attron(COLOR_PAIR(DEFAULT_COLOR));
+	attron(COLOR_PAIR(4));
 	mvprintw(core->l, 251, "]");
-	attroff(COLOR_PAIR(DEFAULT_COLOR));
+	attroff(COLOR_PAIR(4));
 }
 
 void	ft_scoring(t_core *core, int r)
@@ -312,7 +312,7 @@ void	ft_scoring(t_core *core, int r)
 
 void	ft_breaking(t_core *core)
 {
-	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(3, 200, "%s", (core->f) ? "** FINISH ** " : "** RUNNING **");
 	if (core->t)
 		mvprintw(5, 222, "%-10d", 1000000 / core->t);
@@ -326,7 +326,7 @@ void	ft_breaking(t_core *core)
 		mvprintw(12, 200, "Speed: 0.1x        ");
 	else
 		mvprintw(12, 200, "Speed: Stealth     ");
-	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attroff(COLOR_PAIR(4) | A_BOLD);
 }
 
 void	ft_champing(t_core *core, int *r)
@@ -334,7 +334,7 @@ void	ft_champing(t_core *core, int *r)
 	int		i;
 	t_champ	*curr;
 
-	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attron(COLOR_PAIR(4) | A_BOLD);
 	i = 0;
 	curr = core->champs;
 	while (i++ < core->qt_champ)
@@ -346,7 +346,7 @@ void	ft_champing(t_core *core, int *r)
 		curr = curr->next;
 	}
 	(*r)++;
-	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attroff(COLOR_PAIR(4) | A_BOLD);
 }
 
 void	ft_draw(t_core *core)
@@ -360,7 +360,7 @@ void	ft_draw(t_core *core)
 	ft_champing(core, &r);
 	ft_scoring(core, r);
 	r += 4;
-	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(++r, 215, "%-10d", core->c_to_die);
 	if (core->f)
 	{
@@ -373,41 +373,41 @@ void	ft_draw(t_core *core)
 		mvprintw(++r, 200, "Press %s %s", (core->t) ? "any key" : "ESC", \
 			"to exit");
 	}
-	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attroff(COLOR_PAIR(4) | A_BOLD);
 	refresh();
 	pthread_mutex_unlock(&core->m);
 }
 
 void	ft_init_colorset(void)
 {
-	init_pair(TITLE_COLOR, TITLE_FG, TITLE_BG);
-	init_pair(BORDER_L_COLOR, BORDER_L_FG, BORDER_L_BG);
-	init_pair(BORDER_R_COLOR, BORDER_R_FG, BORDER_R_BG);
-	init_pair(DEFAULT_COLOR, DEFAULT_FG, DEFAULT_BG);
-	init_pair(BOT_A_COLOR, BOT_A_FG, BOT_BG);
-	init_pair(BOT_B_COLOR, BOT_B_FG, BOT_BG);
-	init_pair(BOT_C_COLOR, BOT_C_FG, BOT_BG);
-	init_pair(BOT_D_COLOR, BOT_D_FG, BOT_BG);
-	init_pair(CAR_A_COLOR, CAR_FG, BOT_A_FG);
-	init_pair(CAR_B_COLOR, CAR_FG, BOT_B_FG);
-	init_pair(CAR_C_COLOR, CAR_FG, BOT_C_FG);
-	init_pair(CAR_D_COLOR, CAR_FG, BOT_D_FG);
+	init_pair(1, TITLE_FG, TITLE_BG);
+	init_pair(2, BORDER_L_FG, BORDER_L_BG);
+	init_pair(3, BORDER_R_FG, BORDER_R_BG);
+	init_pair(4, DEFAULT_FG, DEFAULT_BG);
+	init_pair(20, BOT_A_FG, BOT_BG);
+	init_pair(21, BOT_B_FG, BOT_BG);
+	init_pair(22, BOT_C_FG, BOT_BG);
+	init_pair(23, BOT_D_FG, BOT_BG);
+	init_pair(30, CAR_FG, BOT_A_FG);
+	init_pair(31, CAR_FG, BOT_B_FG);
+	init_pair(32, CAR_FG, BOT_C_FG);
+	init_pair(33, CAR_FG, BOT_D_FG);
 }
 
 void	ft_init_border_left(t_border *border)
 {
-	border->height = BORDER_L_HEIGHT;
-	border->width = BORDER_L_WIDTH;
-	border->starty = BORDER_L_START_Y;
-	border->startx = BORDER_L_START_X;
+	border->height = 67;
+	border->width = 196;
+	border->starty = 1;
+	border->startx = 0;
 }
 
 void	ft_init_border_right(t_border *border)
 {
-	border->height = BORDER_R_HEIGHT;
-	border->width = BORDER_R_WIDTH;
-	border->starty = BORDER_R_START_Y;
-	border->startx = BORDER_R_START_X;
+	border->height = 67;
+	border->width = 56;
+	border->starty = 1;
+	border->startx = 197;
 }
 
 void	ft_create_border(t_border *border, t_core *core)
@@ -441,23 +441,21 @@ void	ft_fill_screen(t_core *core)
 	ft_init_border_left(&border_left);
 	ft_init_border_right(&border_right);
 	pthread_mutex_lock(&core->m);
-	attron(COLOR_PAIR(TITLE_COLOR) | A_BOLD);
-	mvprintw(0, (WIN_COLS - 13) / 2, "C O R E W A R");
-	attroff(COLOR_PAIR(TITLE_COLOR));
+	attron(COLOR_PAIR(1) | A_BOLD);
+	mvprintw(0, 120, "C O R E W A R");
+	attroff(COLOR_PAIR(1));
 	pthread_mutex_unlock(&core->m);
-	attron(COLOR_PAIR(BORDER_L_COLOR) | A_REVERSE);
+	attron(COLOR_PAIR(2) | A_REVERSE);
 	ft_create_border(&border_left, core);
-	attroff(COLOR_PAIR(BORDER_L_COLOR));
-	attron(COLOR_PAIR(BORDER_R_COLOR));
+	attroff(COLOR_PAIR(2));
+	attron(COLOR_PAIR(3));
 	ft_create_border(&border_right, core);
-	attroff(COLOR_PAIR(BORDER_R_COLOR) | A_REVERSE);
+	attroff(COLOR_PAIR(3) | A_REVERSE);
 	pthread_mutex_lock(&core->m);
-	attron(COLOR_PAIR(DEFAULT_COLOR));
-	mvprintw(BORDER_L_HEIGHT / 2 - 1, (BORDER_L_WIDTH - 18) / 2, \
-		"MAKE PEACE NOT WAR");
-	mvprintw(BORDER_L_HEIGHT / 2, (BORDER_L_WIDTH - 25) / 2, \
-		"PRESS ANY KEY TO CONTINUE");
-	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attron(COLOR_PAIR(4));
+	mvprintw(32, 89, "MAKE PEACE NOT WAR");
+	mvprintw(33, 85, "PRESS ANY KEY TO CONTINUE");
+	attroff(COLOR_PAIR(4) | A_BOLD);
 	refresh();
 	pthread_mutex_unlock(&core->m);
 }
@@ -472,14 +470,14 @@ void	*ft_promo_audio(void *ptr)
 
 void	ft_init_win(t_core *core)
 {
-	// pthread_t	thread_promo;
+	pthread_t	thread_promo;
 
 	initscr();
-	if (LINES < WIN_ROWS || COLS < WIN_COLS)
+	if (LINES < 69 || COLS < 254)
 	{
 		endwin();
 		ft_printf("Resize window to min %d cols and %d rows. Currently %d cols "
-			"and %d rows\n", WIN_COLS, WIN_ROWS, COLS, LINES);
+			"and %d rows\n", 254, 69, COLS, LINES);
 		exit(0);
 	}
 	if (has_colors() == FALSE)
@@ -493,8 +491,8 @@ void	ft_init_win(t_core *core)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	// pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
-	// pthread_detach(thread_promo);
+	pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
+	pthread_detach(thread_promo);
 	ft_init_colorset();
 	ft_fill_screen(core);
 }
@@ -502,9 +500,9 @@ void	ft_init_win(t_core *core)
 void	ft_win_half(t_core *core, t_champ *curr, int i, int *r)
 {
 	pthread_mutex_lock(&core->m);
-	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
-	mvprintw(BORDER_L_HEIGHT / 2 - 1, (BORDER_L_WIDTH - 18) / 2, "%18s", "");
-	mvprintw(BORDER_L_HEIGHT / 2, (BORDER_L_WIDTH - 25) / 2, "%25s", "");
+	attron(COLOR_PAIR(4) | A_BOLD);
+	mvprintw(32, 89, "%18s", "");
+	mvprintw(33, 85, "%25s", "");
 	mvprintw(3, 200, "** RUNNING **");
 	mvprintw(5, 200, "Cycles/second limit : %d", 10);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
@@ -523,14 +521,14 @@ void	ft_win_half(t_core *core, t_champ *curr, int i, int *r)
 		*r += 2;
 		curr = curr->next;
 	}
-	attroff(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attroff(COLOR_PAIR(4) | A_BOLD);
 	pthread_mutex_unlock(&core->m);
 }
 
 void	ft_fill_win(t_core *core, int r)
 {
 	ft_win_half(core, core->champs, 0, &r);
-	attron(COLOR_PAIR(DEFAULT_COLOR) | A_BOLD);
+	attron(COLOR_PAIR(4) | A_BOLD);
 	pthread_mutex_lock(&core->m);
 	mvprintw(r++, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
@@ -583,13 +581,9 @@ void	ft_init_screen(t_core *core, int i, int r, int c)
 int		ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, Uint8 **buf)
 {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0)
-	{
-		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return (1);
-	}
 	if (SDL_LoadWAV(src, spec, buf, len) == NULL)
 	{
-		SDL_Log("Unable to load file '%s': %s", src, SDL_GetError());
 		SDL_Quit();
 		return (1);
 	}
@@ -625,10 +619,7 @@ void	ft_play_sound(char *src)
 	spec.callback = ft_play_callback;
 	spec.userdata = NULL;
 	if (SDL_OpenAudio(&spec, NULL) < 0)
-	{
-		SDL_Log("Unable to open audio: %s", SDL_GetError());
 		return ;
-	}
 	g_len = len;
 	g_buf = buf;
 	SDL_PauseAudio(0);
