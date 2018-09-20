@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/20 09:42:15 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/20 11:10:54 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -753,5 +753,50 @@ void	ft_vcars_rev(t_core *core, t_car *car)
 	else
 		attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
 	refresh();
+	pthread_mutex_unlock(&core->m);
+}
+
+void	ft_champ_visual(t_core *core, t_champ *tmp, int shift)
+{
+	unsigned int	i;
+	unsigned int	r;
+	unsigned int	c;
+
+	pthread_mutex_lock(&core->m);
+	attron(COLOR_PAIR(tmp->c));
+	i = 0;
+	r = 3 + (shift / 64);
+	c = 3 + 3 * (shift % 64);
+	while (i < tmp->size)
+	{
+		mvprintw(r, c, "%02x", tmp->code[i]);
+		if ((1 + i + shift % 64) % 64 == 0 && !(i == 0 && shift == 0))
+		{
+			c = 3;
+			r++;
+		}
+		else
+			c += 3;
+		i++;
+	}
+	attroff(COLOR_PAIR(tmp->c));
+	ft_memset(core->a + shift, tmp->c, tmp->size);
+	refresh();
+	pthread_mutex_unlock(&core->m);
+}
+
+void	ft_vcars_fork(t_core *core, t_car *car, int pos)
+{
+	t_champ	*champ;
+	int		r;
+	int		c;
+
+	pthread_mutex_lock(&core->m);
+	champ = ft_get_champ(core, car->id);
+	r = 3 + ((pos % MEM_SIZE) / 64) % 64;
+	c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
+	attron(COLOR_PAIR(champ->c) | A_REVERSE);
+	mvprintw(r, c, "%02x", core->arena[pos]);
+	attroff(COLOR_PAIR(champ->c) | A_REVERSE);
 	pthread_mutex_unlock(&core->m);
 }
