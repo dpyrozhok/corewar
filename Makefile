@@ -15,14 +15,16 @@ NAME = corewar
 SRC = main.c \
     check_args.c \
     start_fight.c \
+    fight_visual_1.c \
+    fight_visual_2.c \
     check_isend.c \
-    opcode_switcher.c \
+    bit_handler.c \
     ncurs.c \
     op.c \
     opcode_1_5.c \
-    opcode_11_16.c \
+    opcode_11_15.c \
     opcode_6_10.c \
-    op_handler.c
+    opcode_handler.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_isend.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/21 21:32:04 by popanase          #+#    #+#             */
+/*   Updated: 2018/09/21 21:33:40 by popanase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 #include "ncurs.h"
 
@@ -29,10 +41,8 @@ void	ft_check_cars(t_core *core)
 void	ft_make_check(t_core *core)
 {
 	t_champ	*champ;
-	int		flag;
-	int     a;
+	int		a;
 
-	flag = 0;
 	a = 0;
 	core->qt_check++;
 	champ = core->champs;
@@ -46,9 +56,7 @@ void	ft_make_check(t_core *core)
 		champ->all_live = 0;
 		champ = champ->next;
 	}
-	if (a >= NBR_LIVE)
-		flag = 1;
-	if (flag || core->qt_check == MAX_CHECKS)
+	if (a >= NBR_LIVE || core->qt_check == MAX_CHECKS)
 	{
 		core->qt_check = 0;
 		core->c_to_die -= CYCLE_DELTA;

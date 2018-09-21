@@ -43,8 +43,6 @@ void	ft_append_car(t_core *core, t_car *car)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = car;
-	// if (tmp->num == 118)
-	// {}
 	car->num = tmp->num + 1;
 	car->prev = tmp;
 }

@@ -1,29 +1,39 @@
-//
-// Created by Pavlo OPANASENKO on 8/17/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   opcode_1_5.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/21 20:29:31 by popanase          #+#    #+#             */
+/*   Updated: 2018/09/21 20:31:53 by popanase         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "corewar.h"
 #include "ncurs.h"
 
 void	ft_01_opcode(t_core *core, t_car *car)
 {
+	int		id;
 	t_champ	*champ;
-	int id;
 
 	id = ft_read_4(core, car->pos % MEM_SIZE);
-    champ = ft_get_champ(core, id);
+	champ = ft_get_champ(core, id);
 	if (champ)
 	{
 		champ->last_live = core->cycle;
 		champ->s_live++;
-        champ->all_live++;
+		champ->all_live++;
 		if (!core->vis && core->dump == -1)
 			ft_printf("\nPlayer %i (%s) is said to be alive", \
 				champ->num, champ->name);
 		core->winner_id = champ->id;
-	} else {
-        champ = ft_get_champ(core, car->id);
-        champ->all_live++;
+	}
+	else
+	{
+		champ = ft_get_champ(core, car->id);
+		champ->all_live++;
 	}
 	car->live = 1;
 	car->pos += 4;

@@ -12,8 +12,8 @@
 
 #include "ncurs.h"
 
-//Uint32		g_len;
-//Uint8		*g_buf;
+Uint32		g_len;
+Uint8		*g_buf;
 
 void	*ft_resize_help(void *ptr)
 {
@@ -26,8 +26,8 @@ void	*ft_resize_help(void *ptr)
 				refresh();
 				endwin();
 				system("reset");
-				//SDL_Quit();
-				//ft_play_sound("Track0.wav");
+				SDL_Quit();
+				ft_play_sound("Track0.wav");
 				printf("'corewar' shut down. Resize window to min "
 					"80 cols and 24 rows. Currently %d cols and %d rows.\n", \
 					COLS, LINES);
@@ -44,11 +44,11 @@ void	ft_init_resize_help(void)
 	if (LINES < 24 || COLS < 80)
 	{
 		endwin();
-		//SDL_Quit();
-		//ft_play_sound("Track0.wav");
+		SDL_Quit();
+		ft_play_sound("Track0.wav");
 		printf("Resize window to min 80 cols and 24 rows. Currently %d cols"
 			" and %d rows.\n", COLS, LINES);
-		exit(122);	
+		exit(122);
 	}
 	pthread_create(&thread_resize_help, NULL, ft_resize_help, NULL);
 	pthread_detach(thread_resize_help);
@@ -168,8 +168,8 @@ void	*ft_resize_win(void *ptr)
 			refresh();
 			endwin();
 			system("reset");
-			//SDL_Quit();
-			//ft_play_sound("Track0.wav");
+			SDL_Quit();
+			ft_play_sound("Track0.wav");
 			ft_printf("'corewar' shut down. Resize window to min "
 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
 				COLS, LINES);
@@ -411,8 +411,8 @@ void	ft_draw(t_core *core)
 		attron(COLOR_PAIR(curr->col));
 		mvprintw(r++, 216, "%s", curr->name);
 		attroff(COLOR_PAIR(curr->col));
-		mvprintw(++r, 200, "Press %s %s", (core->microsec) ? "any key" : "ESC", \
-			"to exit");
+		mvprintw(++r, 200, "Press %s %s", (core->microsec) ? "any key" : \
+		"ESC", "to exit");
 	}
 	attroff(COLOR_PAIR(4) | A_BOLD);
 	refresh();
@@ -501,17 +501,17 @@ void	ft_fill_screen(t_core *core)
 	pthread_mutex_unlock(&core->mut);
 }
 
-//void	*ft_promo_audio(void *ptr)
-//{
-//	if (!ptr)
-//		ft_play_sound("Track.wav");
-//	pthread_exit(NULL);
-//	return (NULL);
-//}
+void	*ft_promo_audio(void *ptr)
+{
+	if (!ptr)
+		ft_play_sound("Track.wav");
+	pthread_exit(NULL);
+	return (NULL);
+}
 
 void	ft_init_win(t_core *core)
 {
-//	pthread_t	thread_promo;
+	pthread_t	thread_promo;
 
 	initscr();
 	if (LINES < 69 || COLS < 254)
@@ -532,8 +532,8 @@ void	ft_init_win(t_core *core)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	//pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
-	//pthread_detach(thread_promo);
+	pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
+	pthread_detach(thread_promo);
 	ft_init_colorset();
 	ft_fill_screen(core);
 }
@@ -619,57 +619,57 @@ void	ft_init_screen(t_core *core, int i, int r, int c)
 	pthread_mutex_unlock(&core->mut);
 }
 
-//int		ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, Uint8 **buf)
-//{
-//	if (SDL_Init(SDL_INIT_AUDIO) != 0)
-//		return (1);
-//	if (SDL_LoadWAV(src, spec, buf, len) == NULL)
-//	{
-//		SDL_Quit();
-//		return (1);
-//	}
-//	return (0);
-//}
-//
-//void	ft_play_callback(void *udata, Uint8 *stream, int len)
-//{
-//	Uint32	tmp;
-//
-//	tmp = len;
-//	if (g_len == 0)
-//		return ;
-//	else if (tmp > g_len)
-//		len = g_len;
-//	if (udata)
-//		udata = NULL;
-//	SDL_memset(stream, 0, len);
-//	SDL_memcpy(stream, g_buf, len);
-//	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
-//	g_len -= len;
-//	g_buf += len;
-//}
-//
-//void	ft_play_sound(char *src)
-//{
-//	SDL_AudioSpec	spec;
-//	Uint32			len;
-//	Uint8			*buf;
-//
-//	if (ft_init_sdl(src, &spec, &len, &buf))
-//		return ;
-//	spec.callback = ft_play_callback;
-//	spec.userdata = NULL;
-//	if (SDL_OpenAudio(&spec, NULL) < 0)
-//		return ;
-//	g_len = len;
-//	g_buf = buf;
-//	SDL_PauseAudio(0);
-//	while (g_len > 0)
-//		SDL_Delay(500);
-//	SDL_CloseAudio();
-//	SDL_FreeWAV(buf);
-//	SDL_Quit();
-//}
+int		ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, Uint8 **buf)
+{
+	if (SDL_Init(SDL_INIT_AUDIO) != 0)
+		return (1);
+	if (SDL_LoadWAV(src, spec, buf, len) == NULL)
+	{
+		SDL_Quit();
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_play_callback(void *udata, Uint8 *stream, int len)
+{
+	Uint32	tmp;
+
+	tmp = len;
+	if (g_len == 0)
+		return ;
+	else if (tmp > g_len)
+		len = g_len;
+	if (udata)
+		udata = NULL;
+	SDL_memset(stream, 0, len);
+	SDL_memcpy(stream, g_buf, len);
+	SDL_MixAudio(stream, g_buf, len, SDL_MIX_MAXVOLUME / 2);
+	g_len -= len;
+	g_buf += len;
+}
+
+void	ft_play_sound(char *src)
+{
+	SDL_AudioSpec	spec;
+	Uint32			len;
+	Uint8			*buf;
+
+	if (ft_init_sdl(src, &spec, &len, &buf))
+		return ;
+	spec.callback = ft_play_callback;
+	spec.userdata = NULL;
+	if (SDL_OpenAudio(&spec, NULL) < 0)
+		return ;
+	g_len = len;
+	g_buf = buf;
+	SDL_PauseAudio(0);
+	while (g_len > 0)
+		SDL_Delay(500);
+	SDL_CloseAudio();
+	SDL_FreeWAV(buf);
+	SDL_Quit();
+}
 
 void	ft_set_rc(int *r, int *c, int pos)
 {

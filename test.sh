@@ -1,4 +1,4 @@
-i=1500
+i=6930
 while [ $i -le 300000 ]
 do
    echo $i;

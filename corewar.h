@@ -68,6 +68,14 @@ struct              s_car {
 
 void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
+void	ft_fight_visual(t_core *core);
+void	ft_key_pause(t_core *p, int ch);
+void	ft_key_speedup(t_core *p);
+void	ft_key_speeddown(t_core *p);
+void	ft_key_reset(t_core *p);
+void	ft_key_finish(t_core *p);
+void	ft_is_paused(t_core *core);
+void	ft_vfight_run(t_core *core, t_car *tmp);
 void    ft_copy_car(t_core *core, t_car *src, int pos);
 void    ft_make_check(t_core *core);
 void    ft_opcode_switcher(t_core *core, t_car *car);
