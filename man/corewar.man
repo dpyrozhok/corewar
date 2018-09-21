@@ -9,21 +9,43 @@ COREWAR(1)			General Manual			      COREWAR(1)
 	/*champion1.cor*/] /*...*/]
 
 /*DESCRIPTION*/
-	The /*corwar*/ is a simple project. It uses at least one champion
-	passed as a parameter.
+	The /*corewar*/ utility provides user with a virtual "arena" in which
+	programs (the "Champions") fight against one another. It uses at least
+	one champion passed as a parameter.
+
+	Those Champions as well as a distributed Champion should be compiled by
+	an assembler utility included in the corewar project files.
 
 	The options are as follows:
 
 	/*-help*/           Display the general manual page.
 
-	/*-v*/		Run in visual mode.
+	/*-v*/		Run in a visual mode.
 
 	/*-dump nbr_cycle*/	Print a dump on the provided cycle number.
 
 	/*-n number*/	Specify champion initial number.
 
+	Running in a visual mode allows user to see the Champions fight in a
+	realtime. Beside it requires the ncurses library installed in the
+	system.
+
+	While being launched in GUI the corewar gives user an ability to
+	control the workflow. The 'SPACE' key used to pause/play the fighting.
+	The 'ESC' key is considered to terminate the program. General speed of
+	the game could be regulated by the 'UP' and 'DOWN' keys. User should
+	notice that there are only four controled speeds. 'F1' key set speed to
+	its default value.
+
+	Be aware that corewar has a "Stealth" mode. It launches the uncontrolled
+	fighting with the fastest speed. This mode could be launched by the
+	'UP' key after reaching the 100x speed limit.
+
+	The corewar will play some sounds if there is the SDL library found in
+	the system.
+
 /*DIAGNOSTICS*/
 	The /*corewar*/ utility exits 0 on success, and >0 if error occurs.
 
-UNIT Factory			 August 31, 2018		    UNIT Factory
+UNIT Factory		       September 23, 2018		    UNIT Factory
 /^(END)^/

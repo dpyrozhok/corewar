@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/21 13:31:57 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/21 16:37:38 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,51 @@
 //Uint32		g_len;
 //Uint8		*g_buf;
 
+void	*ft_resize_help(void *ptr)
+{
+	if (!ptr)
+		while (true)
+		{
+			if (LINES < 24 || COLS < 80)
+			{
+				clear();
+				refresh();
+				endwin();
+				system("reset");
+				//SDL_Quit();
+				//ft_play_sound("Track0.wav");
+				printf("'corewar' shut down. Resize window to min "
+					"80 cols and 24 rows. Currently %d cols and %d rows.\n", \
+					COLS, LINES);
+				exit(122);
+			}
+		}
+	return (NULL);
+}
+
+void	ft_init_resize_help(void)
+{
+	pthread_t	thread_resize_help;
+
+	if (LINES < 24 || COLS < 80)
+	{
+		endwin();
+		//SDL_Quit();
+		//ft_play_sound("Track0.wav");
+		printf("Resize window to min 80 cols and 24 rows. Currently %d cols"
+			" and %d rows.\n", COLS, LINES);
+		exit(122);	
+	}
+	pthread_create(&thread_resize_help, NULL, ft_resize_help, NULL);
+	pthread_detach(thread_resize_help);
+}
+
 int		ft_init_help(void)
 {
 	initscr();
+	ft_init_resize_help();
 	raw();
+	cbreak();
 	keypad(stdscr, TRUE);
 	noecho();
 	if (has_colors() == FALSE)
@@ -129,7 +170,7 @@ void	*ft_resize_win(void *ptr)
 			system("reset");
 			//SDL_Quit();
 			//ft_play_sound("Track0.wav");
-			ft_printf("'corewar' shut down unexpectedly. Resize window to min "
+			ft_printf("'corewar' shut down. Resize window to min "
 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
 				COLS, LINES);
 			exit(122);
