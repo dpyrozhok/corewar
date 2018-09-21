@@ -25,14 +25,14 @@ typedef struct          s_core {
 	int             qt_check;
 	int             winner_id;
 	int				dump;
-	int				v;
-	int				c;
-	unsigned char	*a;
-	int				l;
-	int				t;
-	int				p;
-	int				f;
-    pthread_mutex_t m;
+	int				vis;
+	int				col_mod;
+	unsigned char	*a_col;
+	int				last_break;
+	int				microsec;
+	int				pas;
+	int				fin;
+    pthread_mutex_t mut;
 }                       t_core;
 
 struct          s_champ {
@@ -46,8 +46,8 @@ struct          s_champ {
 	int             last_live;
 	unsigned char   *code;
 	t_champ  		*next;
-	int				c;
-	int				cc;
+	int				col;
+	int				col_live;
 };
 
 struct              s_car {
@@ -63,7 +63,7 @@ struct              s_car {
 	t_car    		*next;
 	t_car    		*prev;
 	int				sw;
-	int				rp;
+	int				pos_res;
 };
 
 void    ft_dump(t_core *core);

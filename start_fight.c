@@ -14,22 +14,22 @@ void	ft_get_n_car_value(t_core *core, t_car *car)
 	}
 	else
 		car->opcode = 0;
-	if (core->v)
+	if (core->vis)
 	{
-		pthread_mutex_lock(&core->m);
+		pthread_mutex_lock(&core->mut);
 		champ = ft_get_champ(core, car->id);
 		r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
 		c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
-		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
-			attron(A_BOLD | COLOR_PAIR(champ->cc));
+		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
+			attron(A_BOLD | COLOR_PAIR(champ->col_live));
 		else
-			attron(A_REVERSE | COLOR_PAIR(core->a[car->pos%MEM_SIZE]));
+			attron(A_REVERSE | COLOR_PAIR(core->a_col[car->pos%MEM_SIZE]));
 		mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
-		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE)) // champ_id == opcode_id
-			attroff(A_BOLD | COLOR_PAIR(champ->cc));
+		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
+			attroff(A_BOLD | COLOR_PAIR(champ->col_live));
 		else
-			attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-		pthread_mutex_unlock(&core->m);
+			attroff(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
+		pthread_mutex_unlock(&core->mut);
 	}
 }
 
@@ -39,17 +39,17 @@ void	ft_touch_car(t_core *core, t_car *car)
 		ft_get_n_car_value(core, car);
 	if (car->cycle < 2)
 	{
-		if (core->v)
+		if (core->vis)
 			ft_vcars_norev(core, car);
 		if (car->opcode > 0 && car->opcode < 17)
 		{
-			if (core->v && car->sw)
+			if (core->vis && car->sw)
 				ft_vcars_off(core, car);
 			ft_opcode_switcher(core, car);
 		}
 		car->cycle = -1;
 		car->pos++;
-		if (core->v)
+		if (core->vis)
 			ft_vcars_rev(core, car);
 	}
 	else
@@ -60,68 +60,68 @@ void	ft_key_pause(t_core *p, int ch)
 {
 	if (ch == ' ')
 	{
-		pthread_mutex_lock(&(p)->m);
-		if (!(p)->p && (p)->t)
-			(p)->p = 1;
-		else if ((p)->p && (p)->t)
-			(p)->p = 0;
-		pthread_mutex_unlock(&(p)->m);
+		pthread_mutex_lock(&(p)->mut);
+		if (!(p)->pas && (p)->microsec)
+			(p)->pas = 1;
+		else if ((p)->pas && (p)->microsec)
+			(p)->pas = 0;
+		pthread_mutex_unlock(&(p)->mut);
 	}
 }
 
 void	ft_key_speedup(t_core *p)
 {
-	pthread_mutex_lock(&(p)->m);
-	if (!(p)->p && (p)->t)
+	pthread_mutex_lock(&(p)->mut);
+	if (!(p)->pas && (p)->microsec)
 	{
-		if ((p)->t  > 1000)
-			(p)->t /= 10;
+		if ((p)->microsec  > 1000)
+			(p)->microsec /= 10;
 		else
 		{
-			(p)->t = 0;
-			pthread_mutex_unlock(&(p)->m);
+			(p)->microsec = 0;
+			pthread_mutex_unlock(&(p)->mut);
 			pthread_exit(NULL);
 		}
 	}
-	pthread_mutex_unlock(&(p)->m);
+	pthread_mutex_unlock(&(p)->mut);
 }
 
 void	ft_key_speeddown(t_core *p)
 {
-	pthread_mutex_lock(&(p)->m);
-	if (!(p)->p && (p)->t && (p)->t < 1000000)
-		(p)->t *= 10;
-	pthread_mutex_unlock(&(p)->m);
+	pthread_mutex_lock(&(p)->mut);
+	if (!(p)->pas && (p)->microsec && (p)->microsec < 1000000)
+		(p)->microsec *= 10;
+	pthread_mutex_unlock(&(p)->mut);
 }
 
 void	ft_key_reset(t_core *p)
 {
-	pthread_mutex_lock(&(p)->m);
-	if (!(p)->p)
-		(p)->t = 100000;
-	pthread_mutex_unlock(&(p)->m);
+	pthread_mutex_lock(&(p)->mut);
+	if (!(p)->pas)
+		(p)->microsec = 100000;
+	pthread_mutex_unlock(&(p)->mut);
 }
 
 void	ft_key_finish(t_core *p)
 {
-	pthread_mutex_lock(&(p)->m);
-	if ((p)->t == -1)
+	pthread_mutex_lock(&(p)->mut);
+	if ((p)->microsec == -1)
 	{
-		(p)->t = -2;
+		(p)->microsec = -2;
 		pthread_exit(NULL);
 	}	
-	pthread_mutex_unlock(&(p)->m);
+	pthread_mutex_unlock(&(p)->mut);
 }
 
 void	ft_key_terminate(t_core *p)
 {
-	pthread_mutex_lock(&(p)->m);
-	if ((p)->t)
+	pthread_mutex_lock(&(p)->mut);
+	if ((p)->microsec)
 	{
 		endwin();
 		exit(121);
 	}
-	pthread_mutex_unlock(&(p)->m);
+	pthread_mutex_unlock(&(p)->mut);
 }
 
 void	*ft_fight_key(void *ptr)
@@ -160,14 +160,14 @@ void	*ft_fight_key(void *ptr)
 
 void	ft_is_paused(t_core *core)
 {
-	while (core->p)
+	while (core->pas)
 	{
-		pthread_mutex_lock(&core->m);
+		pthread_mutex_lock(&core->mut);
 		attron(A_BOLD);
 		mvprintw(3, 200, "** PAUSED ** ");
 		attroff(A_BOLD);
 		refresh();
-		pthread_mutex_unlock(&core->m);
+		pthread_mutex_unlock(&core->mut);
 		usleep(100000);
 	}
 }
@@ -187,8 +187,8 @@ void	ft_vfight_run(t_core *core, t_car *tmp)
 			tmp = tmp->prev;
 		}
 		ft_draw(core);
-		if (core->t)
-			usleep(core->t);
+		if (core->microsec)
+			usleep(core->microsec);
 		ft_is_paused(core);
 		if (core->cycle == core->c_to_die + core->last_check \
 			|| core->c_to_die <= 0)
@@ -210,13 +210,13 @@ void	ft_fight_visual(t_core *core)
 	//pthread_create(&thread_id2, NULL, ft_fight_audio, NULL);
 	//pthread_detach(thread_id2);
 	ft_vfight_run(core, NULL);
-	core->f = 1;
+	core->fin = 1;
 	ft_draw(core);
 	ft_breakdown(core);
-	if (core->t)
-		core->t = -1;
-	if (core->t)
-		while (core->t > -2)
+	if (core->microsec)
+		core->microsec = -1;
+	if (core->microsec)
+		while (core->microsec > -2)
 			continue ;
 	else
 		while ((ch = getch()) != 27)
@@ -254,7 +254,7 @@ void	ft_fight(t_core *core, t_car *tmp)
 
 void	ft_start_fight(t_core *core)
 {
-	if (core->v)
+	if (core->vis)
 		ft_fight_visual(core);
 	else
 		ft_fight(core, NULL);

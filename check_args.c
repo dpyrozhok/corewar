@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/19 13:18:37 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/21 13:33:33 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ int		ft_is_arg(int ac, char **av, t_core *core, int *i)
 {
 	if (!ft_strcmp(av[*i], "-v"))
 	{
-		core->v = 1;
+		core->vis = 1;
 		return (1);
 	}
 	else if (!ft_strcmp(av[*i], "-dump"))
@@ -318,7 +318,7 @@ void	ft_check_args(int ac, char **av, t_core *core, int args)
 			ft_check_file(av[i], &bots, NULL);
 		i++;
 	}
-	if (core->v && core->dump != -1)
+	if (core->vis && core->dump != -1)
 		exit(ft_err(118, "Invalid arguments usage", NULL));
 	if (!bots)
 		exit(ft_err(119, "Missed bot file", NULL));

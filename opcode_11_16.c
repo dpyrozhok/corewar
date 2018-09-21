@@ -24,7 +24,7 @@ void	ft_11_opcode(t_core *core, t_car *car)
 			arg[2] = (int)car->reg[arg[2] - 1];
 		ft_put_4(core, car->reg[arg[0] - 1], \
 			((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
-		if (core->v)
+		if (core->vis)
 			ft_vcars_on(core, car, car->reg[arg[0] - 1], \
 				((arg[1] + arg[2]) % IDX_MOD + pc) % MEM_SIZE);
 	}
@@ -115,7 +115,7 @@ void	ft_16_opcode(t_core *core, t_car *car)
 	codage = ft_get_codage(core, car);
 	arg = ft_get_args(core, car, codage);
 	arg[0] = (int)car->reg[arg[0] - 1];
-	if (!core->v && core->dump == -1)
+	if (!core->vis && core->dump == -1)
 		ft_printf("\nAff: %c", arg[0] % 256);
 	free(arg);
 	free(codage);

@@ -17,7 +17,7 @@ void	ft_01_opcode(t_core *core, t_car *car)
 		champ->last_live = core->cycle;
 		champ->s_live++;
         champ->all_live++;
-		if (!core->v && core->dump == -1)
+		if (!core->vis && core->dump == -1)
 			ft_printf("\nPlayer %i (%s) is said to be alive", \
 				champ->num, champ->name);
 		core->winner_id = champ->id;
@@ -69,7 +69,7 @@ void	ft_03_opcode(t_core *core, t_car *car)
 		{
 			ft_put_4(core, car->reg[arg[0] - 1], \
 				(arg[1] % IDX_MOD + pc) % MEM_SIZE);
-			if (core->v)
+			if (core->vis)
 				ft_vcars_on(core, car, car->reg[arg[0] - 1], \
 					(arg[1] % IDX_MOD + pc) % MEM_SIZE);
 		}

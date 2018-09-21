@@ -57,11 +57,11 @@ void	ft_copy_car(t_core *core, t_car *src, int pos)
 	i = 0;
 	car = (t_car *)ft_memalloc(sizeof(t_car));
 	car->pos = pos;
-	car->rp = 0;
+	car->pos_res = 0;
 	car->sw = 0;
 	car->carry = src->carry;
 	car->id = src->id;
-	if (core->v)
+	if (core->vis)
 		ft_vcars_fork(core, car, pos);
 	car->state = src->state;
 	car->live = src->live;
@@ -82,7 +82,7 @@ void	ft_create_car(t_core *core, t_champ *champ, int pos, t_car *tmp)
 
 	car = (t_car *)ft_memalloc(sizeof(t_car));
 	car->sw = 0;
-	car->rp = 0;
+	car->pos_res = 0;
 	car->pos = pos;
 	car->state = 1;
 	car->id = champ->id;
@@ -114,14 +114,14 @@ void	ft_place_champ(t_core *core)
 	shift = 0;
 	j = 0;
 	tmp = core->champs;
-	if (core->v)
+	if (core->vis)
 	{
 		ft_init_screen(core, 0, 3, 3);
 		ft_draw(core);
 	}
 	while (tmp)
 	{
-		if (core->v)
+		if (core->vis)
 			ft_champ_visual(core, tmp, shift);
 		j++;
 		tmp->num = j;
@@ -136,9 +136,9 @@ void	ft_place_champ(t_core *core)
 void	ft_init_champ(t_core *core, t_champ *champ)
 {
 	champ->id = core->init_nub;
-	champ->c = 20 + core->c++;
-	core->c = core->c % 4;
-	champ->cc = champ->c + 10;
+	champ->col = 20 + core->col_mod++;
+	core->col_mod = core->col_mod % 4;
+	champ->col_live = champ->col + 10;
 	champ->s_live = 0;
 	champ->all_live = 0;
 }
@@ -206,7 +206,7 @@ void	ft_free(t_core *core)
 		core->cars = car;
 	}
 	free(core->arena);
-	free(core->a);
+	free(core->a_col);
 	free(core);
 }
 
@@ -227,15 +227,15 @@ void	ft_winner_is(t_core *core)
 void	ft_init_core(t_core *core, int ac, char **av)
 {
 	core->dump = -1;
-	core->c = 0;
-	core->l = 0;
-	core->t = 100000;
-	core->p = 0;
-	core->f = 0;
+	core->col_mod = 0;
+	core->last_break = 0;
+	core->microsec = 100000;
+	core->pas = 0;
+	core->fin = 0;
 	ft_check_args(ac, av, core, 0);
 	core->arena = (unsigned char *)ft_memalloc(sizeof(unsigned char) * \
 		MEM_SIZE);
-	core->a = (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
+	core->a_col= (unsigned char *)ft_memalloc(sizeof(unsigned char) * MEM_SIZE);
 	core->init_nub = 0;
 	core->c_to_die = CYCLE_TO_DIE;
 }
@@ -260,11 +260,11 @@ int		main(int ac, char **av)
 		}
 		i++;
 	}
-	if (!core->v)
+	if (!core->vis)
 		ft_introduce(core);
 	ft_place_champ(core);
 	ft_start_fight(core);
-	if (!core->v)
+	if (!core->vis)
 		ft_winner_is(core);
 	ft_free(core);
 	//system("leaks corewar");

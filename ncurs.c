@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/20 15:16:09 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/21 13:31:57 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	*ft_resize_win(void *ptr)
 	{
 		if (LINES < 69 || COLS < 254)
 		{
-			pthread_mutex_lock(&(p)->m);
+			pthread_mutex_lock(&(p)->mut);
 			clear();
 			refresh();
 			endwin();
@@ -133,7 +133,7 @@ void	*ft_resize_win(void *ptr)
 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
 				COLS, LINES);
 			exit(122);
-			pthread_mutex_unlock(&(p)->m);
+			pthread_mutex_unlock(&(p)->mut);
 		}
 	}
 	return (NULL);
@@ -173,13 +173,13 @@ void	ft_fill_score(t_core *core, t_champ *cur, double stp, int remain)
 		if (ttl && remain-- > 0)
 			ttl++;
 		j = 0;
-		attron(A_BOLD | COLOR_PAIR(cur->c));
+		attron(A_BOLD | COLOR_PAIR(cur->col));
 		while (j++ < ttl)
 		{
-			mvprintw(core->l, 201 + col, "-");
+			mvprintw(core->last_break, 201 + col, "-");
 			col = (col < 50) ? col + 1 : 50;
 		}
-		attroff(A_BOLD | COLOR_PAIR(cur->c));
+		attroff(A_BOLD | COLOR_PAIR(cur->col));
 		cur = cur->next;
 	}
 }
@@ -201,20 +201,20 @@ void	ft_break_score(t_core *core, t_champ *curr, double step)
 	}
 	ft_fill_score(core, core->champs, step, 50 - total);
 	attron(COLOR_PAIR(4));
-	mvprintw(core->l, 251, "]");
+	mvprintw(core->last_break, 251, "]");
 	attroff(COLOR_PAIR(4));
 }
 
 void	ft_break_last(t_core *core)
 {
 	attron(COLOR_PAIR(4));
-	mvprintw(core->l, 201, \
+	mvprintw(core->last_break, 201, \
 		"--------------------------------------------------]");
 	attroff(COLOR_PAIR(4));
-	if (core->l)
+	if (core->last_break)
 	{
 		attron(COLOR_PAIR(4));
-		mvprintw(core->l - 3, 201, \
+		mvprintw(core->last_break - 3, 201, \
 			"--------------------------------------------------]");
 		attroff(COLOR_PAIR(4));
 	}
@@ -226,7 +226,7 @@ void	ft_breakdown(t_core *core)
 	double	sum;
 	t_champ	*curr;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	i = 0;
 	sum = 0.0;
 	curr = core->champs;
@@ -239,7 +239,7 @@ void	ft_breakdown(t_core *core)
 		ft_break_score(core, core->champs, 50.0 / sum);
 	else
 		ft_break_last(core);
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_fill_new(t_core *core, double stp, int remain, int r)
@@ -260,13 +260,13 @@ void	ft_fill_new(t_core *core, double stp, int remain, int r)
 		if (ttl && remain-- > 0)
 			ttl++;
 		j = 0;
-		attron(A_BOLD | COLOR_PAIR(cur->c));
+		attron(A_BOLD | COLOR_PAIR(cur->col));
 		while (j++ < ttl)
 		{
 			mvprintw(r, 201 + col, "-");
 			col = (col < 50) ? col + 1 : 50;
 		}
-		attroff(A_BOLD | COLOR_PAIR(cur->c));
+		attroff(A_BOLD | COLOR_PAIR(cur->col));
 		cur = cur->next;
 	}
 }
@@ -288,7 +288,7 @@ void	ft_new_score(t_core *core, t_champ *curr, double step, int r)
 	}
 	ft_fill_new(core, step, 50 - total, r);
 	attron(COLOR_PAIR(4));
-	mvprintw(core->l, 251, "]");
+	mvprintw(core->last_break, 251, "]");
 	attroff(COLOR_PAIR(4));
 }
 
@@ -313,16 +313,16 @@ void	ft_scoring(t_core *core, int r)
 void	ft_breaking(t_core *core)
 {
 	attron(COLOR_PAIR(4) | A_BOLD);
-	mvprintw(3, 200, "%s", (core->f) ? "** FINISH ** " : "** RUNNING **");
-	if (core->t)
-		mvprintw(5, 222, "%-10d", 1000000 / core->t);
+	mvprintw(3, 200, "%s", (core->fin) ? "** FINISH ** " : "** RUNNING **");
+	if (core->microsec)
+		mvprintw(5, 222, "%-10d", 1000000 / core->microsec);
 	else
 		mvprintw(5, 222, "Stealth");
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %-10d", core->qt_car);
-	if (core->t != 1000000 && core->t)
-		mvprintw(12, 200, "Speed: %dx     ", 100000 / core->t);
-	else if (core->t)
+	if (core->microsec != 1000000 && core->microsec)
+		mvprintw(12, 200, "Speed: %dx     ", 100000 / core->microsec);
+	else if (core->microsec)
 		mvprintw(12, 200, "Speed: 0.1x        ");
 	else
 		mvprintw(12, 200, "Speed: Stealth     ");
@@ -354,7 +354,7 @@ void	ft_draw(t_core *core)
 	int		r;
 	t_champ	*curr;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	r = 14;
 	ft_breaking(core);
 	ft_champing(core, &r);
@@ -362,20 +362,20 @@ void	ft_draw(t_core *core)
 	r += 4;
 	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(++r, 215, "%-10d", core->c_to_die);
-	if (core->f)
+	if (core->fin)
 	{
 		curr = ft_get_champ(core, core->winner_id);
 		r += 8;
 		mvprintw(r, 200, "The winner is : ");
-		attron(COLOR_PAIR(curr->c));
+		attron(COLOR_PAIR(curr->col));
 		mvprintw(r++, 216, "%s", curr->name);
-		attroff(COLOR_PAIR(curr->c));
-		mvprintw(++r, 200, "Press %s %s", (core->t) ? "any key" : "ESC", \
+		attroff(COLOR_PAIR(curr->col));
+		mvprintw(++r, 200, "Press %s %s", (core->microsec) ? "any key" : "ESC", \
 			"to exit");
 	}
 	attroff(COLOR_PAIR(4) | A_BOLD);
 	refresh();
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_init_colorset(void)
@@ -417,7 +417,7 @@ void	ft_create_border(t_border *border, t_core *core)
 	int		w;
 	int		h;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	x = border->startx;
 	y = border->starty;
 	w = border->width;
@@ -430,7 +430,7 @@ void	ft_create_border(t_border *border, t_core *core)
 	mvhline(y + h, x + 1, BORDER_BS, w - 1);
 	mvvline(y + 1, x, BORDER_LS, h - 1);
 	mvvline(y + 1, x + w, BORDER_RS, h - 1);
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_fill_screen(t_core *core)
@@ -440,24 +440,24 @@ void	ft_fill_screen(t_core *core)
 
 	ft_init_border_left(&border_left);
 	ft_init_border_right(&border_right);
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	attron(COLOR_PAIR(1) | A_BOLD);
 	mvprintw(0, 120, "C O R E W A R");
 	attroff(COLOR_PAIR(1));
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 	attron(COLOR_PAIR(2) | A_REVERSE);
 	ft_create_border(&border_left, core);
 	attroff(COLOR_PAIR(2));
 	attron(COLOR_PAIR(3));
 	ft_create_border(&border_right, core);
 	attroff(COLOR_PAIR(3) | A_REVERSE);
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	attron(COLOR_PAIR(4));
 	mvprintw(32, 89, "MAKE PEACE NOT WAR");
 	mvprintw(33, 85, "PRESS ANY KEY TO CONTINUE");
 	attroff(COLOR_PAIR(4) | A_BOLD);
 	refresh();
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 //void	*ft_promo_audio(void *ptr)
@@ -499,7 +499,7 @@ void	ft_init_win(t_core *core)
 
 void	ft_win_half(t_core *core, t_champ *curr, int i, int *r)
 {
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	attron(COLOR_PAIR(4) | A_BOLD);
 	mvprintw(32, 89, "%18s", "");
 	mvprintw(33, 85, "%25s", "");
@@ -507,13 +507,13 @@ void	ft_win_half(t_core *core, t_champ *curr, int i, int *r)
 	mvprintw(5, 200, "Cycles/second limit : %d", 10);
 	mvprintw(8, 200, "Cycle : %d", core->cycle);
 	mvprintw(10, 200, "Processes : %d", core->qt_car);
-	mvprintw(12, 200, "Speed: %dx", 100000 / core->t);
+	mvprintw(12, 200, "Speed: %dx", 100000 / core->microsec);
 	while (i++ < core->qt_champ)
 	{
 		mvprintw(*r, 200, "Player %d : ", curr->id);
-		attron(COLOR_PAIR(curr->c));
+		attron(COLOR_PAIR(curr->col));
 		mvprintw((*r)++, 210 + ft_count_dig(curr->id), "%s", curr->name);
-		attroff(COLOR_PAIR(curr->c));
+		attroff(COLOR_PAIR(curr->col));
 		mvprintw(*r, 202, "Last live : ");
 		mvprintw((*r)++, 214, "%21d", curr->last_live);
 		mvprintw(*r, 202, "Lives in current period : ");
@@ -522,14 +522,14 @@ void	ft_win_half(t_core *core, t_champ *curr, int i, int *r)
 		curr = curr->next;
 	}
 	attroff(COLOR_PAIR(4) | A_BOLD);
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_fill_win(t_core *core, int r)
 {
 	ft_win_half(core, core->champs, 0, &r);
 	attron(COLOR_PAIR(4) | A_BOLD);
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	mvprintw(r++, 200, "Live breakdown for current period :");
 	attroff(A_BOLD);
 	mvprintw(r++, 200, "[--------------------------------------------------]");
@@ -537,7 +537,7 @@ void	ft_fill_win(t_core *core, int r)
 	mvprintw(++r, 200, "Live breakdown for last period :");
 	attroff(A_BOLD);
 	mvprintw(++r, 200, "[--------------------------------------------------]");
-	core->l = r;
+	core->last_break = r;
 	attron(A_BOLD);
 	r++;
 	mvprintw(++r, 200, "CYCLE_TO_DIE : %d", core->c_to_die);
@@ -549,20 +549,20 @@ void	ft_fill_win(t_core *core, int r)
 	mvprintw(++r, 200, "MAX_CHECKS : %d", MAX_CHECKS);
 	attroff(COLOR_PAIR(4));
 	attroff(A_BOLD);
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_init_screen(t_core *core, int i, int r, int c)
 {
 	pthread_t	thread_resize_win;
 
-	pthread_mutex_init(&core->m, NULL);
+	pthread_mutex_init(&core->mut, NULL);
 	ft_init_win(core);
 	pthread_create(&thread_resize_win, NULL, ft_resize_win, (void*)core);
 	pthread_detach(thread_resize_win);
 	getch();
 	ft_fill_win(core, 14);
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	while (i < MEM_SIZE)
 	{
 		mvprintw(r, c, "%02x ", core->arena[i]);
@@ -575,7 +575,7 @@ void	ft_init_screen(t_core *core, int i, int r, int c)
 		else
 			c += 3;
 	}
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 //int		ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, Uint8 **buf)
@@ -642,27 +642,27 @@ void	ft_vcars_on(t_core *core, t_car *car, int ag, int pos)
 	int		c;
 	t_champ	*champ;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	champ = ft_get_champ(core, car->id);
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
-	car->rp = pos;
+	car->pos_res = pos;
 	car->sw = 1;
-	attron(COLOR_PAIR(champ->c) | A_BOLD);
+	attron(COLOR_PAIR(champ->col) | A_BOLD);
 	ft_set_rc(&r, &c, pos);
 	mvprintw(r, c, "%02x", (unsigned char)(ag >> 24));
-	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_memset(core->a_col + (pos % MEM_SIZE), champ->col, 1);
 	ft_set_rc(&r, &c, ++pos);
 	mvprintw(r, c, "%02x", (unsigned char)(ag >> 16 & 255));
-	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_memset(core->a_col + (pos % MEM_SIZE), champ->col, 1);
 	ft_set_rc(&r, &c, ++pos);
 	mvprintw(r, c, "%02x", (unsigned char)(ag >> 8 & 255));
-	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
+	ft_memset(core->a_col + (pos % MEM_SIZE), champ->col, 1);
 	ft_set_rc(&r, &c, ++pos);
 	mvprintw(r, c, "%02x", (unsigned char)(ag & 255));
-	ft_memset(core->a + (pos % MEM_SIZE), champ->c, 1);
-	attroff(COLOR_PAIR(champ->c) | A_BOLD);
-	pthread_mutex_unlock(&core->m);
+	ft_memset(core->a_col + (pos % MEM_SIZE), champ->col, 1);
+	attroff(COLOR_PAIR(champ->col) | A_BOLD);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_vcars_off(t_core *core, t_car *tmp)
@@ -671,26 +671,26 @@ void	ft_vcars_off(t_core *core, t_car *tmp)
 	int		r;
 	int		c;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	tmp->sw = 0;
-	pos = tmp->rp;
+	pos = tmp->pos_res;
 	ft_set_rc(&r, &c, pos);
-	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	ft_set_rc(&r, &c, ++pos);
-	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	ft_set_rc(&r, &c, ++pos);
-	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attroff(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	ft_set_rc(&r, &c, ++pos);
-	attron(COLOR_PAIR(core->a[pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", (unsigned char)(core->arena[pos % MEM_SIZE]));
-	attroff(COLOR_PAIR(core->a[pos % MEM_SIZE]));
-	pthread_mutex_unlock(&core->m);
+	attroff(COLOR_PAIR(core->a_col[pos % MEM_SIZE]));
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_vcars_check(t_core *core, t_car *tmp)
@@ -700,12 +700,12 @@ void	ft_vcars_check(t_core *core, t_car *tmp)
 
 	if (tmp->sw)
 		ft_vcars_off(core, tmp);
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	ft_set_rc(&r, &c, tmp->pos);
-	attron(COLOR_PAIR(core->a[tmp->pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[tmp->pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", core->arena[tmp->pos % MEM_SIZE]);
-	attroff(COLOR_PAIR(core->a[tmp->pos % MEM_SIZE]));
-	pthread_mutex_unlock(&core->m);
+	attroff(COLOR_PAIR(core->a_col[tmp->pos % MEM_SIZE]));
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_vcars_norev(t_core *core, t_car *car)
@@ -713,13 +713,13 @@ void	ft_vcars_norev(t_core *core, t_car *car)
 	int		r;
 	int		c;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
 	c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
-	attron(COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
+	attron(COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
-	attroff(COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
-	pthread_mutex_unlock(&core->m);
+	attroff(COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_vcars_rev(t_core *core, t_car *car)
@@ -728,23 +728,23 @@ void	ft_vcars_rev(t_core *core, t_car *car)
 	int		c;
 	t_champ	*champ;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	champ = ft_get_champ(core, car->id);
 	r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
 	c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
 	if (core->arena[car->pos % MEM_SIZE] == 1 \
 		&& car->id == ft_read_4(core, car->pos % MEM_SIZE))
-		attron(A_BOLD | COLOR_PAIR(champ->cc));
+		attron(A_BOLD | COLOR_PAIR(champ->col_live));
 	else
-		attron(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
+		attron(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
 	if (core->arena[car->pos % MEM_SIZE] == 1 \
 		&& car->id == ft_read_4(core, car->pos % MEM_SIZE))
-		attroff(A_BOLD | COLOR_PAIR(champ->cc));
+		attroff(A_BOLD | COLOR_PAIR(champ->col_live));
 	else
-		attroff(A_REVERSE | COLOR_PAIR(core->a[car->pos % MEM_SIZE]));
+		attroff(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
 	refresh();
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_champ_visual(t_core *core, t_champ *tmp, int shift)
@@ -753,8 +753,8 @@ void	ft_champ_visual(t_core *core, t_champ *tmp, int shift)
 	unsigned int	r;
 	unsigned int	c;
 
-	pthread_mutex_lock(&core->m);
-	attron(COLOR_PAIR(tmp->c));
+	pthread_mutex_lock(&core->mut);
+	attron(COLOR_PAIR(tmp->col));
 	i = 0;
 	r = 3 + (shift / 64);
 	c = 3 + 3 * (shift % 64);
@@ -770,10 +770,10 @@ void	ft_champ_visual(t_core *core, t_champ *tmp, int shift)
 			c += 3;
 		i++;
 	}
-	attroff(COLOR_PAIR(tmp->c));
-	ft_memset(core->a + shift, tmp->c, tmp->size);
+	attroff(COLOR_PAIR(tmp->col));
+	ft_memset(core->a_col + shift, tmp->col, tmp->size);
 	refresh();
-	pthread_mutex_unlock(&core->m);
+	pthread_mutex_unlock(&core->mut);
 }
 
 void	ft_vcars_fork(t_core *core, t_car *car, int pos)
@@ -782,12 +782,12 @@ void	ft_vcars_fork(t_core *core, t_car *car, int pos)
 	int		r;
 	int		c;
 
-	pthread_mutex_lock(&core->m);
+	pthread_mutex_lock(&core->mut);
 	champ = ft_get_champ(core, car->id);
 	r = 3 + ((pos % MEM_SIZE) / 64) % 64;
 	c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
-	attron(COLOR_PAIR(champ->c) | A_REVERSE);
+	attron(COLOR_PAIR(champ->col) | A_REVERSE);
 	mvprintw(r, c, "%02x", core->arena[pos]);
-	attroff(COLOR_PAIR(champ->c) | A_REVERSE);
-	pthread_mutex_unlock(&core->m);
+	attroff(COLOR_PAIR(champ->col) | A_REVERSE);
+	pthread_mutex_unlock(&core->mut);
 }
