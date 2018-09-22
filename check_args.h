@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/19 13:36:26 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/22 17:38:56 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,14 @@ typedef struct	s_check
 }				t_check;
 
 void			ft_check_args(int ac, char **av, t_core *core, int args);
+void	ft_check_args(int ac, char **av, t_core *core, int args);
+void	ft_check_file(char *str, int *bots, t_check *file);
+void	ft_store_dump(int ac, char **av, int i, t_core *core);
+void	ft_check_num(int ac, char **av, int i);
+int		ft_err(int ret, char *str, char *orig);
+int		ft_is_num(char *str);
+int		ft_check_dir(char *str);
+
+
 
 #endif

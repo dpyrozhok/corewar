@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/20 14:15:32 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/22 18:31:15 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct	s_border
 int				ft_print_help(size_t i, size_t j, int fd, char c);
 void			ft_draw(t_core *core);
 void			ft_init_screen(t_core *core, int i, int r, int c);
+void	ft_init_win(t_core *core);
+void	ft_fill_screen(t_core *core);
 void			ft_breakdown(t_core *core);
 void			ft_play_sound(char *src);
 void			ft_vcars_on(t_core *core, t_car *car, int ag, int pos);

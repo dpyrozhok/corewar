@@ -6,14 +6,13 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/09/02 12:19:22 by vlevko           ###   ########.fr        #
+#    Updated: 2018/09/22 18:42:25 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
 SRC = main.c \
-    check_args.c \
     start_fight.c \
     prinnt_func.c \
     fight_visual_1.c \
@@ -22,12 +21,24 @@ SRC = main.c \
     bit_handler.c \
     champ_handler.c \
     car_handler.c \
-    ncurs.c \
     op.c \
     opcode_1_5.c \
     opcode_11_15.c \
     opcode_6_10.c \
-    opcode_handler.c
+    opcode_handler.c \
+    ft_check_args.c \
+    ft_check_file.c \
+    ft_dump_num.c \
+    ft_dir_err.c \
+    ft_print_help.c \
+    ft_init_screen.c \
+    ft_init_win.c \
+    ft_fill_screen.c \
+    ft_breakdown.c \
+    ft_draw.c \
+    ft_play_sound.c \
+    ft_vcars_check_on.c \
+    ft_vcars_champ.c
 
 OBJ = $(SRC:.c=.o)
 
