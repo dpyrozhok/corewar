@@ -19,10 +19,11 @@ void	ft_get_n_car_value(t_core *core, t_car *car)
 	int		r;
 	int		c;
 
-	if (core->arena[car->pos % MEM_SIZE] > 0 && core->arena[car->pos % MEM_SIZE] < 17)
+	if (core->arena[car->pos % MEM_SIZE] > 0 &&
+		core->arena[car->pos % MEM_SIZE] < 17)
 	{
 		car->opcode = core->arena[car->pos % MEM_SIZE];
-		car->cycle = op_tab[car->opcode - 1].cycle;
+		car->cycle = g_op_tab[car->opcode - 1].cycle;
 	}
 	else
 		car->opcode = 0;

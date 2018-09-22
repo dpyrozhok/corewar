@@ -66,6 +66,9 @@ struct              s_car {
 	int				pos_res;
 };
 
+void	ft_parse_champion(t_core *core, int fd, int n);
+void	ft_place_champ(t_core *core);
+void	ft_create_car(t_core *core, t_champ *champ, int pos, t_car *tmp);
 void    ft_dump(t_core *core);
 void    ft_start_fight(t_core *core);
 void	ft_fight_visual(t_core *core);
@@ -87,6 +90,8 @@ int     ft_read_1(t_core *core, int pos);
 int 	ft_read_2(t_core *core, int pos);
 int 	ft_read_4(t_core *core, int pos);
 void    ft_put_4(t_core *core, int arg, int pos);
+void	ft_introduce(t_core *core);
+void	ft_winner_is(t_core *core);
 void    ft_free(t_core *core);
 void    ft_01_opcode(t_core *core, t_car *car);
 void    ft_02_opcode(t_core *core, t_car *car);

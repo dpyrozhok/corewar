@@ -259,7 +259,7 @@ Error (line 88): must begin only by tabulations
 Error (line 88): bad indentation
 Norme: ./op.c
 Error (line 15, col 4): bad spacing
-Error (line 15, col 8): global named op_tab is not well prefixed
+Error (line 15, col 8): global named g_op_tab is not well prefixed
 Norme: ./main.c
 Error: 42 header not at top of the file
 Error: global scope bad aligned

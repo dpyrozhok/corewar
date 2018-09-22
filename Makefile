@@ -15,10 +15,13 @@ NAME = corewar
 SRC = main.c \
     check_args.c \
     start_fight.c \
+    prinnt_func.c \
     fight_visual_1.c \
     fight_visual_2.c \
     check_isend.c \
     bit_handler.c \
+    champ_handler.c \
+    car_handler.c \
     ncurs.c \
     op.c \
     opcode_1_5.c \

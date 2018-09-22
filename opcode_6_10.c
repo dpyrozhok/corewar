@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "ncurs.h"
 
 void	ft_06_opcode(t_core *core, t_car *car)
 {

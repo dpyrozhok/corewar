@@ -114,20 +114,3 @@ void	ft_15_opcode(t_core *core, t_car *car)
 	ft_copy_car(core, car, new_pc);
 	car->pos += 2;
 }
-
-void	ft_16_opcode(t_core *core, t_car *car)
-{
-	int		*arg;
-	int		*codage;
-
-	codage = ft_get_codage(core, car);
-	arg = ft_get_args(core, car, codage);
-	if (ft_check_cod_and_arg(car, codage, arg))
-	{
-		arg[0] = (char)car->reg[arg[0] - 1];
-		if (!core->vis && core->dump == -1)
-			ft_printf("\nAff: %c", arg[0]);
-	}
-	free(arg);
-	free(codage);
-}

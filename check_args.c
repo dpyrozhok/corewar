@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   check_args_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/21 13:33:33 by vlevko           ###   ########.fr       */
+/*   Created: 2018/09/22 12:43:28 by vlevko            #+#    #+#             */
+/*   Updated: 2018/09/22 12:45:53 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,7 +314,7 @@ void	ft_check_args(int ac, char **av, t_core *core, int args)
 			ft_help();
 		else if (ft_is_arg(ac, av, core, &i))
 			args++;
-		else 
+		else
 			ft_check_file(av[i], &bots, NULL);
 		i++;
 	}

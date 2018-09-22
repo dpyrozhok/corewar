@@ -20,6 +20,6 @@ typedef struct s_op
 	char lable;
 } t_op;
 
-extern t_op op_tab[17];
+extern t_op g_op_tab[17];
 
 #endif //COREWAR_T_OP_H
