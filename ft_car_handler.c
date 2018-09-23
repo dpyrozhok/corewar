@@ -6,14 +6,14 @@
 /*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 11:49:45 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/22 11:49:47 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 15:03:51 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "check_args.h"
 
-void	ft_append_car(t_core *core, t_car *car)
+static void	ft_append_car(t_core *core, t_car *car)
 {
 	t_car	*tmp;
 
@@ -25,7 +25,7 @@ void	ft_append_car(t_core *core, t_car *car)
 	car->prev = tmp;
 }
 
-void	ft_copy_car(t_core *core, t_car *src, int pos)
+void		ft_copy_car(t_core *core, t_car *src, int pos)
 {
 	t_car	*car;
 	int		i;
@@ -52,7 +52,7 @@ void	ft_copy_car(t_core *core, t_car *src, int pos)
 	ft_append_car(core, car);
 }
 
-void	ft_create_car(t_core *core, t_champ *champ, int pos, t_car *tmp)
+void		ft_create_car(t_core *core, t_champ *champ, int pos, t_car *tmp)
 {
 	t_car	*car;
 

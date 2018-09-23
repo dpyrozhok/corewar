@@ -13,19 +13,19 @@
 NAME = corewar
 
 SRC = main.c \
-    start_fight.c \
-    prinnt_func.c \
-    fight_visual_1.c \
-    fight_visual_2.c \
-    check_isend.c \
-    bit_handler.c \
-    champ_handler.c \
-    car_handler.c \
+    ft_start_fight.c \
+    ft_prinnt_out.c \
+    ft_fight_visual_1.c \
+    ft_fight_visual_2.c \
+    ft_check_isend.c \
+    ft_bit_handler.c \
+    ft_champ_handler.c \
+    ft_car_handler.c \
     op.c \
-    opcode_1_5.c \
-    opcode_11_15.c \
-    opcode_6_10.c \
-    opcode_handler.c \
+    ft_opcode_1_5.c \
+    ft_opcode_11_15.c \
+    ft_opcode_6_10.c \
+    ft_opcode_handler.c \
     ft_check_args.c \
     ft_check_file.c \
     ft_dump_num.c \

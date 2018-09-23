@@ -6,14 +6,14 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 21:21:59 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/23 14:44:58 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 15:06:19 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "ncurs.h"
 
-void	ft_get_n_car_value(t_core *core, t_car *car)
+static void	ft_get_n_car_value(t_core *core, t_car *car)
 {
 	if (core->arena[car->pos % MEM_SIZE] > 0 &&
 		core->arena[car->pos % MEM_SIZE] < 17)
@@ -27,7 +27,7 @@ void	ft_get_n_car_value(t_core *core, t_car *car)
 		ft_vcars_opcode(core, car);
 }
 
-void	ft_touch_car(t_core *core, t_car *car)
+static void	ft_touch_car(t_core *core, t_car *car)
 {
 	if (car->cycle == -1)
 		ft_get_n_car_value(core, car);
@@ -50,7 +50,7 @@ void	ft_touch_car(t_core *core, t_car *car)
 		car->cycle--;
 }
 
-void	ft_vfight_run(t_core *core, t_car *tmp)
+void		ft_vfight_run(t_core *core, t_car *tmp)
 {
 	while (core->qt_car > 0)
 	{
@@ -77,11 +77,16 @@ void	ft_vfight_run(t_core *core, t_car *tmp)
 	}
 }
 
-void	ft_fight(t_core *core, t_car *tmp)
+static void	ft_fight(t_core *core, t_car *tmp)
 {
 	while (core->qt_car > 0)
 	{
 		tmp = core->cars;
+		if (core->dump != -1 && core->dump == core->cycle)
+		{
+			ft_dump(core);
+			exit(0);
+		}
 		core->cycle++;
 		while (tmp->next)
 			tmp = tmp->next;
@@ -90,11 +95,6 @@ void	ft_fight(t_core *core, t_car *tmp)
 			if (tmp->state)
 				ft_touch_car(core, tmp);
 			tmp = tmp->prev;
-		}
-		if (core->dump != -1 && core->dump == core->cycle)
-		{
-			ft_dump(core);
-			exit(0);
 		}
 		if (core->cycle == core->c_to_die + core->last_check \
 			|| core->c_to_die <= 0)
@@ -105,7 +105,7 @@ void	ft_fight(t_core *core, t_car *tmp)
 	}
 }
 
-void	ft_start_fight(t_core *core)
+void		ft_start_fight(t_core *core)
 {
 	if (core->vis)
 		ft_fight_visual(core);

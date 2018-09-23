@@ -6,14 +6,14 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 11:50:26 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/23 11:01:28 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 15:01:42 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "check_args.h"
 
-void	ft_init_core(t_core *core, int ac, char **av)
+static void	ft_init_core(t_core *core, int ac, char **av)
 {
 	core->dump = -1;
 	core->col_mod = 0;
@@ -31,7 +31,7 @@ void	ft_init_core(t_core *core, int ac, char **av)
 	core->c_to_die = CYCLE_TO_DIE;
 }
 
-void	ft_read_champ(t_core *core, int ac, char **av)
+static void	ft_read_champ(t_core *core, int ac, char **av)
 {
 	int	i;
 	int flag;
@@ -52,7 +52,7 @@ void	ft_read_champ(t_core *core, int ac, char **av)
 		if (fd != -1)
 		{
 			if (!flag)
-				n = core->init_nub++;
+				n = ++core->init_nub;
 			flag = 0;
 			ft_parse_champion(core, fd, n);
 		}
@@ -60,7 +60,7 @@ void	ft_read_champ(t_core *core, int ac, char **av)
 	}
 }
 
-void	ft_free(t_core *core)
+static void	ft_free(t_core *core)
 {
 	t_champ	*champ;
 	t_car	*car;
@@ -83,7 +83,7 @@ void	ft_free(t_core *core)
 	free(core);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_core	*core;
 
