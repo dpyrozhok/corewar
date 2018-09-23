@@ -15,12 +15,10 @@
 
 void		ft_place_champ(t_core *core)
 {
-	int		j;
 	t_champ	*tmp;
 	int		shift;
 
 	shift = 0;
-	j = 0;
 	tmp = core->champs;
 	if (core->vis)
 	{
@@ -31,8 +29,6 @@ void		ft_place_champ(t_core *core)
 	{
 		if (core->vis)
 			ft_champ_visual(core, tmp, shift);
-		j++;
-		tmp->num = j;
 		ft_memcpy(core->arena + shift, tmp->code, tmp->size);
 		ft_create_car(core, tmp, shift, NULL);
 		shift += MEM_SIZE / core->qt_champ;
