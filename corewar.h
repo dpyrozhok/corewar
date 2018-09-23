@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:11 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/23 15:33:21 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 21:23:04 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "libft/libft.h"
 # include "ft_printf/libftprintf.h"
 # include "op.h"
-# include "t_op.h"
 
 typedef struct s_champ	t_champ;
 typedef struct s_car	t_car;

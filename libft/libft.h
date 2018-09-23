@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:33:49 by popanase          #+#    #+#             */
-/*   Updated: 2018/08/17 10:25:32 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 20:54:52 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct		s_list
 {
@@ -89,5 +90,7 @@ char				*ft_itoal(long long int n);
 char				*ft_itoao(size_t n);
 char				*ft_itoax(size_t n, char c);
 char				*ft_itoau(size_t n);
+int					ft_printf(const char *fmt, ...);
+int					get_next_line(const int fd, char **line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 15:34:43 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 21:22:59 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define COREWAR_CHECK_ARGS_H
 
 # include "corewar.h"
-# include "t_op.h"
 # include "ncurs.h"
 
 typedef struct	s_check

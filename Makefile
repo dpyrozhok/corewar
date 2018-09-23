@@ -6,7 +6,7 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/09/22 18:42:25 by vlevko           ###   ########.fr        #
+#    Updated: 2018/09/23 21:45:17 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,15 +42,13 @@ SRC = main.c \
 
 OBJ = $(SRC:.c=.o)
 
-# SDL = -L./SDL2/build/.libs/ -lSDL2
 SDL = -F /Library/Frameworks -framework SDL2
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	@#make -C ft_printf
-	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
+	make -C assembler
 	gcc -Wall -Wextra -Werror $^ $(SDL) -lpthread -lncurses -L./libft -lft -o $@
 	
 %.o: %.c
@@ -58,12 +56,12 @@ $(NAME): $(OBJ)
 
 clean: 
 	make clean -C libft
-	@#make clean -C ft_printf
+	make clean -C assembler
 	rm -f $(OBJ)
 
 fclean: clean 
 	make fclean -C libft
-	@#make fclean -C ft_printf
+	make fclean -C assembler
 	rm -f $(NAME)
 
 re: fclean all
