@@ -19,7 +19,7 @@ void	ft_key_terminate(t_core *p)
 	if ((p)->microsec)
 	{
 		endwin();
-		exit(121);
+		exit(0);
 	}
 	pthread_mutex_unlock(&(p)->mut);
 }

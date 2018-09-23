@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3_ft_init_win.c                                    :+:      :+:    :+:   */
+/*   ft_init_win.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -46,13 +46,13 @@ void	ft_init_win(t_core *core)
 		endwin();
 		ft_printf("Resize window to min %d cols and %d rows. Currently %d cols "
 			"and %d rows\n", 254, 69, COLS, LINES);
-		exit(0);
+		exit(28);
 	}
 	if (has_colors() == FALSE)
 	{
 		endwin();
 		ft_printf("Your terminal does not support color\n");
-		exit(0);
+		exit(29);
 	}
 	start_color();
 	cbreak();

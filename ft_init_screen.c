@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_ft_init_screen.c                                 :+:      :+:    :+:   */
+/*   ft_init_screen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -104,7 +104,7 @@ static void	*ft_resize_win(void *ptr)
 			ft_printf("'corewar' shut down. Resize window to min "
 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
 				COLS, LINES);
-			exit(122);
+			exit(27);
 			pthread_mutex_unlock(&(p)->mut);
 		}
 	}

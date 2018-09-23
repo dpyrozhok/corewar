@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_ft_print_help.c                                  :+:      :+:    :+:   */
+/*   ft_print_help.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -28,7 +28,7 @@ static void	*ft_resize_help(void *ptr)
 				printf("'corewar' shut down. Resize window to min "
 					"80 cols and 24 rows. Currently %d cols and %d rows.\n", \
 					COLS, LINES);
-				exit(122);
+				exit(31);
 			}
 		}
 	return (NULL);
@@ -45,7 +45,7 @@ static int	ft_init_help(void)
 		ft_play_sound("Track0.wav");
 		printf("Resize window to min 80 cols and 24 rows. Currently %d cols"
 			" and %d rows.\n", COLS, LINES);
-		exit(122);
+		exit(30);
 	}
 	pthread_create(&thread_resize_help, NULL, ft_resize_help, NULL);
 	pthread_detach(thread_resize_help);
@@ -123,7 +123,7 @@ int		ft_print_help(size_t i, size_t j, int fd, char c)
 	char	*str;
 
 	if (ft_init_help())
-		return (6);
+		return (2);
 	while (get_next_line(fd, &str) > 0)
 	{
 		getmaxyx(stdscr, row_col[0], row_col[1]);

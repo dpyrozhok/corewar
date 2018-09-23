@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1_check_args.c                                     :+:      :+:    :+:   */
+/*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -64,7 +64,7 @@ void	ft_check_args(int ac, char **av, t_core *core, int args)
 	while (i < ac)
 	{
 		if (args > MAX_ARGS_NUMBER)
-			exit(ft_err(100, "Exceeded number of args", av[i]));
+			exit(ft_err(3, "Exceeded number of args", av[i]));
 		if (!ft_strcmp(av[i], "-help"))
 			ft_help();
 		else if (ft_is_arg(ac, av, core, &i))
@@ -74,9 +74,9 @@ void	ft_check_args(int ac, char **av, t_core *core, int args)
 		i++;
 	}
 	if (core->vis && core->dump != -1)
-		exit(ft_err(118, "Invalid arguments usage", NULL));
+		exit(ft_err(4, "Invalid arguments usage", NULL));
 	if (!bots)
-		exit(ft_err(119, "Missed bot file", NULL));
+		exit(ft_err(5, "Missed bot file", NULL));
 	else if (bots > MAX_PLAYERS)
-		exit(ft_err(120, "Exceeded number of bots", ft_itoa(bots)));
+		exit(ft_err(6, "Exceeded number of bots", ft_itoa(bots)));
 }

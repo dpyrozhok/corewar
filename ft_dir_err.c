@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_ft_dir_err.c                                     :+:      :+:    :+:   */
+/*   ft_dir_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -77,9 +77,9 @@ static void	ft_check_filename(char *str)
 
 	len = ft_strlen(str);
 	if (len < 5)
-		exit(ft_err(112, "Invalid file type", str));
+		exit(ft_err(25, "Invalid file type", str));
 	if (!ft_str_include(str, ".cor"))
-		exit(ft_err(113, "Invalid file type", str));
+		exit(ft_err(26, "Invalid file type", str));
 }
 
 int		ft_check_dir(char *str)
@@ -90,11 +90,11 @@ int		ft_check_dir(char *str)
 	if (fd != -1)
 	{
 		close(fd);
-		exit(ft_err(108, "Argument is not a file", str));
+		exit(ft_err(17, "Argument is not a file", str));
 	}
 	ft_check_filename(str);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		exit(ft_err(2, "Unable to open file", str));
+		exit(ft_err(18, "Unable to open file", str));
 	return (fd);
 }

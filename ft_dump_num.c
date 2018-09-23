@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3_ft_dump_num.c                                    :+:      :+:    :+:   */
+/*   ft_dump_num.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -62,7 +62,7 @@ static void	ft_is_int(char *str, char *orig)
 		nb = nb * 10 + (int)*str - '0';
 		str++;
 		if (nb > INT_MAX || (sign && -nb < INT_MIN))
-			exit(ft_err(107, "Player number is out of 'int' range", orig));
+			exit(ft_err(13, "Player number is out of 'int' range", orig));
 	}
 }
 
@@ -71,16 +71,16 @@ void	ft_store_dump(int ac, char **av, int i, t_core *core)
 	int		dump;
 
 	if (core->dump != -1)
-		exit(ft_err(101, "Invalid argument usage", av[i - 1]));
+		exit(ft_err(7, "Invalid argument usage", av[i - 1]));
 	if (i >= ac)
-		exit(ft_err(102, "Missed dump cycle number", NULL));
+		exit(ft_err(8, "Missed dump cycle number", NULL));
 	if (!ft_is_num(av[i]))
-		exit(ft_err(103, "Dump cycle number is not a number", av[i]));
+		exit(ft_err(9, "Dump cycle number is not a number", av[i]));
 	dump = ft_is_posint(av[i]);
 	if (dump == -1)
 	{
-		ft_err(104, "Dump cycle number is out of positive 'int' range", av[i]);
-		exit(104);
+		ft_err(10, "Dump cycle number is out of positive 'int' range", av[i]);
+		exit(10);
 	}
 	core->dump = dump;
 }
@@ -88,8 +88,8 @@ void	ft_store_dump(int ac, char **av, int i, t_core *core)
 void	ft_check_num(int ac, char **av, int i)
 {
 	if (i >= ac)
-		exit(ft_err(105, "Missed player number", NULL));
+		exit(ft_err(11, "Missed player number", NULL));
 	if (!ft_is_num(av[i]))
-		exit(ft_err(106, "Player number is not a number", av[i]));
+		exit(ft_err(12, "Player number is not a number", av[i]));
 	ft_is_int(av[i], av[i]);
 }

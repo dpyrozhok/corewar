@@ -1,0 +1,44 @@
+1, "Cannot access the man file", "man/corewar.man"
+3, "Exceeded number of args", av[i]
+4, "Invalid arguments usage"
+5, "Missed bot file"
+6, "Exceeded number of bots", bots
+ft_check_args.c
+
+2, "Your terminal does not support color"
+31, "'corewar' shut down. Resize window "
+30, "Resize window "
+ft_print_help.c
+
+7, "Invalid argument usage", av[i - 1]
+8, "Missed dump cycle number"
+9, "Dump cycle number is not a number", av[i]
+10, "Dump cycle number is out of positive 'int' range", av[i]
+11, "Missed player number"
+12, "Player number is not a number", av[i]
+13, "Player number is out of 'int' range", orig
+ft_dump_num.c
+
+14, "Invalid magic bytes"
+15, "Bot name length mismatch", ft_itoa((int)file->ret)
+16, "Bot max size length mismatch", ft_itoa((int)file->ret)
+19, "Bot NULL bytes length mismatch", ft_itoa((int)file->ret)
+20, "Invalid NULL bytes"
+21, "Exceeded bot max size"
+22, "Bot comment length mismatch", ft_itoa((int)(*file)->ret)
+23, "Bot size mismatch", ft_itoa((int)(*file)->ret)
+24, "Invalid bot size"
+ft_check_file.c
+
+17, "Argument is not a file", str
+18, "Unable to open file", str
+25, "Invalid file type", str
+26, "Invalid file type", str
+ft_dir_err.c
+
+27, "'corewar' shut down. Resize window to min "
+ft_init_screen.c
+
+28, "Resize window to min "
+29, "Your terminal does not support color"
+ft_init_win.c
