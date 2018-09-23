@@ -21,7 +21,7 @@ $(NAME): $(OBJ)
 	gcc -Wall -Wextra -Werror $^ -L ../libft -lft -o $@
 
 %.o: %.c
-	gcc -Wall -Wextra -Werror -c $<
+	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean: 
 	rm -f $(OBJ)

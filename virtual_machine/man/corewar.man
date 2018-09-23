@@ -1,0 +1,56 @@
+
+COREWAR(1)			General Manual			     COREWAR(1)
+
+/*NAME*/
+	/*corewar*/ -- a very peculiar game about bringing "players" together
+	around a "virtual machine", loading some "champions" fighting against
+	one another with the support of "processes", with the objective being
+	for these champions to stay "alive"
+
+/*SYNOPSIS*/
+	/*./corewar*/ [/*-help*/ | [/*-v*/] [/*-dump nbr_cycles*/] [[/*-n number*/]
+	/*champion1.cor*/] /*...*/]
+
+/*DESCRIPTION*/
+	The /*corewar*/ utility provides user with a virtual "arena". It uses at
+	least one champion passed as a parameter.
+
+	Those champions as well as the distributed /*champion*/ should be compiled
+	by the /*assembler*/ utility included in the /*corewar*/ project files.
+
+	The options are as follows:
+
+	/*-help*/           Display the general manual page.
+
+	/*-v*/		Run in a visual mode.
+
+	/*-dump nbr_cycle*/	Print a dump on the provided cycle number.
+
+	/*-n number*/	Specify champion initial number.
+
+	Running in a visual mode allows user to see the champions fight in a
+	realtime. Beside it requires the ncurses library installed in the
+	system.
+
+	While being launched in GUI the /*corewar*/ gives user an ability to
+	control the workflow. The 'SPACE' key used to pause/play the fighting.
+	The 'ESC' key is considered to terminate the program. General speed of
+	the game could be regulated by the 'UP' and 'DOWN' keys. User should
+	notice that there are only four controled speeds. 'F1' key set speed to
+	its default value.
+
+	Be aware that /*corewar*/ has a "Stealth" mode. It launches the
+	uncontrolled fighting with the fastest speed. This mode could be
+	launched by the 'UP' key after reaching the 100x speed limit.
+
+	The /*corewar*/ will play some sounds if there is the SDL library found in
+	the system.
+
+	The game ends when all the processes are dead. The winner is the last
+	player reported to be "alive".
+
+/*DIAGNOSTICS*/
+	The /*corewar*/ utility exits 0 on success, and >0 if error occurs.
+
+UNIT Factory		       September 23, 2018		   UNIT Factory
+/^(END)^/

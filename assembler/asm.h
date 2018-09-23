@@ -6,12 +6,12 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:49:21 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 21:25:33 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/24 01:27:59 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include "../op.h"
 # include <fcntl.h>
 # include <string.h>
