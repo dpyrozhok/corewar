@@ -41,62 +41,63 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-typedef struct		s_text
+typedef struct				s_text
 {
-	char			*line;
-	int				i;
-	struct s_text	*next;
-}					t_text;
+	char					*line;
+	int						i;
+	struct s_text			*next;
+}							t_text;
 
-typedef struct		s_label
+typedef struct				s_label
 {
-	char			*name;
-	int				size;
-	int				cidr;
-	struct s_label	*next;
-}					t_label;
+	char					*name;
+	int						size;
+	int						cidr;
+	struct s_label			*next;
+}							t_label;
 
-typedef struct		s_use_label
+typedef struct				s_use_label
 {
-	char				*label;
-	struct s_use_label	*next;
-	unsigned int		x;
-	unsigned int		y;
-}					t_use_label;
+	char					*label;
+	struct s_use_label		*next;
+	unsigned int			x;
+	unsigned int			y;
+}							t_use_label;
 
-typedef struct		s_comm
+typedef struct				s_comm
 {
-	char			*name;
-	char			comm_id;
-	char			arg_id[3];
-	char			*arg[3];
-	char			codage;
-	int				size;
-	unsigned int	t_dir_size;
-	int				cidr;
-	t_label			*label;
-	struct s_comm	*next;
-}					t_comm;
+	char					*name;
+	char					comm_id;
+	char					arg_id[3];
+	char					*arg[3];
+	char					codage;
+	int						size;
+	unsigned int			t_dir_size;
+	int						cidr;
+	t_label					*label;
+	struct s_comm			*next;
+}							t_comm;
 
-typedef struct		s_my
+typedef struct				s_my
 {
-	t_text			*head;
-	t_label			*label_s;
-	t_label			*label_e;
-	t_use_label		*use_label;
-	t_comm			*command_s;
-	t_comm			*command_e;
-	int				fd;
-	unsigned int	x;
-	unsigned int	y;
-	int				magic_num;
-	unsigned int	botsize;
-	char			*name2;
-	char			*comment;
-	char			*file_name;
+	t_text					*head;
+	t_label					*label_s;
+	t_label					*label_e;
+	t_use_label				*use_label;
+	t_comm					*command_s;
+	t_comm					*command_e;
+	int						fd;
+	unsigned int			x;
+	unsigned int			y;
+	int						magic_num;
+	unsigned int			botsize;
+	char					*name2;
+	char					*comment;
+	char					*file_name;
 
-}					t_my;
+}							t_my;
 
+int							g_fd;
 void						ft_read_head(t_my *inf);
 void						ft_free_command(t_my *inf);
 void						ft_free_label(t_my *inf);
@@ -133,19 +134,22 @@ void						ft_eror_code_n2(char *le, t_my *inf);
 int							ft_gogogogo(t_my *inf, t_text **p_t);
 void						ft_help_read_body1(t_my *inf, int j);
 int							ft_find_command(t_my *inf, char *command_name);
-char						*ft_nastenka(char command_name[6], t_my *inf, int *j);
-void						ft_function(t_my *inf, int j, char *line, t_text **p_t);
+char						*ft_nastenka(char command_name[6],
+							t_my *inf, int *j);
+void						ft_function(t_my *inf, int j,
+							char *line, t_text **p_t);
 void						ft_read_body(t_my *inf,
 							char command_name[6], char *line);
 void						ft_obnul(t_my *inf, char *name);
 void						ft_push_t_back(t_my *my, t_text *new, int i);
 void						ft_print_txt(t_text *t);
 int							ft_gnl_without_com(int fd, char **line);
-void				        ft_check_end(t_my *inf);
-int					        ft_pliz_write_to_file(t_my *inf);
-int					        ft_empty_label(t_my *inf, char *ssilka);
-int		                    ft_find_label(t_comm *all, char *ssilka, t_my *inf);
-int			                from_ssylk_to_command(int do_ssylk, int do_comm, t_comm *all);
+void						ft_check_end(t_my *inf);
+int							ft_pliz_write_to_file(t_my *inf);
+int							ft_empty_label(t_my *inf, char *ssilka);
+int							ft_find_label(t_comm *all, char *ssilka, t_my *inf);
+int							from_ssylk_to_command(int do_ssylk,
+							int do_comm, t_comm *all);
 int							ft_write_label(t_my *inf, char *ssilka,
 							t_comm *this_command, int size_byte);
 int							ft_write_num(char *arg, unsigned int size);
@@ -153,7 +157,7 @@ void						ft_write_reg(char *arg);
 void						arguements_to_file(t_my *inf, t_comm *this_command);
 void						ft_write_commands(t_my *inf, int i, int codage);
 t_use_label					*ft_check_correct_labels(t_my *inf);
-void				        ft_write_botsize(t_my *inf);
-void				         ft_read_all(t_my *inf);
+void						ft_write_botsize(t_my *inf);
+void						ft_read_all(t_my *inf);
 
 #endif

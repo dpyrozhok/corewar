@@ -6,7 +6,7 @@ OBJ_PATH = ./objs/
 
 INC_PATH = ./inc/
 
-SRC_NAME =	main.c
+SRC_NAME =	main.c free.c 1.c 2.c 3.c 4.c 5.c 6.c 7.c 8.c 9.c 10.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

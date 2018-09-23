@@ -14,41 +14,6 @@
 
 int							g_fd;
 
-
-void				ft_write_botsize(t_my *inf)
-{
-	t_comm			*all;
-
-	all = inf->command_s;
-	while (all != NULL)
-	{
-		inf->botsize += all->size;
-		all = all->next;
-	}
-	lseek(g_fd, 136, SEEK_SET);
-	inf->botsize = convert_end(inf->botsize, 4);
-	write(g_fd, &inf->botsize, 4);
-}
-
-void				ft_read_all(t_my *inf)
-{
-	t_text			*new_t;
-	int				i;
-
-	i = 1;
-	new_t = (t_text *)malloc(sizeof(t_text));
-	new_t->next = NULL;
-	while (ft_gnl_without_com(inf->fd, &(new_t->line)) > 0)
-	{
-		ft_push_t_back(inf, new_t, i++);
-		new_t = (t_text *)malloc(sizeof(t_text));
-		new_t->next = NULL;
-	}
-	free(new_t->line);
-	free(new_t);
-	ft_print_txt(inf->head);
-}
-
 int					main(int ac, char **av)
 {
 	t_my			inf;
