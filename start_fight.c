@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_fight.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 21:21:59 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/21 21:26:55 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 14:44:58 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 void	ft_get_n_car_value(t_core *core, t_car *car)
 {
-	t_champ	*champ;
-	int		r;
-	int		c;
-
 	if (core->arena[car->pos % MEM_SIZE] > 0 &&
 		core->arena[car->pos % MEM_SIZE] < 17)
 	{
@@ -28,22 +24,7 @@ void	ft_get_n_car_value(t_core *core, t_car *car)
 	else
 		car->opcode = 0;
 	if (core->vis)
-	{
-		pthread_mutex_lock(&core->mut);
-		champ = ft_get_champ(core, car->id);
-		r = 3 + ((car->pos % MEM_SIZE) / 64) % 64;
-		c = 3 + (3 * ((car->pos % MEM_SIZE) % 64)) % 192;
-		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
-			attron(A_BOLD | COLOR_PAIR(champ->col_live));
-		else
-			attron(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
-		mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
-		if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
-			attroff(A_BOLD | COLOR_PAIR(champ->col_live));
-		else
-			attroff(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
-		pthread_mutex_unlock(&core->mut);
-	}
+		ft_vcars_opcode(core, car);
 }
 
 void	ft_touch_car(t_core *core, t_car *car)

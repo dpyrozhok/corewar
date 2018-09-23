@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 14:25:32 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:47:49 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void			ft_vcars_rev(t_core *core, t_car *car);
 void			ft_champ_visual(t_core *core, t_champ *tmp, int shift);
 void			ft_vcars_fork(t_core *core, t_car *car, int pos);
 void			*ft_resize(void *ptr);
+void			ft_vcars_opcode(t_core *core, t_car *car);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:32:42 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 14:22:30 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:47:32 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,26 @@ void		ft_vcars_check(t_core *core, t_car *tmp)
 	attron(COLOR_PAIR(core->a_col[tmp->pos % MEM_SIZE]));
 	mvprintw(r, c, "%02x", core->arena[tmp->pos % MEM_SIZE]);
 	attroff(COLOR_PAIR(core->a_col[tmp->pos % MEM_SIZE]));
+	pthread_mutex_unlock(&core->mut);
+}
+
+void		ft_vcars_opcode(t_core *core, t_car *car)
+{
+	t_champ	*champ;
+	int		r;
+	int		c;
+
+	pthread_mutex_lock(&core->mut);
+	champ = ft_get_champ(core, car->id);
+	ft_set_rc(&r, &c, car->pos);
+	if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
+		attron(A_BOLD | COLOR_PAIR(champ->col_live));
+	else
+		attron(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
+	mvprintw(r, c, "%02x", core->arena[car->pos % MEM_SIZE]);
+	if (car->opcode == 1 && car->id == ft_read_4(core, car->pos % MEM_SIZE))
+		attroff(A_BOLD | COLOR_PAIR(champ->col_live));
+	else
+		attroff(A_REVERSE | COLOR_PAIR(core->a_col[car->pos % MEM_SIZE]));
 	pthread_mutex_unlock(&core->mut);
 }
