@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:28:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 14:22:00 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 16:23:27 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ static int	ft_count_dig(int nbr)
 		nbr = -nbr;
 	}
 	cnt++;
-	while (nbr %= 10 > 0)
+	while (nbr / 10 > 0)
+	{
+		nbr /= 10;
 		cnt++;
+	}
 	return (cnt);
 }
 

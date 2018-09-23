@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:34:35 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 14:16:25 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 16:25:56 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int			ft_err(int ret, char *str, char *orig)
 {
+	write(2, "Error: ", 7);
 	write(2, str, ft_strlen(str));
 	if (orig)
 	{
-		write(2, ": '", 3);
+		write(2, "\n>>> '", 6);
 		write(2, orig, ft_strlen(orig));
 		write(2, "'\n", 2);
 	}
