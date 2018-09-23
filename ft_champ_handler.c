@@ -6,14 +6,14 @@
 /*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 11:49:23 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/22 13:46:10 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 14:44:39 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "check_args.h"
 
-void	ft_place_champ(t_core *core)
+void		ft_place_champ(t_core *core)
 {
 	int		j;
 	t_champ	*tmp;
@@ -41,7 +41,7 @@ void	ft_place_champ(t_core *core)
 	}
 }
 
-void	ft_init_champ(t_core *core, t_champ *champ, int n)
+static void	ft_init_champ(t_core *core, t_champ *champ, int n)
 {
 	t_champ	*tmp;
 	int		flag;
@@ -70,7 +70,7 @@ void	ft_init_champ(t_core *core, t_champ *champ, int n)
 	champ->all_live = 0;
 }
 
-void	ft_append_champ(t_core *core, t_champ *champ)
+static void	ft_append_champ(t_core *core, t_champ *champ)
 {
 	t_champ	*tmp;
 
@@ -85,7 +85,7 @@ void	ft_append_champ(t_core *core, t_champ *champ)
 	}
 }
 
-void	ft_parse_champion(t_core *core, int fd, int n)
+void		ft_parse_champion(t_core *core, int fd, int n)
 {
 	char			buf[4];
 	unsigned int	size;
@@ -114,7 +114,7 @@ void	ft_parse_champion(t_core *core, int fd, int n)
 	ft_append_champ(core, champ);
 }
 
-t_champ	*ft_get_champ(t_core *core, int id)
+t_champ		*ft_get_champ(t_core *core, int id)
 {
 	t_champ	*tmp;
 

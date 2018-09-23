@@ -6,14 +6,14 @@
 /*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 21:32:04 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/21 21:33:40 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 14:47:57 by popanase         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "ncurs.h"
 
-void	ft_check_cars(t_core *core)
+static void	ft_check_cars(t_core *core)
 {
 	t_car	*tmp;
 
@@ -38,7 +38,7 @@ void	ft_check_cars(t_core *core)
 	}
 }
 
-void	ft_make_check(t_core *core)
+void		ft_make_check(t_core *core)
 {
 	t_champ	*champ;
 	int		a;

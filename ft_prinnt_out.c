@@ -55,7 +55,7 @@ void	ft_winner_is(t_core *core)
 	{
 		if (champ->id == core->winner_id)
 			ft_printf("\nContestant %i, \"%s\", has won !\n", \
-				champ->num, champ->name);
+				champ->id, champ->name);
 		champ = champ->next;
 	}
 }
