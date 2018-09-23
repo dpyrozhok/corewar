@@ -1,53 +1,47 @@
 NAME = asm
 
-SRC_PATH = ./srcs/
+SRC = main9.c \
+	main8.c \
+	main7.c \
+	main6.c \
+	main.c \
+    main1.c \
+    main4.c \
+    main2.c \
+   	main3.c \
+    main5.c \
+    main10.c \
+    op.c
+	 
+ 
+	 
 
-OBJ_PATH = ./objs/
+OBJ = $(SRC:.c=.o)
 
-INC_PATH = ./inc/
-
-SRC_NAME =	main.c main1.c main2.c main3.c main4.c main5.c main6.c main7.c main8.c main9.c
-
-OBJ_NAME = $(SRC_NAME:.c=.o)
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-
-LDFLAGS = -L./inc/libft/
-
-GRAPH = -lmlx -framework OpenGL -framework AppKit
-
-LFT = -lft
-
-CC = gcc $(CFLAGS)
-
-CFLAGS = -Wall -Wextra -Werror
-
+# SDL = -L./SDL2/build/.libs/ -lSDL2
+# SDL = -F /Library/Frameworks -framework SDL2
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(INC_PATH)
-	@ make -C./inc/libft/
-	@ $(CC) $(LDFLAGS) $(LFT) $(OBJ) -o $@ $(GRAPH)
+$(NAME): $(OBJ)
+	make -C ./libft
+	@#make -C ft_printf
+	@#gcc -Wall -Wextra -Werror $^ -lncurses -L./libft -lft -L./ft_printf -lftprintf -o $@
+	gcc -Wall -Wextra -Werror $^ -L ./libft -lft -o $@
+	
+./srcs/%.o: %.c
+	gcc -Wall -Wextra -Werror $< -o $@ $(INC)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@ mkdir $(OBJ_PATH) 2> /dev/null || true
-	@ $(CC) -I$(INC_PATH) -o $@ -c $<
+clean: 
+	make clean -C ./libft
+	@#make clean -C ft_printf
+	rm -f $(OBJ)
 
-clean: cleanlib
-	@ rm -f $(OBJ)
-	@ rmdir $(OBJ_PATH) 2> /dev/null || true
+fclean: clean 
+	make fclean -C ./libft
+	@#make fclean -C ft_printf
+	rm -f $(NAME)
 
-cleanlib:
-	@ make clean -C ./inc/libft/
+re: fclean all
 
-fclean: clean fcleanlib
-	@ rm -f $(NAME)
-
-fcleanlib:
-	@ make fclean -C ./inc/libft/
-
-re : fclean all
-
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

@@ -6,11 +6,11 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 19:28:03 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:03:56 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/asm.h"
+#include "asm.h"
 
 int					ft_find_label(t_comm *all, char *ssilka, t_my *inf)
 {

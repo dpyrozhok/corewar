@@ -6,11 +6,11 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 19:27:52 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:03:30 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/asm.h"
+#include "asm.h"
 
 void					ft_free_command(t_my *inf)
 {

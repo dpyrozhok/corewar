@@ -6,7 +6,7 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:49:21 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 19:28:07 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:25:40 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define HZ2 inf, this_command->arg[i], this_command, this_command->t_dir_size
 # define HZ3 (ft_go_space(line, &(inf->x))) && line[inf->x] == '\0'
 # define HZ4 ft_throu_empt_lines(inf) && inf->head == NULL
-# define HZ5 "inf->y, inf->x + 1, command_name"
+# define HZ5 inf->y, inf->x + 1, command_name
 # define LE1 LE0"Too big %s\n"
 # define LE2 LE0"%s should ends with \"\n"
 # define LE3 LE0"Excess information after %s\n"
@@ -97,7 +97,7 @@ typedef struct				s_my
 
 }							t_my;
 
-int						g_fd;
+int							g_fd;
 void						ft_read_head(t_my *inf);
 void						ft_free_command(t_my *inf);
 void						ft_free_label(t_my *inf);
@@ -114,11 +114,9 @@ int							ft_throu_empt_lines(t_my *inf);
 void						ft_read_head(t_my *inf);
 void						ft_push_u_front(t_use_label **begin_list,
 							t_use_label *elem);
-int							ft_lable(t_my *inf, int arg_i);
 int							ft_num(t_my *inf, int arg_i,
 							unsigned int m, int is_end);
-int							ft_dir(const char *line,
-							t_my *inf, int is_end);
+int							ft_dir(const char *line, t_my *inf, int is_end);
 int							ft_ind(const char *line, t_my *inf, int is_end);
 int							ft_reg(const char *line, t_my *inf, int is_end);
 int							ft_check_args(t_my *inf, char *line,
@@ -159,5 +157,6 @@ void						ft_write_commands(t_my *inf, int i, int codage);
 t_use_label					*ft_check_correct_labels(t_my *inf);
 void						ft_write_botsize(t_my *inf);
 void						ft_read_all(t_my *inf);
+int							ft_lable(t_my *inf, int arg_i);
 
 #endif

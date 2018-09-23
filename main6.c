@@ -6,11 +6,11 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 19:28:00 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:03:50 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/asm.h"
+#include "asm.h"
 
 char				*ft_nastenka(char command_name[6], t_my *inf, int *j)
 {

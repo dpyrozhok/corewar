@@ -6,11 +6,11 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 19:27:56 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:18:36 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/asm.h"
+#include "asm.h"
 
 int							ft_dir(const char *line,
 	t_my *inf, int is_end)
