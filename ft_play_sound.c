@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:31:42 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:15 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:18:27 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 Uint32		g_len;
 Uint8		*g_buf;
 
-static int	ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, Uint8 **buf)
+static int	ft_init_sdl(char *src, SDL_AudioSpec *spec, Uint32 *len, \
+	Uint8 **buf)
 {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0)
 		return (1);
@@ -45,7 +46,7 @@ static void	ft_play_callback(void *udata, Uint8 *stream, int len)
 	g_buf += len;
 }
 
-void	ft_play_sound(char *src)
+void		ft_play_sound(char *src)
 {
 	SDL_AudioSpec	spec;
 	Uint32			len;

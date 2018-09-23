@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:28:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 11:28:41 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:22:00 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,103 +85,31 @@ static void	ft_fill_win(t_core *core, int r)
 	pthread_mutex_unlock(&core->mut);
 }
 
-// static void	*ft_resize_win(void *ptr)
-// {
-// 	t_core	*p;
-
-// 	p = (t_core *)ptr;
-// 	while (true)
-// 	{
-// 		if (LINES < 69 || COLS < 254)
-// 		{
-// 			pthread_mutex_lock(&(p)->mut);
-// 			clear();
-// 			refresh();
-// 			endwin();
-// 			system("reset");
-// 			// SDL_Quit();
-// 			// ft_play_sound("Track0.wav");
-// 			ft_printf("'corewar' shut down. Resize window to min "
-// 				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
-// 				COLS, LINES);
-// 			exit(27);
-// 			pthread_mutex_unlock(&(p)->mut);
-// 		}
-// 	}
-// 	return (NULL);
-// }
-// static void	*ft_resize_win(void *ptr)
-// {
-// 	t_core	*p;
-
-// 	p = (t_core *)ptr;
-// 	while (true)
-// 	{
-// 		if (LINES < 69 || COLS < 254)
-// 		{
-// 			// pthread_mutex_lock(&(p)->mut);
-// 			(p)->resz = 1;
-// 			// clear();
-// 			// refresh();
-// 			// endwin();
-// 			// system("reset");
-// 			// // SDL_Quit();
-// 			// // ft_play_sound("Track0.wav");
-// 			// ft_printf("'corewar' shut down. Resize window to min "
-// 			// 	"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
-// 			// 	COLS, LINES);
-// 			// exit(27);
-// 			// pthread_mutex_unlock(&(p)->mut);
-// 		}
-// 	}
-// 	return (NULL);
-// }
-// int	ft_check_resize(t_core *core)
-// {
-// 	int	ret;
-
-// 	ret = 0;
-// 	// pthread_mutex_lock(&core->mut);
-// 	if (core->resz)
-// 		ret = 1;
-// 	// pthread_mutex_unlock(&core->mut);
-// 	return (ret);
-// }
-void	*ft_resize(void *ptr)
+void		*ft_resize(void *ptr)
 {
 	t_core	*p;
 
 	p = (t_core *)ptr;
-	// while (true)
-	// {
-		if (LINES < 69 || COLS < 254)
-		// if (LINES < 69 || COLS < 254 || ft_check_resize(p))
-		{
-			pthread_mutex_lock(&(p)->mut);
-			clear();
-			refresh();
-			endwin();
-			system("reset");
-			// SDL_Quit();
-			// ft_play_sound("Track0.wav");
-			ft_printf("'corewar' shut down. Resize window to min "
-				"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
-				COLS, LINES);
-			exit(27);
-			pthread_mutex_unlock(&(p)->mut);
-		}
-	// }
+	if (LINES < 69 || COLS < 254)
+	{
+		pthread_mutex_lock(&(p)->mut);
+		clear();
+		refresh();
+		endwin();
+		system("reset");
+		ft_printf("'corewar' shut down. Resize window to min "
+			"254 cols and 69 rows. Currently %d cols and %d rows.\n", \
+			COLS, LINES);
+		exit(27);
+		pthread_mutex_unlock(&(p)->mut);
+	}
 	return (NULL);
 }
 
-void	ft_init_screen(t_core *core, int i, int r, int c)
+void		ft_init_screen(t_core *core, int i, int r, int c)
 {
-	// pthread_t	thread_resize_win;
-
 	pthread_mutex_init(&core->mut, NULL);
 	ft_init_win(core);
-	// pthread_create(&thread_resize_win, NULL, ft_resize_win, (void*)core);
-	// pthread_detach(thread_resize_win);
 	getch();
 	ft_resize(core);
 	ft_fill_win(core, 14);

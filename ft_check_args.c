@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 12:43:28 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:48:53 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:16:40 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_help(void)
 	exit(ret);
 }
 
-void	ft_check_args(int ac, char **av, t_core *core, int args)
+void		ft_check_args(int ac, char **av, t_core *core, int args)
 {
 	int		i;
 	int		bots;

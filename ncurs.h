@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:04 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 10:56:13 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:25:32 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <pthread.h>
 # include "corewar.h"
 # include "libft/get_next_line.h"
-
 # include "SDL2-2.0.8/include/SDL.h"
 # include "SDL2-2.0.8/include/SDL_audio.h"
 # undef main
@@ -61,8 +60,8 @@ typedef struct	s_border
 int				ft_print_help(size_t i, size_t j, int fd, char c);
 void			ft_draw(t_core *core);
 void			ft_init_screen(t_core *core, int i, int r, int c);
-void	ft_init_win(t_core *core);
-void	ft_fill_screen(t_core *core);
+void			ft_init_win(t_core *core);
+void			ft_fill_screen(t_core *core);
 void			ft_breakdown(t_core *core);
 void			ft_play_sound(char *src);
 void			ft_vcars_on(t_core *core, t_car *car, int ag, int pos);
@@ -72,6 +71,6 @@ void			ft_vcars_norev(t_core *core, t_car *car);
 void			ft_vcars_rev(t_core *core, t_car *car);
 void			ft_champ_visual(t_core *core, t_champ *tmp, int shift);
 void			ft_vcars_fork(t_core *core, t_car *car, int pos);
-void	*ft_resize(void *ptr);
+void			*ft_resize(void *ptr);
 
 #endif

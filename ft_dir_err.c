@@ -6,13 +6,13 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:34:35 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:05 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:16:25 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check_args.h"
 
-int		ft_err(int ret, char *str, char *orig)
+int			ft_err(int ret, char *str, char *orig)
 {
 	write(2, str, ft_strlen(str));
 	if (orig)
@@ -26,7 +26,7 @@ int		ft_err(int ret, char *str, char *orig)
 	return (ret);
 }
 
-int		ft_is_num(char *str)
+int			ft_is_num(char *str)
 {
 	if (str)
 	{
@@ -82,7 +82,7 @@ static void	ft_check_filename(char *str)
 		exit(ft_err(26, "Invalid file type", str));
 }
 
-int		ft_check_dir(char *str)
+int			ft_check_dir(char *str)
 {
 	int		fd;
 

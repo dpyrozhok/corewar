@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:31:11 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 10:57:07 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:19:36 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	ft_breaking(t_core *core, int *r, int i, t_champ *curr)
 	attroff(COLOR_PAIR(4) | A_BOLD);
 }
 
-void	ft_draw(t_core *core)
+void		ft_draw(t_core *core)
 {
 	int		r;
 	t_champ	*curr;

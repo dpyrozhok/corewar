@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:34:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:08 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:17:32 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	ft_is_int(char *str, char *orig)
 	}
 }
 
-void	ft_store_dump(int ac, char **av, int i, t_core *core)
+void		ft_store_dump(int ac, char **av, int i, t_core *core)
 {
 	int		dump;
 
@@ -85,7 +85,7 @@ void	ft_store_dump(int ac, char **av, int i, t_core *core)
 	core->dump = dump;
 }
 
-void	ft_check_num(int ac, char **av, int i)
+void		ft_check_num(int ac, char **av, int i)
 {
 	if (i >= ac)
 		exit(ft_err(11, "Missed player number", NULL));

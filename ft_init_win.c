@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:28:45 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 10:12:50 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:19:12 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,8 @@ static void	ft_init_colorset(void)
 	init_pair(33, CAR_FG, BOT_D_FG);
 }
 
-// static void	*ft_promo_audio(void *ptr)
-// {
-// 	if (!ptr)
-// 		ft_play_sound("Track.wav");
-// 	pthread_exit(NULL);
-// 	return (NULL);
-// }
-
-void	ft_init_win(t_core *core)
+void		ft_init_win(t_core *core)
 {
-	// pthread_t	thread_promo;
-
 	initscr();
 	if (LINES < 69 || COLS < 254)
 	{
@@ -60,8 +50,6 @@ void	ft_init_win(t_core *core)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	// pthread_create(&thread_promo, NULL, ft_promo_audio, NULL);
-	// pthread_detach(thread_promo);
 	ft_init_colorset();
 	ft_fill_screen(core);
 }

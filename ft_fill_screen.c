@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:30:13 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:10 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:17:57 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_create_border(t_border *border, t_core *core)
 	pthread_mutex_unlock(&core->mut);
 }
 
-void	ft_fill_screen(t_core *core)
+void		ft_fill_screen(t_core *core)
 {
 	t_border	border_left;
 	t_border	border_right;

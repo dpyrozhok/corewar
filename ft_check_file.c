@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:33:18 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:02 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:16:59 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	ft_check_size(int fd, t_check **file)
 	free(*file);
 }
 
-void	ft_check_file(char *str, int *bots, t_check *file)
+void		ft_check_file(char *str, int *bots, t_check *file)
 {
 	int		fd;
 

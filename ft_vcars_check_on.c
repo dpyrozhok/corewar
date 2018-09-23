@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:32:42 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:49:19 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:22:30 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_set_rc(int *r, int *c, int pos)
 	*c = 3 + (3 * ((pos % MEM_SIZE) % 64)) % 192;
 }
 
-void	ft_vcars_on(t_core *core, t_car *car, int ag, int pos)
+void		ft_vcars_on(t_core *core, t_car *car, int ag, int pos)
 {
 	int		r;
 	int		c;
@@ -47,7 +47,7 @@ void	ft_vcars_on(t_core *core, t_car *car, int ag, int pos)
 	pthread_mutex_unlock(&core->mut);
 }
 
-void	ft_vcars_off(t_core *core, t_car *tmp)
+void		ft_vcars_off(t_core *core, t_car *tmp)
 {
 	int		pos;
 	int		r;
@@ -75,7 +75,7 @@ void	ft_vcars_off(t_core *core, t_car *tmp)
 	pthread_mutex_unlock(&core->mut);
 }
 
-void	ft_vcars_check(t_core *core, t_car *tmp)
+void		ft_vcars_check(t_core *core, t_car *tmp)
 {
 	int		r;
 	int		c;

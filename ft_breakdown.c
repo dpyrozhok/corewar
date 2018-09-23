@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:30:51 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 08:48:49 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:16:04 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	ft_break_last(t_core *core)
 	}
 }
 
-void	ft_breakdown(t_core *core)
+void		ft_breakdown(t_core *core)
 {
 	int		i;
 	double	sum;

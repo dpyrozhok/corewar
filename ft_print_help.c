@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:05:18 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/23 10:11:29 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 14:20:07 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	*ft_resize_help(void *ptr)
 				refresh();
 				endwin();
 				system("reset");
-				// SDL_Quit();
 				ft_play_sound("Track0.wav");
 				printf("'corewar' shut down. Resize window to min "
 					"80 cols and 24 rows. Currently %d cols and %d rows.\n", \
@@ -116,7 +115,7 @@ static void	ft_print_man(size_t *i, size_t j, char c, char *str)
 	refresh();
 }
 
-int		ft_print_help(size_t i, size_t j, int fd, char c)
+int			ft_print_help(size_t i, size_t j, int fd, char c)
 {
 	int		row_col[2];
 	int		y_x[2];

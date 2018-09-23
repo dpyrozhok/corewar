@@ -46,6 +46,9 @@ COREWAR(1)			General Manual			     COREWAR(1)
 	The /*corewar*/ will play some sounds if there is the SDL library found in
 	the system.
 
+	The game ends when all the processes are dead. The winner is the last player
+	reported to be "alive".
+
 /*DIAGNOSTICS*/
 	The /*corewar*/ utility exits 0 on success, and >0 if error occurs.
 
