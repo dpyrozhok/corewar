@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: popanase <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 11:50:26 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/22 13:44:40 by popanase         ###   ########.fr       */
+/*   Updated: 2018/09/23 11:01:28 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init_core(t_core *core, int ac, char **av)
 	core->microsec = 100000;
 	core->pas = 0;
 	core->fin = 0;
+	core->resz = 0;
 	ft_check_args(ac, av, core, 0);
 	core->arena = (unsigned char *)ft_memalloc(sizeof(unsigned char) * \
 		MEM_SIZE);

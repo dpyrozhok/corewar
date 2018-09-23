@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 18:31:11 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/22 18:31:30 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 10:57:07 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	ft_draw(t_core *core)
 	int		r;
 	t_champ	*curr;
 
+	ft_resize(core);
 	pthread_mutex_lock(&core->mut);
 	r = 14;
 	ft_breaking(core, &r, 0, NULL);

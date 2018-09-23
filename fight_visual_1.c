@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/21 21:27:48 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/21 21:27:57 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/23 11:30:43 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*ft_fight_audio(void *ptr)
 {
 	if (!ptr)
 	{
-		SDL_Quit();
+		// SDL_Quit();
 		ft_play_sound("Track1.wav");
 	}
 	pthread_exit(NULL);
@@ -62,6 +62,7 @@ void	ft_is_paused(t_core *core)
 {
 	while (core->pas)
 	{
+	ft_resize(core);
 		pthread_mutex_lock(&core->mut);
 		attron(A_BOLD);
 		mvprintw(3, 200, "** PAUSED ** ");
@@ -78,6 +79,10 @@ void	ft_fight_visual(t_core *core)
 	pthread_t	thread_id;
 	pthread_t	thread_id2;
 
+	// if (LINES < 69 || COLS < 254)
+		// while (true)
+			// continue ;
+	// ft_play_sound("Track1.wav");
 	pthread_create(&thread_id, NULL, ft_fight_key, (void*)core);
 	pthread_detach(thread_id);
 	pthread_create(&thread_id2, NULL, ft_fight_audio, NULL);

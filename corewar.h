@@ -32,6 +32,7 @@ typedef struct          s_core {
 	int				microsec;
 	int				pas;
 	int				fin;
+	int				resz;
     pthread_mutex_t mut;
 }                       t_core;
 
