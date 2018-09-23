@@ -926,6 +926,7 @@ int					main(int ac, char **av)
 	{
 		SE1;
 		ft_free(&inf);
+		exit(1);
 	}
 	ft_pliz_write_to_file(&inf);
 	ft_write_commands(&inf, 0, 0);

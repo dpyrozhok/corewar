@@ -13,7 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3083a0ac-2024-428d-8636-f720f8640b7b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/42.s" beforeDir="false" afterPath="$PROJECT_DIR$/42.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/asm.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm.h" beforeDir="false" afterPath="$PROJECT_DIR$/asm.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CORE.dir/asm.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CORE" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CORE" afterDir="false" />
     </list>
@@ -39,24 +41,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="c" value="1104" />
-          <entry key="h" value="126" />
-          <entry key="s" value="59" />
+          <entry key="c" value="1216" />
+          <entry key="h" value="454" />
+          <entry key="s" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Assembly file" value="59" />
-          <entry key="ObjectiveC" value="1230" />
+          <entry key="Assembly file" value="81" />
+          <entry key="ObjectiveC" value="1670" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="c" value="3" />
+          <entry key="s" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Assembly file" value="1" />
           <entry key="ObjectiveC" value="3" />
         </counts>
       </usages-collector>
@@ -64,65 +68,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/42.s">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/ft_memdel.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/asm.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="22" column="70" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="70" />
+            <state relative-caret-position="329">
+              <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+              <folding>
+                <element signature="e#2043#2068#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/libft.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="707">
-              <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/asm.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="584" column="41" lean-forward="true" selection-start-line="584" selection-start-column="41" selection-end-line="584" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libft/ft_bzero.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="503">
+              <caret line="909" column="37" lean-forward="true" selection-start-line="909" selection-start-column="37" selection-end-line="909" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -140,11 +102,13 @@
       <find>convert_end_two_bytes</find>
       <find>use_la</find>
       <find>Sy</find>
-      <find>free</find>
       <find>read_</find>
       <find>exit</find>
       <find>malloc</find>
       <find>LE9</find>
+      <find>inf-&gt;name2</find>
+      <find>free</find>
+      <find>SE1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,11 +117,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/zork.s" />
         <option value="$PROJECT_DIR$/libft/ft_atoi.c" />
-        <option value="$PROJECT_DIR$/asm.h" />
         <option value="$PROJECT_DIR$/42.s" />
+        <option value="$PROJECT_DIR$/zork.s" />
         <option value="$PROJECT_DIR$/asm.c" />
+        <option value="$PROJECT_DIR$/asm.h" />
       </list>
     </option>
   </component>
@@ -168,7 +132,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="276" />
+    <option name="x" value="361" />
     <option name="y" value="23" />
     <option name="width" value="2198" />
     <option name="height" value="1258" />
@@ -182,8 +146,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="CORE" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
-              <item name="cor_git" type="462c0819:PsiDirectoryNode" />
+              <item name="CORE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CORE" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -214,7 +178,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CORE" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="42.s" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CORE" TARGET_NAME="CORE" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CORE" RUN_TARGET_NAME="CORE">
+    <configuration name="CORE" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="zork.s" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CORE" TARGET_NAME="CORE" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CORE" RUN_TARGET_NAME="CORE">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -241,15 +205,15 @@
       <workItem from="1536594841347" duration="517000" />
       <workItem from="1536679417433" duration="341000" />
       <workItem from="1536844288798" duration="284000" />
-      <workItem from="1537703886865" duration="7840000" />
+      <workItem from="1537703886865" duration="11335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31347000" />
+    <option name="totallyTimeSpent" value="34842000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="276" y="23" width="2198" height="1258" extended-state="0" />
+    <frame x="361" y="23" width="2198" height="1258" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18877551" />
@@ -304,8 +268,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/asm.c</url>
-          <line>13</line>
-          <option name="timeStamp" value="49" />
+          <line>48</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -341,7 +305,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/zork.cor" />
-    <entry file="file://$PROJECT_DIR$/zork.s" />
     <entry file="file://$PROJECT_DIR$/libft/ft_atoi.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -349,24 +312,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libft/libft.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
+        <state relative-caret-position="814">
           <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libft/ft_bzero.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#926#946#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -377,24 +329,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asm.h">
+    <entry file="file://$PROJECT_DIR$/42.s">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="22" column="70" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="70" />
+        <state relative-caret-position="345">
+          <caret line="23" column="11" lean-forward="true" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/42.s">
+    <entry file="file://$PROJECT_DIR$/zork.s">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="6" lean-forward="true" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libft/ft_bzero.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/asm.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="584" column="41" lean-forward="true" selection-start-line="584" selection-start-column="41" selection-end-line="584" selection-end-column="41" />
+        <state relative-caret-position="503">
+          <caret line="909" column="37" lean-forward="true" selection-start-line="909" selection-start-column="37" selection-end-line="909" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/asm.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="132" column="16" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+          <folding>
+            <element signature="e#2043#2068#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
