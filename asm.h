@@ -13,7 +13,17 @@
 #ifndef ASM_H
 # define ASM_H
 # define OP(index)	g_op_tab[index]
-
+# define LE1 "Lexical error[TOKEN][%i:%i]. Too big %s\n"
+# define LE2 "Lexical error[TOKEN][%i:%i]. %s should ends with \"\n"
+# define LE3 "Lexical error[TOKEN][%i:%i]. Excess information after %s\n"
+# define LE4 "Lexical error[TOKEN][%i:%i]. Too small file. Not enough information\n"
+# define LE5 "Lexical error[TOKEN][%i:%i]. Command line should starts with \"%s\"\n"
+# define LE6 "Lexical error[TOKEN][%i:%i]. %s should starts with \"\n"
+# define LE7 ft_printf("Lexical error[TOKEN][%i:%i]. Not a command %s\n", inf->y, inf->x + 1, command_name)
+# define LE8 ft_printf("Lexical error[TOKEN][%i:%i]. Wrong argument\n", inf->y, inf->x + 1)
+# define LE9 ft_printf("Syntax error[TOKEN][%i:0]. Unexpected end of input \n", inf->y)
+# define SE1 ft_printf("Syntax error[TOKEN][%i:%i].Wrong ssilka to label (%s)\n", p_use_l->y, p_use_l->x, p_use_l->label)
+# define AG1 ft_write_label(inf, this_command->arg[i], this_command, this_command->t_dir_size)
 # include "libft/libft.h"
 # include "op.h"
 # include <fcntl.h>
