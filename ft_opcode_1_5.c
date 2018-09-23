@@ -26,7 +26,7 @@ void	ft_01_opcode(t_core *core, t_car *car)
 		champ->s_live++;
 		champ->all_live++;
 		if (!core->vis && core->dump == -1)
-			ft_printf("\nPlayer %i (%s) is said to be alive", \
+			ft_printf("\nA process shows that player %i (%s) is alive", \
 				champ->id, champ->name);
 		core->winner_id = champ->id;
 	}
