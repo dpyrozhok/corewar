@@ -125,12 +125,13 @@ unsigned int			convert_end(unsigned int ch, char bytes)
 	return (new);
 }
 
-void					ft_go_space(char *line, unsigned int *x)
+int					ft_go_space(char *line, unsigned int *x)
 {
 	while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
 	{
 		(*x)++;
 	}
+	return (1);
 }
 
 void					ft_error_code(char *le, t_my *inf, char *define)
@@ -194,7 +195,7 @@ void					ft_name_comment(t_my inf, char *define, char **buf)
 	ft_write_name_comment(buf, inf.head->line + inf.x, define, inf);
 }
 
-void					ft_throu_empt_lines(t_my *inf)
+int					ft_throu_empt_lines(t_my *inf)
 {
 	t_text				*p_t;
 
@@ -213,6 +214,7 @@ void					ft_throu_empt_lines(t_my *inf)
 		else
 			break ;
 	}
+	return (1);
 }
 
 void					ft_read_head(t_my *inf)
@@ -425,7 +427,7 @@ void						ft_push_l_back(t_my *my, t_label *new)
 	my->label_e = new;
 }
 
-void						ft_label(char *name, t_my *inf)
+int							ft_label(char *name, t_my *inf)
 {
 	t_label					*new;
 	int						i;
@@ -448,6 +450,7 @@ void						ft_label(char *name, t_my *inf)
 	inf->x++;
 	new->name[i] = '\0';
 	ft_push_l_back(inf, new);
+	return (1);
 }
 
 void						ft_push_c_back(t_my *my, t_comm *new)
@@ -514,13 +517,14 @@ void				ft_eror_code_n2(char *le, t_my *inf)
 	exit(1);
 }
 
-void				ft_gogogogo(t_my *inf, t_text **p_t)
+int				ft_gogogogo(t_my *inf, t_text **p_t)
 {
 	*p_t = inf->head;
 	inf->head = inf->head->next;
 	free((*p_t)->line);
 	free(*p_t);
 	inf->y++;
+	return (1);
 }
 
 void				ft_help_read_body1(t_my *inf, int j)
@@ -533,7 +537,7 @@ void				ft_help_read_body1(t_my *inf, int j)
 
 int				ft_find_command(t_my *inf, char *command_name)
 {
-	int 	j;
+	int			j;
 
 	j = 0;
 	while (j < 16)
@@ -550,31 +554,37 @@ int				ft_find_command(t_my *inf, char *command_name)
 	return (j);
 }
 
-void						ft_read_body(t_my *inf)
+char		*ft_nastenka(char command_name[6], t_my *inf, int *j)
+{
+	ft_bzero(command_name, 6);
+	inf->x = 0;
+	*j = 0;
+	return (inf->head->line);
+}
+
+void	ft_function(t_my *inf, int j, char *line, t_text **p_t)
+{
+	ft_help_read_body1(inf, j);
+	if (ft_check_args(inf, line, j) == 0)
+		ft_eror_code_n2(LE8, inf);
+	ft_gogogogo(inf, p_t);
+}
+
+void						ft_read_body(t_my *inf,
+char command_name[6], char *line)
 {
 	int						j;
 	t_text					*p_t;
-	char					*line;
-	char					command_name[6];
 
 	while (inf->head)
 	{
-		ft_throu_empt_lines(inf);
-		if (!inf->head)
+		if ((ft_throu_empt_lines(inf)) && !inf->head)
 			return ;
-		ft_bzero(command_name, 6);
-		inf->x = 0;
-		j = 0;
-		line = inf->head->line;
-		if (ft_is_label_name(line))
+		if (ft_is_label_name(line = ft_nastenka(command_name, inf, &j)))
 		{
-			ft_label(line, inf);
-			ft_go_space(line, &(inf->x));
-			if (line[inf->x] == '\0')
+			if (HUYAIN)
 			{
-				ft_gogogogo(inf, &p_t);
-				ft_throu_empt_lines(inf);
-				if (inf->head == NULL)
+				if (HUYAIN2)
 					return ;
 				line = inf->head->line;
 			}
@@ -584,11 +594,7 @@ void						ft_read_body(t_my *inf)
 		ft_go_space(line, (&inf->x));
 		while (ft_isalpha(line[inf->x]) && j < 5)
 			command_name[j++] = line[inf->x++];
-		j = ft_find_command(inf, command_name);
-		ft_help_read_body1(inf, j);
-		if (ft_check_args(inf, line, j) == 0)
-			ft_eror_code_n2(LE8, inf);
-		ft_gogogogo(inf, &p_t);
+		ft_function(inf, j = ft_find_command(inf, command_name), line, &p_t);
 	}
 }
 
@@ -674,7 +680,7 @@ void				ft_check_end(t_my *inf)
 
 int					ft_pliz_write_to_file(t_my *inf)
 {
-	char nulek[4]; /// PPPPPOMEEEETKA
+	char nulek[4];
 
 	ft_bzero(nulek, 4);
 	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
@@ -815,15 +821,11 @@ void						arguements_to_file(t_my *inf, t_comm *this_command)
 	}
 }
 
-void						ft_write_commands(t_my *inf)
+void						ft_write_commands(t_my *inf, int i, int codage)
 {
 	t_comm					*start;
 	int						change_comm_id;
-	int						codage;
-	int						i;
 
-	i = 0;
-	codage = 0;
 	start = inf->command_s;
 	while (start != NULL)
 	{
@@ -909,6 +911,7 @@ int					main(int ac, char **av)
 {
 	t_my			inf;
 	t_use_label		*p_use_l;
+	char			command_name[6];
 
 	if (ac < 2 || ac > 3 || !ft_check_format(av[1]))
 		return (ft_printf("Not valid arguement\n"));
@@ -917,7 +920,7 @@ int					main(int ac, char **av)
 	ft_obnul(&inf, av[1]);
 	ft_read_all(&inf);
 	ft_read_head(&inf);
-	ft_read_body(&inf);
+	ft_read_body(&inf, command_name, 0);
 	ft_check_end(&inf);
 	if ((p_use_l = ft_check_correct_labels(&inf)) && p_use_l != NULL)
 	{
@@ -925,7 +928,7 @@ int					main(int ac, char **av)
 		ft_free(&inf);
 	}
 	ft_pliz_write_to_file(&inf);
-	ft_write_commands(&inf);
+	ft_write_commands(&inf, 0, 0);
 	ft_write_botsize(&inf);
 	ft_free(&inf);
 	ft_printf("Writing output program to %s", inf.file_name);

@@ -24,6 +24,8 @@
 # define LE9 ft_printf("Syntax error[TOKEN][%i:0]. Unexpected end of input \n", inf->y)
 # define SE1 ft_printf("Syntax error[TOKEN][%i:%i].Wrong ssilka to label (%s)\n", p_use_l->y, p_use_l->x, p_use_l->label)
 # define AG1 ft_write_label(inf, this_command->arg[i], this_command, this_command->t_dir_size)
+# define HUYAIN (ft_label(line, inf)) && (ft_go_space(line, &(inf->x))) && line[inf->x] == '\0'
+# define HUYAIN2 ft_gogogogo(inf, &p_t) && ft_throu_empt_lines(inf) && inf->head == NULL
 # include "libft/libft.h"
 # include "op.h"
 # include <fcntl.h>
