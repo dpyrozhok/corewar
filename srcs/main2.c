@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:27:51 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../inc/asm.h"
 
 unsigned int			convert_end(unsigned int ch, char bytes)
 {

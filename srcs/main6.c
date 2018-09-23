@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:28:00 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../inc/asm.h"
 
 char				*ft_nastenka(char command_name[6], t_my *inf, int *j)
 {
@@ -24,7 +24,10 @@ void				ft_function(t_my *inf, int j, char *line, t_text **p_t)
 {
 	ft_help_read_body1(inf, j);
 	if (ft_check_args(inf, line, j) == 0)
-		ft_eror_code_n2(LE8, inf);
+	{
+		LE8;
+		ft_eror_code_n2(0, inf);
+	}
 	ft_gogogogo(inf, p_t);
 }
 

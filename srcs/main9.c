@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main9.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:28:04 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-
-int					g_fd;
+#include "../inc/asm.h"
 
 void				arguements_to_file(t_my *inf, t_comm *this_command)
 {

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:27:59 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../inc/asm.h"
 
 int						codage(int j)
 {
 	return ((j == 0 || j == 8 || j == 11 || j == 14) ? 0 : 1);
 }
 
-void					ft_eror_code_n2(char *le, t_my *inf)
+void					ft_eror_code_n2(void *le, t_my *inf)
 {
+	le = NULL;
 	ft_free(inf);
 	exit(1);
 }
@@ -56,6 +57,9 @@ int						ft_find_command(t_my *inf, char *command_name)
 		j++;
 	}
 	if (j >= 16)
-		ft_eror_code_n2(LE7, inf);
+	{
+		LE7;
+		ft_eror_code_n2(0, inf);
+	}
 	return (j);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 14:49:21 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 14:49:23 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:28:07 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define HZ2 inf, this_command->arg[i], this_command, this_command->t_dir_size
 # define HZ3 (ft_go_space(line, &(inf->x))) && line[inf->x] == '\0'
 # define HZ4 ft_throu_empt_lines(inf) && inf->head == NULL
-# define HZ5 inf->y, inf->x + 1, command_name
+# define HZ5 "inf->y, inf->x + 1, command_name"
 # define LE1 LE0"Too big %s\n"
 # define LE2 LE0"%s should ends with \"\n"
 # define LE3 LE0"Excess information after %s\n"
@@ -97,7 +97,7 @@ typedef struct				s_my
 
 }							t_my;
 
-int							g_fd;
+int						g_fd;
 void						ft_read_head(t_my *inf);
 void						ft_free_command(t_my *inf);
 void						ft_free_label(t_my *inf);
@@ -130,7 +130,7 @@ void						ft_push_c_back(t_my *my, t_comm *new);
 void						ft_command(int j, t_my *inf);
 unsigned int				size_dira(int j);
 int							codage(int j);
-void						ft_eror_code_n2(char *le, t_my *inf);
+void						ft_eror_code_n2(void *le, t_my *inf);
 int							ft_gogogogo(t_my *inf, t_text **p_t);
 void						ft_help_read_body1(t_my *inf, int j);
 int							ft_find_command(t_my *inf, char *command_name);

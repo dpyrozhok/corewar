@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main8.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:28:03 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../inc/asm.h"
 
 int					ft_find_label(t_comm *all, char *ssilka, t_my *inf)
 {
@@ -81,11 +81,6 @@ int					ft_write_num(char *arg, unsigned int size)
 	if (size == 2)
 	{
 		ch = convert_end(ch, 2);
-		write(g_fd, &ch, size);
-		return (0);
-	}
-	if (ch < 0)
-	{
 		write(g_fd, &ch, size);
 		return (0);
 	}

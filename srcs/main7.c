@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   main7.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/08/09 13:13:09 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/23 19:28:02 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "../inc/asm.h"
 
 void				ft_print_txt(t_text *t)
 {
@@ -54,7 +54,10 @@ void				ft_check_end(t_my *inf)
 	lseek(inf->fd, -1, SEEK_END);
 	read(inf->fd, &c, 1);
 	if (c != '\n')
-		ft_eror_code_n2(LE9, inf);
+	{
+		LE9;
+		ft_eror_code_n2(0, inf);
+	}
 }
 
 int					ft_pliz_write_to_file(t_my *inf)
