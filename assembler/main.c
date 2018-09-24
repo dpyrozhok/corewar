@@ -12,7 +12,76 @@
 
 #include "asm.h"
 
-int							g_fd;
+int					g_fd;
+
+int					ft_check_format(char *name)
+{
+	char				*format;
+
+	format = ft_strchr(name, '.');
+	if (format && ft_strcmp(format, ".s") == 0)
+		return (1);
+	else
+		return (0);
+}
+
+char				*ft_get_name(char *name)
+{
+	char			*get;
+	unsigned int	i;
+	char			*tmp;
+
+	i = 0;
+	while (name[i] != '.')
+		i++;
+	get = malloc(sizeof(char) * (i + 1));
+	ft_strncpy(get, name, i);
+	get[i] = '\0';
+	tmp = get;
+	get = ft_strjoin(get, ".cor");
+	get[i + 4] = '\0';
+	free(tmp);
+	return (get);
+}
+
+void				ft_obnul(t_my *inf, char *name)
+{
+	inf->fd = open(name, O_RDONLY);
+	inf->head = NULL;
+	inf->label_s = NULL;
+	inf->label_e = NULL;
+	inf->command_s = NULL;
+	inf->command_e = NULL;
+	inf->use_label = NULL;
+	inf->x = 1;
+	inf->y = 1;
+	inf->botsize = 0;
+}
+
+t_use_label			*ft_check_correct_labels(t_my *inf)
+{
+	t_label			*all;
+	t_use_label		*to_check;
+
+	all = inf->label_s;
+	to_check = inf->use_label;
+	while (to_check != NULL)
+	{
+		while (all != NULL)
+		{
+			if (ft_strcmp(all->name, to_check->label + 1) == 0)
+				break ;
+			else
+				all = all->next;
+		}
+		if (all == NULL)
+			return (to_check);
+		else
+			to_check = to_check->next;
+		all = inf->label_s;
+	}
+	return (NULL);
+}
 
 int					main(int ac, char **av)
 {

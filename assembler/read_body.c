@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main6.c                                            :+:      :+:    :+:   */
+/*   read_body.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:03:50 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:39:32 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:39:33 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,62 @@ char				*ft_nastenka(char command_name[6], t_my *inf, int *j)
 	return (inf->head->line);
 }
 
-void				ft_function(t_my *inf, int j, char *line, t_text **p_t)
+int					ft_is_label_name(char *name)
 {
-	ft_help_read_body1(inf, j);
-	if (ft_check_args(inf, line, j) == 0)
+	unsigned int	i;
+
+	i = 0;
+	ft_go_space(name, &i);
+	while (name[i] && name[i] != LABEL_CHAR &&
+		(ft_isdigit(name[i]) || ft_isalpha(name[i]) || name[i] == '_'))
+		i++;
+	return ((name[i] == LABEL_CHAR) ? 1 : 0);
+}
+
+void				ft_command(int j, t_my *inf)
+{
+	t_comm			*new;
+
+	new = (t_comm*)malloc(sizeof(t_comm));
+	new->name = ft_strdup(OP(j).op);
+	new->next = NULL;
+	new->label = inf->label_e;
+	new->arg[0] = NULL;
+	new->arg[1] = NULL;
+	new->arg[2] = NULL;
+	new->arg_id[0] = 0;
+	new->arg_id[1] = 0;
+	new->arg_id[2] = 0;
+	new->size = 1;
+	new->t_dir_size = 0;
+	new->codage = 0;
+	if (inf->command_s)
+		new->cidr = inf->command_e->cidr + 1;
+	else
+		new->cidr = 1;
+	ft_push_c_back(inf, new);
+}
+
+int					ft_find_command(t_my *inf, char *command_name)
+{
+	int				j;
+
+	j = 0;
+	while (j < 16)
 	{
-		LE8;
+		if (ft_strcmp(command_name, OP(j).op) == 0)
+		{
+			ft_command(j, inf);
+			break ;
+		}
+		j++;
+	}
+	if (j >= 16)
+	{
+		LE7;
 		ft_eror_code_n2(0, inf);
 	}
-	ft_gogogogo(inf, p_t);
+	return (j);
 }
 
 void				ft_read_body(t_my *inf,
@@ -43,9 +90,9 @@ char command_name[6], char *line)
 			return ;
 		if (ft_is_label_name(line = ft_nastenka(command_name, inf, &j)))
 		{
-			if (HUYAIN)
+			if (HLP)
 			{
-				if (HUYAIN2)
+				if (HLP2)
 					return ;
 				line = inf->head->line;
 			}
@@ -57,39 +104,4 @@ char command_name[6], char *line)
 			command_name[j++] = line[inf->x++];
 		ft_function(inf, j = ft_find_command(inf, command_name), line, &p_t);
 	}
-}
-
-void				ft_obnul(t_my *inf, char *name)
-{
-	inf->fd = open(name, O_RDONLY);
-	inf->head = NULL;
-	inf->label_s = NULL;
-	inf->label_e = NULL;
-	inf->command_s = NULL;
-	inf->command_e = NULL;
-	inf->use_label = NULL;
-	inf->x = 1;
-	inf->y = 1;
-	inf->botsize = 0;
-}
-
-void				ft_push_t_back(t_my *my, t_text *new, int i)
-{
-	t_text			*p_t;
-
-	p_t = my->head;
-	if (!p_t)
-	{
-		my->head = new;
-		return ;
-	}
-	new->i = i;
-	while (p_t->next)
-	{
-		p_t = p_t->next;
-	}
-	if (p_t->line)
-		p_t->next = new;
-	else
-		my->head = new;
 }

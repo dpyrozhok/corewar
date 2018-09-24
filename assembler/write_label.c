@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main8.c                                            :+:      :+:    :+:   */
+/*   write_label.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:03:56 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:39:50 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:39:51 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int					ft_empty_label(t_my *inf, char *ssilka)
+{
+	t_label *all;
+
+	all = inf->label_s;
+	while (all != NULL)
+	{
+		if (ft_strcmp(all->name, ssilka) == 0)
+			return (all->cidr);
+		all = all->next;
+	}
+	return (-1);
+}
 
 int					ft_find_label(t_comm *all, char *ssilka, t_my *inf)
 {
@@ -73,26 +87,17 @@ int					ft_write_label(t_my *inf, char *ssilka,
 	return (0);
 }
 
-int					ft_write_num(char *arg, unsigned int size)
+void				ft_write_botsize(t_my *inf)
 {
-	unsigned int	ch;
+	t_comm			*all;
 
-	ch = (unsigned int)ft_atoi(arg);
-	if (size == 2)
+	all = inf->command_s;
+	while (all != NULL)
 	{
-		ch = convert_end(ch, 2);
-		write(g_fd, &ch, size);
-		return (0);
+		inf->botsize += all->size;
+		all = all->next;
 	}
-	ch = convert_end(ch, 4);
-	write(g_fd, &ch, size);
-	return (0);
-}
-
-void				ft_write_reg(char *arg)
-{
-	int				ch;
-
-	ch = ft_atoi(arg);
-	write(g_fd, &ch, 1);
+	lseek(g_fd, 136, SEEK_SET);
+	inf->botsize = convert_end(inf->botsize, 4);
+	write(g_fd, &inf->botsize, 4);
 }

@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main9.c                                            :+:      :+:    :+:   */
+/*   write_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:03:59 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:39:40 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:39:41 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int					ft_write_num(char *arg, unsigned int size)
+{
+	unsigned int	ch;
+
+	ch = (unsigned int)ft_atoi(arg);
+	if (size == 2)
+	{
+		ch = convert_end(ch, 2);
+		write(g_fd, &ch, size);
+		return (0);
+	}
+	ch = convert_end(ch, 4);
+	write(g_fd, &ch, size);
+	return (0);
+}
+
+void				ft_write_reg(char *arg)
+{
+	int				ch;
+
+	ch = ft_atoi(arg);
+	write(g_fd, &ch, 1);
+}
 
 void				arguements_to_file(t_my *inf, t_comm *this_command)
 {
@@ -60,61 +84,21 @@ void				ft_write_commands(t_my *inf, int i, int codage)
 	}
 }
 
-t_use_label			*ft_check_correct_labels(t_my *inf)
+int					ft_pliz_write_to_file(t_my *inf)
 {
-	t_label			*all;
-	t_use_label		*to_check;
+	char nulek[4];
 
-	all = inf->label_s;
-	to_check = inf->use_label;
-	while (to_check != NULL)
+	ft_bzero(nulek, 4);
+	if ((g_fd = open(inf->file_name, O_WRONLY | O_CREAT | O_TRUNC,
+S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
-		while (all != NULL)
-		{
-			if (ft_strcmp(all->name, to_check->label + 1) == 0)
-				break ;
-			else
-				all = all->next;
-		}
-		if (all == NULL)
-			return (to_check);
-		else
-			to_check = to_check->next;
-		all = inf->label_s;
+		ft_printf("error: open\n");
 	}
-	return (NULL);
-}
-
-void				ft_write_botsize(t_my *inf)
-{
-	t_comm			*all;
-
-	all = inf->command_s;
-	while (all != NULL)
-	{
-		inf->botsize += all->size;
-		all = all->next;
-	}
-	lseek(g_fd, 136, SEEK_SET);
-	inf->botsize = convert_end(inf->botsize, 4);
-	write(g_fd, &inf->botsize, 4);
-}
-
-void				ft_read_all(t_my *inf)
-{
-	t_text			*new_t;
-	int				i;
-
-	i = 1;
-	new_t = (t_text *)malloc(sizeof(t_text));
-	new_t->next = NULL;
-	while (ft_gnl_without_com(inf->fd, &(new_t->line)) > 0)
-	{
-		ft_push_t_back(inf, new_t, i++);
-		new_t = (t_text *)malloc(sizeof(t_text));
-		new_t->next = NULL;
-	}
-	free(new_t->line);
-	free(new_t);
-	ft_print_txt(inf->head);
+	write(g_fd, &inf->magic_num, sizeof(inf->magic_num));
+	write(g_fd, inf->name2, 128);
+	write(g_fd, &nulek, 4);
+	write(g_fd, &(nulek), 4);
+	write(g_fd, inf->comment, 2048);
+	write(g_fd, &nulek, 4);
+	return (0);
 }

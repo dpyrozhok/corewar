@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main1.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:03:30 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:38:04 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:38:06 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,4 @@ void					ft_free(t_my *inf)
 	free(inf->name2);
 	free(inf->comment);
 	free(inf->file_name);
-}
-
-int						ft_check_format(char *name)
-{
-	char				*format;
-
-	format = ft_strchr(name, '.');
-	if (format && ft_strcmp(format, ".s") == 0)
-		return (1);
-	else
-		return (0);
-}
-
-char					*ft_get_name(char *name)
-{
-	char				*get;
-	unsigned int		i;
-	char				*tmp;
-
-	i = 0;
-	while (name[i] != '.')
-		i++;
-	get = malloc(sizeof(char) * (i + 1));
-	ft_strncpy(get, name, i);
-	get[i] = '\0';
-	tmp = get;
-	get = ft_strjoin(get, ".cor");
-	get[i + 4] = '\0';
-	free(tmp);
-	return (get);
 }

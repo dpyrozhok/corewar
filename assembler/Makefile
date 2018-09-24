@@ -1,16 +1,16 @@
 NAME = ../asm
 
-SRC = main9.c \
-	main8.c \
-	main7.c \
-	main6.c \
+SRC = free.c \
+	name_comment_errors.c \
+	check_args.c \
+	push_back.c \
+	helpful.c \
+	read_body.c \
+	go_through.c \
+	write_label.c \
+	write_commands.c \
+	arguments.c \
 	main.c \
-	main1.c \
-	main4.c \
-	main2.c \
-	main3.c \
-	main5.c \
-	main10.c \
 	../op.c
 
 OBJ = $(SRC:.c=.o)

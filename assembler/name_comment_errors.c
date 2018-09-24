@@ -1,60 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   name_comment_errors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:03:36 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:39:11 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:39:15 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-unsigned int			convert_end(unsigned int ch, char bytes)
-{
-	unsigned char		*new_ptr;
-	unsigned char		*ch_ptr;
-	unsigned int		new;
-
-	new_ptr = (unsigned char *)&new;
-	ch_ptr = (unsigned char *)&ch;
-	if (bytes == 4)
-	{
-		new_ptr[0] = ch_ptr[3];
-		new_ptr[1] = ch_ptr[2];
-		new_ptr[2] = ch_ptr[1];
-		new_ptr[3] = ch_ptr[0];
-	}
-	if (bytes == 2)
-	{
-		new_ptr[0] = ch_ptr[1];
-		new_ptr[1] = ch_ptr[0];
-	}
-	return (new);
-}
-
-int						ft_go_space(char *line, unsigned int *x)
-{
-	while (line[*x] && (line[*x] == ' ' || line[*x] == '\t'))
-	{
-		(*x)++;
-	}
-	return (1);
-}
-
-void					ft_error_code(char *le, t_my *inf, char *define)
+void			ft_error_code(char *le, t_my *inf, char *define)
 {
 	ft_printf(le, inf->y, inf->x, define + 1);
 	exit(1);
 }
 
-void					ft_write_name_comment(char **buf, char *line,
+void			ft_eror_code_n2(void *le, t_my *inf)
+{
+	le = NULL;
+	ft_free(inf);
+	exit(1);
+}
+
+void			ft_check_end(t_my *inf)
+{
+	char		c;
+
+	lseek(inf->fd, -1, SEEK_END);
+	read(inf->fd, &c, 1);
+	if (c != '\n')
+	{
+		LE9;
+		ft_eror_code_n2(0, inf);
+	}
+}
+
+void			ft_write_name_comment(char **buf, char *line,
 	char *define, t_my inf)
 {
-	int					i;
-	int					max_i;
+	int			i;
+	int			max_i;
 
 	i = 0;
 	max_i = (*(define + 1) == 'n') ? PROG_NAME_LENGTH - 1 : COMMENT_LENGTH - 1;
@@ -80,7 +68,7 @@ void					ft_write_name_comment(char **buf, char *line,
 		ft_error_code(LE3, &inf, define);
 }
 
-void					ft_name_comment(t_my inf, char *define, char **buf)
+void			ft_name_comment(t_my inf, char *define, char **buf)
 {
 	inf.x = 0;
 	if (!inf.head || !inf.head->next)

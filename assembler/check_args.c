@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main3.c                                            :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 21:17:57 by vlevko           ###   ########.fr       */
+/*   Created: 2018/09/24 12:37:55 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:37:57 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int							ft_dir(const char *line,
+int					ft_dir(const char *line,
 	t_my *inf, int is_end)
 {
-	unsigned int			m;
-	int						arg_i;
+	unsigned int	m;
+	int				arg_i;
 
 	arg_i = 0;
 	if (line[inf->x] != '%')
@@ -33,10 +33,10 @@ int							ft_dir(const char *line,
 		return (ft_num(inf, arg_i, m, is_end));
 }
 
-int							ft_ind(const char *line, t_my *inf, int is_end)
+int					ft_ind(const char *line, t_my *inf, int is_end)
 {
-	unsigned int			m;
-	int						arg_i;
+	unsigned int	m;
+	int				arg_i;
 
 	m = inf->x;
 	arg_i = 0;
@@ -50,11 +50,11 @@ int							ft_ind(const char *line, t_my *inf, int is_end)
 		return (ft_num(inf, arg_i, m, is_end));
 }
 
-int							ft_reg(const char *line, t_my *inf, int is_end)
+int					ft_reg(const char *line, t_my *inf, int is_end)
 {
-	unsigned int			m;
-	int						z;
-	int						arg_i;
+	unsigned int	m;
+	int				z;
+	int				arg_i;
 
 	arg_i = 0;
 	if (line[inf->x] == 'r')
@@ -75,11 +75,11 @@ int							ft_reg(const char *line, t_my *inf, int is_end)
 		return (0);
 }
 
-int							ft_check_args(t_my *inf, char *line,
+int					ft_check_args(t_my *inf, char *line,
 	int num_command)
 {
-	int						z;
-	int						i;
+	int				z;
+	int				i;
 
 	i = 0;
 	ft_go_space(inf->head->line, &(inf->x));
@@ -102,14 +102,13 @@ int							ft_check_args(t_my *inf, char *line,
 	return (1);
 }
 
-int							ft_is_label_name(char *name)
+void				ft_function(t_my *inf, int j, char *line, t_text **p_t)
 {
-	unsigned int			i;
-
-	i = 0;
-	ft_go_space(name, &i);
-	while (name[i] && name[i] != LABEL_CHAR &&
-		(ft_isdigit(name[i]) || ft_isalpha(name[i]) || name[i] == '_'))
-		i++;
-	return ((name[i] == LABEL_CHAR) ? 1 : 0);
+	ft_help_read_body1(inf, j);
+	if (ft_check_args(inf, line, j) == 0)
+	{
+		LE8;
+		ft_eror_code_n2(0, inf);
+	}
+	ft_gogogogo(inf, p_t);
 }

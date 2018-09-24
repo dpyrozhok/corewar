@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main10.c                                           :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:27:23 by dpyrozho         ###   ########.fr       */
+/*   Created: 2018/09/24 12:37:43 by amalkevy          #+#    #+#             */
+/*   Updated: 2018/09/24 12:37:47 by amalkevy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int							g_fd;
 
 int							ft_lable(t_my *inf, int arg_i)
 {
@@ -62,63 +60,28 @@ int							ft_num(t_my *inf, int arg_i,
 	return (1);
 }
 
-void						ft_push_u_front(t_use_label **begin_list,
-	t_use_label *elem)
+int							ft_label(char *name, t_my *inf)
 {
-	if (!*begin_list)
-		elem->next = NULL;
+	t_label					*new;
+	int						i;
+
+	ft_go_space(inf->head->line, &inf->x);
+	i = inf->x;
+	new = (t_label*)malloc(sizeof(t_label));
+	if (inf->command_e)
+		new->cidr = inf->command_e->cidr + 1;
 	else
-		elem->next = *begin_list;
-	*begin_list = elem;
-}
-
-void						ft_read_head(t_my *inf)
-{
-	t_text					*p_t;
-
-	inf->name2 = ft_memalloc(PROG_NAME_LENGTH);
-	inf->comment = ft_memalloc(COMMENT_LENGTH);
-	inf->magic_num = convert_end(COREWAR_EXEC_MAGIC, 4);
-	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, NAME_CMD_STRING, &inf->name2);
-	if (inf->head->next)
-	{
-		p_t = inf->head;
-		inf->head = inf->head->next;
-		free(p_t->line);
-		free(p_t);
-		inf->y++;
-	}
-	ft_throu_empt_lines(inf);
-	ft_name_comment(*inf, COMMENT_CMD_STRING, &inf->comment);
-	if (inf->head->next)
-	{
-		p_t = inf->head;
-		inf->head = inf->head->next;
-		free(p_t->line);
-		free(p_t);
-		inf->y++;
-	}
-}
-
-int							ft_throu_empt_lines(t_my *inf)
-{
-	t_text					*p_t;
-
-	inf->x = 0;
-	while (inf->head && inf->head->line)
-	{
-		ft_go_space(inf->head->line, &(inf->x));
-		if (inf->head->line[inf->x] == '\0')
-		{
-			free(inf->head->line);
-			p_t = inf->head;
-			inf->head = inf->head->next;
-			free(p_t);
-			inf->y++;
-		}
-		else
-			break ;
-	}
+		new->cidr = 1;
+	new->next = NULL;
+	new->size = -1;
+	while (name[i++] && name[i] != LABEL_CHAR)
+		;
+	new->name = (char*)malloc(sizeof(char) * (i - inf->x + 1));
+	i = 0;
+	while (name[inf->x] && name[inf->x] != LABEL_CHAR)
+		new->name[i++] = name[inf->x++];
+	inf->x++;
+	new->name[i] = '\0';
+	ft_push_l_back(inf, new);
 	return (1);
 }
