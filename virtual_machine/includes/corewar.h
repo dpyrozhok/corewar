@@ -6,7 +6,7 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:11 by popanase          #+#    #+#             */
-/*   Updated: 2018/09/24 01:28:22 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/24 10:19:44 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef struct s_champ	t_champ;
 typedef struct s_car	t_car;
 typedef struct s_core	t_core;
 
-struct		s_core {
+struct		s_core
+{
 	unsigned char		*arena;
 	struct s_champ		*champs;
 	t_car				*cars;
@@ -46,7 +47,8 @@ struct		s_core {
 	pthread_mutex_t		mut;
 };
 
-struct		s_champ {
+struct		s_champ
+{
 	unsigned char		name[PROG_NAME_LENGTH + 1];
 	unsigned char		comment[COMMENT_LENGTH + 1];
 	unsigned int		size;
@@ -60,7 +62,8 @@ struct		s_champ {
 	int					col_live;
 };
 
-struct		s_car {
+struct		s_car
+{
 	int					pos;
 	int					carry;
 	int					state;
@@ -118,4 +121,5 @@ void		ft_13_opcode(t_core *core, t_car *car);
 void		ft_14_opcode(t_core *core, t_car *car);
 void		ft_15_opcode(t_core *core, t_car *car);
 void		ft_16_opcode(t_core *core, t_car *car);
+
 #endif

@@ -6,13 +6,12 @@
 /*   By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 17:44:03 by vlevko            #+#    #+#             */
-/*   Updated: 2018/09/24 00:56:24 by vlevko           ###   ########.fr       */
+/*   Updated: 2018/09/24 10:19:56 by vlevko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CHECK_H
 # define FT_CHECK_H
-
 # include "corewar.h"
 # include "ft_visual.h"
 
