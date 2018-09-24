@@ -6,7 +6,7 @@
 #    By: vlevko <vlevko@student.unit.ua>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 14:26:53 by popanase          #+#    #+#              #
-#    Updated: 2018/09/24 00:55:09 by vlevko           ###   ########.fr        #
+#    Updated: 2018/09/24 13:51:46 by vlevko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,15 +47,18 @@ SDL = -F /Library/Frameworks -framework SDL2
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	make -C ../libft
 	gcc -Wall -Wextra -Werror $^ $(SDL) -lpthread -lncurses -L../libft -lft -o $@
 	
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean: 
+	make clean -C ../libft
 	rm -f $(OBJ)
 
 fclean: clean 
+	make fclean -C ../libft
 	rm -f $(NAME)
 
 re: fclean all

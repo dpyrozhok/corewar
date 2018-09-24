@@ -18,15 +18,18 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	make -C ../libft
 	gcc -Wall -Wextra -Werror $^ -L ../libft -lft -o $@
 
 %.o: %.c
 	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean: 
+	make clean -C ../libft
 	rm -f $(OBJ)
 
 fclean: clean 
+	make fclean -C ../libft
 	rm -f $(NAME)
 
 re: fclean all
