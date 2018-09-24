@@ -108,6 +108,6 @@ int					main(int ac, char **av)
 	ft_write_commands(&inf, 0, 0);
 	ft_write_botsize(&inf);
 	ft_free(&inf);
-	ft_printf("Writing output program to %s", inf.file_name);
+	ft_printf("Writing output program to %s\n", inf.file_name);
 	return (0);
 }
