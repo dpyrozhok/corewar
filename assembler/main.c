@@ -6,7 +6,7 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 13:13:07 by dpyrozho          #+#    #+#             */
-/*   Updated: 2018/09/23 20:27:41 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/24 15:03:58 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int					main(int ac, char **av)
 	char			command_name[6];
 
 	if (ac < 2 || ac > 3 || !ft_check_format(av[1]))
-		return (ft_printf("Not valid arguement\n"));
+		return (ft_printf("Not valid argument\n"));
 	else
 		inf.file_name = ft_get_name(av[1]);
 	ft_obnul(&inf, av[1]);
