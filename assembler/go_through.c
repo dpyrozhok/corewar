@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   go_through.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 12:38:11 by amalkevy          #+#    #+#             */
-/*   Updated: 2018/09/24 12:38:13 by amalkevy         ###   ########.fr       */
+/*   Updated: 2018/09/24 14:56:08 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ void				ft_read_all(t_my *inf)
 {
 	t_text			*new_t;
 	int				i;
+	int				r;
 
 	i = 1;
 	new_t = (t_text *)malloc(sizeof(t_text));
 	new_t->next = NULL;
-	while (ft_gnl_without_com(inf->fd, &(new_t->line)) > 0)
+	while ((r = ft_gnl_without_com(inf->fd, &(new_t->line))) > 0)
 	{
 		ft_push_t_back(inf, new_t, i++);
 		new_t = (t_text *)malloc(sizeof(t_text));
@@ -69,6 +70,12 @@ void				ft_read_all(t_my *inf)
 	}
 	free(new_t->line);
 	free(new_t);
+	if (r == -2)
+	{
+		free(inf->file_name);
+		ft_printf("Invalid file, please put adequate file\n");
+		exit(1);
+	}
 }
 
 void				ft_read_head(t_my *inf)

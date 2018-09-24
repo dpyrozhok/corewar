@@ -40,10 +40,7 @@ int					ft_gnl_without_com(int fd, char **line)
 	int				r;
 
 	if ((r = get_next_line(fd, line)) == -1)
-	{
-		ft_printf("Invalid file, put it right, please\n");
-		exit(1);
-	}
+		return (-2);
 	if (ft_strchr(*line, '#') || ft_strchr(*line, ';'))
 	{
 		i = 0;
