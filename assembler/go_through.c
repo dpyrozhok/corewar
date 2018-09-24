@@ -6,7 +6,7 @@
 /*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 12:38:11 by amalkevy          #+#    #+#             */
-/*   Updated: 2018/09/24 14:56:08 by dpyrozho         ###   ########.fr       */
+/*   Updated: 2018/09/24 15:02:20 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void				ft_read_all(t_my *inf)
 		new_t = (t_text *)malloc(sizeof(t_text));
 		new_t->next = NULL;
 	}
-	free(new_t->line);
-	free(new_t);
 	if (r == -2)
 	{
 		free(inf->file_name);
 		ft_printf("Invalid file, please put adequate file\n");
 		exit(1);
 	}
+	free(new_t->line);
+	free(new_t);
 }
 
 void				ft_read_head(t_my *inf)
