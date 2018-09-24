@@ -1,5 +1,5 @@
-.name "zork2"
-.comment "lets try"
+.name "whiterabbit"
+.comment "Oh dear! Oh dear! I shall be too late!"
 
 name1:
     ld %6, r5
