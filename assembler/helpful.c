@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpful.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalkevy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpyrozho <dpyrozho@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 12:38:27 by amalkevy          #+#    #+#             */
-/*   Updated: 2018/09/24 12:38:29 by amalkevy         ###   ########.fr       */
+/*   Updated: 2018/09/24 14:39:43 by dpyrozho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ int					ft_gnl_without_com(int fd, char **line)
 	unsigned int	i;
 	int				r;
 
-	r = get_next_line(fd, line);
+	if ((r = get_next_line(fd, line)) == -1)
+	{
+		ft_printf("Invalid file, put it right, please\n");
+		exit(1);
+	}
 	if (ft_strchr(*line, '#') || ft_strchr(*line, ';'))
 	{
 		i = 0;
